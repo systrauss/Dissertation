@@ -1,0 +1,97 @@
+\chapter{Analysis}
+
+\section{WTF am I doing with my life?}
+
+\section{Gating}
+
+Two types of gates were used in the analysis: energy and timing. Energy gates were used to look for coincidence with specific transitions. [NEED EXAMPLE]. Generally, the energy gates were used on the gamma-ray spectra, with a range around the centroid of the gamma of $\pm2\sigma$. Only one detector would be gated on so both gamma-ray and conversion electron spectra could be looked at.
+
+The timing gates were unique to pairs of detectors. In the GEORGINA data, a pulsed beam was used, allowing for a distinct timing structure [FUCKING PICTURES MAN.]
+
+\section{Systematic Effects}
+
+\subsection{Angular Correlations}
+
+Angular correlations are a well studied phenomenon that arises when trying to look at two types of radiation in coincidence. A thorough exploration of different radiation pairings is explored in \citep{biedenharn53:_theory_angular_corr}. For this work, the pairings of interest are $\gamma-\gamma$ and $\gamma-e$. Triple correlations were also explored, as there were several cases where the intermediate transition was not seen.
+
+Because the detectors are at different angles with respect to each other, when computing conversion coefficients, or subtracting off conversion electrons from the ground state band within the spectra, a correlation must be made based on these relative angles. Table \ref{tab:rel_angle} lists these angles from the ICEBall-Georgina setup, with respect to Detector 1.
+
+These angles can be calculated using
+
+\begin{equation}
+    \theta ' = cos^{-1}(\frac{sin\theta_1 cos\phi_1 sin\theta_2 cos\phi_2 +cos\theta_1 cos\phi_1 cos\theta_2 cos\phi_2 + sin\phi_1 sin\phi_2}{\sqrt{2}})
+    \label{eq:rel_angle}
+\end{equation}
+
+with the previous definitions given for the angles in Tables \ref{tab:ICE_Det_Loc} and \ref{tab:GEORGE_Det_Loc}.
+
+\begin{table}[]
+    \centering
+    \caption{Relative Angles of Detectors}
+    \begin{tabular}{c|c} \toprule
+         Detector & $\theta '$  \\
+         \hline 
+         HPGe 2 & 180 \\
+         SiLi 1 & 90\\
+         SiLi 2 & 90\\
+         SiLi 3 & 122.5\\
+         SiLi 4 & 110.7\\
+         SiLi 5 & 69.3 \\
+         SiLi 6 & 57.3 \\ \bottomrule
+    \end{tabular}
+    \footnotesize
+    \item Relative angles of the detectors with respect to HPGe 1 in the ICEBall-GEORGINA set up. The angles were calculated using Tables \ref{tab:ICE_Det_Loc} and \ref{tab:GEORGE_Det_Loc} and equation \ref{eq:rel_angle}. All angles are in degrees.
+    \label{tab:rel_angle}
+\end{table}
+
+Angular correlation functions for $\gamma-\gamma$ are usually written as a series of Legendre polynomials, multiplied by a correlation coefficient $A_\nu$, or
+
+\begin{equation}
+    w(\beta) = \sum_\nu A_\nu P_\nu(cos\beta)
+    \label{eq:ge_corr}
+\end{equation}
+
+In the case of $\gamma-e$ correlations, the equation becomes 
+
+\begin{equation}
+    \begin{split}
+        w_m(\beta) = \sum_\nu b_\nu(LLm) A_\nu P_\nu(cos\beta), \\
+        w_e(\beta) = \sum_\nu b_\nu(L+1,L+1,e) A_\nu P_\nu(cos\beta)
+        \label{eq:e_corr}
+    \end{split}
+\end{equation}
+
+depending on if the radiation is electric or magnetic in nature. The $b_\nu$ values are based off the same matrix elements used to calculate theoretical conversion coefficients, and are well understood\citep{rose51:_internal_conversion, rose52:_internal_conversion}.
+
+Both of these cases assume pure multipole transitions. In the case of mixed transitions, the correlation function becomes
+
+\begin{equation}
+    W = w_I + \delta^2 w_{II} + 2\delta w_{III}
+    \label{eq:mixed_corr}
+\end{equation}
+
+where $w_I$ and $w_{II}$ are the pure multipole correlation functions, and $w_{III}$ is a correlation mixing the two multipoles. The variable $\delta$ is known as the mixing ratio. 
+
+These correlations can be further extrapolated to look at cases not just of direct correlations, but of indirect correlations, such as three $\gamma$-rays in cascade. If the middle radiation is not observed, the first and third radiations still have a determinable correlation. This is derived for pure multipoles by \citep{biedenharn53:_theory_angular_corr} and for mixed transitions by \citep{rose53:_angular_corr_supp,osborn53:_angular_corr_3}.
+
+\section{Upper Limits}
+
+In $^{156}$Gd, there were several possible transitions of interest at energies less than 250 keV. In that energy range, the ground-state band transitions cover much of the spectrum. Some transitions could be removed through the use of gating on gamma-rays of parallel transitions, but not all the transitions could be removed. This was due, in part, to the gate transitions being in sequence with some of the ground-state band. 
+
+To get an upper limit for the transitions of interest, the ground state band transitions that were in sequence with the gate transition were subtracted off of the conversion electron spectrum through the following method. The skewed gaussian fitting function described earlier was given parameters derived from the data and subtracted from the conversion electron spectrum.
+
+The area of the skewed gaussian is obtained by getting the area of the gamma peak, and adjusting by several factors: efficiencies ($\epsilon$), conversion coefficient ($\alpha$, as derived from theory), and correlation coefficients ($W$). This gives the following:
+
+\begin{equation}
+    A_{ce} = A_{\gamma}\times\frac{\epsilon_{ce}}{\epsilon_{\gamma}}\times\alpha\times\frac{W_{ce}}{W_{\gamma}}
+    \label{eq:subt_area_skew}
+\end{equation}
+
+The height of the skewed gaussian can be derived in terms of the area, $R$, $\sigma$ and $\beta$ to be
+
+\begin{equation}
+    H = A\frac{100}{2*e^{-\frac{\sigma^2}{2\beta^2}}R\sigma-\sqrt{2\pi}(R-100)\sigma};
+    \label{eq:subt_height_skew}
+\end{equation}
+
+These three variables are all unique to the detector, and come directly from fitting the calibration data. From there, the parameters can be fed into the equation, along with the centroid of the peak, and subtracted directly off the spectrum. Any remaining counts are counted by taking sections on either side of the area of interest and using a global linear fit for the background. This linear fit is subtracted off bin-by-bin in the region of interest. The remaining area is then taken as an upper limit on the transition of interest.

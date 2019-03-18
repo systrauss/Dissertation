@@ -1,0 +1,79 @@
+\chapter{$^{154}$Gd Results and Discussion}
+
+\section{Ground State Band Confirmation}
+\label{sec:154GS_Confirm}
+
+The first lines looked at in the data are the ground state band of $^{154}$Gd. These lines are all pure E2 transitions, making them an excellent diagnostic to compare with theoretical conversion coefficients. The transitions up to the $10^+$ are summarized and compared with theory in Table \ref{tab:154Gd_Single_ICC_GS}.
+
+For the $6^+\rightarrow 4^+$ and $8^+\rightarrow 6^+$ transitions, electron contributions from smaller gamma lines of similar energy had to be subtracted. This was determined by looking at the conversion coefficients of these transitions in gated spectra, as discussed in the next section. In the gated spectra, the internal conversion coefficients were in agreement with theory, meaning the transitions did not have contaminants. To do so, the gamma-ray had been seen and identified with known multipolarity. The conversion coefficient was then assumed from theory, and the contribution to the area was calculated to be
+
+\begin{equation}
+    \label{eq:ICC_Subtract}
+    A_{e} = \alpha \epsilon_{e} \frac{A_{\gamma}}{\epsilon_{\gamma}} C_{\angle}
+\end{equation}
+
+where $\epsilon_{i}$ are the efficiencies of the electrons and gammas. $C_{\angle}$ is the angular correction for this particular transition. Here, it is multiplied, and not divided, so it can be subtracted from the uncorrected area.
+
+The calculated contributions were subtracted off the fitted area of the electron peak, before the conversion coefficient was calculated. This made the error also include contributions from the errors of these gamma peaks and the errors on the theoretical $\alpha$ values. 
+
+There were two types of transitions that acted as contaminants: those of similar energy, and higher energies whose K-electron energies were similar to the L and M peaks of the lines of interest. The peaks are summarized in Table \ref{tab:154Gd_Contaminants}.
+
+\afterpage{\clearpage\input{154GdTablesAndFigs/154GdGSCoeffs}}
+
+\afterpage{\clearpage\input{154GdTablesAndFigs/154GdGSBandCorr}}
+
+
+\section{Gates on the Ground State Band}
+\label{sec:154GS_Gates}
+
+The transitions of the ground state band were the most prominent seen in the gamma-ray and conversion electron spectra. To build a level scheme based on known levels and transitions, these transitions were gated on. Figures \ref{fig:154_2to0}, \ref{fig:154_4to2}, \ref{fig:154_6to4}, and \ref{fig:154_8to6} are the result of these gates. In the cases of cascades, secondary gates were done to confirm assignments.
+
+Determining which transitions went uniquely into a given level was done by comparing the outgoing ground state transition for that level with the incoming transition (i.e. for the $2^+$ level, the 123 keV gate was compared directly with the 247 keV gate). Lines in the gamma spectrum that were present only in the outgoing spectrum, but not the incoming, were assumed to be populating that level.
+
+There were nine bands seen in the gating outside of the ground state band, 4 of which are bands with excited $0^+$ band heads. These are seen in both the $2^+\rightarrow0^+$ gate (Figure \ref{fig:154_2to0}. Three of these bands are seen in the $4^+\rightarrow2^+$ gate (Figure \ref{fig:154_4to2}, and two are seen in the $6^+\rightarrow4^+$ gate (Figure \ref{fig:154_6to4}. Only one is seen in the $8^+\rightarrow6^+$ gate (Figure \ref{fig:154_8to6}. This drop off is not surprising for several reasons, including the lack of known higher spin states in the higher energy $0^+$ bands. The other large reason is the drop off in populating higher energy states in the nucleus.
+
+\begin{figure}[!]
+    \centering
+    \includegraphics[scale=0.18]{154GdTablesAndFigs/154Gd_2to0.png}
+    \caption{Level Scheme of $^{154}$Gd. The gamma ray of the $2^+$\rightarrow$0^+$ transition in the ground state was gated on. It was then compared with the gated spectrum from the gamma ray of the $4^+$\rightarrow$2^+$ transition in the ground state. Peaks only appearing in the first gate were assumed to go into the $2^+$ state, and assignments were made. Due to the low energy of the $2^+$\rightarrow$0^+$ transition, the efficiency was lower, and it is likely that transitions into the $2^+$ state were missed. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in gray.}
+    \label{fig:154_2to0}
+\end{figure}
+
+\begin{figure}[!]
+    \centering
+    \includegraphics[scale=0.18]{154GdTablesAndFigs/154Gd_4to2.png}
+    \caption{Level Scheme of $^{154}$Gd. The gamma ray of the $4^+$\rightarrow$2^+$ transition in the ground state was gated on. It was then compared with the gated spectrum from the gamma ray of the $6^+$\rightarrow$4^+$ transition in the ground state. Peaks only appearing in the first gate were assumed to go into the $4^+$ state, and assignments were made. Additionally, these peaks were also gated on, to look for cascades leading into the $4^+$ state, which were found in several cases. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in gray.}
+    \label{fig:154_4to2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.2]{154GdTablesAndFigs/154Gd_6to4.png}
+    \caption{Level Scheme of $^{154}$Gd. The gamma ray of the $6^+$\rightarrow$4^+$ transition in the ground state was gated on. It was then compared with the gated spectrum from the gamma ray of the $8^+$\rightarrow$6^+$ transition in the ground state. Peaks only appearing in the first gate were assumed to go into the $6^+$ state, and assignments were made. Additionally, these peaks were also gated on, to look for cascades leading into the $6^+$ state, which were found in several cases. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in gray.}
+    \label{fig:154_6to4}
+\end{figure}
+
+\begin{figure}[!]
+    \centering
+    \includegraphics[scale=0.25]{154GdTablesAndFigs/154Gd_8to6.png}
+    \caption{Level Scheme of $^{154}$Gd. The gamma ray of the $8^+$\rightarrow$6^+$ transition in the ground state was gated on. It was then compared with the gated spectrum from the gamma ray of the $10^+$\rightarrow$8^+$ transition in the ground state. Peaks only appearing in the first gate were assumed to go into the $8^+$ state, and assignments were made. Additionally, these peaks were also gated on, to look for cascades leading into the $8^+$ state, which were found in several cases. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in gray.}
+    \label{fig:154_8to6}
+\end{figure}
+
+\section{Conversion Coefficients from Singles}
+\label{sec:154_Conv_Singles}
+
+\afterpage{\clearpage\input{154GdTablesAndFigs/154GdSinglesCorr}}
+
+\afterpage{\clearpage\input{154GdTablesAndFigs/154GdSinglesUncorr}}
+
+\afterpage{\clearpage\input{154GdTablesAndFigs/154GdSinglesNoMult}}   
+
+\afterpage{\clearpage\input{154GdTablesAndFigs/154Gd0to0}}
+
+\afterpage{\clearpage\input{154GdTablesAndFigs/154Gd2to2}}
+
+\afterpage{\clearpage\input{154GdTablesAndFigs/154Gd4to4}}
+
+\afterpage{\clearpage\input{154GdTablesAndFigs/154Gd6to6}}
+    
