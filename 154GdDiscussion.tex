@@ -1,67 +1,61 @@
 \chapter{$^{154}$Gd Results and Discussion}
+\label{chap:154Gd}
+
+$^{154}$Gd is of interest for studying $J^\pi\rightarrow J^\pi$ transitions due to the large number of $0^+$ states, 16, and high number of levels in the nucleus. The $^{154}$Gd data was taken across three separate runs; one with ICEBall and GEORGINA, and two with ICEBall and Clovershare, in two different configurations, as discussed in Chapter \label{chap:setup}. The GEORGINA experiment yielded the most conversion electron data, and results in this chapter are quoted from that data. Due to the higher number of HPGe detectors with Clovershare, it contained was better $\gamma-\gamma$ coincidence, so identification of lines and level population was confirmed with this data. All of the experiments used the same enriched $^{152}$Sm target, discussed in Chapter \label{chap:setup}.
 
 \section{Ground State Band Confirmation}
 \label{sec:154GS_Confirm}
 
-The first lines looked at in the data are the ground state band of $^{154}$Gd. These lines are all pure E2 transitions, making them an excellent diagnostic to compare with theoretical conversion coefficients. The transitions up to the $10^+$ are summarized and compared with theory in Table \ref{tab:154Gd_Single_ICC_GS}.
+Looking at a singles spectra of the data, several prominent peaks stand out, seen in Figure \ref{fig:154Gd_Singles}. In the $\gamma$-spectrum on top, there are four prominent peaks from 100 to 500 keV. These peaks are the ground state band. The strong peak just beyond 500 keV is the 511 keV annihilation peak, and the peaks below 100 keV are x-rays. In the conversion electron spectrum on the lower part of the Figure \ref{fig:154Gd_Singles}, there are clear peaks until approximately 400 keV in, and then again in the range of 550 keV to 650 keV. The peaks up to 400 keV correspond to these same ground-state lines that are prominent in the $\gamma$-spectrum. The peaks in the range of 550 keV to 650 keV correspond to a strong series of $J^{\pi}\rightarrow J^{\pi}$ transitions from the first excited $0^+$ band.
 
-For the $6^+\rightarrow 4^+$ and $8^+\rightarrow 6^+$ transitions, electron contributions from smaller gamma lines of similar energy had to be subtracted. This was determined by looking at the conversion coefficients of these transitions in gated spectra, as discussed in the next section. In the gated spectra, the internal conversion coefficients were in agreement with theory, meaning the transitions did not have contaminants. To do so, the gamma-ray had been seen and identified with known multipolarity. The conversion coefficient was then assumed from theory, and the contribution to the area was calculated to be
+\input{154GdTablesAndFigs/154Gd_Singles_Fig}
+
+These transitions in the ground state are the first lines looked at in the data. These lines are all pure E2 multipole transitions, making them an excellent diagnostic to compare with theoretical conversion coefficients. The transitions up to the $10^+$ are summarized and compared with theory in Table \ref{tab:154Gd_Single_ICC_GS}.
+
+\afterpage{\clearpage\input{154GdTablesAndFigs/154GdGSCoeffs}}
+
+For the $6^+\rightarrow 4^+$ and $8^+\rightarrow 6^+$ transitions, electron contributions from smaller gamma lines of similar energy had to be subtracted. This was determined by looking at the conversion coefficients of these transitions in gated spectra, as discussed in the next section. Looking at Figure \ref{fig:154Gd_Singles}, it is clear there are many transitions around the same energy, so the contributions may be many. However, only lines from reactions in the target material will contribute. Gating isolates and identifies these lines for removal.
+
+In the gated spectra, the internal conversion coefficients were in agreement with theory, meaning the transitions did not have contaminants when gated. In the singles, to remove the contaminant the gamma-ray had been seen and identified with known multipolarity. The conversion coefficient was then assumed from theory, and the contribution to the area was calculated to be
 
 \begin{equation}
     \label{eq:ICC_Subtract}
     A_{e} = \alpha \epsilon_{e} \frac{A_{\gamma}}{\epsilon_{\gamma}} C_{\angle}
 \end{equation}
 
-where $\epsilon_{i}$ are the efficiencies of the electrons and gammas. $C_{\angle}$ is the angular correction for this particular transition. Here, it is multiplied, and not divided, so it can be subtracted from the uncorrected area.
+where $\epsilon_{i}$ are the efficiencies of the electrons and gammas respectively. $C_{\angle}$ is the angular correction for this particular transition, discussed in Chapter \ref{chap:theory}. Here, it is multiplied, and not divided, so it can be subtracted from the uncorrected area.
 
-The calculated contributions were subtracted off the fitted area of the electron peak, before the conversion coefficient was calculated. This made the error also include contributions from the errors of these gamma peaks and the errors on the theoretical $\alpha$ values. 
+The calculated contributions were subtracted off the fitted area of the electron peak, before the conversion coefficient was calculated. This meant the error also include contributions from the errors of these gamma peaks and the errors on the theoretical $\alpha$ values. 
 
-There were two types of transitions that acted as contaminants: those of similar energy, and higher energies whose K-electron energies were similar to the L and M peaks of the lines of interest. The peaks are summarized in Table \ref{tab:154Gd_Contaminants}.
-
-\afterpage{\clearpage\input{154GdTablesAndFigs/154GdGSCoeffs}}
+There were two types of transitions that acted as contaminants: those of similar energy, and higher energies whose K-electron energies were similar to the L and M peaks of the lines of interest. The peaks are summarized in Table \ref{tab:154Gd_Contaminants}. The electron-shell of the contaminant is listed in each case, and total $L$ and $M$ contributions are used, without need to look at subshell contributions.  In the case of several contaminant transitions, the mixing ratio had to be assumed to get a conversion coefficient for the subtraction.
 
 \afterpage{\clearpage\input{154GdTablesAndFigs/154GdGSBandCorr}}
-
 
 \section{Gates on the Ground State Band}
 \label{sec:154GS_Gates}
 
-The transitions of the ground state band were the most prominent seen in the gamma-ray and conversion electron spectra. To build a level scheme based on known levels and transitions, these transitions were gated on. Figures \ref{fig:154_2to0}, \ref{fig:154_4to2}, \ref{fig:154_6to4}, and \ref{fig:154_8to6} are the result of these gates. In the cases of cascades, secondary gates were done to confirm assignments.
+The transitions of the ground state band were the most prominent seen in the gamma-ray and conversion electron spectra, as seen in Figure \ref{fig:154Gd_Singles}. To build a level scheme based on known levels and transitions, the $\gamma$ components of these transitions were gated on. Figures \ref{fig:154_2to0}, \ref{fig:154_4to2}, \ref{fig:154_6to4}, and \ref{fig:154_8to6} are the result of these gates. Band structure in these figures was taken from the data sheets. No band assignments were made in this work. In the cases of cascades, secondary gates were done to confirm assignments.
 
-Determining which transitions went uniquely into a given level was done by comparing the outgoing ground state transition for that level with the incoming transition (i.e. for the $2^+$ level, the 123 keV gate was compared directly with the 247 keV gate). Lines in the gamma spectrum that were present only in the outgoing spectrum, but not the incoming, were assumed to be populating that level.
+Determining which transitions went uniquely into a given ground state level was done by comparing the outgoing ground state transition for that level with the incoming transition i.e. for the $2^+$ level, the $2^+\rightarrow0^+$ (123 keV) gate was compared directly with the $4^+\rightarrow2^+$ (247 keV) gate. The $\gamma$-spectra corresponding to these gates can be seen in Figure \ref{fig:154_GS_Gate}. Lines in the gamma spectrum that were present only in the outgoing spectrum, but not the incoming, were assumed to be populating that level (the $2^+$ state in the above example). These identified transitions were then gated on for two reasons: to confirm where the line populated the ground-state band, and to search for cascades from higher states.
 
-There were nine bands seen in the gating outside of the ground state band, 4 of which are bands with excited $0^+$ band heads. These are seen in both the $2^+\rightarrow0^+$ gate (Figure \ref{fig:154_2to0}. Three of these bands are seen in the $4^+\rightarrow2^+$ gate (Figure \ref{fig:154_4to2}, and two are seen in the $6^+\rightarrow4^+$ gate (Figure \ref{fig:154_6to4}. Only one is seen in the $8^+\rightarrow6^+$ gate (Figure \ref{fig:154_8to6}. This drop off is not surprising for several reasons, including the lack of known higher spin states in the higher energy $0^+$ bands. The other large reason is the drop off in populating higher energy states in the nucleus.
+\input{154GdTablesAndFigs/154GdGSGateFig.tex}
 
-\begin{figure}[!]
-    \centering
-    \includegraphics[scale=0.18]{154GdTablesAndFigs/154Gd_2to0.png}
-    \caption{Level Scheme of $^{154}$Gd. The gamma ray of the $2^+$\rightarrow$0^+$ transition in the ground state was gated on. It was then compared with the gated spectrum from the gamma ray of the $4^+$\rightarrow$2^+$ transition in the ground state. Peaks only appearing in the first gate were assumed to go into the $2^+$ state, and assignments were made. Due to the low energy of the $2^+$\rightarrow$0^+$ transition, the efficiency was lower, and it is likely that transitions into the $2^+$ state were missed. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in gray.}
-    \label{fig:154_2to0}
-\end{figure}
+There were nine bands seen in the gating outside of the ground state band, 4 of which are bands with excited $0^+$ band heads. These are seen in the $2^+\rightarrow0^+$ gate (Figure \ref{fig:154_2to0}). Three of these bands are seen in the $4^+\rightarrow2^+$ gate (Figure \ref{fig:154_4to2}), and two are seen in the $6^+\rightarrow4^+$ gate (Figure \ref{fig:154_6to4}). Only one is seen in the $8^+\rightarrow6^+$ gate (Figure \ref{fig:154_8to6}). This drop off is not surprising due to the lack of known higher spin states in the higher energy $0^+$ bands. Additionally, there is a drop off in populating higher energy states in the nucleus.
 
-\begin{figure}[!]
-    \centering
-    \includegraphics[scale=0.18]{154GdTablesAndFigs/154Gd_4to2.png}
-    \caption{Level Scheme of $^{154}$Gd. The gamma ray of the $4^+$\rightarrow$2^+$ transition in the ground state was gated on. It was then compared with the gated spectrum from the gamma ray of the $6^+$\rightarrow$4^+$ transition in the ground state. Peaks only appearing in the first gate were assumed to go into the $4^+$ state, and assignments were made. Additionally, these peaks were also gated on, to look for cascades leading into the $4^+$ state, which were found in several cases. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in gray.}
-    \label{fig:154_4to2}
-\end{figure}
+\input{154GdTablesAndFigs/154Gd2to0Fig.tex}
 
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.2]{154GdTablesAndFigs/154Gd_6to4.png}
-    \caption{Level Scheme of $^{154}$Gd. The gamma ray of the $6^+$\rightarrow$4^+$ transition in the ground state was gated on. It was then compared with the gated spectrum from the gamma ray of the $8^+$\rightarrow$6^+$ transition in the ground state. Peaks only appearing in the first gate were assumed to go into the $6^+$ state, and assignments were made. Additionally, these peaks were also gated on, to look for cascades leading into the $6^+$ state, which were found in several cases. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in gray.}
-    \label{fig:154_6to4}
-\end{figure}
+\input{154GdTablesAndFigs/154Gd4to2Fig.tex}
 
-\begin{figure}[!]
-    \centering
-    \includegraphics[scale=0.25]{154GdTablesAndFigs/154Gd_8to6.png}
-    \caption{Level Scheme of $^{154}$Gd. The gamma ray of the $8^+$\rightarrow$6^+$ transition in the ground state was gated on. It was then compared with the gated spectrum from the gamma ray of the $10^+$\rightarrow$8^+$ transition in the ground state. Peaks only appearing in the first gate were assumed to go into the $8^+$ state, and assignments were made. Additionally, these peaks were also gated on, to look for cascades leading into the $8^+$ state, which were found in several cases. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in gray.}
-    \label{fig:154_8to6}
-\end{figure}
+\input{154GdTablesAndFigs/154Gd6to4Fig.tex}
+
+\input{154GdTablesAndFigs/154Gd8to6Fig.tex}
 
 \section{Conversion Coefficients from Singles}
 \label{sec:154_Conv_Singles}
+
+With the gamma-rays now identified through gates, conversion coefficients could be calculated from the singles spectra. Transitions that could be clearly identified and separated are found in Table \ref{tab:154Gd_Single_ICC}. Contamination concerns were taken into account by using the identified transitions to look for gamma-rays in close proximity to those in the Table. Several transitions with E0 components can be found in the table. Most of the conversion electrons seen are the $K$-shell electron. These transitions could be given an angular correction based on the multipolarity of the transition.
+
+Table \ref{tab:154Gd_Single_ICC_Uncorr} holds conversion coefficients that have been left uncorrected in the singles for one of two reasons: either there were multiple known assignments to the gamma-ray energy, or the exact multipole mixing-ratio was unknown. Table \ref{tab:154Gd_No_Mult_ICC} contains the conversion coefficients that could not be corrected because the transition has no multipole assignment. It contains allowable and reasonable theoretical conversion coefficients to compare the values against, calculated using BrIcc \cite{kibedi08:_BRICC}.
 
 \afterpage{\clearpage\input{154GdTablesAndFigs/154GdSinglesCorr}}
 
@@ -69,11 +63,56 @@ There were nine bands seen in the gating outside of the ground state band, 4 of 
 
 \afterpage{\clearpage\input{154GdTablesAndFigs/154GdSinglesNoMult}}   
 
+In Table \ref{tab:154Gd_Single_ICC}, there are several conversion coefficients that are high, not only compared to theory, but compared to previous measurements. Due to these values being from singles data, unknown contaminants to the electron spectrum cannot be ruled out. While these transitions were identified clearly and separably, low-intensity gamma-rays may have been missed in the gates. There are also three transitions that are lower than the theoretical values (515, 873 and 894 keV). In all of these cases, $\delta$ is negative. This leads to a question of whether the angular correction has been correctly applied in such cases. Finally, there are several $J^{\pi}\rightarrow J^{\pi}$ transitions seen in the singles. For the $4^+\rightarrow4^+$ at 676 keV, there is clearly an E0 component, although not as big at that seen by Spits \cite{spits96:_154gd} or Gono \cite{gono74:_154gd_e0}. It is a similar situation for the $8^+\rightarrow8^+$ at 610 keV compared to Gono. Additionally, there is a $6^+\rightarrow6^+$ transition at 889 keV that is higher than number from Spits and the theoretical conversion coefficient. The $4^+\rightarrow4^+$ was also found in gating, as will be discussed in the next section.
+
+In Table \ref{tab:154Gd_Single_ICC_Uncorr}, the $2^+\rightarrow2^+$ transition at 715 keV appears to have a large E0 component. This transition is examined in the next section. For the two entangled transitions around 645 keV, the $6^+\rightarrow6^+$ transition is likely the dominant contribution, as the measured value in the singles is in good agreement with the measured value in the gated data, see Table \ref{tab:154Gd_6_to_6}. Two separate $\alpha$ values are listed in this part of Table \ref{tab:154Gd_Single_ICC_Uncorr}, as the gamma-rays were separable, but the conversion electron peaks were not.
+
+In Table \ref{tab:154Gd_No_Mult_ICC}, the $4^+\rightarrow4^+$ transition at 433 keV has evidence of an E0 component, even without correction. Unfortunately, this transition could not be found in gates, as the levels are too high in energy to be populated significantly enough for gates.
+
+\section{$J^{\pi}\rightarrow J^{\pi}$ Transitions}
+\label{sec:154_J2J}
+
+After identification of the bands and transitions, gates were put on the transitions both entering and leaving states of interest, namely even-$J^{+}$ states. Gates entering these states were not fruitful. However, gates leaving these states allowed enough statistics to look for transitions from states of the same $J^{\pi}$. In many cases, two separate gates could be used to look at the same state. To look for these transitions, other transitions, namely those of the ground state band, were subtracted from the regions of interest as described in \ref{sec:upper_limit}. Tables \ref{tab:154Gd_0_to_0} - \ref{tab:154Gd_6_to_6} are the tabulated results. Where previous measurements have been taken, they have been listed. Additionally, the theoretical conversion coefficients have been listed for $M1$ and $E2$ transitions, as taken from BrIcc \cite{kibedi08:_BRICC}.
+
 \afterpage{\clearpage\input{154GdTablesAndFigs/154Gd0to0}}
+
+As is expected, Table \ref{tab:154Gd_0_to_0} is only lower limits. Although $M1$ and $E2$ transitions are not allowed, they have been included in the table for the sake of comparison.  The lower limits, expectedly, rule out the $M1$ and $E2$ transitions. The measured limits agree with the ones seen by Spits \cite{spits96:_154gd}.
 
 \afterpage{\clearpage\input{154GdTablesAndFigs/154Gd2to2}}
 
+In Table \ref{tab:154Gd_2_to_2}, many of the transitions could be seen in two different gates. In many cases, only lower limits could be seen. For the 180 keV transitions from the 996 state and the 421 keV transition from the 1418 keV state, there appears to be an E0 component. Spits \cite{spits96:_154gd} agrees with this for the latter. The 602 keV transition from the 1418 state may have an E0 component, but this work cannot rule out an $M1$ transition. Both transitions from 1531 keV have values instead of limits. The 715 keV transition appears to have an E0 component, in contradiction to Spits \cite{spits96:_154gd}. The 535 keV transition also disagrees with Spits, giving an E0 component, but smaller than that seen by Spits. The 900 keV transition from 1716 keV was only able to get upper limits, which lends itself toward a small E0 component.The 719 keV transition from the same state appears to have an E0 component. This implies a stronger connection to the 996 keV state, which is the head of the gamma-band. This will be further examined in Table \ref{tab:154Gd_BE0_Comp}. The transitions from 1775 keV both appear to have E0 components, although the 960 keV transition only has lower limits.
+
 \afterpage{\clearpage\input{154GdTablesAndFigs/154Gd4to4}}
 
+Table \ref{tab:154Gd_4_to_4}, unlike Table \ref{tab:154Gd_2_to_2}, has mostly upper limits instead of lower limits, with the exception of the 676 keV transition from 1047 keV. Only the 437 keV transition from 1701 keV and the 740 keV transition from 1789 keV do not rule out E0 components.
+
 \afterpage{\clearpage\input{154GdTablesAndFigs/154Gd6to6}}
-    
+
+Table \ref{tab:154Gd_6_to_6} is the smallest of these tables, as the $6^+$ states are higher in energy and less populated by the reaction than the $2^+$ or $4^+$ states. The 648 keV transition appears to have a large E0 component, even larger than the one measured by Gono \cite{gono74:_154gd_e0}. The 1606 state has a lower limit, implying a large E0 component. The transitions from 1911 keV are all upper limits that are close to the $M1$ conversion coefficients.   
+
+The majority of these states do not have lifetimes, so $B(E0)$ values cannot be calculated. However, the relative intensities of these values can be compared, assuming they are coming from the same state, as the lifetime would divide out (see equation \ref{eq:BEO}. The contributions from the individual components of the transition must be separated out.
+
+To compare the $E0$ components, the other two major contributing components ($M1$ and $E2$) had to be subtracted out. This was done by getting the $q^2$ value multiplied by the theoretical $\alpha(E2)$, which gives an estimate of the E0 intensity [INSERT LANGE EQUATION OR REFERENCE TO IT]. None of the transitions have known $\delta$ mixing ratios, so $\delta$ was assumed to be 1, and the theoretical mixed $M1$ and $E2$ $\alpha$ was subtracted [LANGE]. In some cases, this left a negative value, which has been excluded from the table of results. This subtraction was not done for the $0^+$ transitions, as $M1$ and $E2$ transitions are not allowed. Most of the values calculated are upper or lower limits, as the original $\alpha$ obtained was an upper or lower limit. These values are listed in Table \ref{tab:154Gd_E0}.
+
+With these values, two transitions from the same level can be compared using the $B(E0)$ formula to take the energy adjustment into account [NEED TO MAKE EQUATION IN INTRO/THEORY]. This ratio must then be corrected by the ratio of the gate efficiencies, as the intensities of the transitions are unknown, and the efficiency correction gives absolute numbers to compare. Because some transitions could be seen in multiple gates, these ratios could be calculated using several corrected numbers. These results are summarized in Table \ref{tab:154Gd_BE0_Comp}
+
+\afterpage{\clearpage\input{154GdTablesAndFigs/154Gd_E0}}
+
+\afterpage{\clearpage\input{154GdTablesAndFigs/154Gd_BE0_Comp}}
+
+Of note in this table, the $0^+\rightarrow0^+$ transitions are both stronger to the 1182 keV $0^+$ state than to the 680 keV $0^+$ state, implying these two states are not built on the $\beta$-band. For the $2^+\rightarrow2^+$ transitions, the 1418 keV $2^+$ state and the 1716 $2^+$ keV state appear to more strongly populate the 996 keV $2^+$ state, which is the head of the $\gamma$-band. The 1531 keV $2^+$ state and the 1775 keV $2^+$ state do not appear to strongly favor the 815 keV $2^+$ state or the 996 keV $2^+$ state. However, the 1775 keV state is only a lower limit, and could actually favor the 815 keV state, which is part of the $\beta$-band.
+
+For the $4^+\rightarrow4^+$ transitions, the 1645 keV $4^+$ state and the 1701 keV $4^+$ state favor going to the 1263 keV $4^+$ state over the 1047 keV $4^+$ state, once against favoring the $\gamma$-band over the $\beta$-band. For the 1789 keV state, the opposite is true, and the transition to the 1047 keV state is favored, implying the $\beta$-band is favored. Only the 1911 kev $6^+$ state could be examined for the $6^+\rightarrow6^+$ transitions, which appears to favor the 1606 keV $6^+$ state over the 1365 keV $6^+$ state, once again favoring the $\gamma$-band over the $\beta$-band.
+
+\section{Dynamic Moments of Inertia}
+\label{sec:154_Dynamic}
+
+To examine the structure of the bands seen in this experiment, the dynamic moments of inertia can be compared. This is usually done with higher spins, but examination at lower spins can allow for more bands to be compared. The energy difference tracks linearly, with the slope being directly correlated to the moment of inertia of the band, as seen in Figure \ref{fig:154_Dynamic0} and Figure \ref{fig:154_Dynamic}. The slopes of these bands are summarized in Table \ref{tab:154_Dynamic}. Slopes with an error had enough points to calculate the error on the slope. Those without error had only two points or, in the case of the second excited $2^+$ band, one point and the origin. These points each require two levels of the band to be known for calculation. The intercept was left to float, but not iincluded, as it was in agreement with 0 in all cases where error could be calculated.
+
+\input{154GdTablesAndFigs/154Dynamic0_fig.tex}
+
+\input{154GdTablesAndFigs/154Dynamic_fig.tex}
+
+\input{154GdTablesAndFigs/154_Dynamic_Table.tex}
+
+Figure \ref{fig:154_Dynamic0} shows the $0^+$ bands. The first excited $0^+$ band has a very similar slope to the ground state band, as seen both in Figure \ref{fig:154_Dynamic0} and Table \ref{tab:154_Dynamic}. The two bands agree within $2\sigma$. While the $\gamma$-band also appears similar in slope to the ground state band in Figure \ref{fig:154_Dynamic}, they do not overlap within $3\sigma$. The first $4^+$ excited band does have a slope within $2\sigma$ of the $\gamma$-band.
