@@ -1,6 +1,14 @@
 \chapter{Analysis}
+\label{ch:analysis}
 
-\section{WTF am I doing with my life?}
+The acquisition of the data, as discussed in the previous chapter, was done using the NSCL DAQ. These files were converted into files compatible with ROOT \citep{brun97:_root}. In ROOT, calibrations, gates, and fitting were done. Fits of the peaks were also done in RADWARE \citep{radford00:_radware} and compared. RADWARE was used as the main fitting tool, as the built-in framework for the Fano factor created more consistent global fits, and a better estimate of the skew factors for the conversion electron spectra.
+
+\section{Fitting Spectra}
+\label{sec:fitting}
+
+Whenever possible, all data were fit using the same methodology. If another methodology needed to be used (as will be discussed in section \ref{sec:upper_limit}) the methodology was tested. This was done by taking both fitting routines to the same peaks and comparing the results. If they were in agreement, the secondary method could be used where the primary method failed.
+
+In the previous chapter, the results of the calibrations were discussed, without going into detail into the calibrations themselves. In particular, the calibrations of the Si(Li) detectors were important for the fitting of 
 
 \section{Gating}
 
@@ -96,3 +104,5 @@ The height of the skewed gaussian can be derived in terms of the area, $R$, $\si
 \end{equation}
 
 These three variables are all unique to the detector, and come directly from fitting the calibration data. From there, the parameters can be fed into the equation, along with the centroid of the peak, and subtracted directly off the spectrum. Any remaining counts are counted by taking sections on either side of the area of interest and using a global linear fit for the background. This linear fit is subtracted off bin-by-bin in the region of interest. The remaining area is then taken as an upper limit on the transition of interest.
+
+\section{Error Analysis}

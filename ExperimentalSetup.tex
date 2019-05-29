@@ -86,97 +86,25 @@ Originally designed to go inside of large gamma detector arrays, ICEBall consist
 
 \subsection{Detectors}
 
-The detectors inside of ICEBall are lithium-drifted silicon detectors, known as Si(Li) detectors for short. Si(Li) detectors allow for a larger depletion region in the detector, compared to pure silicon detectors, and can be made thicker as a result. The detectors inside of ICEBall are 5mm thick, with a surface area of 750 mm$^2$ \citep{metlay93:_iceball_comm}.
+The detectors inside of ICEBall are lithium-drifted silicon detectors, known as Si(Li) detectors for short. Si(Li) detectors allow for a larger depletion region in the detector, compared to pure silicon detectors, and can be made thicker as a result. The detectors inside of ICEBall are 5mm thick, with a surface area of 750 mm$^2$ \citep{metlay93:_iceball_comm}. Table \ref{tab:ICE_Det_Loc} summarizes the locations of the six Si(Li) detectors inside of ICEBall, using spherical coordinates.
+
+\input{Setup_Figs/ICEBall_Location.tex}
 
 Between the detectors and the target are mini-orange filter. Designed in the 1970s, mini-orange filters are a permanent magnet array surrounding a high-Z material, as seen in Figure \ref{fig:mini_orange}. In ICEBall, this material is tantalum [CHECK], and the magnets are made of SmCo$_5$, and arranged in groups of 3. The tantalum acts as a blocker, lowering noise from the target that can be due to $\gamma$ or $\delta$ rays. The magnets create a field that bends electrons toward the detector, while bending positrons away from the detector, further lowering noise. 
 
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.6]{Setup_Figs/mini-orange-metlay-figure.pdf}
-    \caption{Graphic of the mini-orange filter. The central blocker keeps $\gamma$-rays from hitting the detector. The magnets bend electrons toward the detectors, and positrons away from the detectors. Being permanent magnets, they are optimized for a range of electron energies, and can cause overbending or underbending of electrons outside of that energy range, making the magnetic filter a factor in the efficiency. Taken from \citep{metlay93:_iceball_comm}}
-    \label{fig:mini_orange}
-\end{figure}
+\input{Setup_Figs/miniOrange_fig.tex}
 
-A large drawback of these mini-orange filters is the permanent magnets. The field is optimized for a range of energies, and must be pre-selected before the experiment. Switching magnets mid-experiment is not feasible, due to the downtime needed to warm-up the system, bring it to atmosphere, replace the filter, and then reverse the first two steps. Additionally, the mini-orange filter changes the efficiency of the system, meaning each configuration must have a separate efficiency measurement.
+A drawback of these mini-orange filters is the permanent magnets. The field is optimized for a range of energies, and must be pre-selected before the experiment. Switching magnets mid-experiment is not feasible, due to the downtime needed to warm-up the system, bring it to atmosphere, replace the filter, and then return the system to data taking conditions. Additionally, the efficiency of the system is a convolution of the detector's efficiency and the mini-orange filter in front of it, meaning each configuration must have a separate efficiency measurement. Tables \ref{tab:ICE_Magnet_G} and \ref{tab:ICE_Magnet_C} summarize the magnetic configurations of the mini-orange filters used in the experiments.
 
-\begin{table}[]
-    \centering
-    \caption{ICEBall magnetic strengths with GEORGINA}
-    \begin{tabular}{c|c|c} \toprule
-         Detector & Filter & Strengths \\
-         \hline
-         1 & M13 & 815,740,830 \\ 
-         2 & M15 & 939,911,949\\
-         3 & M21 & 850,875,900 \\
-         4 & M14 & 972,911,992\\
-         5 & M18 & 856,913,963\\
-         6 & M22 & 845,900,900\\ \bottomrule
-    \end{tabular}
-    \footnotesize
-    \item Magnetic strengths of the mini-orange filters used in the GEORGINA experiments, listed in Gauss. 
-    \label{tab:ICE_Magnet}
-\end{table}
+\input{Setup_Figs/ICEBallMagnetTableG.tex}
 
-\begin{table}[]
-    \centering
-    \caption{ICEBall magnetic strengths with Clovershare}
-    \begin{tabular}{c|c|c} \toprule
-         Detector & Filter & Strengths \\
-         \hline
-         1 & M13 & 815,740,830 \\ 
-         2 & M20 & 1228,1292,1265\\
-         3 & M21 & 850,875,900 \\
-         4 & M2 & 31411,1420,1410\\
-         5 & M16 & 1286,1340,1285\\
-         6 & M22 & 845,900,900\\ \bottomrule
-    \end{tabular}
-    \footnotesize
-    \item Magnetic strengths of the mini-orange filters used in the Clovershare experiments, listed in Gauss. 
-    \label{tab:ICE_Magnet}
-\end{table}
-
-\begin{table}[]
-    \centering
-    \caption{ICEBall detector locations }
-    \begin{tabular}{c|c|c} \toprule
-         Detector & $\theta$ & $\phi$  \\
-         \hline
-         1 & 90 & 79.2 \\ 
-         2 & 270 & 100.8\\
-         3 & 172 & 129.9\\
-         4 & 198 & 31.7\\
-         5 & 18 & 148.3\\
-         6 & 355 & 50.1\\ \bottomrule
-    \end{tabular}
-    \footnotesize
-    \item The beam axis is the z-axis. $\theta$ is the angle in the xy-plane, where 0 degrees is beam left. $\phi$ is the azimuthal angle, with respect to the beam axis. All values are in degrees.
-    \label{tab:ICE_Det_Loc}
-\end{table}
+\input{Setup_Figs/ICEBallMagnetTableC.tex}
 
 \subsection{Calibration}
 
-ICEBall is calibrated using two sources: $^{133}$Ba and $^{207}$Bi. The specific properties of the two sources are listed in Table \ref{Table:Sources}. The $^{207}$Bi covered the high-energy regime, with lines around 500 keV and 1000 keV. The $^{133}$Ba covered energies from 200 to 400 keV. Both sources are low activity, preventing incomplete or overlapping charge collection from hindering the resolution of the detectors during calibration runs.
+ICEBall is calibrated using two sources: $^{133}$Ba and $^{207}$Bi. The specific properties of the two sources are listed in Table \ref{Table:Sources}. The $^{207}$Bi covers the high-energy regime, with lines around 500 keV and 1000 keV. The $^{133}$Ba covered energies from 200 to 400 keV. Both sources are low activity, preventing incomplete or overlapping charge collection from hindering the resolution of the detectors during calibration runs.
 
-\begin{table}[]
-    \centering
-    \caption{ICEBall calibration sources}
-    \begin{tabular}{c|c|c|c|c} \toprule
-         Source & Activity & Date Measured & Energy (keV) & Intensity (\%)\\
-          \hline 
-         $^{133}$Ba & May-4-2012 & 0.331(7) $\mu$C & 240.413 & 0.331 \\
-         & & & 266.868 & 0.698 \\
-         & & & 320.032 & 1.308 \\
-         & & & 347.866 & 0.370 \\
-         \hline
-         $^{207}$Bi & May-4-2012 & 0.306(8) $\mu$C & 481.697 & 1.562 \\ 
-         & & & 554.4 & 0.469 \\
-         & & & 975.657 & 7.243 \\
-         & & & 1048.1 & 1.838 \\\bottomrule
-    \end{tabular}
-    \footnotesize
-    \item Calibration source information for ICEBall. The energies and the respective intensities are listed for each source. Intensities are taken from \cite{trzaska90:_calibration}. The intensity of the 347 keV line in $^{133}$Ba is both the 384K and 356L intensities combined.
-    \label{tab:ICE_Cal_Source}
-\end{table}
+\input{Setup_Figs/ICEBall_calSource.tex}
 
 The energy calibration is assumed to be quadratic in nature, although both linear and quadratic calibrations are performed. [FIGURE]
 
@@ -191,7 +119,7 @@ The efficiency is a convolution of the magnetic configuration and the inherent d
 
 \section{GEORGINA}
 
-GEORGINA is a compact array of germanium detectors for $\gamma$-ray experiments. The detectors are 100\% relative efficiency. These detectors were designed for use with astrophysical capture reactions, meant to cover a large solid angle. There are a total of five detectors.
+GEORGINA is a compact array of germanium detectors for $\gamma$-ray experiments\citep{isnap18:_georgina}. The detectors are 100\% relative efficiency. These detectors were designed for use with astrophysical capture reactions, meant to cover a large solid angle. There are a total of five detectors.
 
 \subsection{Detectors}
 
@@ -199,63 +127,15 @@ While the GEORGINA detectors were designed for reasonable efficiency up to 12 Me
 
 The detectors were designed with the crystal at a $90^{\circ}$ from the cold-finger, as seen in Figure \ref{fig:georgina}.
 
-\begin{figure}
-    \centering
-    \includegraphics{Setup_Figs/georgina_example.png}
-    \caption{An example of one of the GEORGINA detectors. The crystal is at a $90^{\circ}$ from the cold finger, allowing the long side of the crystal to be placed next to the target, to optimize solid angle coverage. In the experiment, the circular face of the crystal was placed toward the target.}
-    \label{fig:georgina}
-\end{figure}
+\input{Setup_Figs/georgina_fig.tex}
 
-\begin{table}[]
-    \centering
-    \caption{GEORGINA detector locations }
-    \begin{tabular}{c|c|c} \toprule
-         Detector & $\theta$ & $\phi$  \\
-         \hline
-         1 & 0 & 90 \\ 
-         2 & 180 & 90\\ \bottomrule
-    \end{tabular}
-    \footnotesize
-    \item The beam axis is the z-axis. $\theta$ is the angle in the xy-plane, where 0 degrees is beam left. $\phi$ is the azimuthal angle, with respect to the beam axis. All values are in degrees.
-    \label{tab:GEORGE_Det_Loc}
-\end{table}
+\input{Setup_Figs/georgina_locations.tex}
 
 \subsection{Calibration}
 
 The GEORGINA detectors were calibrated using a $^{152}$Eu source, in addition to the ICEBall sources. The information about the sources is in Table \ref{tab:GEORGINA_Cal_Source}. Additionally, several background lines could be used to extend the energy calibration up to 2700 keV. 
 
-\begin{table}[]
-    \centering
-    \caption{GEORGINA calibration sources}
-    \begin{tabular}{c|c|c|c|c} \toprule
-         Source & Activity & Date Measured & Energy (keV) & Intensity (\%)\\
-          \hline 
-         $^{133}$Ba & May-4-2012 & 0.331(7) $\mu$C & 80.997 & 0.3406 \\
-         & & & 276.398 & 7.164 \\
-         & & & 302.853 & 18.33 \\
-         & & & 356.017 & 62.05 \\
-         & & & 383.851 & 8.94 \\
-         \hline
-         $^{207}$Bi & May-4-2012 & 0.306(8) $\mu$C & 569.702 & 97.75 \\ 
-         & & & 1063.662 & 74.09 \\
-         \hline
-         $^{152}$Eu & & & 121.7825 & 28.65 \\
-         & & & 244.6989 & 7.582 \\
-         & & & 344.281 & 26.6 \\
-         & & & 411.115 & 2.262 \\
-         & & & 443.965 & 3.125 \\
-         & & & 778.903 & 13.017 \\
-         & & & 867.39 & 4.26 \\
-         & & & 964.055 & 14.758 \\
-         & & & 1085.842 & 10.062 \\
-         & & & 1089.7 & 1.738 \\
-         & & & 1112.087 & 13.587 \\
-         & & & 1408.022 & 20.945 \\\bottomrule
-    \end{tabular}
-    \footnotesize
-    \item Calibration source information for GEORGINA. The energies and the respective intensities are listed for each source. Intensities are taken from \cite{trzaska90:_calibration}. The  $^{152}$Eu does not have activity and intensity, as it was normalized to the $^{133}$Ba.
-    \label{tab:GEORGINA_Cal_Source}
-\end{table}
+\input{Setup_Figs/georgina_calibration_table.tex}
 
 The efficiency calibration is fitted to equation
 
@@ -264,13 +144,17 @@ The efficiency calibration is fitted to equation
     \label{eq:Ge_Eff}
 \end{equation}
 
-\subsection{Electronics}
+\subsection{Electronics and Data Structure}
 
-% we need shit from Tony's thesis for this dawg
+The data taken with the ICEBall-Georgina pairing of detectors used the electronics set-up from previous experiments\citep{battaglia15:_iceball_176lu}. Signals from the Si(Li), HPGe, and BGO detectors were split into two signals, one for timing and one for energy. After going through several NIM (Nuclear Instrumentation Modules) to clean up the signals, these were fed into two VME (Versa Module Europa) bus modules for analog-to-digital conversion. Energy signals were converted using the Mesytec analog-to-digital converter (MADC-32) module. This module has 13 bit resolution. The timing signals were converted using a Caen V778 time-to-digital converter (TDC) module, with 12 bit resolution.
+
+The BGOs went through an amplifier before being fed directly into the MADC-32. Both the Si(Li)s and the HPGe detectors went into a preamplifier before going into an amplifier, and then the MADC-32. The amplifier allowed for the adjustment of the gain, to optimize the energy regime of interest. The timing signals were sent through a Timing Filter Amplifier (TFA) before going through a constant fraction discriminator (CFD) and being split into start and stop signals, as well as being recorded into the scalers. The stop signal was delayed by ~500ns to prevent self-triggering. Start timing signals were put into a logic coincidence for the trigger. The trigger could be adjusted if the count rate were problematic, but the ideal case was the "OR" coincidence, where a Si(Li) or HPGe detector could trigger the start. When this occurred, the signal was sent to a trigger, which sent the TDC a start signal. Stop signals could come from any of the three types of detectors, or the bunched beam being used.
+
+The data was collected from the VME modules using the Michigan State University NSCL data acquisition system (DAQ).
 
 \section{CloverShare}
 
-CloverShare is a group of HPGe clover detectors with BGO shields, that originated at Yale University. They were sent to various laboratories and universities for series of experiments, including the NSL. Two campaigns of experiments were run with CloverShare, each one involving an ICEBall experiment.
+CloverShare is aviously group of HPGe clover detectors with BGO shields, that originated at Yale University. They were sent to various laboratories and universities for series of experiments, including the NSL. Two campaigns of experiments were run with CloverShare, each one involving an ICEBall experiment.
 
 \subsection{Detectors}
 
@@ -282,25 +166,7 @@ Due to the fixed nature of the ICEBall detectors, the clovers were limited in th
 
 The CloverShare detectors were calibrated using the same sources as GEORGINA, as well as at $^{56}$Co source that was created on the FN accelerator days before the experiment. The information about the sources is in Table \ref{tab:GEORGINA_Cal_Source} and \ref{tab:Co_Energy}. 
 
-\begin{table}[]
-    \centering
-    \caption{$^56$Co calibration information}
-    \begin{tabular}{c|c|c|c}
-         Activity & Date Measured & Energies  \hline \\
-         6.44 $\mu$Ci & Mar-16-2016 & 846.77 \\
-         & & 977.372 \\
-         & & 1037.843 \\
-         & & 1175.101 \\
-         & & 1238.288 \\
-         & & 1360.212 \\
-         & & 1771.357 \\
-         & & 2015.215 \\
-         & & 2034.791 \\
-         & & 2598.5 \\
-    \end{tabular}
-    \caption{Energies used in $^{56}$Co for calibration, as well as activity.}
-    \label{tab:Co_Energy}
-\end{table}
+\input{Setup_Figs/Co_Calibration.tex}
 
 The $^{152}$Eu was placed on the individual detectors instead of centered in the trap, as it was not mounting well to the target ladder. To use the $^{152}$Eu for efficiency, a linear extrapolation of the efficiency of the 344 keV line was done using the 303 keV and 356 keV lines in $^{133}$Ba. All points in the Eu were then scaled based on this. A characteristic fit of the efficiency of these detectors can be seen in Figure \ref{fig:Clover_eff}, with the various sources denoted for the points.
 
