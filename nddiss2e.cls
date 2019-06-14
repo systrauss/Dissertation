@@ -179,7 +179,7 @@
     \subsection{\texttt{#3}}
     #4
     \begin{singlespace}
-        \inputminted[breaklines=true, linenos=true,fontsize=\footnotesize]{#1}{Code/#2}
+        \inputminted[breaklines=true, breakanywhere, tabsize=2, linenos=true,fontsize=\footnotesize]{#1}{Code/#2}
     \end{singlespace}
 }
 \AtBeginDocument{

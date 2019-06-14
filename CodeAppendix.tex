@@ -93,29 +93,51 @@ The code in this appendix is expressly for the ICEBall-GEORGINA data. The ICEBal
 
 \includecode{bash}{Queuescript.sh}{Queuescript.sh}{This shell script is written for executing the code on the CRC backend computers. It can be used locally by removing the commented lines down to line 9, and replacing \mint{bash}|$SGE_TASK_ID| with the run number. The terms "netID","Nickname","runStart","runEnd", "CodeDirectory","FileOut", "CutFile", and "TimingFile" must all be replaced with the correct information.}
 
-\includecode{c++}{src/main.cxx}{src/main.cxx}{This is the main code that calls all of the subroutines. The gSystem line is necessary to load the library to read the tree structure of the root files.}
+\includecode{c++}{src/main.cxx}{src/main.cxx}{This is the main code that calls all of the subroutines. The gSystem line is necessary to load the library to read the tree structure of the root files. "Directory" and "OutputDirectory" should be replaced with the proper filepaths.}
 
 \includecode{c++}{src/analysis.cxx}{src/analysis.cxx}{This is the main analysis section of the code. The skeleton is built using the MakeClass routine in ROOT.\citep{brun97:_root} If the structure of the tree varies, this is where the changes would reflect, from lines \texttt{154}-texttt{206}, where the event tree values are assigned to local variables for manipulation in the code.}
 
-\includecode{c++}{src/histograms.cxx}{src/histograms.cxx}{These are the subroutines for the creation, adding to, and writing to file of the histograms created in the gating process.}%Fix this code. The spacing is fucked%
+\includecode{c++}{include/analysis.h}{include/analysis.h}{Header file for \texttt{analysis.cxx}.}
 
-\includecode{c++}{src/timing.cxx}{src/timing.cxx}{This is a class for keeping track of the timing gates used between pairs of detectors.}%Fix this code. The spacing is fucked%
+\includecode{c++}{src/histograms.cxx}{src/histograms.cxx}{These are the subroutines for the creation, adding to, and writing to file of the histograms created in the gating process.}
+
+\includecode{c++}{include/histograms.h}{include/histograms.h}{Header file for \texttt{histograms.cxx}.}
+
+\includecode{c++}{src/timing.cxx}{src/timing.cxx}{This is a class for keeping track of the timing gates used between pairs of detectors.}
+
+\includecode{c++}{include/timing.h}{include/timing.h}{Header file for \texttt{timing.cxx}.}
 
 \section{Merge Code}
 
+\includecode{md}{merge/README.md}{README.md}{Simple included explanation of code inputs for running. Includes important commentary on inputs when used in conjunction with the coincidence code.}
+
+\includecode{make}{merge/Makefile}{Makefile}{The compilation code.}
+
+\includecode{c++}{merge/main.cxx}{src/main.cxx}{This is the main code that calls all the subroutines. The main subroutine used is in the histograms code. "\$OutputDirectory\$ must be replaced with the output directory.}
+
+\includecode{c++}{merge/histograms.cxx}{src/histograms.cxx}{This is the code that combines the histograms of the separate files into one.}
+
+\includecode{c++}{merge/histograms.h}{include/histograms.h}{Header file for \texttt{histograms.cxx}.}
+
 \section{Code shared between Coincidence and Merge}
 
-\includecode{c++}{src/Coefficients.cxx}{src/Coefficients.cxx}{These are the subroutines for reading in calibration coefficients for the Si(Li) and HPGe detectors.}%spacing adjust%
+\includecode{c++}{src/Coefficients.cxx}{src/Coefficients.cxx}{These are the subroutines for reading in calibration coefficients for the Si(Li) and HPGe detectors.}
 
-\includecode{c++}{src/Constraints.cxx}{src/Constraints.cxx}{These are the subroutines for reading in coincidence gates for the BGO, Si(Li), and HPGe detectors.}%spacing adjust%
+\includecode{c++}{include/Coefficients.h}{include/Coefficients.h}{Header file for \texttt{Coefficients.cxx}.}
+
+\includecode{c++}{src/Constraints.cxx}{src/Constraints.cxx}{These are the subroutines for reading in coincidence gates for the BGO, Si(Li), and HPGe detectors.}
+
+\includecode{c++}{include/Constraints.h}{include/Constraints.h}{Header file for \texttt{Constraints.cxx}.}
 
 \includecode{c++}{src/Filelist.cxx}{src/Filelist.cxx}{These are the subroutines for reading in the directory to the data, the generalized run name, the file type, and the tree name. The tree name is not used in the merge code.}
 
+\includecode{c++}{include/Filelist.h}{include/Filelist.h}{Header file for \texttt{Filelist.cxx}.}
+
 \section{Example User Files}
 
-\includecode{c++}{user/Filelist.dat}{user/Filelist.dat}{This is read in by the \texttt{Filelist.cxx} subroutines. It includes the path to the raw data files, the name of the tree, and the formatting for the beginning and end of the data files, including the file extension. The comments must be left in for proper spacing to be read by the program.}
+\includecode{c++}{user/Filelist.dat}{user/Filelist.dat}{This is read in by the \texttt{Filelist.cxx} subroutines. It includes the path to the raw data files, the name of the tree, and the formatting for the beginning and end of the data files, including the file extension. "\$DirectoryToData\$" should be replaced with the correct filepath. The comments must be left in for proper spacing to be read by the program.}
 
-\includecode{c++}{user/GeCoefficients.dat}{user/GeCoefficients.dat}{This is read in by the \texttt{Coefficients.cxx} subroutines. It includes the number of HPGe detectors, the polynomial order of the energy calibration, and the energy calibration itself. Coefficients are in order of increasing polynomial ($0^{th}$, $1^{st}$, etc.). It also is set up for segmented detectors, as in the Clovershare runs. In the case of the different tree structure in the Clovershare data, it also contains the start index of the HPGe detectors in the \texttt{evt} tree array. The comments must be left in for proper spacing to be read by the program.}
+\includecode{c++}{user/GeCoefficients.dat}{user/GeCoefficients.dat}{This is read in by the \texttt{Coefficients.cxx} subroutines. It includes the number of HPGe detectors, the polynomial order of the energy calibration, and the energy calibration itself. Coefficients are in order of increasing polynomial ($0^{th}$, $1^{st}$, etc.). It also is set up for segmented detectors, as in the Clovershare runs. In the case of the different tree structure in the Clovershare data, it also contains the start index of the HPGe detectors in the \texttt{evt} tree array. As a special correction function was used on the residuals to deal with the differential non-linearity of the electronics, as discussed in section \ref{sec:clover_electronics} and \ref{sec:clover_correction}, these coefficients are also included. They can be excluded if not needed. The comments must be left in for proper spacing to be read by the program.}
 
 \includecode{c++}{user/SiLiCoefficients.dat}{user/SiLiCoefficients.dat}{This is read in by the \texttt{Coefficients.cxx} subroutines. It includes the number of Si(Li) detectors, the polynomial order of the energy calibration, and the energy calibration itself. Coefficients are in order of increasing polynomial ($0^{th}$, $1^{st}$, etc.). In the case of the different tree structure in the Clovershare data, it also contains the start index  of the Si(Li) detectors in the \texttt{evt} tree array. The comments must be left in for proper spacing to be read by the program.}
 
@@ -127,6 +149,6 @@ The code in this appendix is expressly for the ICEBall-GEORGINA data. The ICEBal
 
 \includecode{c++}{user/Cut_Files/SiLiCuts.dat}{user/Cut\_Files/SiLiCuts.dat}{This is read in by the \texttt{Constraints.cxx} subroutines. It includes the number cuts to run on the HPGe detectors. Each cut is then listed as the detector index, the center of the gate, and half the width of the gate. This is done to mirror the centroid and width of peaks, for readability. The comments must be left in for proper spacing to be read by the program. This file name can be changed so multiple timing files can exist, as the timing file is specified as input when running the program.}
 
-\includecode{c++}{user/Run_by_Run/GeCoefficients.dat}{user/Run\_by\_Run/GeCoefficients\_r*.dat}{This is read in by the \texttt{Coefficients.cxx} subroutines. It includes a linear correction for the HPGe detectors based on the run specified where * is in the file name. The comments must be left in for proper spacing to be read by the program. This file name can be changed so multiple timing files can exist, as the timing file is specified as input when running the program. These files can be excluded and the correction will be set to y=x automatically.}%fix this file, add in SiLi file*
+\includecode{c++}{user/Run_by_Run/GeCoefficients.dat}{user/Run\_by\_Run/GeCoefficients\_r*.dat}{This is read in by the \texttt{Coefficients.cxx} subroutines. It includes a linear correction for the HPGe detectors based on the run specified where * is in the file name. The run correction is assumed to be linear, and the number of detectors is assumed from the base calibration files. The comments must be left in for proper spacing to be read by the program. This file name can be changed so multiple run files can exist, as the run file is based on the run being analyzed. These files can be excluded and the correction will be set to y=x automatically.}
 
-\includecode{c++}{}{user/Run\_by\_Run/SiLiCoefficients\_r*.dat}{This is read in by the \texttt{Coefficients.cxx} subroutines. It includes a linear correction for the HPGe detectors based on the run specified where * is in the file name. The comments must be left in for proper spacing to be read by the program. This file name can be changed so multiple timing files can exist, as the timing file is specified as input when running the program. These files can be excluded and the correction will be set to y=x automatically.}
+\includecode{c++}{}{user/Run\_by\_Run/SiLiCoefficients\_r*.dat}{This is read in by the \texttt{Coefficients.cxx} subroutines. It includes a linear correction for the Si(Li) detectors based on the run specified where * is in the file name. The run correction is assumed to be linear, and the number of detectors is assumed from the base calibration files. The comments must be left in for proper spacing to be read by the program. This file name can be changed so multiple run files can exist, as the run file is based on the run being analyzed. These files can be excluded and the correction will be set to y=x automatically.}
