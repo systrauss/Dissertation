@@ -86,7 +86,7 @@ int main(int argc, char* argv[]) //Order of arguments: run #, output filename, c
 	char* sOut = argv[2]; //file title to write to
 	char* sCut1 = argv[3]; //Cut file name indicator
 	char* sTime = argv[4]; //Cut file name indicator
-	gSystem->Load("/afs/crc.nd.edu/group/nsl/nuc/users/sstrauss/iceball_dec2014/Data/libExpEvent.so","", kTRUE);
+	gSystem->Load("$Directory$/libExpEvent.so","", kTRUE);
 	readPaths(); //From Filelist.cxx
 	makeChain(nRunNum); //From Filelist.cxx
 	defineGeCoeff(); //From Coefficients.cxx
@@ -108,5 +108,5 @@ int main(int argc, char* argv[]) //Order of arguments: run #, output filename, c
 	sprintf(buffer,"SiLiCut_%s.dat",sCut1); //File name to input
 	nSiLiConstraints = defineConstraints(buffer,dSiLiBounds);
 	makeHistograms(nGeDets/nGeSegments,nGeConstraints,nSiLiDets,nSiLiConstraints); //from histograms.cxx
-	ana.Loop(Form("/scratch365/sstrauss/temp/%s_run_00%i.root",sOut,nRunNum),nRunNum, false); //fOut is in Filelist.h
+	ana.Loop(Form("$OutputDirectory$/%s_run_00%i.root",sOut,nRunNum),nRunNum, false); //fOut is in Filelist.h
 }
