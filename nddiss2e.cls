@@ -173,6 +173,15 @@
 }{}
 }
 \RequirePackage{metalogo}
+\RequirePackage{minted}
+\RequirePackage[T1]{fontenc}
+\newcommand{\includecode}[4]{
+    \subsection{\texttt{#3}}
+    #4
+    \begin{singlespace}
+        \inputminted[breaklines=true, linenos=true,fontsize=\footnotesize]{#1}{Code/#2}
+    \end{singlespace}
+}
 \AtBeginDocument{
 \pagestyle{plain}
 \normalspacing
