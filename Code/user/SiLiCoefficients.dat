@@ -1,0 +1,10 @@
+2 //Order of calibration i.e. 1 = linear.
+6 //Total number of signals from SiLi detectors
+48 //Start of SiLis in generalized array, redundant from CloverShare
+//SiLi Coefficients
+-20.0687, 0.186828, -3.03149E-06
+9.46919,  0.153857, 6.276E-07
+3.84721, 0.163458, 3.61702E-07
+8.41864, 0.160942, 4.86406E-07
+5.5835,   0.163278, 3.71974E-07
+-2.28321, 0.173382, 2.06782E-07
