@@ -124,6 +124,7 @@
   colorlinks=false,%
   pdfpagemode=UseOutlines]{hyperref}
 \RequirePackage{longtable,afterpage}
+\RequirePackage{physics}
 \RequirePackage[flushleft]{threeparttable}
 \RequirePackage[flushleft]{threeparttablex}
 \RequirePackage{xspace}
@@ -132,6 +133,8 @@
 \RequirePackage{enumitem}
 \RequirePackage{latexsym}
 \RequirePackage{textcase}
+\RequirePackage{multirow}
+\RequirePackage{caption,subcaption}
 \ifboolexpr{bool{pdf} or bool{xetex} or bool{luatex}}{%
   \RequirePackage{epsfig}
   \RequirePackage{color}
@@ -180,6 +183,13 @@
     #4
     \begin{singlespace}
         \inputminted[breaklines=true, breakanywhere, tabsize=2, linenos=true,fontsize=\footnotesize]{#1}{Code/#2}
+    \end{singlespace}
+}
+\newcommand{\includemacro}[4]{
+    \section{\texttt{#3}}
+    #4
+    \begin{singlespace}
+        \inputminted[breaklines=true, breakanywhere, tabsize=2, linenos=true,fontsize=\footnotesize]{#1}{Macros/#2}
     \end{singlespace}
 }
 \AtBeginDocument{

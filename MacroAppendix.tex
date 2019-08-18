@@ -1,0 +1,44 @@
+%
+% Modified by Megan Patnott
+% Last Change: Jan 18, 2013
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Modified by Sameer Vijay
+% Last Change: Tue Jul 26 2005 13:00 CEST
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Sample Notre Dame Thesis/Dissertation
+% Using Donald Peterson's ndthesis classfile
+%
+% Written by Jeff Squyres and Don Peterson
+%
+% Provided by the Information Technology Committee of
+%   the Graduate Student Union
+%   http://www.gsu.nd.edu/
+%
+% Nothing in this document is serious except the format.  :-)
+%
+% If you have any suggestions, comments, questions, please send e-mail
+% to: ndthesis@gsu.nd.edu
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%
+% Appendix for Analysis Code
+%
+
+\chapter{ROOT Macro Codes}
+\label{chap:macro}
+
+This appendix contains macros used in ROOT for various pieces of analysis, such as subtracting off peaks or piecewise background fits. All codes were run using ROOT version 5.34.19 \citep{brun97:_root}.
+
+\includemacro{c++}{FitterProgram.cxx}{FitterProgram.cxx}{This code is a series of fitting macros for various kinds of spectra and peak types. These fits were compared with RADWARE\citep{radford00:_radware} for consistency.}
+
+\includemacro{c++}{skewedsubtraction.cxx}{skewedsubtraction.cxx}{This code is used for subtracting off conversion electron peaks, typically those from the ground state band in this work, from the conversion electron spectrum to look for smaller peaks and upper limits.}
+
+\includemacro{c++}{Piecewise_macro.cxx}{Piecewise\_macro.cxx}{This code was used for fitting the background on either side of a peak and outputting the area under the peak after subtracting the background off. It must be compiled by root for use by being converted into a shared library by ACLiC.}
+
+\includemacro{c++}{ROOT2SPE.cxx}{ROOT2SPE.cxx}{This code was used for converting ROOT histograms into \texttt{.spe} files for use by RADWARE \citep{radford00:_radware}. It uses an existing conversion in the RADWARE source code to convert from \texttt{ascii} to \texttt{spe}.}

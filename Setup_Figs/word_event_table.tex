@@ -1,0 +1,108 @@
+\begin{landscape}
+\begin{table}[]
+    \centering
+    \label{tab:wordevent}
+    \caption{Data Structure of Electronics}
+    \begin{subtable}[]{1.3\textwidth}
+    \centering
+    \small
+    \caption{\label{tab:word_MADC}Data event - MADC32 (32 bit word)}
+    \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+ %   \begin{tabularx}{\linewidth}{X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X}
+        \toprule
+        \multicolumn{32}{c}{Header} \\
+        \hline
+        \multicolumn{2}{c|}{2} & \multicolumn{6}{|c|}{6} & \multicolumn{8}{|c|}{8} & 1 & \multicolumn{3}{|c|}{3} & \multicolumn{2}{|c|}{2} & \multicolumn{10}{|c}{10} \\
+        \multicolumn{2}{c|}{header signature} & \multicolumn{6}{|c|}{subheader} & \multicolumn{8}{|c|}{module id} & output format & \multicolumn{3}{|c|}{adc resolution} & \multicolumn{2}{|c|}{} & \multicolumn{10}{|c}{number of data words} \\
+        \hline
+        \multicolumn{2}{c|}{b01} & \multicolumn{6}{|c|}{b000000} & \multicolumn{8}{|c|}{} & bx & \multicolumn{3}{|c|}{bxxx} & \multicolumn{2}{|c|}{b00} & \multicolumn{10}{|c}{number of 32 bit data words} \\
+        \midrule
+        \multicolumn{32}{c}{Data Word} \\
+        \hline
+        \multicolumn{2}{c|}{2} & \multicolumn{9}{|c|}{9} & \multicolumn{5}{|c|}{5} & 1 & 1 & \multicolumn{3}{|c|}{1..3} & \multicolumn{11}{|c}{11..13} \\
+        \multicolumn{2}{c|}{data-sig} & \multicolumn{9}{|c|}{} & \multicolumn{5}{|c|}{} &  & out of range & \multicolumn{3}{|c|}{} & \multicolumn{11}{|c}{} \\
+        \hline
+        \multicolumn{2}{c|}{b00} & \multicolumn{9}{|c|}{00 0100 000} & \multicolumn{5}{|c|}{channel number} & b0  & Oor & \multicolumn{3}{|c|}{b00} & \multicolumn{11}{|c}{ADC Amplitude} \\
+        \midrule
+        \multicolumn{32}{c}{End of Event} \\
+        \hline
+        \multicolumn{2}{c|}{2} & \multicolumn{30}{|c}{30} \\
+        \hline
+        \multicolumn{2}{c|}{b11} & \multicolumn{30}{|c}{event counter/time stamp} \\
+        \bottomrule
+    \end{tabular}
+    \end{subtable}
+    \end{table}
+    
+    \pagebreak
+    
+    \begin{table}[]
+    \ContinuedFloat
+    \begin{subtable}[]{1.3\textwidth}
+    \centering
+    \caption{\label{tab:word_CAEN}Data event - V775 (32 bit word)}
+    \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+        \toprule
+        \multicolumn{32}{c}{Header} \\
+        \hline
+        \multicolumn{5}{c|}{5} & \multicolumn{3}{|c|}{3} & \multicolumn{8}{|c|}{8} & \multicolumn{2}{|c|}{2} & \multicolumn{6}{|c|}{6} & \multicolumn{8}{|c}{8} \\
+        \hline
+        \multicolumn{5}{c|}{Geo Address[5]} & \multicolumn{3}{|c|}{010} & \multicolumn{8}{|c|}{Crate Number[8]} & \multicolumn{2}{|c|}{00} & \multicolumn{6}{|c|}{Converted Channels[6]} & \multicolumn{8}{|c}{} \\
+        \midrule
+        \multicolumn{32}{c}{Data Word} \\
+        \hline
+        \multicolumn{5}{c|}{5} & \multicolumn{3}{|c|}{3} & \multicolumn{3}{|c|}{3} & \multicolumn{5}{|c|}{5} & 1 & 1 & 1 & 1 & \multicolumn{12}{|c}{12}\\
+        \hline
+        \multicolumn{5}{c|}{Geo Address[5]} & \multicolumn{3}{|c|}{000} & \multicolumn{3}{|c|}{} & \multicolumn{5}{|c|}{Channel Number} &  & Valid & Under-Threshold & Overflow & \multicolumn{12}{|c}{ADC Amplitude[12]}\\
+        \midrule
+        \multicolumn{32}{c}{End of Block} \\
+        \hline
+        \multicolumn{5}{c|}{5} & \multicolumn{3}{|c|}{3} & \multicolumn{24}{|c}{24} \\
+        \hline
+        \multicolumn{5}{c|}{Geo Address[5]} & \multicolumn{3}{|c|}{100} & \multicolumn{24}{|c}{Event Counter[24]} \\
+        \bottomrule
+    \end{tabular}
+    \end{subtable}
+    \end{table}
+    
+    \pagebreak
+    
+    \begin{table}[]
+    \ContinuedFloat
+    \begin{subtable}[]{1.3\textwidth}
+    \small
+    \centering
+    \caption{\label{tab:word_XIA}Data event - Pixie-16 (32 bit word)}
+    \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+    \toprule
+        Index & \multicolumn{32}{|c}{Header}\\
+        \midrule
+        \multirow{2}{*}{0} & 1 & \multicolumn{14}{|c|}{14} & \multicolumn{5}{|c|}{5} & \multicolumn{4}{|c|}{4} & \multicolumn{4}{|c|}{4} & \multicolumn{4}{|c}{4} \\
+        \cline{2-33}
+        & Finish Code & \multicolumn{14}{|c|}{Event Length} & \multicolumn{5}{|c|}{Header Length} & \multicolumn{4}{|c|}{CrateID} & \multicolumn{4}{|c|}{SlotID} & \multicolumn{4}{|c}{Chan\#} \\
+        \midrule
+        \multirow{2}{*}{1} & \multicolumn{32}{|c}{32} \\
+        \cline{2-33}
+        & \multicolumn{32}{|c}{EVTTIME\_LO[32]} \\
+        \midrule
+        \multirow{2}{*}{2} & 1 & \multicolumn{15}{|c|}{15} & \multicolumn{16}{|c}{16}\\
+        \cline{2-33}
+        & CFD forced trigger bit & \multicolumn{15}{|c|}{CFD Fractional Time[15] x 32768} & \multicolumn{16}{|c}{EVTTIME\_HI[16]} \\
+        \midrule
+        \multirow{2}{*}{3} & 1 & \multicolumn{15}{|c|}{15} & \multicolumn{16}{|c}{16}\\
+        \cline{2-33}
+        & Trace Out-of-Range Flag & \multicolumn{15}{|c|}{Trace Length} & \multicolumn{16}{|c}{Event Energy}\\
+        \midrule
+        \multicolumn{33}{c}{Data Word} \\
+        \midrule
+        \multirow{2}{*}{n} & \multicolumn{16}{|c|}{16} & \multicolumn{16}{|c}{16} \\
+        \cline{2-33}
+        & \multicolumn{16}{|c|}{ADC Data #(2n+1)[16]} & \multicolumn{16}{|c}{ADC Data #(2n)[16]} \\
+        \bottomrule
+    \end{tabular}
+    \end{subtable}
+    \\[2]
+    \footnotesize
+    Tables of the 32-bit word data structures of the different electronics used in the experiments, including the MADC (a), the CAEN 775 TDC (b), and the Xia Pixie-16 (c). The headers, event word structure, and end of event structure, where needed, are all listed. In the tables, the first row in a given block is the number of bits used by that piece of data, while the second row is a description of the data. Bits go in descending order from left to right.
+\end{table}
+\end{landscape}

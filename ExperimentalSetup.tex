@@ -1,32 +1,4 @@
 %
-% Modified by Megan Patnott
-% Last Change: Jan 18, 2013
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Modified by Sameer Vijay
-% Last Change: Tue Jul 26 2005 13:00 CEST
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Sample Notre Dame Thesis/Dissertation
-% Using Donald Peterson's ndthesis classfile
-%
-% Written by Jeff Squyres and Don Peterson
-%
-% Provided by the Information Technology Committee of
-%   the Graduate Student Union
-%   http://www.gsu.nd.edu/
-%
-% Nothing in this document is serious except the format.  :-)
-%
-% If you have any suggestions, comments, questions, please send e-mail
-% to: ndthesis@gsu.nd.edu
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%
 % Chapter 2
 %
 
@@ -35,56 +7,60 @@
 
 \section{Overview}
 
-To measure conversion electrons for nuclear structure, three separate experiments were performed at the Nuclear Science Laboratory (NSL) at the University of the Notre Dame using the Internal Conversion Electron Ball (ICEBall) Spectrometer paired with several configurations of High Purity Germanium (HPGe) detectors. A Sm$(\alpha,2n)$Gd reaction was used with different enriched targets to create the desired Gd isotope.
+To measure conversion electrons for nuclear structure, three separate experiments were performed at the Nuclear Science Laboratory (NSL) at the University of Notre Dame using the Internal Conversion Electron Ball (ICEBall) Spectrometer paired with several configurations of High Purity Germanium (HPGe) detectors. A Sm$(\alpha,2n)$Gd reaction was used with different enriched targets to create the desired Gd isotope, with an $\alpha$ beam of 20 MeV.
+
+\section{Experimental Design}
+
+As conversion electrons are usually referred to using conversion coefficients, which compare the electron intensities to the respective gamma-rays from the transition, both conversion electrons and gamma-rays must be measured in this experiment. Further, for pure $E0$ transitions, it must be shown that there are no gamma-rays, as gamma rays are forbidden by selection rules in these transitions. Both particle and gamma-ray detectors are needed.
+
+Due to the high level density of nuclei in this region, detectors with good resolution are favored for these experiments. The detectors must also be placed in a way that allows for simultaneous measurement of both particles and gamma-rays. For good resolution, high purity germanium detectors are the standard for gamma-rays. For electron detection, silicon-based detectors have the best resolution. The electron energies of interest range from less than 100 keV to over 1 MeV. Standard silicon detectors do not have an energy range that high for electrons, so lithium-drifted silicon detectors will be used instead, which have a higher top-end electron energy.
+
+The $(\alpha,2n)$ reaction favors populating states of low, even-$J$ and positive parity. These states, including the $0^+$ states, are the ones of interest in this study, making this a natural reaction to select for the experiment. The $Q$ value for this reaction is -14.774 MeV for $^{154}$Gd and -13.638 MeV for $^{156}$Gd, making it well within the energy range available at the NSL.
 
 \section{Nuclear Science Laboratory at Notre Dame}
 
-The Nuclear Science Laboratory at the University of Notre Dame has been in operation since the 1930s. Currently, the NSL operates locally with three accelerators: the 10 MV FN Tandem, the 5 MV Sta. Ana accelerator, and the 3 MV 9S Tandem. There is also a fourth accelerator, a 1 MV machine called CASPAR, located in the Homestake Mines in South Dakota. The experiments in this dissertation were performed on the 10 MV FN Tandem. Figure \ref{fig:NSL} is the current layout of the NSL. The accelerator in the top right of the figure is the FN Tandem.
+The Nuclear Science Laboratory at the University of Notre Dame has been in operation since the 1930s. Currently, the NSL operates locally with three accelerators: the FN Tandem, the 5 MV Single-Ended Sta. Ana accelerator, and the 3 MV 9S Tandem. There is also a fourth accelerator, a 1 MV machine called CASPAR, located in the Homestake Mines in South Dakota. The experiments in this dissertation were performed on the FN Tandem. Figure \ref{fig:NSL} is the current layout of the NSL. The accelerator in the top right of the figure is the FN Tandem.
 
 The FN Tandem has two ion sources: the Helium Ion Source (HIS) and the Multi-Cathode Source of Negative Ions Using Cesium Sputtering (MC-SNICS). Most elements can take the electrons from cesium to create negative ions. Helium cannot and needs a special source, as discussed below. For the experiments described, the HIS was used.
 
-Due to the electron binding energy of helium, the HIS uses a duoplasmatron. Within the duoplasmatron, a thin tungsten wire is heated while surrounded by the source gas (helium). The tungsten wire emits electrons, and positively ionizes the helium. This helium is extracted from the duoplasmatron and focused by an einzel lens, where it then goes through the lithium charge exchange. This section of the HIS works much like the Tandem, although the charge exchange works in reverse. The positively charged ions are accelerated through a lithium vapor, and some gain electrons, becoming neutral or negatively charged. Those ions that become negatively charged are accelerated out the other end of the HIS, before being sent to the FN Tandem. Figure \ref{fig:HIS} is a schematic of this system.
+Due to the electron binding energy of helium, the HIS uses a duoplasmatron. Within the duoplasmatron, a thin tungsten wire is heated while surrounded by the source gas (helium). The tungsten wire emits electrons, and positively ionizes the helium. This helium is extracted from the duoplasmatron and focused by an einzel lens, where it then goes through the lithium charge exchange. This section of the HIS works as a small two stage acceleration system, although the charge exchange works added electrons instead of stripping them. The positively charged ions are accelerated through a lithium vapor, and some gain electrons, becoming neutral or negatively charged. Those ions that become negatively charged are accelerated out the other end of the HIS, before being sent to the FN Tandem. Figure \ref{fig:HIS} is a schematic of this system.
 
 \input{Setup_Figs/NSL_Layout.tex}
 
-The 10 MV FN Tandem has been in operation since 1968. It operates using a Van de Graaff system. Charging chains carrying a static charge deposit the charge on a terminal in the center of the machine. The charging chains are a pelletron system, upgraded from the original insulated belt system in 2000. The pelletron chain consists of metal pellets connected using nylon, allowing for each pellet to be electrically isolated as it carries electrical charge to the terminal \citep{nec:_pelletron}. The beamline is kept at vacuum, but the area outside of the beamline, but within the accelerator tank, is filled with a mixture of CO$_2$ and dry nitrogen gas, at approximately 200 PSI. To create a more uniform acceleration field, the terminal is brought to ground along the beamline using resistor-lined tubes. The resistors used create a uniform electrical field down the tube, allowing for uniform acceleration.
+The FN Tandem has been in operation since 1968. It operates using a Van de Graaff system. Charging chains carrying a static charge deposit the charge on a terminal in the center of the machine. The charging chains are a pelletron system, upgraded from the original insulated belt system in 2000. The pelletron chain consists of metal pellets connected using nylon, allowing for each pellet to be electrically isolated as it carries electrical charge to the terminal \citep{nec:_pelletron}. The beamline is kept at vacuum, but the area outside of the beamline, but within the accelerator tank, is filled with a mixture of CO$_2$ and dry nitrogen gas, at approximately 200 PSI. To create a more uniform acceleration field, the terminal is brought to ground along the beamline using resistor-lined tubes. The resistors used create a uniform electrical field down the tube, allowing for uniform acceleration.
 
 It is known as a tandem because the system is a two-stage acceleration. Negatively charged ions enter the system, accelerating toward a positively charged terminal shell. Inside of the shell, the ions go through carbon stripping foils 3 $\mu g/cm^2$ thick, becoming positively charged as electrons are pulled off. The ions then accelerate away from the terminal for the second stage. The total energy gained by the ions is the terminal voltage times the quantity of one plus the final charge state.
 
 \input{Setup_Figs/HIS.tex}
 
-\section{Target Fabrication}
+\section{Electron Detection}
 
-For conversion electron experiments, thinner targets are ideal. Electrons must escape the target for detection, and a thicker target causes energy loss and straggling effects, blurring out the conversion electron spectrum.
+Silicon detectors are a commonly used particle detector, with good energy resolution. The detectors are semiconductors, using a $p-n$ junction to create a depletion region, which becomes the active detection region\citep{knoll00:rad_det_meas}. Semiconductors have a bandgap around 1eV. A cartoon of the bandgap can be seen in Figure \ref{fig:bandgap}. The $p-n$ junction takes two semi-conductor materials, one of $p$-type (an excess of holes in the valence band) and one of $n$-type (an excess of electrons in the conduction band) together. The holes and electrons mix, creating a depletion region, which becomes the active detection area. This region can be enlarged to some extent by putting a bias across the detector.
 
-Enriched, self-supporting samarium targets were used for this experiment. Table \ref{tab:target} has the enrichment and thickness of the targets used. The material started as Sm$_2$O$_3$. Using the reaction
+\input{Setup_Figs/semiconductor.tex}
 
-\begin{equation}
-    Sm_2O_3 + Hf \xrightarrow{} HfO_2 + Sm
-    \label{eq:sm_hf}
-\end{equation}
+Because electrons are much smaller than protons or alphas, it takes much more material to fully stop electrons compared to protons of the same kinetic energy. Silicon detectors only have active regions of 1mm-2mm thick, due to impurities, and cannot be made thick enough for the purposes of measuring electrons in the energy range of interest. Lithium-drifted silicon, colloquially Si(Li), detectors operate under the same principles as silicon detectors, but can be manufactured with larger depletion regions and a larger detectable energy range of electrons. These work by specifically introducing impurities, or doping, in this case lithium, to the detector, drifting it to create a $p-i-n$ junction. The $i$ region is also known as the intrinsic region, and is created by the drifting of the lithium, creating a highly purified region. The thickness of these detectors is only limited by the distance across which the lithium can be successfully drifted.
 
-at a temperature of 1520-1820 K the samarium was extracted as a metal \citep{clifford02:_target}. Once cooled, it was rolled as thin as possible. Samarium easily oxidizes, stagnating the rolling process, as too much work on the material at once could cause instantaneous oxidization, resulting in the loss of the target. Rolling had to be done incrementally, giving the material time to rest.
-
-\input{Setup_Figs/targetable.tex}
-
-\section{Internal Conversion Electron Ball Spectrometer}
+\subsection{Internal Conversion Electron Ball Spectrometer}
 
 The Internal Conversion Electron Ball Spectrometer (ICEBall) was developed at the University of Pittsburgh by Metlay et al. \citep{metlay92:_iceball_comm,metlay93:_iceball_comm}. Originally at the Spin Spectrometer at Oak Ridge National Laboratory, it was later stationed at the Wright Nuclear Structure Laboratory at Yale University with the YRAST Ball, until being brought to the University of Notre Dame and stationed in the Nuclear Science Laboratory West Target Room, on a dedicated beamline \citep{battaglia15:_iceball_176lu}.
 
-Originally designed to go inside of large gamma detector arrays, ICEBall consists of six mini-orange spectrometers, cooled using liquid nitrogen for ideal energy resolution. The liquid nitrogen is administered using an autofill system with two thermal sensors for a start and stop signal. When the sensor closest to the detectors warms enough, liquid nitrogen is pumped into the system. A second sensor at the top of the dewar is used to stop the fill of liquid nitrogen before it overflows. This system goes off in 15 to 20 minute intervals.
+Originally designed to go inside of large gamma detector arrays, ICEBall consists of six mini-orange spectrometers, cooled using liquid nitrogen for ideal energy resolution. The liquid nitrogen is administered using an autofill system with two thermal sensors for a start and stop signal. When the sensor closest to the detectors warms enough, liquid nitrogen is pumped into the system. A second sensor at the top of the dewar is used to stop the fill of liquid nitrogen before it overflows. This system goes off in 15 to 20 minute intervals. ICEBall can be seen in Figure \ref{fig:open_iceball}, open for servicing.
 
-\subsection{Detectors}
+\input{Setup_Figs/open_iceball.tex}
 
-The detectors inside of ICEBall are lithium-drifted silicon detectors, known colloquially as Si(Li) detectors. Si(Li) detectors allow for a larger depletion region in the detector, compared to pure silicon detectors, and can be made thicker as a result. The detectors inside of ICEBall are 5 mm thick, with a surface area of 750 mm$^2$ \citep{metlay93:_iceball_comm}. Table \ref{tab:ICE_Det_Loc} summarizes the locations of the six Si(Li) detectors inside of ICEBall, using spherical coordinates. A thin aluminized mylar foil is placed in front of the Si(Li) detectors to block low-energy electrons and $\delta$-rays that successfully make it past the mini-orange filter.
+The Si(Li) detectors inside of ICEBall are 5 mm thick, with a surface area of 750 mm$^2$ \citep{metlay93:_iceball_comm}. Table \ref{tab:ICE_Det_Loc} summarizes the locations of the six Si(Li) detectors inside of ICEBall, using spherical coordinates. A thin aluminized mylar foil is placed in front of the Si(Li) detectors to block low-energy electrons and $\delta$-rays that successfully make it past the mini-orange filter (discussed in \ref{sec:mini_orange}).
 
 \input{Setup_Figs/ICEBall_Location.tex}
 
-Between the detectors and the target are mini-orange filters. Designed in the 1970s, mini-orange filters are a permanent magnet array surrounding a high-Z material, as seen in Figure \ref{fig:mini_orange}. In ICEBall, this material is tungsten, and the magnets are made of SmCo$_5$, and arranged in groups of 3. The tungsten acts as a blocker, lowering background from the target that can be due to $\gamma$ rays and heavy charged particles. The magnets create a field that bends electrons toward the detector, while bending positrons away from the detector, further lowering background noise. 
+\subsubsection{Mini-Orange Spectrometer}
+\label{sec:mini_orange}
+
+Between the detectors and the target are mini-orange filters. Designed in the 1970s, mini-orange filters are a permanent magnet array surrounding a high-Z material, as seen in Figure \ref{fig:mini_orange} \citep{vanklinken72:mini_orange, vanklinken75:mini_orange}. In ICEBall, this material is tungsten, and the magnets are made of SmCo$_5$, and arranged in groups of 3. The tungsten acts as a blocker, lowering background from the target that can be due to $\gamma$ rays and heavy charged particles. The magnets create a field that bends electrons toward the detector, while bending positrons away from the detector, further lowering background noise. 
 
 \input{Setup_Figs/miniOrange_fig.tex}
 
-Compared to conventional spectrometers that sweep over electron energies by changing the magnetic field of the spectrometer, the mini-orange spectrometers are able to cover a wide range of energies at once. A drawback of this is the permanent magnets. The field is optimized for a range of energies, and must be pre-selected before the experiment. Switching magnets mid-experiment is not feasible, due to the downtime needed to warm-up the system, bring it to atmosphere, replace the filter, and then return the system to data taking conditions. Additionally, the efficiency of the system is a convolution of the detector's efficiency and the mini-orange filter in front of it, meaning each configuration must have a separate efficiency measurement. Tables \ref{tab:ICE_Magnet_G} and \ref{tab:ICE_Magnet_C} summarize the magnetic configurations of the mini-orange filters used in the experiments.
+Compared to conventional spectrometers that sweep over electron energies by changing the magnetic field of the spectrometer, the mini-orange spectrometers are able to cover a wide range of energies at once. A drawback of this is the permanent magnets. The field is optimized for a range of energies, and must be pre-selected before the experiment. Switching magnets mid-experiment is not feasible, due to the downtime needed to warm-up the system, bring it to atmosphere, replace the filter, and then return the system to data taking conditions. Additionally, the efficiency of the system is a convolution of the detector's efficiency and the mini-orange filter in front of it, meaning each configuration must have a separate efficiency measurement. Tables \ref{tab:ICE_Magnet_G} and \ref{tab:ICE_Magnet_C} summarize the magnetic configurations of the mini-orange filters used in the experiments. The higher the magnetic strengths, the higher energy the peak efficiency of the mini-orange spectrometer. For the GEORGINA configuration, the magnetic strengths were all of similar values. For the Clovershare configuration, the filters were replaced on three detectors to enhance efficiency at higher energies.
 
 \input{Setup_Figs/ICEBallMagnetTableG.tex}
 
@@ -109,25 +85,36 @@ The efficiency calibration is fitted to equation
 
 The efficiency is a convolution of the magnetic configuration and the inherent detector efficiency. Using the efficiency points, the analytic expression for the efficiency was determined empirically in previous work \citep{battaglia15:_iceball_176lu}. These experimental values are summarized in the next chapter for each experiment.
 
-\section{GEORGINA}
+\section{Gamma Detection}
 
-GEORGINA is a compact array of high-purity germanium (HPGe) detectors for $\gamma$-ray experiments\citep{isnap18:_georgina}. The detectors are 109\% relative efficiency. These detectors were designed for use with astrophysical capture reactions, meant to cover a large solid angle. There are a total of five detectors.
+Gamma radiation is highly penetrating, making semiconductor detectors of normal purity unusable, as they have limitations on the depth of the depletion region that are nowhere near the necessary depths needed for fully stopping gamma radiation. The depletion depth is inversely proportional to the number of impurities in the material \citep{knoll00:rad_det_meas}. High-purity germanium, also known as intrinsic germanium, detectors decrease these impurities to increase the depletion depth, resulting in depths of several centimeters.
 
-\subsection{Detectors}
+Like other semi-conductor detectors, there are dead zones that attenuate the radiation. Generally, this attenuation is negligible above 200 keV. These detectors have a high resolution due to the small bandgap of 0.7 eV in germanium. This small bandgap comes at a price, and HPGe detectors can only be operated at liquid nitrogen temperatures, as putting any voltage on a room temperature HPGe would result in high leakage currents and noise, making detection impossible.
 
-While the GEORGINA detectors were designed for reasonable efficiency up to 12 MeV, they were used in this experiment to look at energies up to 4 MeV. Two detectors of the five were used in this experiment. The detectors were designed with the crystal at a $90^{\circ}$ from the cold-finger, as seen in Figure \ref{fig:georgina}.
+\subsection{GEORGINA}
+
+GEORGINA is a compact array of high-purity germanium (HPGe) detectors for $\gamma$-ray experiments\citep{isnap18:_georgina}. The detectors are 109\% relative efficiency. These detectors were designed for use with astrophysical capture reactions, meant to cover a large solid angle. There are a total of five detectors. The detectors were designed with the crystal at a $90^{\circ}$ from the cold-finger, as seen in Figure \ref{fig:georgina}.
 
 \input{Setup_Figs/georgina_fig.tex}
 
-\input{Setup_Figs/georgina_locations.tex}
+One of the two detectors had Bismuth Germanate (BGO) detectors from Argonne National Laboratory around it to cut down on background from incomplete charge collection, these can be seen in Figure \ref{fig:georgina_config}. BGO detectors have a high efficiency, but poor resolution, and are good to use as a veto system. In the event that a gamma-ray does not deposit its full energy in the HPGe crystal, the BGO detectors surrounding the crystal should pick up the remaining energy. This indicates the event was incomplete in energy and should be excluded from the data. This is a manual cut made during the analysis procedure by looking at the data from the BGO detectors.
 
-One of the two detectors had Bismuth Germanate (BGO) detectors from Argonne National Laboratory around it to cut down on background from incomplete charge collection. BGO detectors have a high efficiency, but poor resolution, and are good to use as a veto system. In the event that a gamma-ray does not deposit its full energy in the HPGe crystal, the BGO detectors surrounding the crystal should pick up the remaining energy. This indicates the event was incomplete in energy and should be excluded from the data. For more on the electronics logic for this, see section \ref{sec:GEORGINA_electronics}.
+\subsection{CloverShare}
+
+CloverShare is a group of HPGe clover detectors with BGO shields, that originated at Yale University. They were sent to various laboratories and universities for series of experiments, including the NSL. Two campaigns of experiments were run with CloverShare, each one involving an ICEBall experiment.
+
+The CloverShare detectors are large, segmented HPGe detectors, with fitted BGO shields, seen in Figure \ref{fig:clover_example}. In the first of the two experiments, 7 detectors were used. In the second, 5 were used, as two experienced pre-amplifier problems during the previous campaign. The detectors used biases between -3000 and -4000 V, and were kept cold using a liquid nitrogen autofill system.
+
+\input{Setup_Figs/clover_example.tex}
 
 \subsection{Calibration}
+\label{sec:clover_cal}
 
-The GEORGINA detectors were calibrated using a $^{152}$Eu source, in addition to the ICEBall sources. The information about the sources is in Table \ref{tab:GEORGINA_Cal_Source}. The $^{152}$Eu source was not designed to sit perfectly on the target ladder, while the two ICEBall sources were. So, even though the Eu source was attached to the target ladder for calibration, using it as a measure of absolute efficiency was not possible. To use the $^{152}$Eu for efficiency, a linear extrapolation of the efficiency of the 344 keV line was done using the 303 keV and 356 keV lines in $^{133}$Ba. All points in the Eu were then scaled based on this. Additionally, several background lines could be used to extend the energy calibration up to 2700 keV. The energy calibration was assumed to be a polynomial, and fits up to the fifth order were done to find the best calibration without overfitting. For examples of these fits and a summary of the determined coefficients, see the next chapter.
+Both sets of detectors were calibrated using a $^{152}$Eu source, in addition to the ICEBall sources. The information about the sources is in Table \ref{tab:GEORGINA_Cal_Source}. The $^{152}$Eu source was not designed to sit perfectly on the target ladder, while the two ICEBall sources were. So, even though the Eu source was attached to the target ladder for calibration, using it as a measure of absolute efficiency was not possible. To use the $^{152}$Eu for efficiency, a linear extrapolation of the efficiency of the 344 keV line was done using the 303 keV and 356 keV lines in $^{133}$Ba. All points in the Eu were then scaled based on this. Additionally, several background lines could be used to extend the energy calibration up to 2700 keV. The energy calibration was assumed to be a polynomial, and fits up to the fifth order were done to find the best calibration without overfitting. For examples of these fits, see the next chapter.
 
 \input{Setup_Figs/georgina_calibration_table.tex}
+
+The $^{152}$Eu was placed on the individual detectors instead of centered in the trap, as it does not mount well to the target ladder. To use the $^{152}$Eu for efficiency, a linear extrapolation of the efficiency of the 344 keV line was done using the 303 keV and 356 keV lines in $^{133}$Ba. All points in the Eu were then scaled based on this. A characteristic fit of the efficiency of these detectors can be seen in Figure \ref{fig:clover_eff}.
 
 The efficiency calibration is fitted to equation
 
@@ -136,42 +123,13 @@ The efficiency calibration is fitted to equation
     \label{eq:Ge_Eff}
 \end{equation}
 
-This is the same efficiency curve used for the Clovershare detectors, and a characteristic fit can be seen in Figure \ref{fig:clover_eff}. For a summary of the calibration points, please see the next chapter.
-
-\subsection{Electronics and Data Structure}
-\label{sec:GEORGINA_electronics}
-
-The data taken with the ICEBall-Georgina pairing of detectors used the electronics set-up from previous experiments\citep{battaglia15:_iceball_176lu}. Signals from the Si(Li), HPGe, and BGO detectors were split into two signals, one for timing and one for energy, as seen in Figure \ref{fig:iceball_electronics}. After going through several NIM (Nuclear Instrumentation Modules) to clean up the signals, these were fed into two VME (Versa Module Europa) bus modules for analog-to-digital conversion. Energy signals were converted using the Mesytec analog-to-digital converter (MADC-32) module. This module has 13 bit resolution. The timing signals were converted using a Caen V778 time-to-digital converter (TDC) module, with 12 bit resolution.
-
-\input{Setup_Figs/iceball_electronics.tex}
-
-The BGO detectors went through an amplifier before being fed directly into the MADC-32. Both the Si(Li)s and the HPGe detectors went into a preamplifier before going into an amplifier, and then the MADC-32. The amplifier allowed for the adjustment of the gain, to optimize the energy regime of interest. The timing signals were sent through a Timing Filter Amplifier (TFA) before going through a constant fraction discriminator (CFD) and being split into start and stop signals, as well as being recorded into the scalers. The stop signal was delayed by \~500ns to prevent self-triggering. Start timing signals were put into a logic coincidence for the trigger. The trigger could be adjusted if the count rate were too high, but the ideal case was the "OR" coincidence, where a Si(Li) or HPGe detector could trigger the start. When this occurred, the signal was sent to a trigger, which sent the TDC a start signal. Stop signals could come from any of the three types of detectors, or the bunched beam being used.
-
-The data was collected from the VME modules using the Michigan State University NSCL data acquisition system (DAQ)\citep{nscl:_daq}. The data file, known as an event or "evt" file, is only compatible with the analysis software SpecTcl\citep{nscl:_daq}. For online analysis, SpecTcl was used. However, for the purposes of gating and fitting, it is inadequate. These evt files were instead converted into "root" files, for use with the CERN Root Data Analysis Framework\citep{brun97:_root}. This open source software is programmable through C++, allowing for a robust set of features. This conversion was done using a program called \texttt{evt2root}\citep{smith14:_evt2root}.
-
-\section{CloverShare}
-
-CloverShare is a group of HPGe clover detectors with BGO shields, that originated at Yale University. They were sent to various laboratories and universities for series of experiments, including the NSL. Two campaigns of experiments were run with CloverShare, each one involving an ICEBall experiment.
-
-\subsection{Detectors}
-
-The CloverShare detectors are large, segmented HPGe detectors, with fitted BGO shields. In the first of the two experiments, 7 detectors were used. In the second, 5 were used, as two experienced pre-amplifier problems during the previous campaign. The detectors used biases between -3000 and -4000 V, and were kept cold using a liquid nitrogen autofill system.
-
-Due to the fixed nature of the ICEBall detectors, the clovers were limited in the angles they could be placed at to optimize efficiency. With the tungsten blockers in front of the Si(Li) detectors to block gamma-rays and x-rays, placing the clovers behind these detectors would drastically reduce efficiency. The system was modeled in AutoDesk Inventor \citep{autodesk:_inventor} to visualize the detector placement, and find an ideal setup to optimize the HPGe detectors. Figure \ref{fig:inventor} shows the resulting model and placements, as well as several unmoveable obstructions, like cable trays, that needed to be worked around.
-
-\input{Setup_Figs/inventor.tex}
-
-\subsection{Calibration}
-
-The CloverShare detectors were calibrated using the same sources as GEORGINA, as well as at $^{56}$Co source that was created on the FN accelerator days before the experiment. The information about the sources is in Table \ref{tab:GEORGINA_Cal_Source} and \ref{tab:Co_Energy}. 
+A characteristic fit can be seen in Figure \ref{fig:clover_eff}. The CloverShare detectors were also calibrated using a $^{56}$Co source that was created on the FN accelerator days before the experiment. The information about the source is in Table \ref{tab:Co_Energy}. 
 
 \input{Setup_Figs/Co_Calibration.tex}
 
-The $^{152}$Eu was placed on the individual detectors instead of centered in the trap, as it does not mount well to the target ladder. To use the $^{152}$Eu for efficiency, a linear extrapolation of the efficiency of the 344 keV line was done using the 303 keV and 356 keV lines in $^{133}$Ba. All points in the Eu were then scaled based on this. A characteristic fit of the efficiency of these detectors can be seen in Figure \ref{fig:clover_eff}. A summary of the calibrated efficiency values can be seen in the next chapter.
-
 \input{Setup_Figs/clover_eff_fig.tex}
 
-As the clovers are comprised of four separate crystals, the efficiency was taken for the individual leaves, and once the detectors had been calibrated, they were summed together. Figure \ref{fig:Clover_ind_vs_sum} shows the comparison. As is expected, there is a small improvement in the higher energies. The summed crystals were used for analysis, and will be used in spectra from here on forward.
+As the clovers are comprised of four separate crystals, the efficiency was taken for the individual leaves, and once the detectors had been calibrated, they were summed together. Figure \ref{fig:Clover_ind_vs_sum} shows the comparison. As is expected, there is a small improvement in the higher energies. This is due to the summation of otherwise incomplete charge collection due to compton scattering within individual crystals. This did cause the efficiency at lower energies to appear lower, but this is due to the summing of cascades of energies over the segments. The summed crystals were used for analysis, and will be used in spectra from here on forward.
 
 \input{Setup_Figs/clover_ind_vs_sum.tex}
 
@@ -179,15 +137,24 @@ Each leaf of the clovers was energy calibrated. An unusual trend in the residual
 
 \input{Setup_Figs/Clover_resid.tex}
 
-\subsection{Electronics}
+\section{Target Fabrication}
 
-The electronics used for the Clovershare series of experiments were designed for use with the High Efficiency TOtal absorption spectrometeR (HECTOR), a NaI(Tl) detector array\citep{reingold19:_HECTOR}. The HECTOR data acquisition system is the Michigan Sate University NSCL digital data acquisition system (DDAS). This system uses three XIA Pixie-16 modules \citep{xia:_pixie} which are 16 channel 14-bit 100 MSPS digitizers. Signals from detectors were fed directly from the preamplifiers to the Pixie modules, which did the amplification, shaping, timing, and logic triggers within the module through adjustments on the data acquisition computer. NaI(Tl) detectors have far lower resolution than HPGe detectors, so the differential non-linearities are not noticeable in the HECTOR data.
+Electrons must escape the target for detection. All materials have some stopping power for radiation, based on the material, thickness, and type of particle. The Beta-Bloch formula can be used to calculate this stopping power, with several programs, including SRIM, created to make and tabulate these values [CITE SRIM]. A thicker target causes energy loss and straggling effects, blurring out the conversion electron spectrum, meaning a thinner target is a more ideal situation.
 
-The Pixie modules were unable to produce enough gain in the amplifier section for the Si(Li) detectors to cover a significant number of channels for resolution, so the detectors' signals were put through fast filter amplifiers \citep{ortec:_fastamp} to boost the signal before being fed into the DDAS. Fast amplifiers were used due to the fast timing and acquisition nature of the Pixie-16 modules and DDAS. 
+Enriched, self-supporting samarium targets were used for this experiment. Table \ref{tab:target} has the enrichment and thickness of the targets used. The material started as Sm$_2$O$_3$. Using the reaction
+
+\begin{equation}
+    Sm_2O_3 + Hf \xrightarrow{} HfO_2 + Sm
+    \label{eq:sm_hf}
+\end{equation}
+
+at a temperature of 1520-1820 K the samarium was extracted as a metal \citep{clifford02:_target}. Once cooled, it was rolled as thin as possible. Samarium easily oxidizes, stagnating the rolling process, as too much work on the material at once could cause instantaneous oxidization, resulting in the loss of the target. Rolling had to be done incrementally, giving the material time to rest.
+
+\input{Setup_Figs/targetable.tex}
 
 \section{Beam Production}
 
-Because of the use of HPGe detectors in an $(\alpha,2n)$ reaction, the neutron flux must be minimized in comparison to the cross section of the reaction, as the $(\alpha,n)$ reaction is also open. To do this, a range of energies to test were selected by looking at theoretical cross sections in Talys\citep{koning07:_talys}. These energies were then tested with natural Sm targets, ICEBall, and two liquid scintillators to detect neutrons.
+Because of the use of HPGe detectors in an $(\alpha,2n)$ reaction, the neutron flux must be minimized in comparison to the cross section of the reaction, as the $(\alpha,n)$ reaction is also open. The neutrons being produced will interact with everything, including the HPGe detectors, which can be damaged by the $(n,\gamma)$ reaction on germanium. To do this, a range of energies to test were selected by looking at theoretical cross sections in Talys\citep{koning07:_talys}. These energies were then tested with natural Sm targets, ICEBall, and two liquid scintillators to detect neutrons.
 
 Samarium, as with many even-Z elements in the lanthanide region, has many stable isotopes. A total of five stable isotopes of Samarium exist, with two other isotopes being long-lived. Table \ref{tab:nat_Sm} summarizes the abundances and lifetimes of the various isotopes found in natural Samarium. The two isotopes to be used in enriched targets in the experiments have the highest natural abundances, $^{152,154}$Sm.
 
@@ -203,7 +170,7 @@ Both natural and enriched samarium targets were used and modelled within Talys. 
 
 \subsection{Test Analysis and Results}
 
-To test these Talys calculations and determine the best running energy, the cross section and neutron flux had to be measured at each energy without the use of the HPGe detectors. ICEBall was used to measure the cross section by examining the K-electrons from ground-state band transitions in the reactions of interest, as the ground-state band is the most significantly populated band in the reaction.
+To test these Talys calculations and determine the best running energy, the cross section and neutron flux had to be measured at each energy without the use of the HPGe detectors. This was done using a natural samarium target. ICEBall was used to measure the cross section by examining the K-electrons from ground-state band transitions in the reactions of interest, as the ground-state band is the most significantly populated band in the reaction. The DAQ described in section \ref{sec:GEORGINA_electronics} was used. Spectra from ICEBall were fit using the methods described in \ref{sec:fitting}. The peaks were identified under the assumption the ground-state band transitions would be the strongest peaks in the spectra, and populate quickly. 
 
 The neutrons were measured using two NE213 liquid organic scintillators. In these detectors, it is possible to do pulse shape discrimination, as the neutrons have longer decay times than the gammas in these detectors due to the nature of the interaction with the scintillating liquid \citep{knoll00:rad_det_meas}. This produces longer trails in the detectors, leading to different decay shapes, see Figure \ref{fig:pulse_discrimination}. 
 
@@ -238,14 +205,45 @@ Table \ref{tab:neutrons} summarizes the results at each energy. Note, that the c
 
 \input{Setup_Figs/neutron_summary}
 
+\section{Experimental Configuration and Operation}
+
 \subsection{Experimental Beam Operation}
 
-The experiments with GEORGINA were done using a bunched beam, creating a set timing signal to help with coincidence. The beam was bunched before the accelerator, with a time separation of 600 ns between bunches. The timing of these bunches is shown in Figure \ref{fig:bunched}. Clear separation in of the bunches is visible.
+The experiments with GEORGINA were done using a bunched beam, creating a set timing signal to help with coincidence. The beam was bunched before the accelerator, with a time separation of 600 ns between bunches. The timing of these bunches is shown in Figure \ref{fig:bunched}. Clear separation in of the bunches is visible. The accelerator was run with a terminal voltage of 6.64 MV, with $^{4}$He$^{2+}$ being sent through the machine. 
 
 \input{Setup_Figs/bunched_fig.tex}
 
-% % uncomment the following lines,
-% if using chapter-wise bibliography
-%
-% \bibliographystyle{ndnatbib}
-% \bibliography{example}
+\subsection{GEORGINA Configuration and Electronics}
+\label{sec:GEORGINA_electronics}
+
+While the GEORGINA detectors were designed for reasonable efficiency up to 12 MeV, they were used in this experiment to look at energies up to 4 MeV. Two GEORGINA detectors were used in the experiment with ICEBall. The location of the detectors is given in Table \ref{tab:GEORGE_Det_Loc}. They were placed with the face of the detector against ICEBall.
+
+\input{Setup_Figs/georgina_locations.tex}
+
+The ICEBall-GEORGINA pairing can be seen in Figure \ref{fig:georgina_config}. The data taken with this pairing of detectors used the electronics set-up from previous experiments\citep{battaglia15:_iceball_176lu}. Signals from the Si(Li), HPGe, and BGO detectors were split into two signals, one for timing and one for energy, as seen in Figure \ref{fig:iceball_electronics}. After going through several NIM (Nuclear Instrumentation Modules) to clean up the signals, these were fed into two VME (Versa Module Europa) bus modules for analog-to-digital conversion. Energy signals were converted using the Mesytec analog-to-digital converter (MADC-32) module. This module has 13 bit resolution. The timing signals were converted using a Caen V775 time-to-digital converter (TDC) module, with 12 bit resolution. The data structures of the events in these modules are explicitly written in Tables \ref{tab:word_MADC} anf \ref{tab:word_CAEN}.
+
+\input{Setup_Figs/Georgina_Config.tex}
+
+\input{Setup_Figs/iceball_electronics.tex}
+
+The BGO detectors went through an amplifier before being fed directly into the MADC-32. Both the Si(Li)s and the HPGe detectors went into a preamplifier before going into an amplifier, and then the MADC-32. The amplifier allowed for the adjustment of the gain, to optimize the energy regime of interest. The timing signals were sent through a Timing Filter Amplifier (TFA) before going through a constant fraction discriminator (CFD) and being split into start and stop signals, as well as being recorded into the scalers. The stop signal was delayed by \~500ns to prevent self-triggering. Start timing signals were put into a logic coincidence for the trigger. The trigger could be adjusted if the count rate were too high, but the ideal case was the "OR" coincidence, where a Si(Li) or HPGe detector could trigger the start. When this occurred, the signal was sent to a trigger, which sent the TDC a start signal. Stop signals could come from any of the three types of detectors, or the bunched beam being used.
+
+The data was collected from the VME modules using the Michigan State University NSCL data acquisition system (DAQ)\citep{nscl:_daq}. The data file, known as an event or "evt" file, is only compatible with the analysis software SpecTcl\citep{nscl:_daq}. For online analysis, SpecTcl was used. However, for the purposes of gating and fitting, it is inadequate. These evt files were instead converted into "root" files, for use with the CERN Root Data Analysis Framework\citep{brun97:_root}. This open source software is programmable through C++, allowing for a robust set of features. This conversion was done using a program called \texttt{evt2root}\citep{smith14:_evt2root}.
+
+\subsection{Clovershare Configuration and Electronics}
+
+Due to the fixed nature of the ICEBall detectors, the clovers were limited in the angles they could be placed at to optimize efficiency. With the tungsten blockers in front of the Si(Li) detectors to block gamma-rays and x-rays, placing the clovers behind these detectors would drastically reduce efficiency. The system was modeled in AutoDesk Inventor \citep{autodesk:_inventor} to visualize the detector placement, and find an ideal setup to optimize the HPGe detectors. Figure \ref{fig:inventor} shows the resulting model and placements, as well as several unmoveable obstructions, like cable trays, that needed to be worked around. Figure \ref{fig:clovershare_config} shows the final placements for the seven-detector configuration, in the experimental hall.
+
+\input{Setup_Figs/inventor.tex}
+
+\input{Setup_Figs/Clovershare_config.tex}
+
+The electronics used for the Clovershare series of experiments were designed for use with the High Efficiency TOtal absorption spectrometeR (HECTOR), a NaI(Tl) detector array\citep{reingold19:_HECTOR}. The HECTOR data acquisition system is based on the Michigan State University NSCL digital data acquisition system (DDAS). This system uses three XIA Pixie-16 modules \citep{xia:_pixie} which are 16 channel 14-bit 100 MSPS digitizers. The data structure of this system can be seen in Table \ref{tab:word_XIA}. Signals from detectors were fed directly from the preamplifiers to the Pixie modules, which did the amplification, shaping, timing, and logic triggers within the module through adjustments on the data acquisition computer, seen in Figure \ref{fig:pixie_electronics}. NaI(Tl) detectors have far lower resolution than HPGe detectors, so the differential non-linearities are not noticeable in the HECTOR data.
+
+\input{Setup_Figs/pixie_electronics.tex}
+
+The Pixie modules were unable to produce enough gain in the amplifier section for the Si(Li) detectors to cover a significant number of channels for resolution, so the detectors' signals were put through fast filter amplifiers \citep{ortec:_fastamp} to boost the signal before being fed into the DDAS. Fast amplifiers were used due to the fast timing and acquisition nature of the Pixie-16 modules and DDAS. 
+
+As with the ICEBall data, these files were event files that were then converted in root files for further analysis.
+
+\input{Setup_Figs/word_event_table.tex}
