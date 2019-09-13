@@ -7,13 +7,13 @@
 % What is matter?
 Visible matter comprises $\sim$5 percent of the universe. This matter makes up all living things and ecosystems, including the stars and planets. This matter exists entirely within the atom, with the nucleus holding more than 99.9 \% of all matter. The nucleus is comprised of protons and neutrons in different configurations, held together by the strong force. Understanding this essential building block of the universe is at the heart of understanding how matter is formed and evolves.
 
-The periodicity of phenomena on the atomic level and higher is well documented, from the lattice structures of crystals, to the periodic table of the elements, organized in a way that groups elements that behave similarly due to the structure of the orbiting atomic electrons. But, this periodic table does not delve into the subatomic level. The periodic table separates out atoms by the number of protons, which equates with the atomic number, but the number of neutrons in a nucleus can also vary. When mapping these two, we create Figure \ref{fig:chart}, known as the chart of nuclides. These nucleons are held together by the strong force, which has a short range. In the low-mass region of the chart, this creates a linear trend for the line of stability. As mass and the total number of nucleons increases, the line of stability trends toward the neutron side, due to repulsion by the coulomb force in the protons. More neutrons are needed, proportionately to protons, to decrease the coulomb force felt by the protons.
+The periodicity of phenomena on the atomic level and higher is well documented near stability, from the lattice structures of crystals, to the periodic table of the elements, organized in a way that groups elements that behave similarly due to the structure of the orbiting atomic electrons. But, this periodic table does not delve into the subatomic level. The periodic table separates out atoms by the number of protons, which equates with the atomic number, but the number of neutrons in a nucleus can also vary. When mapping these two, we create Figure \ref{fig:chart}, known as the chart of nuclides. These nucleons are held together by the strong force, which has a short range. In the low-mass region of the chart, this creates a linear trend for the line of stability. As mass and the total number of nucleons increases, the line of stability trends toward the neutron side, due to repulsion by the coulomb force in the protons. As the neutrons do not contribute significantly to the coulomb force, the addition of more neutrons creates larger separation between protons, decreasing the coulomb contribution.
 
 \input{Introduction_Figs/chart.tex}
 
 The chart of nuclides has several notable features in this form. The color coding in Figure \ref{fig:chart} is representative of the lifetimes of the isotopes represented in each box: lighter boxes are shorter-lived, while darker boxes are longer lived, with black boxes being stable isotopes. This creates a black line going up at approximately $N=Z$, known as the valley of stability. Additionally in this figure, several rows and columns are singled out. These rows and columns are a series of numbers referred to as the "magic" numbers, and highlight a form of periodicity in nuclei. 
 
-This periodic nature is explained through the shell model. Based on the same idea as atomic electrons, the "shells" occur due to the energy gap in levels. The neutrons and protons each have separate potential wells and levels populated. When examining solutions to this potential well, the magic numbers naturally form after including angular momentum, and taking the spin-orbit interaction into account, as seen in Figure \ref{fig:shellmodel}. These magic numbers represent closed shells of a spherical nucleus, and cause a variety of effects, including high energy of the first excited $2^+$ state at closed shells, seen in Figure \ref{fig:E2bymass}, and the low reduced transition rate between this first excited state and the ground state, seen in Figure \ref{fig:reducedtrans}.
+This periodic nature is explained through the shell model. Based on the same idea as atomic electrons, the "shells" occur due to the energy gap in levels. The neutrons and protons each have separate potential wells and levels populated. When examining solutions to this potential well, the magic numbers naturally form after including angular momentum, and taking the spin-orbit interaction into account, as seen in Figure \ref{fig:shellmodel}. These magic numbers represent closed shells of a spherical nucleus model. It is of note, that a doubly-magic nucleus, that is, a nucleus with both neutron and proton close shells, is spherical. However, a nucleus with only a single closed shell is not, necesarily, spherical. These closed shells cause a variety of effects, including high energy of the first excited $2^+$ state at closed shells, seen in Figure \ref{fig:E2bymass}, and the low reduced transition rate between this first excited state and the ground state, seen in Figure \ref{fig:reducedtrans}.
 
 \input{Introduction_Figs/ShellBreakdown.tex}
 
@@ -21,7 +21,7 @@ This periodic nature is explained through the shell model. Based on the same ide
 
 \input{Introduction_Figs/ReducedTransChart.tex}
 
-However, outside of these closed shells, there are large regions that do not work within the paradigm created by this phenomenon. Nuclei near the close shells are spherical in nature. However, the shell model breaks down far from the closed shells. In some cases, the magic numbers themselves appear to change. This change can be charted using the Nilsson model, which shows the evolution of the levels in the shell model as deformation occurs, see Figure \ref{fig:nilsson}.
+However, outside of these closed shells, there are large regions that do not work within the paradigm created by this phenomenon. Nuclei near the close shells are spherical in nature. However, the shell model breaks down far from the closed shells. In some cases, the magic numbers themselves appear to change. This change can be charted using the Nilsson model, which shows the evolution of the levels in the shell model as a function of deformation, see Figure \ref{fig:nilsson}.
 
 \input{Introduction_Figs/nilsson.tex}
 
@@ -108,9 +108,9 @@ and
 As these are equivalent, any pair of fields \textbf{B}(\textbf{r}) and \textbf{E}(\textbf{r}) that satisfy equations \ref{eq:maxwell_rw1} must satisfy equations \ref{eq:maxwell_rw2} and vice-versa. It can be shown that any arbitrary solution to the Maxwell equations can be written as a linear combination of a transverse magnetic wave and a tranverse electric wave, i.e. 
 \begin{align}
     \label{eq:trans_E}
-    \nabla \cdot \textbf{E} & = 0, \text{ or} \\
+    \textbf{r} \cdot \textbf{E} & = 0, \text{ or} \\
     \label{eq:trans_B}
-    \nabla \cdot \textbf{B} & = 0
+    \textbf{r} \cdot \textbf{B} & = 0
 \end{align}
 
 When combining \ref{eq:trans_E} and \ref{eq:maxwell_rw1}, a solution to the Maxwell equations can be derived. When doing the same with \ref{eq:trans_B} and \ref{eq:maxwell_rw2}, a separate, linearly independent, solution can be derived. These two solutions in combination can express any of the solutions to the Maxwell equations as a linear combination.
@@ -192,7 +192,7 @@ where $M$ and $e$ are the mass and charge of a single particle, $\textbf{p}=i\hb
 From here, it is possible to obtain the transition probability using Fermi's golden rule,
 \begin{equation}
     \label{eq:golden}
-    w_{if}=\frac{2\pi}{\hbar}|\bra{f}H_{int}\ket{i}|^2\rho,
+    w_{if}=\frac{2\pi}{\hbar}\abs{\bra{f}H_{int}\ket{i}}^2\rho,
 \end{equation}
 where $H_{int}$ is the interaction Hamiltonian from the generated field. This Hamiltonian is
 \begin{equation}
@@ -201,14 +201,14 @@ where $H_{int}$ is the interaction Hamiltonian from the generated field. This Ha
 where $\mathcal{J}$ is the current density and $\boldsymbol{A}$ is the magnetic vector potential, which can be derived from the solutions above \citep{wong90:_nuclear}. Combining all of this together with Fermi's golden rule, the transition probabilities are
 \begin{subequations}
 \begin{align}
-    T^\text{E}(l,m) & = \frac{8\pi(l+1)}{l[(2l+1)!!]^2}\frac{\kappa^{2l+1}}{\hbar}|Q_{lm}+Q'_{lm}|^2 \\
-    T^\text{M}(l,m) & = \frac{8\pi(l+1)}{l[(2l+1)!!]^2}\frac{\kappa^{2l+1}}{\hbar}|M_{lm}+M'_{lm}|^2
+    T^\text{E}(l,m) & = \frac{8\pi(l+1)}{l[(2l+1)!!]^2}\frac{\kappa^{2l+1}}{\hbar}\abs{Q_{lm}+Q'_{lm}}^2 \\
+    T^\text{M}(l,m) & = \frac{8\pi(l+1)}{l[(2l+1)!!]^2}\frac{\kappa^{2l+1}}{\hbar}\abs{M_{lm}+M'_{lm}}^2
 \end{align}
 \end{subequations}
 
 Of note from this derivation, the transition probability decreases with increasing $l$, making lower angular momentum transitions more favorable. Additionally, looking at the multipole moments, once the wave equations have been added in, all but $Q_{lm}$ have a factor of $1/c$. This makes the electric transition stronger than the magnetic transition of the same $l$.
 
-There are limitations for the types of multipole radiation that can be emitted due to a transition, known as selection rules. One such limitation is that all of the multipole moments of \ref{eq:multipole_moment} go to zero is $l=0$, making $l=0$ transitions forbidden via this method. Other rules are based on two pieces of information about the initial and final states: the spins and parities of the states. The spins, $J$ of the states select the allowable $l$, using the range $|J_i-J_f|\leq l\leq J_i+J_f$, meaning the change in angular momentum cannot exceed the sum of the spins of the two states, or be smaller than the difference of the spins of the two states. For example, a transition between two states of spins 4 and 2 would allow $l$ from 2 to 6. The parity selection now helps select the set of solutions. With the first selection rule, in the example, the possibilities are E2, M2 ... E6, M6. If the parity stays the same between the two states, so positive to positive or negative to negative, the solutions are even E$l$ and odd M$l$. If the parity changes, the solutions are odd E$l$ and even M$l$. In an equation form, the parity change is
+There are limitations for the types of multipole radiation that can be emitted due to a transition, known as selection rules. One such limitation is that all of the multipole moments of \ref{eq:multipole_moment} go to zero is $l=0$, making $l=0$ transitions forbidden via this method. Other rules are based on two pieces of information about the initial and final states: the spins and parities of the states. The spins, $J$ of the states select the allowable $l$, using the range $\abs{J_i-J_f}\leq l\leq J_i+J_f$, meaning the change in angular momentum cannot exceed the sum of the spins of the two states, or be smaller than the difference of the spins of the two states. For example, a transition between two states of spins 4 and 2 would allow $l$ from 2 to 6. The parity selection now helps select the set of solutions. With the first selection rule, in the example, the possibilities are E2, M2 ... E6, M6. If the parity stays the same between the two states, so positive to positive or negative to negative, the solutions are even E$l$ and odd M$l$. If the parity changes, the solutions are odd E$l$ and even M$l$. In an equation form, the parity change is
 \begin{align}
     \pi(\text{E}l) &= (-1)^{l} & \pi(\text{M}l) &= (-1)^{l-1}
 \end{align}
@@ -243,28 +243,29 @@ where $a_0=\hbar^2/me^2$ is the Bohr radius of the hydrogen atom, \textbf{R} is 
 Taking into account there are two electrons in the $K$-shell, the probability $w_{if}$ can then be rewritten as
 \begin{equation}
 \label{eq:golden_ic}
-    w_{if}=2 \frac{2\pi}{\hbar}z(k)\int|\bra{f}H_{int}\ket{i}|^2d\Omega
+    w_{if}=2 \frac{2\pi}{\hbar}z(k)\int\abs{\bra{f}H_{int}\ket{i}}^2d\Omega
 \end{equation}
 
 For this derivation, the electric multipoles are being considered, so only the electrostatic interaction is being used. By using the magnetic interaction instead, the magnetic multipoles can also be derived. By assuming the interaction is occurring outside of the nucleus, the Hamiltonian can be assumed to be the electrostatic interaction between the protons of the nucleus and the electron or
 \begin{equation}
-    H=\sum_{i=1}^Z \frac{e^2}{|\textbf{R}-\textbf{r}_i|}
+    H=\sum_{i=1}^Z \frac{e^2}{\abs{\textbf{R}-\textbf{r}_i}}
 \end{equation}
 where \textbf{R} is as described above, and $\textbf{r}_i$ is the proton position from the center of the nucleus. Then the matrix element is
 \begin{equation}
 \label{eq:matrix_element_int}
-    |\bra{f}H_{int}\ket{i}| = \left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{-1/2}\int e^{-i\textbf{k}\cdot\textbf{R}}\varphi_{f}^* \frac{e^2}{|\textbf{R}-\textbf{r}_i|} e^{-\frac{RZ}{a_0}}\varphi_{i}d\Omega
+    \abs{\bra{f}H_{int}\ket{i}} = \left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{-1/2}\int e^{-i\textbf{k}\cdot\textbf{R}}\varphi_{f}^* \frac{e^2}{\abs{\textbf{R}-\textbf{r}_i}} e^{-\frac{RZ}{a_0}}\varphi_{i}d\Omega
 \end{equation}
 with $\varphi_{i}$ and $\varphi_{f}$ being the initial and final wave functions of the nucleus, respectively. The integration must occur over both the coordinates of the electron and over the coordinates in the nuclear wave functions, such that $d\Omega=d^3Rd\tau$ where $\tau$ represents the nuclear coordinates.
 
-The main contribution to the integral is going to come from $\textbf{R}>\textbf{r}_i$, the earlier assumption the interaction is occurring outside of the nucleus. This allows for an expansion of $|\textbf{R}-\textbf{r}_i|^{-1}$ in terms of spherical harmonics such that
+The main contribution to the integral is going to come from $\textbf{R}>\textbf{r}_i$, the earlier assumption the interaction is occurring outside of the nucleus. This allows for an expansion of $\abs{\textbf{R}-\textbf{r}_i}^{-1}$ in terms of spherical harmonics such that
 \begin{equation}
 \label{eq:expansion_Rri}
-    \frac{1}{|\textbf{R}-\textbf{r}_i|} = \sum_{l=0}^\infty\sum_{m=-l}^{l}\frac{4\pi}{2l+1}\frac{r_i^l}{R^{l+1}}Y_{lm}(\Theta,\Phi)Y_{lm}^{*}(\theta_i,\phi_i)
+    \frac{1}{\abs{\textbf{R}-\textbf{r}_i}} = \sum_{l=0}^\infty\sum_{m=-l}^{l}\frac{4\pi}{2l+1}\frac{r_i^l}{R^{l+1}}Y_{lm}(\Theta,\Phi)Y_{lm}^{*}(\theta_i,\phi_i)
 \end{equation}
 where $\Theta$ and $\Phi$ are the polar vector of \textbf{R} and $\theta_i$ and $\phi_i$ are the same for $\textbf{r}_i$. Substituting this into equation \ref{eq:matrix_element_int} gives
 \begin{equation}
-    |\bra{f}H_{int}\ket{i}| = \frac{e}{ \left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{1/2}} \sum_{l=0}^\infty\sum_{m=-l}^{l}\frac{4\pi}{2l+1} Q_{lm}(i,f)J_{lm}
+    
+    abs{\bra{f}H_{int}\ket{i}} = \frac{e}{ \left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{1/2}} \sum_{l=0}^\infty\sum_{m=-l}^{l}\frac{4\pi}{2l+1} Q_{lm}(i,f)J_{lm}
 \end{equation}
 where $Q_{lm}(i,f)$ is the electric multipole matrix element and $J_{lm}$ is the integral
 \begin{equation}
@@ -277,7 +278,7 @@ Because of the earlier assumption of the outgoing electron being a plane wave by
 
 Substituting all of this into \ref{eq:golden}, the transition probability is
 \begin{equation}
-    w_{if}=128\pi\frac{me^2Z^3}{\hbar^2a_0^3} \sum_{l=0}^\infty\sum_{m=-l}^{l} \frac{k^{2l-3}}{\left[\,(2l-1)!!\right]\,^2}|Q_{lm}(i,f)|^2
+    w_{if}=128\pi\frac{me^2Z^3}{\hbar^2a_0^3} \sum_{l=0}^\infty\sum_{m=-l}^{l} \frac{k^{2l-3}}{\left[\,(2l-1)!!\right]\,^2}\abs{Q_{lm}(i,f)}^2
 \end{equation}
 There is a strong dependence on atomic number $Z$ and the multipole order $l$. 
 
@@ -287,12 +288,12 @@ There is a strong dependence on atomic number $Z$ and the multipole order $l$.
 Like the electromagnetic radiation, $l=0$ transitions are still forbidden in the internal conversion proof above, as the rate directly depends on $Q_{lm}$, which goes to 0 for $l=0$, which is relevant to transitions where the initial and final spins are the same. This, however, arises from the previous assumption of looking only outside of the nucleus. While the majority of the interaction between nucleus and electron occurs outside of the nucleus, when this goes to zero, as is the case for $l=0$, the correction term from inside the nucleus must be taken into account, i.e. $R<r_i$. This exchanges the positions of $R$ and $r_i$ on the right in the expansion from equation \ref{eq:expansion_Rri}. Revisiting equation \ref{eq:matrix_element_int}, and setting $l=0$ it becomes
 \begin{equation}
 \label{eq:matrix_element_E0}
-    |\bra{f}H_{int}\ket{i}| = \frac{e}{\left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{1/2}}\sum_{i=1}^Z \int d\tau\varphi_{f}^*\frac{1}{r_i}\varphi_{i} \int_{R<r_i}d^3R e^{-i\textbf{k}\cdot\textbf{R}} e^{-\frac{RZ}{a_0}}
+    \abs{\bra{f}H_{int}\ket{i}} = \frac{e}{\left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{1/2}}\sum_{i=1}^Z \int d\tau\varphi_{f}^*\frac{1}{r_i}\varphi_{i} \int_{R<r_i}d^3R e^{-i\textbf{k}\cdot\textbf{R}} e^{-\frac{RZ}{a_0}}
 \end{equation}
 As integration over R extends only to very small numbers, the exponentials on the right can be approximated as 1, simplifying the integral to just $d^3R$, making it $4\pi r_i^3/3$. The matrix element is now
 \begin{equation}
 \label{eq:hint_e0}
-    |\bra{f}H_{int}\ket{i}| =  \frac{4\pi}{3}\frac{e}{\left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{1/2}} \sum_{i=1}^Z \int d\tau\varphi_{f}^*r_i^2\varphi_{i}
+    \abs{\bra{f}H_{int}\ket{i}} =  \frac{4\pi}{3}\frac{e}{\left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{1/2}} \sum_{i=1}^Z \int d\tau\varphi_{f}^*r_i^2\varphi_{i}
 \end{equation}
 The sum is of the order of magnitude of the square of the nuclear charge radius, denoted by $\mathcal{R}^2$. Substituting \ref{eq:hint_e0} into \ref{eq:golden_ic}, the probability for an electric multipole of order $l=0$ becomes
 \begin{equation}

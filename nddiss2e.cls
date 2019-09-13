@@ -130,11 +130,14 @@
 \RequirePackage{xspace}
 \RequirePackage{indentfirst}
 \RequirePackage{tabularx}
+\RequirePackage{tablefootnote}
 \RequirePackage{enumitem}
 \RequirePackage{latexsym}
 \RequirePackage{textcase}
 \RequirePackage{multirow}
-\RequirePackage{caption,subcaption}
+\RequirePackage{caption}
+\RequirePackage[labelformat=simple]{subcaption}
+\RequirePackage{tocbasic}
 \ifboolexpr{bool{pdf} or bool{xetex} or bool{luatex}}{%
   \RequirePackage{epsfig}
   \RequirePackage{color}
@@ -439,6 +442,8 @@
     \end{copyrightpage}
   \fi
 }%
+\renewcommand{\thesubfigure}{Figure~\thefigure(\alph{subfigure})}
+\renewcommand{\thesubtable}{(\alph{subtable})}
 \providecommand{\abstractname}{Abstract}
 \providecommand{\dedicationname}{\mbox{}}
 \providecommand{\prefacename}{Preface}

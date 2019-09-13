@@ -23,9 +23,21 @@ With this proposal, there will be dedicated HPGe detectors for the array, with t
 
 To improve the detection efficiency of the conversion electrons, the magnetic configurations can be changed. This was done in the experiments to optimize for higher energies. When the original magnetic configurations were used, the permanent magnets used were 0.5 cm thick SmCo$_5$ squares. These thin squares are not, necessarily, creating the most optimal magnetic field.
 
-Using GEANT4 [CITE] and [UHHHH?], a variety of magnetic shapes were modeled, varying the profile (square vs triangle) and the thickness. Two extremes would be chosen, with steps shifting between modelled, to find an optimal choice. The thickness was also varied between uniform and a gradient. [I NEED STUFF FROM KEVIN].
+Using GEANT4 and COMSOL, a variety of magnetic shapes were modeled, varying the cross-shape profile, the thickness, and the number of magnets used \citep{allison16:_geant4,comsol:_comsol}. Figure \ref{fig:fieldmap} shows what the magnetic fields look like when modelled in COMSOL. All of the magnets simulated were assumed to be Neodymium, specifically $\text{Nd}_{2}\text{Fe}_{14}\text{B}$.  In all of the shape testing, the number of magnets was varied to find idealized scenarios, with the magnets symmetrically spaced. The first variation was the cross-shape profile. Two extremes would be chosen, with intermediate steps between the extremes modelled and tested, as shown in Figure \ref{fig:cross-shape-slide}. Several hybrids of the intermediate steps were also examined, seen in Figure \ref{fig:cross_shape_hybrid}.
 
-After 
+\input{Future_Figs/fieldmap.tex}
+
+\input{Future_Figs/Cross-Shape-Slide.tex}
+
+\input{Future_Figs/Cross-Shape-Hybrid.tex}
+
+After picking the best cross-shapes, the thickness was varied between uniform and a gradient. Initially, this was a linear, uniform gradient. As simulations continued, variations in the form of the gradient were tested, including a step function, and a piecewise linear design, seen in Figure \ref{fig:width_shape}.
+
+\input{Future_Figs/width-shape.tex}
+
+Three designs were chosen after extensive simulations, to maximize efficiencies at low energies (0.2 to 0.4 MeV), high energies (0.7-1.0 MeV), and overall (0.2 to 1.0 MeV). This designs are shown in Figure \ref{fig:finalshapes} with simulated efficiencies. These designs have been ordered for testing with the detectors.
+
+\input{Future_Figs/finalshapes.tex}
 
 \section{Target Upgrades}
 
@@ -33,16 +45,30 @@ One of the concerns and limitations of the original experiments was the thicknes
 
 To create a thinner target, it was decided to try and use a carbon-backing. The Sm was then evaporated onto the backing. The carbon was 20 $\mu g/cm^2$. In the targets made, the Sm was measured to be 170 $\mu g/cm^2$, ten times thinner than the original targets used.
 
-To compare the old and new targets, an experiment was run with both targets inside of ICEBall. 
+To compare the old and new targets, an experiment was run with both targets inside of ICEBall. The data compared was taken with the same electronics (discussed in the next section) and setup, to minimize differences that could impact the data.
 
-The new targets could be run with higher beam currents to get similar rates in the detectors, at what appeared to be a proportional rate to the target thickness.
+The new targets could be run with higher beam currents to get similar rates in the detectors, at what appeared to be a proportional rate to the target thickness. At lower electron energies, the carbon-backed targets had far better resolution, as seen in Figure \ref{fig:target_test}. The centroids of the peaks also shifted in comparison between the thick and thin target, which follows logically from the thicker target causing greater energy loss. 
 
-At lower electron energies, the carbon-backed targets had far better resolution, as seen in Figure \ref{fig:target_test}.
+Also of note in Figure \ref{fig:target_test}, is that the thin target appears to have a higher background, causing the signal-to-noise ratio to decrease. To understand this increase in background, the beam was cut off and a new run was taken. Figure \ref{fig:O15decay} shows the trigger rate with respect to time during this background run. The background appears to show an exponential decay with a half-life on the order of two minutes.
 
 \input{Future_Figs/targetcomp.tex}
 
 \input{Future_Figs/oxygen.tex}
 
+It was theorized this decay may be from $^{15}$O, which would be created from the $^{12}$C($\alpha,n$) reaction. Using the cross section, obtained from the EXFOR database, the cross section for this reaction at 20 MeV was obtained \citep{zerkin18:_exfor,black69:_carbonalphan}. This was used to calculate the rate in the detectors if it was $^{15}$O being created. These values matched, providing evidence of the new background element. One way this background can be decreased is by using thinner carbon-backing, as 12 $\mu g/cm^2$ is commercially available. This would reduce the $^{15}$O contribution the background by 40 percent.
+
 \section{Electronics}
+
+After experiments with two different electronics set ups, a third electronics set up was used, with the plan for it to become the standard electronics for future fIREBALL experiments. These electronics use the Mesytec MDPP-16 VME module and the Mesytec MVME data acquisition software \citep{mesytec:_mdpp,mesytec:_mvme}. The MDPP-16 modules replace the conventional NIM modules, replacing external CFDs and TDCs. The gain, threshold, shaping time, and signal rise and decay times are all set within the module. 
+
+The MDPP-16 modules can be run in multiply modes, depending on the firmware: QDC, SCP, and RCP modes. The firmware can be changed using a switch on the module, allowing a given module to hold all three firmware versions. For these tests, the SCP, or standard charge sensitive preamplifier, mode is used. Figure \ref{fig:mdpp_schematic} shows the schematic configuration of the module in SCP mode, and Table \ref{tab:word_MDPP} shows the breakdown of the event words in the system.
+
+\input{Future_Figs/MDPP_schematic_fig.tex}
+
+\input{Future_Figs/word_event_table.tex}
+
+One of the benefits of the MDPP-16 modules is the compatibility with other VME modules. Scaler values can be read in with a separate module, such as the CAEN V830, as was done with the GEORGINA setup, discussed in Section \ref{sec:GEORGINA_electronics}. Many of the scaler values can be read in using the MDPP-16, but the addition of the V830 allows for more versatility in rates to record, including comparing rates between the MDPP-16 and the V830 for deadtime corrections.
+
+The mvme software from Mesytec has built-in online analysis tools, allowing for real time analysis of the data.
 
 \section{Alternative Reactions}

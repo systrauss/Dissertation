@@ -7,19 +7,27 @@
 
 \section{Overview}
 
-To measure conversion electrons for nuclear structure, three separate experiments were performed at the Nuclear Science Laboratory (NSL) at the University of Notre Dame using the Internal Conversion Electron Ball (ICEBall) Spectrometer paired with several configurations of High Purity Germanium (HPGe) detectors. A Sm$(\alpha,2n)$Gd reaction was used with different enriched targets to create the desired Gd isotope, with an $\alpha$ beam of 20 MeV.
+In looking at $^{154}$Gd and $^{156}$Gd for E0 transitions, two types of radiation must be measured: conversion electrons and gamma rays. As conversion electron transitions and intensities are usually tabulated as conversion coefficients, which compare the electron intensities to the respective gamma-rays from the transition, both conversion electrons and gamma-rays must be measured in this experiment. Further, for pure E0 transitions, it must be shown that there are no gamma-rays, as gamma rays are forbidden by selection rules in these transitions. 
 
-\section{Experimental Design}
+Due to the high level density of nuclei in the rare-earth region, detectors with high resolution are favored for these experiments. The detectors must also be placed in a way that allows for simultaneous measurement of both particles and gamma-rays. For good resolution, high purity germanium (HPGe) detectors are the standard for gamma-rays. For electron detection, silicon-based detectors have the best resolution. The electron energies of interest range from less than 100 keV to over 1 MeV. Standard silicon detectors do not have an energy range that high for electrons, so lithium-drifted silicon (Si(Li)) detectors were be used, which have a higher top-end electron energy.
 
-As conversion electrons are usually referred to using conversion coefficients, which compare the electron intensities to the respective gamma-rays from the transition, both conversion electrons and gamma-rays must be measured in this experiment. Further, for pure $E0$ transitions, it must be shown that there are no gamma-rays, as gamma rays are forbidden by selection rules in these transitions. Both particle and gamma-ray detectors are needed.
+To make these measurements, three separate experiments were performed at the Nuclear Science Laboratory (NSL) at the University of Notre Dame using the Internal Conversion Electron Ball (ICEBall) Spectrometer paired with two configurations of HPGe detectors: GEORGINA (Figure \ref{fig:georgina_config}) and Clovershare (Figure \ref{fig:clovershare_config}). 
 
-Due to the high level density of nuclei in this region, detectors with good resolution are favored for these experiments. The detectors must also be placed in a way that allows for simultaneous measurement of both particles and gamma-rays. For good resolution, high purity germanium detectors are the standard for gamma-rays. For electron detection, silicon-based detectors have the best resolution. The electron energies of interest range from less than 100 keV to over 1 MeV. Standard silicon detectors do not have an energy range that high for electrons, so lithium-drifted silicon detectors will be used instead, which have a higher top-end electron energy.
+\input{Setup_Figs/Georgina_Config.tex}
+
+\input{Setup_Figs/Clovershare_config.tex}
 
 The $(\alpha,2n)$ reaction favors populating states of low, even-$J$ and positive parity. These states, including the $0^+$ states, are the ones of interest in this study, making this a natural reaction to select for the experiment. The $Q$ value for this reaction is -14.774 MeV for $^{154}$Gd and -13.638 MeV for $^{156}$Gd, making it well within the energy range available at the NSL.
 
+A Sm$(\alpha,2n)$Gd reaction was used with different enriched targets to create the desired Gd isotope, with an $\alpha$ beam of 20 MeV. A bunched beam was used to create timing for coincidence identification. This energy was determined by a measurement using a natural Sm target, with ICEBall and two neutron detectors. TALYS was run to determine a range of energies to maximize the cross section of the desired reaction, while minimizing the neutron flux, as neutrons can damage HPGe detectors. This range went from 16 MeV to 21 MeV. Measurements were done at 1 MeV intervals. The cross section was calculated using conversion electron measurements from ICEBall, and compared with the neutron flux at that energy.
+
+Two different forms of electronics were used for the data acquisition system. The data acquisition systems used were based on the NSCL DAQ\citep{nscl:_daq,prokop14:_nsclddas}. The electronics used with GEORGINA were shaped by NIM modules before going through ADC VME modules to the computer \citep{mesytec:_ADC,caen:_TDC}. The Clovershare data used the XIA Pixie-16 modules, which take the place of the NIM and VME modules for shaping and converting the signals to digital data \citep{xia:_pixie}.
+
+The digital files were converted to files for the analysis software using \texttt{evt2root} \citep{smith14:_evt2root}. Analysis, in chapter \ref{ch:analysis}, was done using the CERN Root Data Analysis Framework and Radware \citep{brun97:_root,radford00:_radware}.
+
 \section{Nuclear Science Laboratory at Notre Dame}
 
-The Nuclear Science Laboratory at the University of Notre Dame has been in operation since the 1930s. Currently, the NSL operates locally with three accelerators: the FN Tandem, the 5 MV Single-Ended Sta. Ana accelerator, and the 3 MV 9S Tandem. There is also a fourth accelerator, a 1 MV machine called CASPAR, located in the Homestake Mines in South Dakota. The experiments in this dissertation were performed on the FN Tandem. Figure \ref{fig:NSL} is the current layout of the NSL. The accelerator in the top right of the figure is the FN Tandem.
+The Nuclear Science Laboratory at the University of Notre Dame has been in operation since the 1934, with accelerators in operation since 1937. Currently, the NSL operates locally with three accelerators: the FN Tandem, the 5 MV Single-Ended Sta. Ana accelerator, and the 3 MV 9S Tandem. There is also a fourth accelerator, a 1 MV machine called CASPAR, located in the Homestake Mines in South Dakota. The experiments in this dissertation were performed on the FN Tandem. Figure \ref{fig:NSL} is the current layout of the NSL. The accelerator in the top right of the figure is the FN Tandem.
 
 The FN Tandem has two ion sources: the Helium Ion Source (HIS) and the Multi-Cathode Source of Negative Ions Using Cesium Sputtering (MC-SNICS). Most elements can take the electrons from cesium to create negative ions. Helium cannot and needs a special source, as discussed below. For the experiments described, the HIS was used.
 
@@ -32,6 +40,61 @@ The FN Tandem has been in operation since 1968. It operates using a Van de Graaf
 It is known as a tandem because the system is a two-stage acceleration. Negatively charged ions enter the system, accelerating toward a positively charged terminal shell. Inside of the shell, the ions go through carbon stripping foils 3 $\mu g/cm^2$ thick, becoming positively charged as electrons are pulled off. The ions then accelerate away from the terminal for the second stage. The total energy gained by the ions is the terminal voltage times the quantity of one plus the final charge state.
 
 \input{Setup_Figs/HIS.tex}
+
+After being sent through the accelerator, the beam goes through the analyzing magnet. This magnet is set for the specific species, energy, and charge state to bend 90 degrees to the experimental set ups.
+
+\section{Beam Production}
+
+Because of the use of HPGe detectors in an $(\alpha,2n)$ reaction, the neutron flux must be minimized in comparison to the cross section of the reaction, as the $(\alpha,n)$ reaction is also open. The neutrons being produced will interact with everything, including the HPGe detectors, which can be damaged by the $(n,\gamma)$ reaction on germanium. To do this, a range of energies to test were selected by looking at theoretical cross sections in Talys\citep{koning07:_talys}. These energies were then tested with natural Sm targets, ICEBall, and two liquid scintillators to detect neutrons.
+
+Samarium, as with many even-Z elements in the lanthanide region, has many stable isotopes. A total of five stable isotopes of Samarium exist, with two other isotopes being long-lived. Table \ref{tab:nat_Sm} summarizes the abundances and lifetimes of the various isotopes found in natural Samarium. The two isotopes to be used in enriched targets in the experiments have the highest natural abundances, $^{152,154}$Sm.
+
+\input{Setup_Figs/nat_sm}
+
+\subsection{Talys Calculations}
+
+Talys \citep{koning07:_talys} is software for the simulation of nuclear reactions. Cross sections can be estimated using Talys to guide where an experiment may want to run to optimize production, as is the case presently. 
+
+Both natural and enriched samarium targets were used and modelled within Talys. A range of energies, from 14 MeV to 24 MeV $\alpha$-particles were run. These energies allowed a large number of potential reaction products from elastic, inelastic, transfer, and knockout reactions. Figure \ref{fig:talys} is a visual summary of the strongest modelled reactions in the natural samarium target. It was decided to test the energies between 16-21 MeV.
+
+\input{Setup_Figs/Talys.tex}
+
+\subsection{Test Analysis and Results}
+
+To test these Talys calculations and determine the best running energy, the cross section and neutron flux had to be measured at each energy without the use of the HPGe detectors. This was done using a natural samarium target. ICEBall was used to measure the cross section by examining the K-electrons from ground-state band transitions in the reactions of interest, as the ground-state band is the most significantly populated band in the reaction. The DAQ described in section \ref{sec:GEORGINA_electronics} was used. Spectra from ICEBall were fit using the methods described in \ref{sec:fitting}. The peaks were identified under the assumption the ground-state band transitions would be the strongest peaks in the spectra, and populate quickly. 
+
+The neutrons were measured using two NE213 liquid organic scintillators. In these detectors, it is possible to do pulse shape discrimination, as the neutrons have longer decay times than the gammas in these detectors due to the nature of the interaction with the scintillating liquid \citep{knoll00:rad_det_meas}. This produces longer trails in the detectors, leading to different decay shapes, see Figure \ref{fig:pulse_discrimination}. 
+
+\input{Setup_Figs/pulse_discrimination.tex}
+
+By plotting the pulse height against the decay tail time, neutrons and gammas can be separated. In this setup, this was done by sending the signal to a Mesytec MPD-4 (Multi-channel Pulse Discriminator) \citep{mesytec:_PSD}. This is a module built for pulse discrimination. It splits the signal, amplifies for the pulse height, and sends the other signal to a constant fraction discriminator (CFD), which converts the value to an amplitude using a time to analog converter (TAC). A CFD works by measuring the time it takes for a pulse to decrease to a fraction of its original height. Both of these signals (the pulse amplitude and the TAC amplitude) are recorded in the data. Plotting these values in a two-dimensional plot distinguishes the gammas and neutrons, as in Figure \ref{fig:neutron}. There is a threshold cut off that removed most gammas from the spectrum.
+
+\input{Setup_Figs/neutron_fig.tex}
+
+Once the detectors were calibrated, each energy was run, with a total of four different targets across six energies. For each energy, the peaks in the electron spectra were identified with their respective isotopes, working under the assumption that only the lowest-lying states and the ground-state band would be populated significantly enough to see the electrons. These peaks are representative of the reaction cross section for that isotope. The K-electron of the $4^+\rightarrow2^+$ ground state transition for both nuclei of interest was clearly visible and clean at all energies, listed in Table \ref{tab:neutron_electron}. These K-electrons were used for the cross-section calculation.
+
+\input{Setup_Figs/neutron_electron_table.tex}
+
+To calculate the cross section, the formula
+
+\begin{equation}
+    \sigma=\frac{Yield}{\delta x*Q*\epsilon}
+    \label{eq:xs}
+\end{equation}
+
+was used, where $\delta x$ is the target thickness, $Q$ is the integrated charge, and $\epsilon$ is the efficiency of the Si(Li) detector at the electron energy. The $Yield$ is the area under the curve.
+
+This then had to be compared with the neutron production cross section. A bunched beam was used to get a time-of-flight. Calculating the neutron flux was done using the formula
+
+\begin{equation}
+    \sigma_n = \frac{Neutrons}{\delta x*Q}
+\end{equation}
+
+where $\delta x$ and $Q$ are the same as used for the cross section. The neutron yield is obtained by pulse shape discrimination, as seen in Figure \ref{fig:neutron}. The left-most line is the gamma-flash that comes from the prompt gammas. The secondary gathering of counts, to the right, is the neutron peak. This area can be integrated over to get the number of neutrons seen during the run.
+
+Table \ref{tab:neutrons} summarizes the results at each energy. Note, that the cross section is not reflective of the full cross section of the isotopes, but of the K-electrons for that transition. This ratio, of the cross-section to the neutron flux, was ultimately used to determine the running energy. The two higher energies, 20 and 21 MeV, have a ratio that agrees within error for both isotopes, indicating a plateau, in agreement with the expectation from Talys. Ultimately, 20 MeV was chosen for two reasons: to minimize any higher energy reaction channels, and because the neutron flux was lower in rate.
+
+\input{Setup_Figs/neutron_summary}
 
 \section{Electron Detection}
 
@@ -56,11 +119,13 @@ The Si(Li) detectors inside of ICEBall are 5 mm thick, with a surface area of 75
 \subsubsection{Mini-Orange Spectrometer}
 \label{sec:mini_orange}
 
-Between the detectors and the target are mini-orange filters. Designed in the 1970s, mini-orange filters are a permanent magnet array surrounding a high-Z material, as seen in Figure \ref{fig:mini_orange} \citep{vanklinken72:mini_orange, vanklinken75:mini_orange}. In ICEBall, this material is tungsten, and the magnets are made of SmCo$_5$, and arranged in groups of 3. The tungsten acts as a blocker, lowering background from the target that can be due to $\gamma$ rays and heavy charged particles. The magnets create a field that bends electrons toward the detector, while bending positrons away from the detector, further lowering background noise. 
+Between the detectors and the target are mini-orange filters. First designed in the 1970s, mini-orange filters are a permanent magnet array surrounding a high-Z material, as seen in Figure \ref{fig:mini_orange} \citep{vanklinken72:mini_orange, vanklinken75:mini_orange}. In ICEBall, this material is tungsten, and the magnets are made of SmCo$_5$, and arranged in groups of 3. The tungsten acts as a blocker, lowering background from the target that can be due to $\gamma$ rays and heavy charged particles. The magnets create a field that bends electrons toward the detector, while bending positrons away from the detector, further lowering background noise. 
 
 \input{Setup_Figs/miniOrange_fig.tex}
 
-Compared to conventional spectrometers that sweep over electron energies by changing the magnetic field of the spectrometer, the mini-orange spectrometers are able to cover a wide range of energies at once. A drawback of this is the permanent magnets. The field is optimized for a range of energies, and must be pre-selected before the experiment. Switching magnets mid-experiment is not feasible, due to the downtime needed to warm-up the system, bring it to atmosphere, replace the filter, and then return the system to data taking conditions. Additionally, the efficiency of the system is a convolution of the detector's efficiency and the mini-orange filter in front of it, meaning each configuration must have a separate efficiency measurement. Tables \ref{tab:ICE_Magnet_G} and \ref{tab:ICE_Magnet_C} summarize the magnetic configurations of the mini-orange filters used in the experiments. The higher the magnetic strengths, the higher energy the peak efficiency of the mini-orange spectrometer. For the GEORGINA configuration, the magnetic strengths were all of similar values. For the Clovershare configuration, the filters were replaced on three detectors to enhance efficiency at higher energies.
+Compared to conventional spectrometers that sweep over electron energies by changing the magnetic field of the spectrometer, the mini-orange spectrometers are able to cover a wide range of energies at once. A drawback of this is the permanent magnets. The field is optimized for a range of energies, and must be pre-selected before the experiment. Switching magnets mid-experiment is not feasible, due to the downtime needed to warm-up the system, bring it to atmosphere, replace the filter, and then return the system to data taking conditions. Additionally, the efficiency of the system is a convolution of the detector's efficiency and the mini-orange filter in front of it, meaning each configuration must have a separate efficiency measurement. Tables \ref{tab:ICE_Magnet_G} and \ref{tab:ICE_Magnet_C} summarize the magnetic configurations of the mini-orange filters used in the experiments. The higher the magnetic strengths, the higher energy the peak efficiency of the mini-orange spectrometer, seen in Figure \ref{fig:filtercomp}. For the GEORGINA configuration, the magnetic strengths were all of similar values. For the Clovershare configuration, the filters were replaced on three detectors to enhance electron efficiency at higher energies.
+
+\input{Setup_Figs/FilterComparison.tex}
 
 \input{Setup_Figs/ICEBallMagnetTableG.tex}
 
@@ -68,7 +133,7 @@ Compared to conventional spectrometers that sweep over electron energies by chan
 
 \subsection{Calibration}
 
-ICEBall is calibrated using two sources: $^{133}$Ba and $^{207}$Bi. The specific properties of the two sources are listed in Table \ref{tab:ICE_Cal_Source}. The $^{207}$Bi covers the high-energy regime, with lines around 500 keV and 1000 keV. The $^{133}$Ba covered energies from 200 to 400 keV. Both sources are low activity, preventing incomplete or overlapping charge collection from hindering the resolution of the detectors during calibration runs. 
+ICEBall is energy and efficiency calibrated using two sources: $^{133}$Ba and $^{207}$Bi. The specific properties of the two sources are listed in Table \ref{tab:ICE_Cal_Source}. The $^{207}$Bi covers the high-energy regime, with lines around 500 keV and 1000 keV. The $^{133}$Ba covered energies from 200 to 400 keV. Both sources are low activity, preventing incomplete or overlapping charge collection from hindering the resolution of the detectors during calibration runs. 
 
 \input{Setup_Figs/ICEBall_calSource.tex}
 
@@ -152,59 +217,6 @@ at a temperature of 1520-1820 K the samarium was extracted as a metal \citep{cli
 
 \input{Setup_Figs/targetable.tex}
 
-\section{Beam Production}
-
-Because of the use of HPGe detectors in an $(\alpha,2n)$ reaction, the neutron flux must be minimized in comparison to the cross section of the reaction, as the $(\alpha,n)$ reaction is also open. The neutrons being produced will interact with everything, including the HPGe detectors, which can be damaged by the $(n,\gamma)$ reaction on germanium. To do this, a range of energies to test were selected by looking at theoretical cross sections in Talys\citep{koning07:_talys}. These energies were then tested with natural Sm targets, ICEBall, and two liquid scintillators to detect neutrons.
-
-Samarium, as with many even-Z elements in the lanthanide region, has many stable isotopes. A total of five stable isotopes of Samarium exist, with two other isotopes being long-lived. Table \ref{tab:nat_Sm} summarizes the abundances and lifetimes of the various isotopes found in natural Samarium. The two isotopes to be used in enriched targets in the experiments have the highest natural abundances, $^{152,154}$Sm.
-
-\input{Setup_Figs/nat_sm}
-
-\subsection{Talys Calculations}
-
-Talys \citep{koning07:_talys} is software for the simulation of nuclear reactions. Cross sections can be estimated using Talys to guide where an experiment may want to run to optimize production, as is the case presently. 
-
-Both natural and enriched samarium targets were used and modelled within Talys. A range of energies, from 14 MeV to 24 MeV $\alpha$-particles were run. These energies allowed a large number of potential reaction products from elastic, inelastic, transfer, and knockout reactions. Figure \ref{fig:talys} is a visual summary of the strongest modelled reactions in the natural samarium target. It was decided to test the energies between 16-21 MeV.
-
-\input{Setup_Figs/Talys.tex}
-
-\subsection{Test Analysis and Results}
-
-To test these Talys calculations and determine the best running energy, the cross section and neutron flux had to be measured at each energy without the use of the HPGe detectors. This was done using a natural samarium target. ICEBall was used to measure the cross section by examining the K-electrons from ground-state band transitions in the reactions of interest, as the ground-state band is the most significantly populated band in the reaction. The DAQ described in section \ref{sec:GEORGINA_electronics} was used. Spectra from ICEBall were fit using the methods described in \ref{sec:fitting}. The peaks were identified under the assumption the ground-state band transitions would be the strongest peaks in the spectra, and populate quickly. 
-
-The neutrons were measured using two NE213 liquid organic scintillators. In these detectors, it is possible to do pulse shape discrimination, as the neutrons have longer decay times than the gammas in these detectors due to the nature of the interaction with the scintillating liquid \citep{knoll00:rad_det_meas}. This produces longer trails in the detectors, leading to different decay shapes, see Figure \ref{fig:pulse_discrimination}. 
-
-\input{Setup_Figs/pulse_discrimination.tex}
-
-By plotting the pulse height against the decay tail time, neutrons and gammas can be separated. In this setup, this was done by sending the signal to a Mesytec MPD-4 (Multi-channel Pulse Discriminator) \citep{mesytec:_PSD}. This is a module built for pulse discrimination. It splits the signal, amplifies for the pulse height, and sends the other signal to a constant fraction discriminator (CFD), which converts the value to an amplitude using a time to analog converter (TAC). A CFD works by measuring the time it takes for a pulse to decrease to a fraction of its original height. Both of these signals (the pulse amplitude and the TAC amplitude) are recorded in the data. Plotting these values in a two-dimensional plot distinguishes the gammas and neutrons, as in Figure \ref{fig:neutron}. There is a threshold cut off that removed most gammas from the spectrum.
-
-\input{Setup_Figs/neutron_fig.tex}
-
-Once the detectors were calibrated, each energy was run, with a total of four different targets across six energies. For each energy, the peaks in the electron spectra were identified with their respective isotopes, working under the assumption that only the lowest-lying states and the ground-state band would be populated significantly enough to see the electrons. These peaks are representative of the reaction cross section for that isotope. The K-electron of the $4^+\rightarrow2^+$ ground state transition for both nuclei of interest was clearly visible and clean at all energies, listed in Table \ref{tab:neutron_electron}. These K-electrons were used for the cross-section calculation.
-
-\input{Setup_Figs/neutron_electron_table.tex}
-
-To calculate the cross section, the formula
-
-\begin{equation}
-    \sigma=\frac{Yield}{\delta x*Q*\epsilon}
-    \label{eq:xs}
-\end{equation}
-
-was used, where $\delta x$ is the target thickness, $Q$ is the integrated charge, and $\epsilon$ is the efficiency of the Si(Li) detector at the electron energy. The $Yield$ is the area under the curve.
-
-This then had to be compared with the neutron production cross section. A bunched beam was used to get a time-of-flight. Calculating the neutron flux was done using the formula
-
-\begin{equation}
-    \sigma_n = \frac{Neutrons}{\delta x*Q}
-\end{equation}
-
-where $\delta x$ and $Q$ are the same as used for the cross section. The neutron yield is obtained by pulse shape discrimination, as seen in Figure \ref{fig:neutron}. The left-most line is the gamma-flash that comes from the prompt gammas. The secondary gathering of counts, to the right, is the neutron peak. This area can be integrated over to get the number of neutrons seen during the run.
-
-Table \ref{tab:neutrons} summarizes the results at each energy. Note, that the cross section is not reflective of the full cross section of the isotopes, but of the K-electrons for that transition. This ratio, of the cross-section to the neutron flux, was ultimately used to determine the running energy. The two higher energies, 20 and 21 MeV, have a ratio that agrees within error for both isotopes, indicating a plateau, in agreement with the expectation from Talys. Ultimately, 20 MeV was chosen for two reasons: to minimize any higher energy reaction channels, and because the neutron flux was lower in rate.
-
-\input{Setup_Figs/neutron_summary}
-
 \section{Experimental Configuration and Operation}
 
 \subsection{Experimental Beam Operation}
@@ -220,9 +232,7 @@ While the GEORGINA detectors were designed for reasonable efficiency up to 12 Me
 
 \input{Setup_Figs/georgina_locations.tex}
 
-The ICEBall-GEORGINA pairing can be seen in Figure \ref{fig:georgina_config}. The data taken with this pairing of detectors used the electronics set-up from previous experiments\citep{battaglia15:_iceball_176lu}. Signals from the Si(Li), HPGe, and BGO detectors were split into two signals, one for timing and one for energy, as seen in Figure \ref{fig:iceball_electronics}. After going through several NIM (Nuclear Instrumentation Modules) to clean up the signals, these were fed into two VME (Versa Module Europa) bus modules for analog-to-digital conversion. Energy signals were converted using the Mesytec analog-to-digital converter (MADC-32) module. This module has 13 bit resolution. The timing signals were converted using a Caen V775 time-to-digital converter (TDC) module, with 12 bit resolution. The data structures of the events in these modules are explicitly written in Tables \ref{tab:word_MADC} anf \ref{tab:word_CAEN}.
-
-\input{Setup_Figs/Georgina_Config.tex}
+The ICEBall-GEORGINA pairing can be seen in Figure \ref{fig:georgina_config}. The data taken with this pairing of detectors used the electronics set-up from previous experiments\citep{battaglia15:_iceball_176lu}. Signals from the Si(Li), HPGe, and BGO detectors were split into two signals, one for timing and one for energy, as seen in Figure \ref{fig:iceball_electronics}. After going through several NIM (Nuclear Instrumentation Modules) to clean up the signals, these were fed into three VME (Versa Module Europa) bus modules for analog-to-digital conversion. Energy signals were converted using the Mesytec analog-to-digital converter (MADC-32) module \citep{mesytec:_ADC}. This module has 13 bit resolution. The timing signals were converted using a Caen V775 time-to-digital converter (TDC) module, with 12 bit resolution\citep{caen:_TDC}. A third module, the Caen V830 32 Channel Latching Scaler, was used to keep track of detector rates for deadtime, beam current, and trigger rates\citep{caen:_scaler}. The data structures of the events in these modules are explicitly written in Tables \ref{tab:word_MADC}, \ref{tab:word_CAEN}, \ref{tab:word_V830}.
 
 \input{Setup_Figs/iceball_electronics.tex}
 
@@ -232,11 +242,11 @@ The data was collected from the VME modules using the Michigan State University 
 
 \subsection{Clovershare Configuration and Electronics}
 
-Due to the fixed nature of the ICEBall detectors, the clovers were limited in the angles they could be placed at to optimize efficiency. With the tungsten blockers in front of the Si(Li) detectors to block gamma-rays and x-rays, placing the clovers behind these detectors would drastically reduce efficiency. The system was modeled in AutoDesk Inventor \citep{autodesk:_inventor} to visualize the detector placement, and find an ideal setup to optimize the HPGe detectors. Figure \ref{fig:inventor} shows the resulting model and placements, as well as several unmoveable obstructions, like cable trays, that needed to be worked around. Figure \ref{fig:clovershare_config} shows the final placements for the seven-detector configuration, in the experimental hall.
+Due to the fixed nature of the ICEBall detectors, the clovers were limited in the angles they could be placed at to optimize efficiency. With the tungsten blockers in front of the Si(Li) detectors to block gamma-rays and x-rays, placing the clovers behind these detectors would drastically reduce efficiency. The system was modeled in AutoDesk Inventor \citep{autodesk:_inventor} to visualize the detector placement, and find an ideal setup to optimize the HPGe detectors. Figure \ref{fig:inventor} shows the resulting model and placements, as well as several unmoveable obstructions, like cable trays, that needed to be worked around. Figure \ref{fig:clovershare_config} shows the final placements for the seven-detector configuration, in the experimental hall. Table \ref{tab:Clover_Det_Loc} lists the detector placements for the seven and five detector configurations, labeled as Experiments 1 and 2.
 
 \input{Setup_Figs/inventor.tex}
 
-\input{Setup_Figs/Clovershare_config.tex}
+\input{Setup_Figs/Clovershare_locations.tex}
 
 The electronics used for the Clovershare series of experiments were designed for use with the High Efficiency TOtal absorption spectrometeR (HECTOR), a NaI(Tl) detector array\citep{reingold19:_HECTOR}. The HECTOR data acquisition system is based on the Michigan State University NSCL digital data acquisition system (DDAS). This system uses three XIA Pixie-16 modules \citep{xia:_pixie} which are 16 channel 14-bit 100 MSPS digitizers. The data structure of this system can be seen in Table \ref{tab:word_XIA}. Signals from detectors were fed directly from the preamplifiers to the Pixie modules, which did the amplification, shaping, timing, and logic triggers within the module through adjustments on the data acquisition computer, seen in Figure \ref{fig:pixie_electronics}. NaI(Tl) detectors have far lower resolution than HPGe detectors, so the differential non-linearities are not noticeable in the HECTOR data.
 

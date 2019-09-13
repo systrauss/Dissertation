@@ -1,0 +1,45 @@
+\begin{landscape}
+    \begin{table}[]
+    \footnotesize
+    \centering
+    \caption{\label{tab:word_MDPP}Data event - MDPP-16 (32 bit word)}
+    \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+        \toprule
+        \multicolumn{32}{c}{Header} \\
+        \hline
+        \multicolumn{2}{c|}{2} & \multicolumn{2}{|c|}{2} & \multicolumn{4}{|c|}{4} & \multicolumn{8}{|c|}{8} & \multicolumn{3}{|c|}{3} & \multicolumn{3}{|c|}{3} & \multicolumn{10}{|c}{10} \\
+        \addlinespace[-2ex]
+        \multicolumn{2}{c|}{header} & \multicolumn{2}{|c|}{subheader} & \multicolumn{4}{|c|}{} & \multicolumn{8}{|c|}{module id} & \multicolumn{3}{|c|}{TDC} & \multicolumn{3}{|c|}{ADC} & \multicolumn{10}{|c}{number of} \\
+        \addlinespace[-2ex]
+        \multicolumn{2}{c|}{signature} & \multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{} & \multicolumn{8}{|c|}{} & \multicolumn{3}{|c|}{\_resolution} & \multicolumn{3}{|c|}{\_resolution} & \multicolumn{10}{|c}{following words} \\
+        \hline
+        \multicolumn{2}{c|}{b01} & \multicolumn{2}{|c|}{b00} & \multicolumn{4}{|c|}{xxxx} & \multicolumn{8}{|c|}{module id} & \multicolumn{3}{|c|}{bxxx} & \multicolumn{3}{|c|}{bxxx} & \multicolumn{10}{|c}{number of 32} \\
+        \addlinespace[-2ex]
+        \multicolumn{2}{c|}{} & \multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{} & \multicolumn{8}{|c|}{} & \multicolumn{3}{|c|}{} & \multicolumn{3}{|c|}{} & \multicolumn{10}{|c}{bit data words} \\
+        \midrule
+        \multicolumn{32}{c}{Data Word} \\
+        \hline
+        \multicolumn{2}{c|}{2} & \multicolumn{2}{|c|}{2} & \multicolumn{4}{|c|}{4} & \multicolumn{2}{|c|}{2} & 1 & \multicolumn{5}{|c|}{5} & \multicolumn{16}{|c}{16}\\
+        \addlinespace[-2ex]
+        \multicolumn{2}{c|}{data-sig} & \multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{} & \multicolumn{2}{|c|}{} &  & \multicolumn{5}{|c|}{} & \multicolumn{16}{|c}{}\\
+        \hline
+        \multicolumn{2}{c|}{b00} & \multicolumn{2}{|c|}{01} & \multicolumn{4}{|c|}{xxxx} & \multicolumn{2}{|c|}{(pu,ov)} & Trigger Flag & \multicolumn{5}{|c|}{channel number} & \multicolumn{16}{|c}{ADC Value}\\
+        \hline
+        \multicolumn{2}{c|}{2} & \multicolumn{2}{|c|}{2} & \multicolumn{6}{|c|}{6} & 1 & \multicolumn{5}{|c|}{5} & \multicolumn{16}{|c}{16}\\
+        \addlinespace[-2ex]
+        \multicolumn{2}{c|}{data-sig} & \multicolumn{2}{|c|}{} & \multicolumn{6}{|c|}{} &  & \multicolumn{5}{|c|}{} & \multicolumn{16}{|c}{}\\
+        \hline
+        \multicolumn{2}{c|}{b00} & \multicolumn{2}{|c|}{01} & \multicolumn{6}{|c|}{xxxxxx} & Trigger Flag & \multicolumn{5}{|c|}{channel number + 16} & \multicolumn{16}{|c}{TDC time difference}\\
+        \midrule
+        \multicolumn{32}{c}{End of Event} \\
+        \hline
+        \multicolumn{2}{c|}{2} & \multicolumn{30}{|c}{30}\\
+        \hline
+        \multicolumn{2}{c|}{b11} & \multicolumn{30}{|c}{Event counter/time stamp}\\
+        \bottomrule
+    \end{tabular}
+    \\[2]
+    \footnotesize
+    Table of the 32-bit word data structures of the Mesytec MDPP-16 in the SCP Firmware. The headers, event word structure, and end of event structure, where needed, are all listed. In the tables, the first row in a given block is the number of bits used by that piece of data, while the second row is a description of the data. Bits go in descending order from left to right. Data has two words, one for the amplitude and one for the corresponding timing. The (pu,ov) bits are for pile up, underflow, and overflow flags.
+\end{table}
+\end{landscape}

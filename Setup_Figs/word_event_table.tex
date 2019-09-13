@@ -64,6 +64,34 @@
     \end{tabular}
     \end{subtable}
     \end{table}
+
+    \pagebreak
+    
+    \begin{table}[]
+    \ContinuedFloat
+    \begin{subtable}[]{1.3\textwidth}
+    \small
+    \centering
+    \caption{\label{tab:word_V830}Data event - V830 (32 bit word)}
+    \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+        \toprule
+        \multicolumn{32}{c}{Header} \\
+        \hline
+        \multicolumn{5}{c|}{5} & 1 & \multicolumn{2}{|c|}{2} & \multicolumn{6}{|c|}{6} & \multicolumn{2}{|c|}{2} & \multicolumn{16}{|c|}{16}\\
+        \hline
+        \multicolumn{5}{c|}{Geo Address} & 1 & \multicolumn{2}{|c|}{} & \multicolumn{6}{|c|}{Number of} & \multicolumn{2}{|c|}{Source} & \multicolumn{16}{|c|}{Trigger}\\
+        \addlinespace[-2ex]
+        \multicolumn{5}{c|}{Geo Address} & 1 & \multicolumn{2}{|c|}{} & \multicolumn{6}{|c|}{Enabled Channels} & \multicolumn{2}{|c|}{Source} & \multicolumn{16}{|c|}{Number}\\
+        \midrule
+        \multicolumn{32}{c}{Data Word} \\
+        \hline
+         \multicolumn{32}{c}{32} \\
+        \hline
+         \multicolumn{32}{c}{Channel Counter[32]} \\
+        \bottomrule
+    \end{tabular}
+    \end{subtable}
+\end{table}
     
     \pagebreak
     
@@ -103,6 +131,6 @@
     \end{subtable}
     \\[2]
     \footnotesize
-    Tables of the 32-bit word data structures of the different electronics used in the experiments, including the MADC (a), the CAEN 775 TDC (b), and the Xia Pixie-16 (c). The headers, event word structure, and end of event structure, where needed, are all listed. In the tables, the first row in a given block is the number of bits used by that piece of data, while the second row is a description of the data. Bits go in descending order from left to right.
+    Tables of the 32-bit word data structures of the different electronics used in the experiments, including the MADC (a), the CAEN 775 TDC (b), CAEN V830 Scaler (c) and the Xia Pixie-16 (d). The headers, event word structure, and end of event structure, where needed, are all listed. In the tables, the first row in a given block is the number of bits used by that piece of data, while the second row is a description of the data. Bits go in descending order from left to right.
 \end{table}
 \end{landscape}
