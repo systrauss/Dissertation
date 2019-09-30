@@ -124,7 +124,7 @@
   colorlinks=false,%
   pdfpagemode=UseOutlines]{hyperref}
 \RequirePackage{longtable,afterpage}
-\RequirePackage{physics}
+\RequirePackage{physics,mathrsfs}
 \RequirePackage[flushleft]{threeparttable}
 \RequirePackage[flushleft]{threeparttablex}
 \RequirePackage{xspace}

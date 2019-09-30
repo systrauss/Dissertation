@@ -59,7 +59,7 @@ It was theorized this decay may be from $^{15}$O, which would be created from th
 
 \section{Electronics}
 
-After experiments with two different electronics set ups, a third electronics set up was used, with the plan for it to become the standard electronics for future fIREBALL experiments. These electronics use the Mesytec MDPP-16 VME module and the Mesytec MVME data acquisition software \citep{mesytec:_mdpp,mesytec:_mvme}. The MDPP-16 modules replace the conventional NIM modules, replacing external CFDs and TDCs. The gain, threshold, shaping time, and signal rise and decay times are all set within the module. 
+After experiments with two different electronics set ups, a third electronics set up was used, with the plan for it to become the standard electronics for future fIREBALL experiments. These electronics use the Mesytec MDPP-16 VME module and the Mesytec MVME data acquisition software \citep{mesytec:_mdpp,mesytec:_mvme}. The MVME software from Mesytec has built-in online analysis tools, allowing for real time analysis of the data. The MDPP-16 modules replace the conventional NIM modules, replacing external CFDs and TDCs. The gain, threshold, shaping time, and signal rise and decay times are all set within the module. 
 
 The MDPP-16 modules can be run in multiply modes, depending on the firmware: QDC, SCP, and RCP modes. The firmware can be changed using a switch on the module, allowing a given module to hold all three firmware versions. For these tests, the SCP, or standard charge sensitive preamplifier, mode is used. Figure \ref{fig:mdpp_schematic} shows the schematic configuration of the module in SCP mode, and Table \ref{tab:word_MDPP} shows the breakdown of the event words in the system.
 
@@ -69,6 +69,6 @@ The MDPP-16 modules can be run in multiply modes, depending on the firmware: QDC
 
 One of the benefits of the MDPP-16 modules is the compatibility with other VME modules. Scaler values can be read in with a separate module, such as the CAEN V830, as was done with the GEORGINA setup, discussed in Section \ref{sec:GEORGINA_electronics}. Many of the scaler values can be read in using the MDPP-16, but the addition of the V830 allows for more versatility in rates to record, including comparing rates between the MDPP-16 and the V830 for deadtime corrections.
 
-The mvme software from Mesytec has built-in online analysis tools, allowing for real time analysis of the data.
+\section{Outlook}
 
-\section{Alternative Reactions}
+Testing with the new magnetic configurations is currently underway, while the new detectors are being manufactured. The electronics have been tested and used extensively in the NSL. Future experiments with the new fIREBall system will have greater sensitivity, contributing to the effort to probe the nuclear chart for E0 transitions in the search for understanding collective modes and shape coexistence.
