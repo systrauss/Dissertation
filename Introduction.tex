@@ -26,23 +26,23 @@ Outside of these closed shells, there are large regions that do not work within 
 
 \input{Introduction_Figs/nilsson.tex}
 
-In the area around $Z=60$ and $N=90$, away from the closed shells, nuclei do not hold a spherical shape. They lose symmetry on the major axes, becoming axially assymmetric via $x=y\neq z$ or $x \neq y \neq z$. The former case has two forms: oblate (pancake-like) or prolate (football-like) depending on whether the nucleus appears compressed (oblate) or elongated (prolate) along the symmetry axis ($z$), as seen in Figure \ref{fig:deformation}. In Figure \ref{fig:nilsson}, the negative $\beta$ corresponds to oblate nuclei, while positive $\beta$ corresponds to prolate nuclei. There are more exotic deformations when the latter assymmetry is true, where symmetry is broken along two or more axes, resulting in pear-shapes and other exotic formations.
+In the area around $Z=60$ and $N=90$, away from the closed shells, nuclei do not hold a spherical shape. They lose symmetry on the major axes, becoming axially assymmetric. /i/e/ $x=y\neq z$ or $x \neq y \neq z$. The former case has two forms: oblate (pancake-like) or prolate (football-like) depending on whether the nucleus appears compressed (oblate) or elongated (prolate) along the symmetry axis ($z$), as seen in Figure \ref{fig:deformation}. In Figure \ref{fig:nilsson}, the negative $\beta$ corresponds to oblate nuclei, while positive $\beta$ corresponds to prolate nuclei. There are more exotic deformations when the latter assymmetry is true, where symmetry is broken along two or more axes, resulting in pear-shapes and other exotic formations.
 
 \input{Introduction_Figs/deformation.tex}
 
-There are several ways to look for deformation in a nucleus. The most common is the quadrupole moment, which is directly related to the deformation parameter, $\beta$ by
+There are several ways to look for deformation in a nucleus. The most common is the quadrupole moment, which is directly related to the quadrupole deformation parameter, $\beta_2$ (also referred to as $\beta$) by
 
 \begin{equation}
-    Q_0 = \frac{3}{\sqrt{5\pi}}ZR_0^2\beta\left(1+0.16\beta\right)
+    Q_0 = \frac{3}{\sqrt{5\pi}}ZR_0^2\beta_2\left(1+0.16\beta_2\right)
 \end{equation}
 
-to second order, where $Z$ is the atomic number, and $R_0$ is the approximate radius based on $R_0=1.2A^{1/3}$fm, where $A$ is the number of nucleons \citep{casten90:_structure}. This can be measured in even-even nuclei using the transition between the first excited $2^+$ state and the $0^+$ ground state. The onset of deformation can be seen in Figure \ref{fig:beta_by_isotope}, via the rapid increase in $\beta_2$, the quadrupole deformation parameter. The equation used to calculate $\beta_2$ for this figure is 
+to second order, where $Z$ is the atomic number, and $R_0$ is the approximate radius based on $R_0=1.2A^{1/3}$fm, where $A$ is the number of nucleons \citep{casten90:_structure}. This can be measured in even-even nuclei using the transition between the first excited $2^+$ state and the $0^+$ ground state. The onset of deformation can be seen in Figure \ref{fig:beta_by_isotope}, via the rapid increase in $\beta_2$. The equation used to calculate $\beta_2$ for this figure is 
 
 \begin{equation}
     \beta_2 = \frac{4\pi}{3ZR^2_0}\left[B(E2)\right]^{1/2}
 \end{equation}
 
-where B(E2) is the reduced transition probability for the $0^+_1\rightarrow2^+_1$ transition. There is no way to distinguish prolate and oblate using this calculation.
+where B(E2) is the reduced transition probability for the $0^+_1\rightarrow2^+_1$ transition. There is no way to distinguish prolate and oblate using this calculation, as the sign comes from the choice of sign on the root. The choice cannot be decided with the information in the equation.
 
 \input{Introduction_Figs/DeformationPlot.tex}
 
@@ -52,11 +52,11 @@ In the lanthanide region, there are multiple stable isotopes of several elements
     E=\frac{\hbar^2}{2\mathscr{J}_{eff}}J(J+1)
 \end{equation}
 
-The moment of inertia, $\mathscr{J}_{eff}$, varies as energy increases. In a perfect rigid rotor, this would not be the case, and $\mathscr{J}_{eff}=\mathscr{J}_{rigid}=\frac{2}{5}Am_{\mathscr{N}}r_0^2A^{2/3}$. Taking the ratio of two energy levels, $J=4$ and $J=2$ in this case, would give a ratio of 10/3, or 3.3. However, if it is not a rigid rotor, this number deviates from 3.3, as the change in the effective moment of inertia changes. The model used by Bohr and Mottelson shows that $\mathscr{J}_{eff}$ is proportional to the square of the deformation parameter, $\beta$ at low deformation, and approaches that of a rigid body at high deformation \citep{bohr55:_deformation}.
+The moment of inertia, $\mathscr{J}_{eff}$, varies as energy increases. In a perfect rigid rotor, this would not be the case, and $\mathscr{J}_{eff}=\mathscr{J}_{rigid}=\frac{2}{5}Am_{\mathscr{N}}r_0^2A^{2/3}$. Taking the ratio of two energy levels, $J=4$ and $J=2$ in this case, would give a ratio of 10/3, or 3.3. However, if it is not a rigid rotor, this number deviates from 3.3, as the change in the effective moment of inertia changes. The model used by Bohr and Mottelson shows that $\mathscr{J}_{eff}$ is proportional to the square of the deformation parameter, $\beta_2$, at low deformation, and approaches that of a rigid body at high deformation \citep{bohr55:_deformation}.
 
 \input{Introduction_Figs/E4E2ratio.tex}
 
-Much of these nuclei are successfully modelled with deformation in theoretical calculations \citep{delaroche10:_systematics}. These models can also open up new questions, when a previously identified feature does not fit with the assignment, in an otherwise well described system.
+Much of these nuclei are successfully modelled with deformation in theoretical calculations \citep{delaroche10:_systematics}. These models can also open up new questions, when a previously identified feature does not fit with the assignment in an otherwise well described system.
 
 \section{Nuclear Excitations}
 \label{sec:nuc_excite}
@@ -77,11 +77,11 @@ Another aspect of nuclear shape is that of shape coexistence. In shape coexisten
 
 \input{Introduction_Figs/shape_beta.tex}
 
-There are two main theoretical approaches to shape coexistence in nuclei: microscopic shell-model and mean-field descriptions \citep{heyde11:_shape_coexist}. These two approaches compliment each other. In the shell-model approach, a spherical shell model is assumed, and particle-hole excitations across closed shells are examined. For an $n$p-$n$h configuration, it would appear the $0^+$ states are too high. However, upon correcting for monopole interaction energy, and then coupling different $n$p-$n$h subspaces together, lower energy $0^+$ states are calculated \citep{caurier07:_shape_coexist}. For calculations above $A=80$, nucleons must be treated in pairs built from realistic collective pairs, as the model spaces become too large for current computational power\citep{heyde11:_shape_coexist}. In this approach, intruder states from even-evn particle-hole excitations can create shape-coexisting $0^+$ states.
+There are two main theoretical approaches to shape coexistence in nuclei: microscopic shell-model and mean-field descriptions \citep{heyde11:_shape_coexist}. These two approaches compliment each other. In the shell-model approach, a spherical shell model is assumed, and particle-hole excitations across closed shells are examined. For an $n$p-$n$h configuration, it would appear the $0^+$ states are too high. However, upon correcting for monopole interaction energy, and then coupling different $n$p-$n$h subspaces together, lower energy $0^+$ states are calculated \citep{caurier07:_shape_coexist}. For calculations above $A=80$, nucleons must be treated in pairs built from realistic collective pairs, as the model spaces become too large for current computational power\citep{heyde11:_shape_coexist}. In this approach, intruder states from even-even particle-hole excitations can create shape-coexisting $0^+$ states.
 
-The mean-field approach uses the self-consistent Hartree-Fock-Bogoliubov (HFB) theory. The effective forced are tuned to describe global nuclear properties. When minimizing the energy, deformation in the nuclear shape can result. Various mean-field states are found, which have broken symmetries needed witin the nucleus. These states are projected onto the proper particle numbers, isospin, and angular momentum to produce the physical states observed \citep{heyde11:_shape_coexist}. To compare with experimental date, the Hamiltonian must be rediagonlized in terms of the physical, projected states.
+The mean-field approach uses the self-consistent Hartree-Fock-Bogoliubov (HFB) theory. The effective forces are tuned to describe global nuclear properties. When minimizing the energy, deformation in the nuclear shape can result. Various mean-field states are found, which have broken symmetries needed within the nucleus. These states are projected onto the proper particle numbers, isospin, and angular momentum to produce the physical states observed \citep{heyde11:_shape_coexist}. To compare with experimental date, the Hamiltonian must be rediagonlized in terms of the physical, projected states.
 
-This shape coexistence, like the collective excitations, have spectroscopic fingerprints that can help determine their existence. As with deformation, large reduced transition rates are a possible sign of shape coexistence, but do not distinguish between static and dynamic deformation \citep{heyde11:_shape_coexist}. The diagonal $E2$ matrix elements can distinguish between the dynamic and static. The $E0$ transitions present in $J^{\pi}\rightarrow J^{\pi}$ may also be an indirect fingerprint of shape coexistence, as it is related to the change in the mean radius of the nucleus, as discussed in section \ref{sec:E0}\citep{wood99:_e0}. The low-lying states of interest can be difficult to observe, as they are not populated strongly in reactions.
+Shape coexistence, like the collective excitations, has spectroscopic fingerprints that can help determine its existence. As with deformation, large reduced transition rates are a possible sign of shape coexistence, but do not distinguish between static and dynamic deformation \citep{heyde11:_shape_coexist}. The diagonal $E2$ matrix elements can distinguish between the dynamic and static. The $E0$ transitions present in $J^{\pi}\rightarrow J^{\pi}$ may also be an indirect fingerprint of shape coexistence, as it is related to the change in the mean radius of the nucleus, as discussed in Section \ref{sec:E0}\citep{wood99:_e0}. The low-lying states of interest can be difficult to observe, as they are not populated strongly in reactions.
 
 \section{Multipole Radiation}
 \label{sec:multipole}
@@ -131,7 +131,7 @@ As these are equivalent, any pair of fields \textbf{B}(\textbf{r}) and \textbf{E
     \textbf{r} \cdot \textbf{B} & = 0
 \end{align}
 
-When combining \ref{eq:trans_E} and \ref{eq:maxwell_rw1}, a solution to the Maxwell equations can be derived. When doing the same with \ref{eq:trans_B} and \ref{eq:maxwell_rw2}, a separate, linearly independent, solution can be derived. These two solutions in combination can express any of the solutions to the Maxwell equations as a linear combination.
+When combining equations \ref{eq:trans_E} and \ref{eq:maxwell_rw1}, a solution to the Maxwell equations can be derived. When doing the same with equations \ref{eq:trans_B} and \ref{eq:maxwell_rw2}, a separate, linearly independent, solution can be derived. These two solutions in combination can express any of the solutions to the Maxwell equations as a linear combination.
 
 Because of the linear independence of the spherical harmonics, solutions to these wave equations can be written as multipole expansions, the term multipole in reference to the angular momentum, $l$, defining the series of the harmonic. The first set of solutions give the magnetic multipole fields, with the solutions
 \begin{subequations}
@@ -141,7 +141,7 @@ Because of the linear independence of the spherical harmonics, solutions to thes
     \nabla \cdot \textbf{E}^\text{M} & = 0 & \textbf{r}\cdot\textbf{E}^\text{M}=0
 \end{align}
 \end{subequations}
-where the M indicates the magnetic multipole component of the field. Second set give the electric multipole fields with the solutions
+where the M indicates the magnetic multipole component of the field. The second set give the electric multipole fields with the solutions
 \begin{subequations}
 \label{eq:electric_sol}
 \begin{align}
@@ -158,7 +158,7 @@ These multipole fields can be written as an expansion of the spherical Hankel fu
     \textbf{B}^\text{E}(\textbf{r})=\sum_{l,m,i}d_{lm}^{(i)}h_l^{(i)}\textbf{l}Y_{lm}(\theta,\phi)
 \end{align}
 \end{subequations}
-with $\textbf{E}^\text{E}$ and $\textbf{B}^\text{M}$ derivable from the curl expressions in \ref{eq:maxwell_rw1} and \ref{eq:maxwell_rw2}. In this equation, the orbital angular momentum is expressed as $\textbf{l}=-i(\textbf{r}\times\nabla)$ The created multipole radiation of E and M types, being listed as E$l$ and M$l$ radiation. Then the vector spherical harmonics can be introduced in the form
+with $\textbf{E}^\text{E}$ and $\textbf{B}^\text{M}$ derivable from the curl expressions in equations \ref{eq:maxwell_rw1} and \ref{eq:maxwell_rw2}. In this equation, the orbital angular momentum is expressed as $\textbf{l}=-i(\textbf{r}\times\nabla)$. The created multipole radiation is of E and M types, being referred to as E$l$ and M$l$ radiation. Then the vector spherical harmonics can be introduced in the form
 \begin{equation}
     \textbf{X}_{lm}=\frac{1}{\sqrt{l(l+1)}}\textbf{l}Y_{lm}(\theta,\phi)
 \end{equation}
@@ -224,14 +224,14 @@ where $\mathcal{J}$ is the current density and $\boldsymbol{A}$ is the magnetic 
 \end{align}
 \end{subequations}
 
-Of note from this derivation, the transition probability decreases with increasing $l$, making lower angular momentum transitions more favorable. Additionally, looking at the multipole moments, once the wave equations have been added in, all but $Q_{lm}$ have a factor of $1/c$. This makes the electric transition stronger than the magnetic transition of the same $l$.
+Of note from this derivation, the transition probability decreases with increasing $l$, making lower angular momentum transitions more favorable. Additionally, looking at the multipole moments, once the wave equations have been added in, all but the $Q_{lm}$ multipole moments have a factor of $1/c$. This makes the electric transition stronger than the magnetic transition of the same $l$.
 
-There are limitations for the types of multipole radiation that can be emitted due to a transition, known as selection rules. One such limitation is that all of the multipole moments of equations \ref{eq:multipole_moment} go to zero is $l=0$, making $l=0$ transitions forbidden via this method. Other rules are based on two pieces of information about the initial and final states: the spins and parities of the states. The spins, $J$ of the states select the allowable $l$, using the range $\abs{J_i-J_f}\leq l\leq J_i+J_f$, meaning the change in angular momentum cannot exceed the sum of the spins of the two states, or be smaller than the difference of the spins of the two states. For example, a transition between two states of spins 4 and 2 would allow $l$ from 2 to 6. The parity selection now helps select the set of solutions. With the first selection rule, in the example, the possibilities are E2, M2 ... E6, M6. If the parity stays the same between the two states, so positive to positive or negative to negative, the solutions are even E$l$ and odd M$l$. If the parity changes, the solutions are odd E$l$ and even M$l$. In an equation form, the parity change is
+There are limitations for the types of multipole radiation that can be emitted due to a transition, known as selection rules. One such limitation is that all of the multipole moments of equations \ref{eq:multipole_moment} go to zero is $l=0$, making $l=0$ transitions forbidden via this method. Other rules are based on two pieces of information about the initial and final states: the spins and parities of the states. The spins, $J$, of the states select the allowable $l$, using the range $\abs{J_i-J_f}\leq l\leq J_i+J_f$, meaning the change in angular momentum cannot exceed the sum of the spins of the two states, or be smaller than the difference of the spins of the two states. For example, a transition between two states of spins 4 and 2 would allow $l$ from 2 to 6. The parity selection now helps select the set of solutions. With the first selection rule, in the example, the possibilities are E2, M2 ... E6, M6. If the parity stays the same between the two states, so positive to positive or negative to negative, the solutions are even E$l$ and odd M$l$. If the parity changes, the solutions are odd E$l$ and even M$l$. In an equation form, the parity change is
 \begin{align}
     \pi(\text{E}l) &= (-1)^{l} & \pi(\text{M}l) &= (-1)^{l-1}
 \end{align}
 
-While not a selection rule, multipoles of lower order are stronger, and electric multipoles are stronger than magnetic multipoles, with M$l$ having about the same intensity as E$l+1$. There are also forbidden transitions to consider. The name is a misnomer, as these transitions are not strictly forbidden, but are highly suppressed, or must occur through a different mechanism. A relevant example to this text is that of the $l=0$ transition, previously noted as forbidden. Photons carry an angular momentum of 1, so any transitions that occur via photon emission must have a $\delta J \geq 1$, so $l$ must be at least 1. An E0 transition has $l=0$, making it forbidden by single photon emission. However, it can still occur, several different ways.
+While not a selection rule, multipoles of lower order are stronger, and electric multipoles are stronger than magnetic multipoles, with M$l$ having about the same intensity as E$l+1$. There are also forbidden transitions to consider. The name is a misnomer, as these transitions are not strictly forbidden, but are highly suppressed, or must occur through a different mechanism. A relevant example to this text is that of the $l=0$ transition, previously noted as forbidden. Photons carry an angular momentum of 1, so any transitions that occur via photon emission must have a $\delta J \geq 1$, so $l$ must be at least 1. An E0 transition has $l=0$, making it forbidden by single photon emission. However, it can still occur, several different ways, including internal conversion.
 
 \section{Internal Conversion}
 
@@ -246,9 +246,9 @@ Both of these processes come from the same overall mechanism, that of the electr
 \label{eq:conv_coeff}
     \alpha = \frac{w_e}{w_\gamma}
 \end{equation}
-where $w_e$ is the transition probability due to internal conversion and $w_\gamma$ is the transition probability due to single photon emission.
+where $w_e$ is the transition probability due to internal conversion and $w_\gamma$ is the transition probability due to single photon emission for the same transition.
 
-Internal conversion is a result of the interaction of the electron's wavefunction with that of the nucleus. The probability for internal conversion can be derived using Fermi's Golden rule, equation \ref{eq:golden}, where $H_{int}$ is the electromagnetic interaction of the combined initial nuclear and electron states, to the combined final nuclear state and free electron, and $\rho$ is the accessible energy state density for the ejected electron. For simplicity, this derivation will be specifically for $K$ electrons, and look at the area outside of the nuclear radius \citep{roy67:_e0, blatt79:_emradiation, segre77:_icradiation}.
+Internal conversion is a result of the interaction of the electron's wavefunction with that of the nucleus. The probability for internal conversion can be derived using Fermi's Golden rule, equation \ref{eq:golden}, where $H_{int}$ is the electromagnetic interaction of the combined initial nuclear and electron states, to the combined final nuclear state and free electron, and $\rho$ is the accessible energy state density for the ejected electron. For simplicity, this derivation will be specifically for $K$-shell electrons, and look at the area outside of the nuclear radius \citep{roy67:_e0, blatt79:_emradiation, segre77:_icradiation}.
 
 The electron can be treated as a plane wave once it has been ejected from the $K$ shell, assuming the electron energy is large compared to the binding energy. This makes the initial and final states of the electron
 \begin{subequations}
@@ -257,7 +257,7 @@ The electron can be treated as a plane wave once it has been ejected from the $K
     \psi_{f} & = V^{-1/2}e^{i\textbf{k}\cdot\textbf{R}}
 \end{align}
 \end{subequations}
-where $a_0=\hbar^2/me^2$ is the Bohr radius of the hydrogen atom, \textbf{R} is the position vector between the electron and the center of the nucleus, \textbf{k} us the wave vector of the electron after ejection, and $V$ is the volume of the "box", which should drop out in the final result, as $\rho$ also contains the volume in its formulation. The energy state density can be rewritten in terms of the wave vector \textbf{k} to be 
+where $a_0=\hbar^2/me^2$ is the Bohr radius of the hydrogen atom, \textbf{R} is the position vector between the electron and the center of the nucleus, \textbf{k} is the wave vector of the electron after ejection, and $V$ is the volume of the "box", which should drop out in the final result, as $\rho$ also contains the volume in its formulation. The energy state density can be rewritten in terms of the wave vector \textbf{k} to be 
 \begin{align}
     \rho & = z(k)d\Omega, \text{ where} \\
     z(k) & = V\frac{m\hbar k}{(2\pi\hbar)^3}
@@ -270,24 +270,24 @@ Taking into account there are two electrons in the $K$-shell, the probability $w
 
 For this derivation, the electric multipoles are being considered, so only the electrostatic interaction is being used. By using the magnetic interaction instead, the magnetic multipoles can also be derived. By assuming the interaction is occurring outside of the nucleus, the Hamiltonian can be assumed to be the electrostatic interaction between the protons of the nucleus and the electron or
 \begin{equation}
-    H=\sum_{i=1}^Z \frac{e^2}{\abs{\textbf{R}-\textbf{r}_i}}
+    H=\sum_{n=1}^Z \frac{e^2}{\abs{\textbf{R}-\textbf{r}_n}}
 \end{equation}
-where \textbf{R} is as described above, and $\textbf{r}_i$ is the proton position from the center of the nucleus. Then the matrix element is
+where \textbf{R} is as described above, and $\textbf{r}_n$ is the proton position from the center of the nucleus. Then the matrix element is
 \begin{equation}
 \label{eq:matrix_element_int}
-    \abs{\bra{f}H_{int}\ket{i}} = \left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{-1/2}\int e^{-i\textbf{k}\cdot\textbf{R}}\varphi_{f}^* \frac{e^2}{\abs{\textbf{R}-\textbf{r}_i}} e^{-\frac{RZ}{a_0}}\varphi_{i}d\Omega
+    \abs{\bra{f}H_{int}\ket{i}} = \left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{-1/2} \sum_{n=1}^Z \int e^{-i\textbf{k}\cdot\textbf{R}}\varphi_{f}^* \frac{e^2}{\abs{\textbf{R}-\textbf{r}_n}} e^{-\frac{RZ}{a_0}}\varphi_{i}d\Omega
 \end{equation}
 with $\varphi_{i}$ and $\varphi_{f}$ being the initial and final wave functions of the nucleus, respectively. The integration must occur over both the coordinates of the electron and over the coordinates in the nuclear wave functions, such that $d\Omega=d^3Rd\tau$ where $\tau$ represents the nuclear coordinates.
 
-The main contribution to the integral is going to come from $\textbf{R}>\textbf{r}_i$, the earlier assumption the interaction is occurring outside of the nucleus. This allows for an expansion of $\abs{\textbf{R}-\textbf{r}_i}^{-1}$ in terms of spherical harmonics such that
+The main contribution to the integral is going to come from $\textbf{R}>\textbf{r}_n$, the earlier assumption the interaction is occurring outside of the nucleus. This allows for an expansion of $\abs{\textbf{R}-\textbf{r}_n}^{-1}$ in terms of spherical harmonics such that
 \begin{equation}
 \label{eq:expansion_Rri}
-    \frac{1}{\abs{\textbf{R}-\textbf{r}_i}} = \sum_{l=0}^\infty\sum_{m=-l}^{l}\frac{4\pi}{2l+1}\frac{r_i^l}{R^{l+1}}Y_{lm}(\Theta,\Phi)Y_{lm}^{*}(\theta_i,\phi_i)
+    \frac{1}{\abs{\textbf{R}-\textbf{r}_n}} = \sum_{l=0}^\infty\sum_{m=-l}^{l}\frac{4\pi}{2l+1}\frac{r_i^l}{R^{l+1}}Y_{lm}(\Theta,\Phi)Y_{lm}^{*}(\theta_n,\phi_n)
 \end{equation}
-where $\Theta$ and $\Phi$ are the polar vector of \textbf{R} and $\theta_i$ and $\phi_i$ are the same for $\textbf{r}_i$. Substituting this into equation \ref{eq:matrix_element_int} gives
+where $\Theta$ and $\Phi$ are the polar vector of \textbf{R} and $\theta_n$ and $\phi_n$ are the same for $\textbf{r}_n$. Substituting this into equation \ref{eq:matrix_element_int} gives
 \begin{equation}
     
-    abs{\bra{f}H_{int}\ket{i}} = \frac{e}{ \left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{1/2}} \sum_{l=0}^\infty\sum_{m=-l}^{l}\frac{4\pi}{2l+1} Q_{lm}(i,f)J_{lm}
+    \abs{\bra{f}H_{int}\ket{i}} = \frac{e}{ \left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{1/2}} \sum_{l=0}^\infty\sum_{m=-l}^{l}\frac{4\pi}{2l+1} Q_{lm}(i,f)J_{lm}
 \end{equation}
 where $Q_{lm}(i,f)$ is the electric multipole matrix element and $J_{lm}$ is the integral
 \begin{equation}
@@ -312,12 +312,12 @@ There is a strong dependence on atomic number $Z$ and the multipole order $l$. T
 Like the electromagnetic radiation, $l=0$ transitions are still forbidden in the internal conversion proof above, as the rate directly depends on $Q_{lm}$, which goes to 0 for $l=0$, which is relevant to transitions where the initial and final spins are the same. This, however, arises from the previous assumption of looking only outside of the nucleus. While the majority of the interaction between nucleus and electron occurs outside of the nucleus, when this goes to zero, as is the case for $l=0$, the correction term from inside the nucleus must be taken into account, i.e. $R<r_i$. This exchanges the positions of $R$ and $r_i$ on the right in the expansion from equation \ref{eq:expansion_Rri}. Revisiting equation \ref{eq:matrix_element_int}, and setting $l=0$ it becomes
 \begin{equation}
 \label{eq:matrix_element_E0}
-    \abs{\bra{f}H_{int}\ket{i}} = \frac{e}{\left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{1/2}}\sum_{i=1}^Z \int d\tau\varphi_{f}^*\frac{1}{r_i}\varphi_{i} \int_{R<r_i}d^3R e^{-i\textbf{k}\cdot\textbf{R}} e^{-\frac{RZ}{a_0}}
+    \abs{\bra{f}H_{int}\ket{i}} = \frac{e}{\left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{1/2}}\sum_{n=1}^Z \int d\tau\varphi_{f}^*\frac{1}{r_n}\varphi_{i} \int_{R<r_n}d^3R e^{-i\textbf{k}\cdot\textbf{R}} e^{-\frac{RZ}{a_0}}
 \end{equation}
-As integration over R extends only to very small numbers, the exponentials on the right can be approximated as 1, simplifying the integral to just $d^3R$, making it $4\pi r_i^3/3$. The matrix element is now
+As integration over R extends only to very small numbers, the exponentials on the right can be approximated as 1, simplifying the integral to just $d^3R$, making it $4\pi r_n^3/3$. The matrix element is now
 \begin{equation}
 \label{eq:hint_e0}
-    \abs{\bra{f}H_{int}\ket{i}} =  \frac{4\pi}{3}\frac{e}{\left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{1/2}} \sum_{i=1}^Z \int d\tau\varphi_{f}^*r_i^2\varphi_{i}
+    \abs{\bra{f}H_{int}\ket{i}} =  \frac{4\pi}{3}\frac{e}{\left(V\pi\left(\frac{a_0}{Z}\right)^3\right)^{1/2}} \sum_{n=1}^Z \int d\tau\varphi_{f}^*r_n^2\varphi_{i}
 \end{equation}
 The sum is of the order of magnitude of the square of the nuclear charge radius, denoted by $\mathcal{R}^2$. Substituting \ref{eq:hint_e0} into \ref{eq:golden_ic}, the probability for an electric multipole of order $l=0$ becomes
 \begin{equation}
@@ -327,11 +327,11 @@ where $\Delta E=E_f-E_i-B_K$ is the energy of the electron, with $B_K$ indicatin
 
 One common way to rewrite the E0 transition probability is 
 $\mathcal{W}=\Omega\rho^2$, where $\Omega$ are non-nuclear factors, i.e. $\Omega=\sum_i\Omega_i$ where $i$ is the electron shell. This contains the nuclear factors to $\rho^2$, referred to as the nuclear strength parameter \citep{church56:_monopole,wood99:_e0}. In practice, $\rho^2$ tends to fall between $10^{-1}-10^{-3}$, so it is standard to quote $\rho^2\times10^3$. For a given transition, \begin{equation}
-    \rho^2_{if}=\abs{\frac{\bra{f}\sum_ke_kr_k^2\ket{i}}{eR^2}}^2
+    \rho^2_{if}=\abs{\frac{\bra{f}\sum_ne_nr_n^2\ket{i}}{eR^2}}^2
 \end{equation}
 This makes $\rho^2$ unitless, due to the division by $eR^2$, where $R$ is the standard nuclear radial approximation. With this, $\rho^2$ can be scaled in terms of mass, allowing for comparisons across the nuclear chart \citep{wood99:_e0}.
 
-These transitions have been seen to manifest via a variety of phenomena, including the shell model, collective models, shape mixing i.e. shape coexistence and intruder states\citep{wood99:_e0}. Depending upon which phenomenon is responsible for a given E0 transition will change $\rho^2$, of which estimates can be calculated. many of these models lead to small E0 rates, the exception being shape mixing. Due to the dominant nature of shape mixing in E) decays, it is difficult to compare these models with experimental $\rho^2$ values unless shape-mixing effects have been removed \citep{wood99:_e0}.
+These transitions have been seen to manifest via a variety of phenomena, including the shell model, collective models, shape mixing i.e. shape coexistence and intruder states\citep{wood99:_e0}. Depending upon which phenomenon is responsible for a given E0 transition will change $\rho^2$, of which estimates can be calculated. Many of these models lead to small E0 rates, the exception being shape mixing. Due to the dominant nature of shape mixing in E0 decays, it is difficult to compare these models with experimental $\rho^2$ values unless shape-mixing effects have been removed \citep{wood99:_e0}.
 
 \section{The Rare Earth Region: $N=90,Z=60$}
 

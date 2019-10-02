@@ -9,21 +9,21 @@ Throughout the course of this experiment, there have been a variety of areas tha
 
 \section{Detector Upgrades}
 
-In a given experiment, the detectors are one of the single most important pieces of equipment. Two different styles of HPGe detectors were used, to varying success, and different magnetic configurations were used to optimize efficiency. Further steps are being taken for the future of conversion electron experiments at Notre Dame in both areas.
+In a given experiment, the detectors are one of the single most important pieces of equipment. Two different styles of HPGe detectors were used, to varying success, and different magnetic configurations were used to optimize efficiency, discussed in Section \ref{sec:mini_orange}. Further steps are being taken for the future of conversion electron experiments at Notre Dame in both areas to improve the quality of data.
 
 \subsection{fIREBAll}
 
-The La Crosse \textbf{I}nternal Conve\textbf{R}sion \textbf{E}lectron \textbf{B}all \textbf{A}rray (fIREBAll) will be the next generation of ICEBall[FIGURE OUT CITATION]. The Major Research Instrumentation (MRI) proposal to the National Science Foundation (NSF) for funding has been approved. The University of Wisconsin-La Crosse submitted the proposal. The ICEBall beamline at the NSL will become the fIREBAll beamline. The focus of the proposal was detector upgrades, both for the Si(Li) detectors, and the HPGe detectors.
+The La Crosse \textbf{I}nternal Conve\textbf{R}sion \textbf{E}lectron \textbf{B}all \textbf{A}rray (fIREBAll) will be the next generation of ICEBall\citep{lesher19:_fireball}. The Major Research Instrumentation (MRI) proposal to the National Science Foundation (NSF) for funding has been approved. The University of Wisconsin-La Crosse submitted the proposal. The ICEBall beamline at the NSL will become the fIREBAll beamline. The focus of the proposal was detector upgrades, both for the Si(Li) detectors, and the HPGe detectors.
 
-With this proposal, there will be dedicated HPGe detectors for the array, with two Bizmuth Germanate (BGO) anti-Compton suppression shields. The current Si(Li) detectors would be replaced with two Si(Li) detectors, for a total of twelve detectors each. There would still be six detection planes, as the Si(Li) detectors would be stacked in a telescope formation, to allow for the measurement of higher energy E0 transitions. The current Si(Li) detectors in use are 5 $mm$ thick. All of the new detectors would be 5 $mm$ thick, making for an active stopping depth of 10 $mm$ when stacked. Additionally, the detectors would be 800 $mm^2$ surface area instead of 750 $mm^2$ of the current detectors. Over the past 25 years of use, the current Si(Li) detectors have begun to deteriorate. As seen in Figure \ref{fig:bad_sili}. There is a clear decline in the resolution of the detector between the different experiments.
+With this proposal, there will be dedicated HPGe detectors for the array, with two Bizmuth Germanate (BGO) anti-Compton suppression shields. The current Si(Li) detectors would be replaced with two Si(Li) detectors, for a total of twelve detectors each. There would still be six detection planes, as the Si(Li) detectors would be stacked in a telescope formation, to allow for the measurement of higher energy conversion electron transitions, including E0 transitions. The current Si(Li) detectors in use are 5 mm thick. All of the new detectors would be 5 mm thick, making for an active stopping depth of 10 mm when stacked. Additionally, the detectors would be 800 mm$^2$ surface area instead of 750 mm$^2$ of the current detectors. Over the past 25 years of use, the current Si(Li) detectors have begun to deteriorate. As seen in Figure \ref{fig:bad_sili}, there is a clear decline in the resolution of the detector between the different experiments.
 
 \input{Future_Figs/bad_sili.tex}
 
 \subsection{Magnet Designs}
 
-To improve the detection efficiency of the conversion electrons, the magnetic configurations can be changed. This was done in the experiments to optimize for higher energies. When the original magnetic configurations were used, the permanent magnets used were 0.5 cm thick SmCo$_5$ squares. These thin squares are not, necessarily, creating the most optimal magnetic field.
+To improve the detection efficiency of the conversion electrons, the magnetic configurations can be changed. This was done in the experiments to optimize for higher energies. When the experiments in this work were performed, the permanent magnets used were $36\times36\times5$ mm SmCo$_5$ squares. These thin squares are not, necessarily, creating the most optimal magnetic field.
 
-Using GEANT4 and COMSOL, a variety of magnetic shapes were modeled, varying the cross-shape profile, the thickness, and the number of magnets used \citep{allison16:_geant4,comsol:_comsol}. Figure \ref{fig:fieldmap} shows what the magnetic fields look like when modelled in COMSOL. All of the magnets simulated were assumed to be Neodymium, specifically $\text{Nd}_{2}\text{Fe}_{14}\text{B}$.  In all of the shape testing, the number of magnets was varied to find idealized scenarios, with the magnets symmetrically spaced. The first variation was the cross-shape profile. Two extremes would be chosen, with intermediate steps between the extremes modelled and tested, as shown in Figure \ref{fig:cross-shape-slide}. Several hybrids of the intermediate steps were also examined, seen in Figure \ref{fig:cross_shape_hybrid}.
+Using GEANT4 and COMSOL, a variety of magnetic shapes were modeled, varying the cross-shape profile, the thickness, and the number of magnets used \citep{allison16:_geant4,comsol:_comsol}. Figure \ref{fig:fieldmap} shows what the magnetic fields look like when modelled in COMSOL. This figure is of the original magnets used in this work. Efficiencies of the new shapes were modeled from 0.1 to 1.0 MeV. The magnets were assumed to have a maximal side length of 37 mm. All of the magnets simulated were assumed to be Neodymium, specifically $\text{Nd}_{2}\text{Fe}_{14}\text{B}$.  In all of the shape testing, the number of magnets was varied to find idealized scenarios, with the magnets symmetrically spaced. The first variation was the cross-shape profile. Two extremes would be chosen, with intermediate steps between the extremes modelled and tested, as shown in Figure \ref{fig:cross-shape-slide}. Several hybrids of the intermediate steps were also examined, seen in Figure \ref{fig:cross_shape_hybrid}. the number of magnets was varied from 3 to 6 for each design, and evenly spaced.
 
 \input{Future_Figs/fieldmap.tex}
 
@@ -31,44 +31,44 @@ Using GEANT4 and COMSOL, a variety of magnetic shapes were modeled, varying the 
 
 \input{Future_Figs/Cross-Shape-Hybrid.tex}
 
-After picking the best cross-shapes, the thickness was varied between uniform and a gradient. Initially, this was a linear, uniform gradient. As simulations continued, variations in the form of the gradient were tested, including a step function, and a piecewise linear design, seen in Figure \ref{fig:width_shape}.
+After picking the best cross-shapes, the thickness was varied between uniform and a gradient. Initially, this was a linear, uniform gradient. As simulations continued, variations in the form of the gradient were tested, including a step function, and a piecewise linear design, seen in Figure \ref{fig:width_shape}. As with the cross-shape, the number of magnets was varied for each design, ranging from 3 to 6 magnets.
 
 \input{Future_Figs/width-shape.tex}
 
-Three designs were chosen after extensive simulations, to maximize efficiencies at low energies (0.2 to 0.4 MeV), high energies (0.7-1.0 MeV), and overall (0.2 to 1.0 MeV). This designs are shown in Figure \ref{fig:finalshapes} with simulated efficiencies. These designs have been ordered for testing with the detectors.
+Three designs were chosen after extensive simulations, to maximize efficiencies at low energies (0.2 to 0.4 MeV), high energies (0.7-1.0 MeV), and overall (0.2 to 1.0 MeV). This designs are shown in Figure \ref{fig:finalshapes} with simulated efficiencies for six magnet configurations. These designs have been ordered for testing with the detectors.
 
 \input{Future_Figs/finalshapes.tex}
 
 \section{Target Upgrades}
 
-One of the concerns and limitations of the original experiments was the thickness of the target. Ideally, the target being used would be less that 500 $\mu g/cm^2$, but the ones used were 1.7 $mg/cm^2$ and 1.44 $mg/cm^2$. While these targets were self-supporting, they were thick enough that electron straggling occurred, smearing out the spectrum.
+One of the concerns and limitations of the original experiments was the thickness of the target. Ideally, the target being used would be less that 500 $\mu\text{g/cm}^2$, but the ones used were 1.7 $\text{mg/cm}^2$ and 1.44 $\text{mg/cm}^2$. While these targets were self-supporting, they were thick enough that electron straggling occurred, smearing out the spectrum.
 
-To create a thinner target, it was decided to try and use a carbon-backing. The Sm was then evaporated onto the backing. The carbon was 20 $\mu g/cm^2$. In the targets made, the Sm was measured to be 170 $\mu g/cm^2$, ten times thinner than the original targets used.
+To create a thinner target, it was decided to explore a carbon-backing. The Sm was evaporated onto a backing 20 $\mu\text{g/cm}^2$ thick. In the targets made, the Sm was measured to be 170 $\mu\text{g/cm}^2$, ten times thinner than the original targets used.
 
 To compare the old and new targets, an experiment was run with both targets inside of ICEBall. The data compared was taken with the same electronics (discussed in the next section) and setup, to minimize differences that could impact the data.
 
 The new targets could be run with higher beam currents to get similar rates in the detectors, at what appeared to be a proportional rate to the target thickness. At lower electron energies, the carbon-backed targets had far better resolution, as seen in Figure \ref{fig:target_test}. The centroids of the peaks also shifted in comparison between the thick and thin target, which follows logically from the thicker target causing greater energy loss. 
 
-Also of note in Figure \ref{fig:target_test}, is that the thin target appears to have a higher background, causing the signal-to-noise ratio to decrease. To understand this increase in background, the beam was cut off and a new run was taken. Figure \ref{fig:O15decay} shows the trigger rate with respect to time during this background run. The background appears to show an exponential decay with a half-life on the order of two minutes.
+Also of note in Figure \ref{fig:target_test}, the thin target appears to have a higher background, causing the signal-to-noise ratio to decrease. To understand this increase in background, the beam was cut off and a new run was taken. Figure \ref{fig:O15decay} shows the detector trigger rate with respect to time during this background run. The background appears to show an exponential decay with a half-life on the order of two minutes.
 
 \input{Future_Figs/targetcomp.tex}
 
 \input{Future_Figs/oxygen.tex}
 
-It was theorized this decay may be from $^{15}$O, which would be created from the $^{12}$C($\alpha,n$) reaction. Using the cross section, obtained from the EXFOR database, the cross section for this reaction at 20 MeV was obtained \citep{zerkin18:_exfor,black69:_carbonalphan}. This was used to calculate the rate in the detectors if it was $^{15}$O being created. These values matched, providing evidence of the new background element. One way this background can be decreased is by using thinner carbon-backing, as 12 $\mu g/cm^2$ is commercially available. This would reduce the $^{15}$O contribution the background by 40 percent.
+It was theorized this decay may be from $^{15}$O, which would be created from the $^{12}$C($\alpha,n$) reaction. Using the cross section, obtained from the EXFOR database, the cross section for this reaction at 20 MeV was obtained \citep{zerkin18:_exfor,black69:_carbonalphan}. This was used to calculate the rate in the detectors if it was $^{15}$O being created. These values matched, providing evidence of the new background element. One way this background can be decreased is by using thinner carbon-backing, as 12 $\mu g/cm^2$ is commercially available. This should reduce the $^{15}$O contribution the background by 40 percent.
 
 \section{Electronics}
 
-After experiments with two different electronics set ups, a third electronics set up was used, with the plan for it to become the standard electronics for future fIREBALL experiments. These electronics use the Mesytec MDPP-16 VME module and the Mesytec MVME data acquisition software \citep{mesytec:_mdpp,mesytec:_mvme}. The MVME software from Mesytec has built-in online analysis tools, allowing for real time analysis of the data. The MDPP-16 modules replace the conventional NIM modules, replacing external CFDs and TDCs. The gain, threshold, shaping time, and signal rise and decay times are all set within the module. 
+After experiments with two different electronics set ups, a third electronics set up was used, with the plan for it to become the standard electronics for future fIREBALL experiments. These electronics use the Mesytec MDPP-16 VME module and the Mesytec MVME data acquisition software \citep{mesytec:_mdpp,mesytec:_mvme}. The MVME software from Mesytec has built-in online analysis tools, allowing for real time analysis of the data and can be used with multiple types of VMEs. The MDPP-16 modules replace the conventional NIM modules, replacing external CFDs and TDCs. The gain, threshold, shaping time, and signal rise and decay times are all set within the module. 
 
-The MDPP-16 modules can be run in multiply modes, depending on the firmware: QDC, SCP, and RCP modes. The firmware can be changed using a switch on the module, allowing a given module to hold all three firmware versions. For these tests, the SCP, or standard charge sensitive preamplifier, mode is used. Figure \ref{fig:mdpp_schematic} shows the schematic configuration of the module in SCP mode, and Table \ref{tab:word_MDPP} shows the breakdown of the event words in the system.
+The MDPP-16 modules can be run in multiple modes, depending on the firmware: QDC, SCP, and RCP modes. The firmware can be changed using a switch on the module, allowing a given module to hold all three firmware versions. For these tests, the SCP, or standard charge sensitive preamplifier, mode is used. Figure \ref{fig:mdpp_schematic} shows the schematic configuration of the module in SCP mode, and Table \ref{tab:word_MDPP} shows the breakdown of the event words in the system.
 
 \input{Future_Figs/MDPP_schematic_fig.tex}
-
-\input{Future_Figs/word_event_table.tex}
 
 One of the benefits of the MDPP-16 modules is the compatibility with other VME modules. Scaler values can be read in with a separate module, such as the CAEN V830, as was done with the GEORGINA setup, discussed in Section \ref{sec:GEORGINA_electronics}. Many of the scaler values can be read in using the MDPP-16, but the addition of the V830 allows for more versatility in rates to record, including comparing rates between the MDPP-16 and the V830 for deadtime corrections.
 
 \section{Outlook}
 
-Testing with the new magnetic configurations is currently underway, while the new detectors are being manufactured. The electronics have been tested and used extensively in the NSL. Future experiments with the new fIREBall system will have greater sensitivity, contributing to the effort to probe the nuclear chart for E0 transitions in the search for understanding collective modes and shape coexistence.
+Testing with the new magnetic configurations is currently underway, while the new detectors are being manufactured. The electronics have been tested and used extensively at the NSL. Future experiments with the new fIREBall system will have greater sensitivity, contributing to the effort to probe the nuclear chart for E0 transitions in the search for understanding collective modes and shape coexistence.
+
+\input{Future_Figs/word_event_table.tex}
