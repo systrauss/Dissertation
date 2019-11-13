@@ -68,8 +68,9 @@ Several systematic effects had to be taken into account at various stages of ana
 In the analysis stage, corrections on extracted values needed to be done based on the angular correlations due to the detectors being at different angles relative to each other. If the angle between the two HPGe detectors were the same as the angle between the HPGe detector and Si(Li) detector(s), this correction would divide out and be unneeded.
 
 \subsection{Electronics-based Integral Non-Linearities}
+\label{sec:non-linearity}
 
-There are two kinds of non-linearities from electronics: integral and differential \citep{knoll00:rad_det_meas}. These two non-linearities are interrelated. Integral linearity is most easily seen in the energy calibration. Differential non-linearity can be seen by looking at the count rate with respect to channel number. [FIGURE FROM KNOLL?] Generally, the non-linearity can be expressed in calibration by a higher order correction to an otherwise linear calibration. In the GEORGINA detectors, this was the case. In the Clovershare detectors, this was not the case. 
+There are two kinds of non-linearities from electronics: integral and differential \citep{knoll00:rad_det_meas}. These two non-linearities are interrelated. Integral linearity is most easily seen in the energy calibration. Differential non-linearity can be seen by looking at the count rate with respect to channel number. Generally, the non-linearity can be expressed in calibration by a higher order correction to an otherwise linear calibration. In the GEORGINA detectors, this was the case. In the Clovershare detectors, this was not the case. 
 
 The Pixie-16 MCA used in the Clovershare experiments has non-linearity specifications for 12-bit and 14-bit modes, but not 16-bit, according to the XIA datasheet \citep{xia:_pixie}. These are listed in terms of the difference of the least significant bit (LSB). In an ideal ADC, this number is 0, meaning the difference between two adjacent channels is exactly one LSB. A larger number means the gap is that much greater than one, and a negative number is that much less. When such non-linearities exist, a best case scenario is for the difference to be constant, leading to the polynomial correction. In the case of the Clovershare experiments, the LSB difference between channels does not appear to be constant.
 
@@ -106,24 +107,7 @@ These angles can be calculated using
 
 with the previous definitions given for the angles in Tables \ref{tab:ICE_Det_Loc} and \ref{tab:GEORGE_Det_Loc}.
 
-\begin{table}[]
-    \centering
-    \caption{Relative Angles of Detectors}
-    \begin{tabular}{c|c} \toprule
-         Detector & $\theta '$  \\
-         \hline 
-         HPGe 2 & 180 \\
-         SiLi 1 & 90\\
-         SiLi 2 & 90\\
-         SiLi 3 & 122.5\\
-         SiLi 4 & 110.7\\
-         SiLi 5 & 69.3 \\
-         SiLi 6 & 57.3 \\ \bottomrule
-    \end{tabular}
-    \footnotesize
-    \item Relative angles of the detectors with respect to HPGe 1 in the ICEBall-GEORGINA set up. The angles were calculated using Tables \ref{tab:ICE_Det_Loc} and \ref{tab:GEORGE_Det_Loc} and equation \ref{eq:rel_angle_g}. All angles are in degrees.
-    \label{tab:rel_angle_g}
-\end{table}
+\input{Analysis_Figs/rel_angle.tex}
 
 Angular correlation functions for $\gamma-\gamma$ are usually written as a series of Legendre polynomials, multiplied by a correlation coefficient $A_\nu$, or
 
