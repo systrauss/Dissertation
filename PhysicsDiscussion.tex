@@ -32,33 +32,159 @@
 
 \chapter{Discussion}
 
+Understanding the nature of collective bands in nuclei requires the use of multiple tools. Energies, transition characterization including strengths and multpolarities, and lifetime information is all vital. Combining this data together creates a story to understand the nature of the band.
+
+\section{Dynamic Symmetries in Nuclei}
+
+Dynamical symmetries are a way to describe physical properties of nuclear systems with explicit analytical form \citep{iachello00:_x5}. The most notable example of a dynamical system is that of the interacting boson model (IBM). The standard interacting boson triangle of symmetries is in Figure \ref{fig:castentriangle}. The three corners represent the vibrator, rotor, and $\gamma$-soft (or $\gamma$-unstable) models of nuclei. A nucleus can rest anywhere within the triangle. The points E(5) and X(5) are the critical points of phase transition. Introduced by Iachello in 2000 \citep{iachello00:_x5}, with first evidence noted later that year \citep{casten00:_x5}, properties of these critical point nuclei can be described analytically, predicting differences in energies of excited states in the nucleus, for example \citep{iachello01:_x5}.
+
+The predicted ratios for the X(5) critical point symmetry agree well with the ratios for $^{154}$Gd \citep{tonev04:_154gd}. However, these ratios were determined not to be robust enough to definitively classify $^{154}$Gd as an X(5) nucleus, and a more stringent test of the X(5) predictions, the absolute B(E2) values was used. The nucleus showed good agreement with theory. Importantly, one of the assumptions Iachello made when developing these critical point symmetries was shape coexistence between the two lowest $0^+$ states in the nucleus. The IBM predicted the deformations of these two excited $0^+$ states will become similar as the deformed limit is reached\citep{werner08:_x5}. While $^{156}$Gd has also been examined through the lens of the interacting boson model, it is a rotor in the axially-deformed limit.
+
+\input{Discussion/CastenTriangle.tex}
+
 \section{Dynamic Moments of Inertia}
 \label{sec:Dynamic}
 
-Something something moment of inertia.
+Identical bands in neighboring nuclei are a phenomenon that was discovered in the 1990s \citep{baktash95:_dynamic_inertia}. These identical bands indicate identical moments of inertia in two different nuclei. Baktash\citep{baktash95:_dynamic_inertia} defines two different moments of inertia: kinematic ($\mathscr{J}^{(1)}$) and dynamic ($\mathscr{J}^{(2)}$), specifically identifying $\mathscr{J}^{(2)}$ as being identical in both bands. These moments of inertia can be approximated for rotational bands as 
+\begin{equation}
+    \begin{split}
+        \mathscr{J}^{(1)}\equiv I/\omega \approx 2I/E_{\gamma} \\
+        \mathscr{J}^{(2)}\equiv (d^2E/dI^2)^{-1} = dI/d\omega \approx 4/\delta E_{\gamma}
+    \end{split}
+\end{equation}
+where $I$ is the spin of the level being depopulated, $E_{\gamma}$ is the energy of the gamma depopulating level $I$, $\delta E_{\gamma}$ is the difference between two separate energies of gamma transitions, and $\omega$ us the rotational frequency such that 
+\begin{equation}
+    \hbar \omega(I) =dE_{I}/dI \approx \left[E(I+1)-E(I-1)\right]/2 = E_{\gamma}(I+1)/2
+\end{equation}
+As $\mathscr{J}^{(2)}$ is a derivative of the spin, it eliminates any single particle component of the aligned angular momentum, making it a better indicator if the collective properties of the band. There is still a slowly changing component that is seen with increasing spin.
 
-\subsection{Bands in $^{154}$Gd}
-\label{sec:154_Dynamic}
+While Baktash discussed the identical band phenomenon between two different nuclei, it can also be used to compare bands within the same nucleus, giving insight into the relative nature of the collective bands \citep{aprahamian18:_156gd}. Combining the dynamic moment of inertia with measures of the $\rho^2$ of E0 transitions can give further insight into the nuclear matrix element. While the E0 matrix element is generally seen as a change in the radius of the nucleus between two states of the same $J^{\pi}$, it is, more accurately, a combination of this radial change and a measure of the overlap of the nuclear states. Comparing the dynamic moments of inertia of the two bands involved in an E0 transition can aid in examining the strength of the nuclear overlap.
 
-To examine the structure of the bands seen in this experiment, the dynamic moments of inertia can be compared. This is usually done with higher spins, but examination at lower spins can allow for more bands to be compared. The energy difference tracks linearly, with the slope being directly correlated to the moment of inertia of the band, as seen in Figure \ref{fig:154_Dynamic0} and Figure \ref{fig:154_Dynamic}. The slopes of these bands are summarized in Table \ref{tab:154_Dynamic}. Slopes with an error had enough points to calculate the error on the slope. Those without error had only two points or, in the case of the second excited $2^+$ band, one point and the origin. These points each require two levels of the band to be known for calculation. The intercept was left to float, but not included, as it was in agreement with 0 in all cases where error could be calculated.
+To examine the structure of the bands seen in this experiment, the dynamic moments of inertia can be compared. This is usually done with higher spins, but examination at lower spins can allow for more bands to be compared. The energy difference tracks linearly, with the slope being directly correlated to the moment of inertia of the band, as seen in Figures \ref{fig:154_Dynamic}, \ref{fig:154_Dynamic0}, \ref{fig:156_Dynamic}, and \ref{fig:156_Dynamic0}. The slopes of these bands are summarized in Tables \ref{tab:154_Dynamic} and \ref{tab:156_Dynamic}. Slopes will vary with spin, and slopes with an error had enough points to calculate the error on the slope based on the fit. Those without error had only two points or, in the case of the second excited $2^+$ band, one point and the origin. These points each require two levels of the band to be known for calculation. The intercept was left to float, but not included, as it was in agreement with 0 in all cases where error could be calculated.
 
-\input{154GdTablesAndFigs/154Dynamic0_fig.tex}
+\section{$^{154}$Gd Results}
+\label{sec:154_Discussion}
+In Chapter \ref{chap:154Gd}, the results of this work on the nucleus $^{154}$Gd were detailed. From the singles data multipole assignments were confirmed for two transitions, conversion coefficiencts were measured for 30 transitions, and $\delta$ was measured for one. A new transition, from $5^-_{0^-}\rightarrow 6^+_{gs}$ was seen. Five pure E0 transitions were measured via coincidence (Table \ref{tab:154Gd_0_to_0}), with two of these transitions having been measured for the first time in this work ($0^+_6\rightarrow 0^+_2$ and $0^+_7\rightarrow 0^+_3$). None of these $0^+$ states had lifetimes, but the $q_K^2(E0/E2)$ value was calculated for all the transitions (Table \ref{tab:154Gd_E0_0}).
 
-\input{154GdTablesAndFigs/154Dynamic_fig.tex}
+A total of 22 $J^{\pi}\rightarrow J^{\pi}$ transitions were measured for $2^+$ (Table \ref{tab:154Gd_2_to_2}), $4^+$ (Table \ref{tab:154Gd_4_to_4}), and $6^+$ (Table \ref{tab:154Gd_6_to_6}) states, 11 of these transitions for the first time. Of these 22 transitions, 11 have conversion coefficients indicating evidence of E0 components. Four of these transitions had known $\delta$ mixing ratios, allowing for the calculation of $\epsilon$, the E0/E2 mixing ratio (Table \ref{tab:154Gd_E0_d}), and in two cases with known lifetimes, the nuclear strength parameter $\rho^2(E0)$. For the rest of the transitions, $\delta$ was assumed to be 1, so $q^2\alpha(E2)$ and B(E0) ratios were calculated for transitions depopulating the same level (Tables \ref{tab:154Gd_E0} and \ref{tab:154Gd_BE0_Comp}). Combining these ratios with the dynamic moments of inertia can give some insight into the strength of $\rho^2(E0)$.
 
-\input{154GdTablesAndFigs/154_Dynamic_Table.tex}
+\input{Discussion/154Dynamic_fig.tex}
 
-Figure \ref{fig:154_Dynamic0} shows the $0^+$ bands. The first excited $0^+$ band has a very similar slope to the ground state band, as seen both in Figure \ref{fig:154_Dynamic0} and Table \ref{tab:154_Dynamic}. The two bands agree within $2\sigma$. While the $\gamma$-band also appears similar in slope to the ground state band in Figure \ref{fig:154_Dynamic}, they do not overlap within $3\sigma$. The first $4^+$ excited band does have a slope within $2\sigma$ of the $\gamma$-band.
+\input{Discussion/154Dynamic0_fig.tex}
 
-\subsection{Bands in $^{154}$Gd}
+\input{Discussion/154_Dynamic_Table.tex}
+
+The $\gamma$-band, seen in Figure \ref{fig:154_Dynamic} is a vibration built on the ground state, leading to a nearly identical dynamic moment of inertia. The $K=4^+$ band has a nearly identical moment of inertia to the $\gamma$-band, indicating it, too, may be a vibration built on the same structure as the ground state. The first excited $0^+$ state $0^+_2$, seen in Figure \ref{fig:154_Dynamic0}, agrees with the $\gamma$-band within $1\sigma$. The variation in the error of slopes has to do with the slow change in $\mathcal{J}^{(2)}$ due to the increase in spin. 
+
+\subsection{$K^{\pi}=0^+_2$, First Excited $0^+$ Band, 680.6673 keV}
+
+The conversion coefficients for the singles and gated data originating from the first excited $0^+$ band are in Tables \ref{tab:154Gd_Single_02_Disc} and \ref{tab:154Gd_02_Gate_Disc}, respectively. The first excited $0^+$ band is the only band with lifetimes and mixing ratios such that $\rho^2$ could be calculated, seen in Table \ref{tab:154Gd_E0_0}. The first excited $0^+$ band has a very similar slope to the ground state band, as seen both in Figure \ref{fig:154_Dynamic0} and Table \ref{tab:154_Dynamic}, indicating similar moments of inertia. Lifetimes beyond the $4^+$ state are unknown, so the $\rho^2$ value cannot be calculated for the $6^+$ state, but could be calculated for the $2^+$ and $4^+$ states. With the large $\rho^2$ values calculated for the $2^+_{0^+_2}\rightarrow 2^+_{gs}$ and $4^+_{0^+_2}\rightarrow 4^+_{gs}$ transitions to the ground state, the small change in the moment of inertia would indicate a large overlap in the nuclear states. 
+
+\input{Discussion/154Gd_02_Singles.tex}
+
+\input{Discussion/154Gd_02_Coin.tex}
+
+The similarity in the dynamic moment of inertia, coupled with the large $\rho^2$ values, indicate a $\beta$-vibration. The $\gamma$-vibration band dynamic moment of inertia behaves very similarly to the ground state in much the same way, also favoring this interpretation. 
+
+\subsection{$K^{\pi}=0^+_3$, Second Excited $0^+$ Band, 1182.091 keV}
+
+The conversion coefficients for the gated data originating from the second excited $0^+$ band are in Table \ref{tab:154Gd_03_Gate_Disc}. All of the measurements from the $K=0^+_3$ band were limits, and connected to either the $0^+_2$ band or the $\gamma$-band. All the transitions were measured with two different gates. The $2^+$ state transitions only had lower limits, with the lower limit on the $\gamma$-band indicating an E0 component. For the $4^+$ state transitions, the limits were upper limits. The upper limit to the $0^+_2$ transition indicated little to no E0 component, while the upper limit on the transition to the $\gamma$-band allows for a larger E0 component. The transitions, in agreement with Table \ref{tab:154Gd_BE0_Comp}, indicate the $0^+_3$ band favors populating the $\gamma$-band. This band also has a much larger dynamic moment of inertia, compared to the ground state, first excited $0^+$ state and $\gamma$-bands. None of the transitions examined have known mixing ratios, so the $q^2$ and $\alpha q^2$ can be found in Tables \ref{tab:154Gd_E0} and \ref{tab:154Gd_E0_0}. 
+
+\input{Discussion/154Gd_03_Coin.tex}
+
+\subsection{$K^{\pi}=0^+_6$, Fifth Excited $0^+$ Band, 1573.9 keV}
+
+The conversion coefficients for the singles and gated data originating from the fifth excited $0^+$ band are in Tables \ref{tab:154Gd_Single_06_Disc} and \ref{tab:154Gd_06_Gate_Disc}, respectively. Transitions between the $0^+_6$ band and the $0^+_2$ and $0^+_3$ bands could be seen in the gates, specifically for the $0^+$ states. $\rho^2$ could not be calculated due to a lack of lifetime, but the two transitions could be compared, in Table \ref{tab:154Gd_BE0_Comp}, indicating a stronger connection to the $0^+_3$ band. Comparisons between the $0^+_2$ and $\gamma$-band were also done using the $2^+$ state, generally indicating a stronger connection to the $\gamma$-band than the $0^+_2$ band. None of the transitions examined have known mixing ratios, so the $q^2$ and $\alpha q^2$ can be found in Tables \ref{tab:154Gd_E0} and \ref{tab:154Gd_E0_0}. The fifth excited $0^+$ band has the smallest slope of all the bands looked at in this nucleus, the strongly different moment of inertia gives an indication this band is likely not built on the $\gamma$-band or $0^+_2$ band.
+
+\input{Discussion/154Gd_06_Singles.tex}
+
+\input{Discussion/154Gd_06_Coin.tex}
+
+\subsection{$K^{\pi}=0^+_7$, Sixth Excited $0^+$ Band, 1650.3 keV}
+
+The conversion coefficients for the gated data originating from the sixth excited $0^+$ band are in Table \ref{tab:154Gd_03_Gate_Disc}. Transitions between the $0^+_7$ band and the $0^+_2$ and $0^+_3$ bands could be seen in the gates, specifically for the $0^+$ states. $\rho^2$ could not be calculated due to a lack of lifetime, but the two transitions could be compared, in Table \ref{tab:154Gd_BE0_Comp}, indicating a stronger connection to the $0^+_3$ band. Comparisons between the $0^+_2$ and $\gamma$-band were also done using the $2^+$ state, generally indicating a stronger connection to the $\gamma$-band than the $0^+_2$ band, although with this ratio being a limit, this could be untrue. None of the transitions examined have known mixing ratios, so the $q^2$ and $\alpha q^2$ can be found in Tables \ref{tab:154Gd_E0} and \ref{tab:154Gd_E0_0}. This band did not have enough information to calculate the dynamic moment of inertia, hence its omission from Figure \ref{fig:154_Dynamic0} and Table \ref{tab:154_Dynamic}.
+
+\input{Discussion/154Gd_07_Coin.tex}
+
+\subsection{$K^{\pi}=2^+$, $\gamma$ Band, 996.264 keV}
+
+The conversion coefficients for the singles and gated data originating from the first excited $2^+$ band, the $\gamma$-vibrational band are in Tables \ref{tab:154Gd_Single_gamma_Disc} and \ref{tab:154Gd_gamma_Gate_Disc}, respectively. The $\gamma$ band has a very similar slope to the ground state band, as seen both in Figure \ref{fig:154_Dynamic} and Table \ref{tab:154_Dynamic}, indicating similar moments of inertia, although the slope is higher than that seen by the ground state band or first excited $0^+$ band. While measures of the transitions between the $\gamma$ band and ground state band could not be done in this work, measures between the $\gamma$-band and first excited $0^+$ were done. The $2^+\rightarrow2^+$ and $6^+\rightarrow6^+$ transitions indicate potentially large E0 components for the conversion coefficients. The $4^+\rightarrow4^+$ transition indicates small E0 components. Of these transitions, the $2^+\rightarrow2^+$ has a previously measured relative $\gamma$-intensity of 0.043 (6)\% \citep{reich09:_nds_154}. The low intensities of these transitions and the lack of mixing and branching ratios make it difficult to draw conclusions. None of the transitions examined have known mixing ratios, so the $q^2$ and $\alpha q^2$ can be found in Table \ref{tab:154Gd_E0}.
+
+\input{Discussion/154Gd_gamma_Singles.tex}
+
+\input{Discussion/154Gd_gamma_Coin.tex}
+
+\subsection{$K^{\pi}=2^+_2$, Second Excited $2^+$ Band, 1531.305 keV}
+
+The conversion coefficients for the singles and gated data originating from the second excited $2^+$ band are in Tables \ref{tab:154Gd_Single_22_Disc} and \ref{tab:154Gd_22_Gate_Disc}, respectively. The dynamic moment of inertia of the 2nd excited $2^+$ state is very different from any of the previously discussed bands. This band has indications of E0 components to both the $\gamma$-band and the first excited $0^+$ band for the $2^+\rightarrow2^+$ transition, but only indications to the first excited $0^+$ band for the $4^+\rightarrow4^+$ transition. Comparisons of the transitions between the two bands in Table \ref{tab:154Gd_BE0_Comp} indicate a stronger connection to the first excited $0^+$ band than the $\gamma$-band. This does not confirm it to be built on the first excited $0^+$ band, though evidence points to this, including the branching ratios to the ground state and the first excited $0^+$ band.  With $^{154}$Gd considered to be an X(5) critical point nucleus by some, the $0^+_2$ state is thought to be a sign of shape coexistence. Should this be the case, this second excited $2^+$ band may be a vibration built on this state. It seems unlikely the band is a $\gamma\gamma$-vibration. None of the transitions examined have known mixing ratios, so the $q^2$ and $\alpha q^2$ can be found in Tables \ref{tab:154Gd_E0} and \ref{tab:154Gd_E0_0}.
+
+\input{Discussion/154Gd_22_Singles.tex}
+
+\input{Discussion/154Gd_22_Coin.tex}
+
+\subsection{$K^{\pi}=4^+$, First Excited $4^+$ Band, 1645.814 keV}
+
+The conversion coefficients for the singles and gated data originating from the first excited $4^+$ band are in Tables \ref{tab:154Gd_Single_41_Disc} and \ref{tab:154Gd_41_Gate_Disc}, respectively. The dynamic moment of inertia for the first excited $4^+$ band is almost identical to the $\gamma$-band dynamic moment of inertia. The ratios in Table \ref{tab:154Gd_BE0_Comp} indicate a stronger connection to the $\gamma$ band. The E0 components would not be large for these transitions, indicating a potentially small $\rho^2$. The large connection but small $\rho^2$ would make sense if the first excited $4^+$ band is the $4^+$ component of the $\gamma\gamma$ excitations. One of the transitions examined has a known mixing ratio, but not a lifetime, and $q^2$ and $\epsilon^2$ can be found in Table \ref{tab:154Gd_E0_d}. The rest, without known mixing ratios, can be found in Table \ref{tab:154Gd_E0}.
+
+\input{Discussion/154Gd_41_Singles.tex}
+
+\input{Discussion/154Gd_41_Coin.tex}
+
+\subsection{Summary and Conclusions}
+
+Table \ref{tab:154gd_summary} contains a summary of relevant data for the $0^+$ states in $^{154}$Gd. Lifetimes are unknown for most of the $0^+$ states. This nucleus has not been measured via $(n,n')$ since the 1970s. It would benefit from more lifetime measurements.
+
+\input{Discussion/154Gd_Summary.tex}
+
+\section{$^{156}$Gd Results}
 \label{sec:156_Dynamic}
 
-To examine the structure of the band seen in this experiment, the dynamic moments of inertia can be compared. This is usually done at higher spins, but examination at lower spins can allow for more bands to be compared. The energy difference tracks linearly, with the slope being directly correlated to the moment of inertia of the band, as seen in Figures \ref{fig:156_Dynamic0} and \ref{fig:156_Dynamic}. The slopes of these bands are summarized in Table \ref{tab:156_Dynamic}. Slopes with an error had enough points to calculate the error on the slope. Those without error had only two points or, in the case of the second excited $2^+$ band, one point and the origin. These points each require two levels of the band to be known for calculation. The intercept was left to float, but not included, as it was in agreement with 0 in all cases where error could be calculated.
+In Chapter \ref{chap:156Gd}, the results of this work on the nucleus $^{156}$Gd were detailed. From the singles data a multipole assignment was made for one transition ($7^+_{4^+}\rightarrow 8^+_{gs}$) of E2+M1, with a $\delta$ of $<0.61$ or $-0.55^{+51}_{-8}$, and conversion coefficients were measured for 21 transitions. The newly measured multipole assignment indicates a small M1 component, if not a pure E2 transition. One pure E0 transition was measured via coincidence (Table \ref{tab:154Gd_0_to_0}). This $0^+$ state has a measured lifetime, so $\rho^2(E0)$ was calculated (Table \ref{tab:156Gd_E0_0}).
 
-\input{156GdTablesAndFigs/156Dynamic0_Fig.tex}
+A total of 9 $J^{\pi}\rightarrow J^{\pi}$ transitions were measured for $2^+$ (Table \ref{tab:156Gd_2_to_2}) and $4^+$ (Table \ref{tab:156Gd_4_to_4}) states, 8 of these transitions for the first time. Of these 9 transitions, 2 have conversion coefficients indicating evidence of E0 components, with 4 more that have lower limits that may indicate E0 components. None of these transitions had known $\delta$ mixing ratios. For the transitions, $\delta$ was assumed to be 1, so $q^2\alpha(E2)$ and B(E0) ratios were calculated for transitions depopulating the same level (Tables \ref{tab:156Gd_E0} and \ref{tab:156Gd_BE0_Comp}). Combining these ratios with the dynamic moments of inertia can give some insight into the strength of $\rho^2(E0)$.
 
-\input{156GdTablesAndFigs/156Dynamic_Fig.tex}
+\input{Discussion/156Dynamic_Fig.tex}
 
-\input{156GdTablesAndFigs/156Dynamic_table.tex}
+\input{Discussion/156Dynamic0_Fig.tex}
 
-Figure \ref{fig:156_Dynamic0} shows the moments of inertia of the $0^+$ bands, including the ground state band. The first excited $0^+$ band has a very similar slope to the ground state band, as seen both in Figure \ref{fig:156_Dynamic0} and Table \ref{tab:156_Dynamic}. The two bands agree within $2\sigma$. The $\gamma$-band and the excited $4^+$ band also appear similar in slope to the ground state band in Figure \ref{fig:156_Dynamic}, and overlap within $2\sigma$. The first $4^+$ excited band is almost identical in slope to the first excited $0^+$ band. Both of these bands are about $1\sigma$ apart.
+\input{Discussion/156Dynamic_table.tex}
+
+The $\gamma$-band, seen in Figure \ref{fig:156_Dynamic} is a vibration built on the ground state, leading to a nearly identical dynamic moment of inertia. The $K=4^+$ band has a nearly identical moment of inertia to the $\gamma$-band, indicating it, too, may be a vibration built on the same structure as the ground state. The first excited $0^+$ state, $0^+_2$, seen in Figure \ref{fig:156_Dynamic0}, agrees with the $\gamma$-band within $1\sigma$. The variation in the error of slopes has to do with the slow change in $\mathcal{J}^{(2)}$ due to the increase in spin. 
+
+\subsection{$K^{\pi}=0^+_2$, First Excited $0^+$ Band, 1049.487 keV}
+
+The conversion coefficients for the singles data originating from the first excited $0^+$ band are in Table \ref{tab:156Gd_Single_02_Disc}. The first excited $0^+$ band has a very similar slope to the ground state band, as seen both in Figure \ref{fig:156_Dynamic0} and Table \ref{tab:156_Dynamic}. The two bands agree within $2\sigma$. Without more statistics, data could not be collected for outgoing transitions from the first excited $0^+$ band.
+
+\input{Discussion/156Gd_02_Singles.tex}
+
+\subsection{$K^{\pi}=0^+_3$, Second Excited $0^+$ Band, 1168.186 keV}
+
+The conversion coefficients for the gated data originating from the second excited $0^+$ band are in Table \ref{tab:156Gd_03_Gate_Disc}. The second excited $0^+$ band could be seen going to both the $\gamma$ band and first excited $0^+$ band. It has a very different dynamic moment of inertia compared to those two. This change in shape may account for the large $\rho^2$ value between the first and second $0^+$ excited states, in Table \ref{tab:156Gd_E0}. In this data, transitions for the $2^+$ and $4^+$ states in this band were inconclusive about E0 components to the first excited $0^+$ state, and the $2^+$ state may have an E0 component to the $\gamma$-band. The $2^+$ and $4^+$ transitions examined do not have known mixing ratios, so $\alpha q^2$ can be found in \ref{tab:156Gd_E0}.
+
+\input{Discussion/154Gd_03_Coin.tex}
+
+\subsection{$K^{\pi}=2^+$, $\gamma$ Band, 1065.1781 keV}
+
+The conversion coefficients for the singles data originating from the first excited $2^+$ band, the $\gamma$-vibrational band are in Table \ref{tab:156Gd_Single_02_Disc}. The $\gamma$ band has a very similar slope to the ground state band, as seen both in Figure \ref{fig:154_Dynamic0} and Table \ref{tab:156_Dynamic}, indicating similar moments of inertia, although the slope is higher than that seen by the ground state band or first excited $0^+$ band. The transitions between the first excited $0^+$ band and the $\gamma$ band are not energetically capable of conversion electrons for the $2^+_{\gamma}\rightarrow 2^+_{0^+_2}$ transition, and below the energy threshold of the detectors in this work for the $4^+_{\gamma}\rightarrow 4^+_{0^+_2}$ transition.
+
+\input{Discussion/156Gd_gamma_Singles.tex}
+
+\subsection{$K^{\pi}=2^+$, Second Excited $2^+$ Band, 1827.841 keV}
+
+The conversion coefficients for the gated data originating from the second excited $2^+$ band are in Table \ref{tab:156Gd_22_Gate_Disc}. The second excited $2^+$ band has a smaller slope than the ground state band, first excited $0^+$ band and the $\gamma$ band.  It is a slightly larger moment of inertia than the second excited $0^+$ band. Transitions to the $0^+_3$ band do not indicate an E0 component. Transitions to the first excited $0^+$ band and the $\gamma$ band may have an E0 component, but with only upper limits, it is inconclusive. These limits indicate approximately equal strengths to both bands, as seen in Table \ref{tab:156Gd_BE0_Comp}, a possible indication it may be a mix of the two bands. The transitions examined do not have known mixing ratios, so $\alpha q^2$ can be found in \ref{tab:156Gd_E0}.
+
+\input{Discussion/154Gd_22_Coin.tex}
+
+\subsection{$K^{\pi}=4^+$, First Excited $4^+$ Band, 1510.594 keV}
+
+The conversion coefficients for the singles and gated data originating from the first excited $4^+$ band are in Tables \ref{tab:156Gd_Single_41_Disc} and \ref{tab:156Gd_41_Gate_Disc}, respectively. Only the first state in the first excited $4^+$ band was able to get electron spectroscopy. This band has a similar slope to the ground state band, first excited $0^+$ band and the $\gamma$ band, although it is least like the ground state band dynamic moment of inertia. The lower limits on the conversion coefficients to the first excited $0^+$ band and the $\gamma$ band tell very little, as all forms of multipolarity, including a pure E2, are still accessible. Further, the lack of information on transition to the ground state band obfuscates interpretation. The transitions examined do not have known mixing ratios, so $\alpha q^2$ can be found in \ref{tab:156Gd_E0}.
+
+\input{Discussion/156Gd_41_Singles.tex}
+
+\input{Discussion/156Gd_41_Coin.tex}
+
+\subsection{Summary and Conclusions}
+
+Table \ref{tab:156gd_summary} contains a summary of relevant data for the $0^+$ states in $^{156}$Gd. For the low-lying levels, there is a good amount of information known. The cross sections from $(p,t)$ are from Fleming et al.\citep{fleming73:_156gd}. These measurements were done in 1973, and are the most recent $(p,t)$ measurements for $^{156}$Gd. With new high-precision spectroscopy and the discovery of so many $0^+$ states in the rare-earth region, this nucleus should be revisited via the reaction.
+
+\input{Discussion/156Gd_Summary.tex}

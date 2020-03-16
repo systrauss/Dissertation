@@ -1,12 +1,8 @@
 \begin{landscape}
 \begin{table}[]
     \centering
-    \label{tab:wordevent}
-    \caption{Data Structure of Electronics}
-    \begin{subtable}[]{1.3\textwidth}
-    \centering
     \small
-    \caption{\label{tab:word_MADC}Data event - MADC32 (32 bit word)}
+    \caption{\label{tab:word_MADC}Data Event - MADC32 (32 Bit Word)}
     \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
  %   \begin{tabularx}{\linewidth}{X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X|X}
         \toprule
@@ -31,16 +27,16 @@
         \multicolumn{2}{c|}{b11} & \multicolumn{30}{|c}{event counter/time stamp} \\
         \bottomrule
     \end{tabular}
-    \end{subtable}
+    \\[2pt]
+    \footnotesize
+    Table of the 32-bit word data structure of the MADC. The headers, event word structure, and end of event structure, where needed, are all listed. In the tables, the first row in a given block is the number of bits used by that piece of data, while the second row is a description of the data. Bits go in descending order from left to right.
     \end{table}
     
     \pagebreak
     
     \begin{table}[]
-    \ContinuedFloat
-    \begin{subtable}[]{1.3\textwidth}
     \centering
-    \caption{\label{tab:word_CAEN}Data event - V775 (32 bit word)}
+    \caption{\label{tab:word_CAEN}Data Event - V775 (32 Bit Word)}
     \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
         \toprule
         \multicolumn{32}{c}{Header} \\
@@ -62,17 +58,17 @@
         \multicolumn{5}{c|}{Geo Address[5]} & \multicolumn{3}{|c|}{100} & \multicolumn{24}{|c}{Event Counter[24]} \\
         \bottomrule
     \end{tabular}
-    \end{subtable}
+    \\[2pt]
+    \footnotesize
+    Table of the 32-bit word data structure of the CAEN 775 TDC. The headers, event word structure, and end of event structure, where needed, are all listed. In the tables, the first row in a given block is the number of bits used by that piece of data, while the second row is a description of the data. Bits go in descending order from left to right.
     \end{table}
 
     \pagebreak
     
     \begin{table}[]
-    \ContinuedFloat
-    \begin{subtable}[]{1.3\textwidth}
     \small
     \centering
-    \caption{\label{tab:word_V830}Data event - V830 (32 bit word)}
+    \caption{\label{tab:word_V830}Data Event - V830 (32 Bit Word)}
     \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
         \toprule
         \multicolumn{32}{c}{Header} \\
@@ -90,17 +86,17 @@
          \multicolumn{32}{c}{Channel Counter[32]} \\
         \bottomrule
     \end{tabular}
-    \end{subtable}
+    \\[2pt]
+    \footnotesize
+    Table of the 32-bit word data structure of the CAEN V830 Scaler. The headers, event word structure, and end of event structure, where needed, are all listed. In the tables, the first row in a given block is the number of bits used by that piece of data, while the second row is a description of the data. Bits go in descending order from left to right.
 \end{table}
     
     \pagebreak
     
     \begin{table}[]
-    \ContinuedFloat
-    \begin{subtable}[]{1.3\textwidth}
     \small
     \centering
-    \caption{\label{tab:word_XIA}Data event - Pixie-16 (32 bit word)}
+    \caption{\label{tab:word_XIA}Data Event - Pixie-16 (32 Bit Word)}
     \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
     \toprule
         Index & \multicolumn{32}{|c}{Header}\\
@@ -125,12 +121,11 @@
         \midrule
         \multirow{2}{*}{n} & \multicolumn{16}{|c|}{16} & \multicolumn{16}{|c}{16} \\
         \cline{2-33}
-        & \multicolumn{16}{|c|}{ADC Data #(2n+1)[16]} & \multicolumn{16}{|c}{ADC Data #(2n)[16]} \\
+        & \multicolumn{16}{|c|}{ADC Data \#(2n+1)[16]} & \multicolumn{16}{|c}{ADC Data \#(2n)[16]} \\
         \bottomrule
     \end{tabular}
-    \end{subtable}
-    \\[2]
+    \\[2pt]
     \footnotesize
-    Tables of the 32-bit word data structures of the different electronics used in the experiments, including the MADC (a), the CAEN 775 TDC (b), CAEN V830 Scaler (c) and the Xia Pixie-16 (d). The headers, event word structure, and end of event structure, where needed, are all listed. In the tables, the first row in a given block is the number of bits used by that piece of data, while the second row is a description of the data. Bits go in descending order from left to right.
+    Table of the 32-bit word data structure of the Xia Pixie-16. The headers, event word structure, and end of event structure, where needed, are all listed. In the tables, the first row in a given block is the number of bits used by that piece of data, while the second row is a description of the data. Bits go in descending order from left to right.
 \end{table}
 \end{landscape}

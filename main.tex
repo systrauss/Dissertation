@@ -78,7 +78,6 @@
 % sort&compress (sorts and compresses numerical citations;
 %           is identical to sort when used with textrefs)
 
-
 \begin{document}
 
 \frontmatter % All the items before the first chapter go in ``frontmatter''
@@ -90,7 +89,7 @@
 \author{Sabrina Yve Strauss}
 \work{Dissertation} % or \work{Thesis}
 %\degaward{Doctor of Philosophy} % or 
-\degaward{Doctorate of Philosophy \\ in \\ Physics}
+\degaward{Doctor of Philosophy}
 \advisor{Ani Aprahamian}
 \department{Physics}
 
@@ -103,24 +102,30 @@
 
 % You must either set the copyright information or put your work in the public domain.
 \copyrightholder{Sabrina Strauss} % See template or documentation for
-\copyrightyear{2018}           % other copyright options.
+\copyrightyear{2020}           % other copyright options.
 \copyrightlicense{CC-BY-4.0}
 \makecopyright
 
 % An abstract is optional for a master's thesis, and required for a doctoral dissertation.
 \begin{abstract}
-    E0 components of transitions between two states of the same spin and parity are challenging to measure, with sparse information available in nuclear databases. A recent study of $^{154}$Gd (D. A. Meyer et al, PRC 044309(2006)) showed the nucleus to have 16 0$^+$ states. $^{154}$Gd is well-studied by a number of reactions, hence it is an ideal candidate to search for E0 transitions. We will report on our results for transitions in $^{154}$Gd following the $^{152}$Sm($\alpha$,2n) reaction using the Internal Conversion Electron Ball (ICEBall) array in coincidence with $\gamma$-rays at the University of Notre Dame Nuclear Science Laboratory (NSL). ICEBall was re-implemented at the NSL 4 years ago and the $\gamma$-rays were detected by Clovershare, segmented HPGe detectors purchased by the Yale Nuclear Structure Laboratory that are shared by a consortium of universities and laboratories for experimental campaigns.
+    One of the open questions of nuclear structure is the nature of excited $0^+$ states. Probing the $0^+$ states in nuclei requires spectroscopy of the $0^+$ states with respect to other states. One such probe is conversion electrons. The transitions between two $0^+$ states can only be seen via E0 transitions, which are forbidden via $\gamma$-rays. Further, E0 components of $J^{\pi}\rightarrow J^{\pi}$ transitions can give similar probes of relationships between bands. Information on E0 components are challenging to measure and sparse in nuclear databases.
+    
+    The rare-earth region provides a rich landscape to probe pure and mixed E0 transitions. The deformed nature of nuclei in the area leads to a large number of nuclear structure phenomena. In $^{154}$Gd, 16 $0^+$ states have been seen in previous studies, the nature of many are unknown. The first excited $0^+$ state is of great interest, due to its large E0 strength to the ground state. There is a question of the nature of this state and its potential role as an example of $\beta$-vibration, or an indication of shape coexistence. $^{156}$Gd is one of the most well-studied nuclei in the rare-earth region. It has a large number of known levels, lifetimes and mixing ratios, allowing for the study of mixed E0 transitions.
+    
+    This work reports on results for transitions in $^{154,156}$Gd following the $^{152,154}$Sm($\alpha$,2n) reaction using the Internal Conversion Electron Ball (ICEBall) array in coincidence with $\gamma$-rays at the University of Notre Dame Nuclear Science Laboratory (NSL). ICEBall was re-implemented at the NSL 8 years ago and the $\gamma$-rays were detected by GEORGINA, a HPGe array at the NSL, and Clovershare, segmented HPGe detectors purchased by the Yale Nuclear Structure Laboratory that are shared by a consortium of universities and laboratories for experimental campaigns.
 \end{abstract}
 
 % A dedication is optional.
 \renewcommand{\dedicationname}{To my parents, who always encouraged my love of science.\\
 To Jolie, who introduced me to nuclear physics research.\\
 To Ani, who helped keep me from going too far down side paths. \\
-To all the people who put up with my mood swings.}
+To all the people who put up with my mood swings.\\}
 
-\centering{\dedicationname}
+{\centering\dedicationname}
 
-\raggedright
+% \raggedright
+
+
 
 % These are required, and must be in this order.
 \tableofcontents
@@ -128,13 +133,13 @@ To all the people who put up with my mood swings.}
 \listoftables
 
 % A preface is optional.
-\begin{preface}
-\end{preface}
+%\begin{preface}
+%\end{preface}
 
 % It's hard to tell from the information available from the Graduate
 % School in Spring 2013 whether or not an acknowledgements section is optional.
-\begin{acknowledge}
-\end{acknowledge}
+%\begin{acknowledge}
+%\end{acknowledge}
 
 \mainmatter
 %
@@ -188,10 +193,10 @@ To all the people who put up with my mood swings.}
 
 \appendix
 
-%\include{154GdAppendix}
-%\include{156GdAppendix}
-%\include{CodeAppendix}
-%\include{MacroAppendix}
+% \include{154GdAppendix}
+% \include{156GdAppendix}
+% \include{CodeAppendix}
+% \include{MacroAppendix}
 
 
 %
@@ -202,7 +207,7 @@ To all the people who put up with my mood swings.}
 % if using chapter-wise bibliography
 
  \backmatter
- \bibliographystyle{abbrvnat} % The standard abbrvnat style should be acceptable. Also provided with both the advanced and standard
+ \bibliographystyle{nddiss2e} % The standard abbrvnat style should be acceptable. Also provided with both the advanced and standard
  \bibliography{Bibliography}       % distributions are nddiss2e and nddiss2enoarticletitles style options.
 % If you prefer to manually enter your bibliography, that is fine. Comment out the previous two lines, and enter your bibliography
 % as usual. Note that if you choose this route, formatting the bibliography is your responsibility. An example is below, including the

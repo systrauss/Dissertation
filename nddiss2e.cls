@@ -135,7 +135,7 @@
 \RequirePackage{latexsym}
 \RequirePackage{textcase}
 \RequirePackage{multirow}
-\RequirePackage{caption}
+\RequirePackage{caption, newfloat}
 \RequirePackage[labelformat=simple]{subcaption}
 \RequirePackage{tocbasic}
 \ifboolexpr{bool{pdf} or bool{xetex} or bool{luatex}}{%
@@ -686,6 +686,24 @@
   \vskip\abovecaptionskip
   \begin{center}
   \parbox{\capwidth}{
+    \centering\singlespacing
+    {#1}. {#2}%\par
+  \vskip\belowcaptionskip\normalspacing }%
+  \end{center}
+}%
+\newenvironment{figurels}{
+   \setlength{\abovecaptionskip}{\abovefigureskip}
+   \setlength{\belowcaptionskip}{\belowfigureskip}
+   \let\@makecaption\@makefigurecaptionls
+   \@float{figure}}%
+   {%
+   \addtocontents{lof}{ {\vskip 0.4em} }%
+   \end@float%
+}
+\long\def\@makefigurecaptionls#1#2{%
+  \vskip\abovecaptionskip
+  \begin{center}
+  \parbox{1.4\textwidth}{
     \centering\singlespacing
     {#1}. {#2}%\par
   \vskip\belowcaptionskip\normalspacing }%

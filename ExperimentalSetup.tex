@@ -25,7 +25,7 @@ A Sm$(\alpha,2n)$Gd reaction was used with different enriched targets to create 
 
 Two different forms of electronics were used for the data acquisition system. The data acquisition systems used were based on the NSCL DAQ\citep{nscl:_daq,prokop14:_nsclddas}. The electronics used with GEORGINA were shaped by NIM modules before going through ADC VME modules to the computer \citep{mesytec:_ADC,caen:_TDC}. The Clovershare data used the XIA Pixie-16 modules, which take the place of the NIM and VME modules for shaping and converting the signals to digital data \citep{xia:_pixie}.
 
-The digital files were converted to files for the analysis software using \texttt{evt2root} \citep{smith14:_evt2root}. Analysis, reported in chapter \ref{ch:analysis}, was done using the CERN Root Data Analysis Framework and Radware \citep{brun97:_root,radford00:_radware}.
+The digital files were converted to files for the analysis software using \texttt{evt2root} \citep{smith14:_evt2root}. Analysis, reported in Chapter \ref{ch:analysis}, was done using the CERN Root Data Analysis Framework and Radware \citep{brun97:_root,radford00:_radware}.
 
 \section{Nuclear Science Laboratory at Notre Dame}
 
@@ -33,11 +33,11 @@ The Nuclear Science Laboratory at the University of Notre Dame has been in opera
 
 The FN Tandem has two ion sources: the Helium Ion Source (HIS) and the Multi-Cathode Source of Negative Ions Using Cesium Sputtering (MC-SNICS). Most elements can absorb the electrons from cesium to create negative ions. Helium cannot and needs a special source, as discussed below. For the experiments described, the HIS was used.
 
-Due to the electron binding energy of helium, the HIS uses a duoplasmatron. Within the duoplasmatron, a thin tungsten wire is heated while surrounded by the source gas (helium). The tungsten wire emits electrons, and positively ionizes the helium. This helium is extracted from the duoplasmatron and focused by an einzel lens, where it then goes through the lithium charge exchange. This section of the HIS works as a small two stage acceleration system, although the charge exchange works added electrons instead of stripping them. The positively charged ions are accelerated through a lithium vapor, and some gain electrons, becoming neutral or negatively charged. Those ions that become negatively charged are accelerated out the other end of the HIS, before being sent to the FN Tandem. Figure \ref{fig:HIS} is a schematic of this system.
+Due to the electron binding energy of helium, the HIS uses a duoplasmatron. Within the duoplasmatron, a thin tungsten wire is heated while surrounded by the source gas (helium). The tungsten wire emits electrons, and positively ionizes the helium. This helium is extracted from the duoplasmatron and focused by an einzel lens, where it then goes through the lithium charge exchange. This section of the HIS works as a small two stage acceleration system, although the charge exchange works by adding electrons instead of stripping them. The positively charged ions are accelerated through a lithium vapor, and some gain electrons, becoming neutral or negatively charged. Those ions that become negatively charged are accelerated out the other end of the HIS, before being sent to the FN Tandem. Figure \ref{fig:HIS} is a schematic of this system.
 
 \input{Setup_Figs/NSL_Layout.tex}
 
-The FN Tandem has been in operation since 1968. It is a Van de Graaff. Charging chains carrying a static charge deposit the charge on a terminal in the center of the machine. The charging chains is a pelletron type, upgraded from the original insulated rubber belt system in 2000. The pelletron chain consists of metal pellets connected using nylon, allowing for each pellet to be electrically isolated as it carries electrical charge to the terminal \citep{nec:_pelletron}. The beamline is kept at vacuum, but the area outside of the beamline, but within the accelerator tank, is filled with a mixture of CO$_2$ and dry nitrogen gas, at approximately 200 PSI. To create a more uniform acceleration field, the terminal is brought to ground along the beamline using resistor-lined tubes. The resistors used create a uniform electrical field down the tube, allowing for uniform acceleration.
+The FN Tandem has been in operation since 1968. It is a Van de Graaff. Charging chains carrying a static charge deposit the charge on a terminal in the center of the machine. The charging chains are a pelletron type, upgraded from the original insulated rubber belt system in 2000. The pelletron chain consists of metal pellets connected using nylon, allowing for each pellet to be electrically isolated as it carries electrical charge to the terminal \citep{nec:_pelletron}. The beamline is kept at vacuum, but the area outside of the beamline and within the accelerator tank, is filled with a mixture of CO$_2$ and dry nitrogen gas, at approximately 200 PSI. To create a more uniform acceleration field, the terminal is brought to ground along the beamline using resistor-lined tubes. The resistors create a uniform electrical field down the tube, allowing for uniform acceleration.
 
 It is known as a tandem because the system is a two-stage acceleration. Negatively charged ions enter the system, accelerating toward a positively charged terminal shell. Inside of the shell, the ions go through carbon stripping foils 3 $\mu g/cm^2$ thick, becoming positively charged as electrons are pulled off. The ions then accelerate away from the terminal for the second stage. The total energy gained by the ions is the terminal voltage times the quantity of one plus the final charge state.
 
@@ -47,7 +47,7 @@ After being sent through the accelerator, the beam goes through the analyzing ma
 
 \section{Beam Production}
 
-Because of the use of HPGe detectors in an $(\alpha,2n)$ reaction, the neutron flux must be minimized in comparison to the cross section of the reaction, as the $(\alpha,n)$ reaction is also open. The neutrons being produced will interact with everything, including the HPGe detectors, which can be damaged by the $(n,\gamma)$ reaction on germanium. To do this, a range of energies to test were selected by looking at theoretical cross sections in Talys\citep{koning07:_talys}. These energies were then tested with natural Sm targets, ICEBall, and two liquid scintillators to detect neutrons.
+Because of the use of HPGe detectors in an $(\alpha,2n)$ reaction, the neutron flux must be minimized in comparison to the cross section of the reaction, as the $(\alpha,n)$ reaction is also open. The neutrons being produced will interact with everything, including the HPGe detectors, which can be damaged by the $(n,\gamma)$ reaction on germanium. To do this minimization, a range of energies to test were selected by looking at theoretical cross sections in Talys\citep{koning07:_talys}. These energies were then tested with natural Sm targets, ICEBall, and two liquid scintillators to detect neutrons.
 
 Samarium, as with many even-Z elements in the lanthanide region, has many stable isotopes. A total of five stable isotopes of Samarium exist, with two other isotopes being long-lived. Table \ref{tab:nat_Sm} summarizes the abundances and lifetimes of the various isotopes found in natural Samarium. The two isotopes used our enriched targets are the ones that have the highest natural abundances, $^{152,154}$Sm.
 
@@ -57,13 +57,13 @@ Samarium, as with many even-Z elements in the lanthanide region, has many stable
 
 Talys \citep{koning07:_talys} is code for simulation of nuclear reactions dynamically with neutrons. Cross sections can be estimated using Talys to guide where an experiment may want to run to optimize production, as is the case presently. 
 
-Both natural and enriched samarium targets were used and modelled within Talys. A range of energies, from 14 MeV to 24 MeV $\alpha$-particles were run. These energies allowed a large number of potential reaction products from elastic, inelastic, transfer, and knockout reactions. Figure \ref{fig:talys} is a visual summary of the strongest modelled reactions in the natural samarium target. It was decided to test the energies between 16-21 MeV.
+Both natural and enriched Samarium targets were used and modelled within Talys. A range of energies, from 14 MeV to 24 MeV $\alpha$-particles were run. These energies allowed a large number of potential reaction products from elastic, inelastic, transfer, and knockout reactions. Figure \ref{fig:talys} is a visual summary of the strongest modelled reactions in the natural Samarium target. It was decided to test the energies between 16-21 MeV.
 
 \input{Setup_Figs/Talys.tex}
 
 \subsection{Test Analysis and Results}
 
-To test these Talys calculations and determine the best running energy, the cross section and neutron flux had to be measured at each energy without the use of the HPGe detectors. This was done using a natural samarium target. ICEBall was used to measure the cross section by examining the K-electrons from ground-state band transitions in the reactions of interest, as the ground-state band is the most significantly populated band in the reaction. The DAQ described in section \ref{sec:GEORGINA_electronics} was used. Spectra from ICEBall were fit using the methods described in \ref{sec:fitting}. The peaks were identified under the assumption the ground-state band transitions would be the strongest peaks in the spectra, and populate quickly. 
+To test these Talys calculations and determine the best running energy, the cross section and neutron flux had to be measured at each energy without the use of the HPGe detectors. This was done using a natural Samarium target. ICEBall was used to measure the cross section by examining the K-electrons from ground-state band transitions in the reactions of interest, as the ground-state band is the most significantly populated band in the reaction. The DAQ described in Section \ref{sec:GEORGINA_electronics} was used. Spectra from ICEBall were fit using the methods described in Section \ref{sec:fitting}. The peaks were identified under the assumption the ground-state band transitions would be the strongest peaks in the spectra, and populate quickly. 
 
 The neutrons were measured using two NE213 liquid organic scintillators. In these detectors, it is possible to do pulse shape discrimination, as the neutrons have longer decay times than the gammas in these detectors due to the nature of the interaction with the scintillating liquid \citep{knoll00:rad_det_meas}. This produces longer trails in the detectors, leading to different decay shapes, see Figure \ref{fig:pulse_discrimination}. 
 
@@ -78,20 +78,16 @@ Once the detectors were calibrated, each energy was run, with a total of four di
 \input{Setup_Figs/neutron_electron_table.tex}
 
 To calculate the cross section, the formula
-
 \begin{equation}
     \sigma=\frac{Yield}{\delta x*Q*\epsilon}
     \label{eq:xs}
 \end{equation}
-
 was used, where $\delta x$ is the target thickness, $Q$ is the integrated charge, and $\epsilon$ is the efficiency of the Si(Li) detector at the electron energy. The $Yield$ is the area under the curve.
 
 This then had to be compared with the neutron production cross section. A bunched beam was used to get a time-of-flight. Calculating the neutron flux was done using the formula
-
 \begin{equation}
     \sigma_n = \frac{Neutrons}{\delta x*Q}
 \end{equation}
-
 where $\delta x$ and $Q$ are the same as used for the cross section. The neutron yield is obtained by pulse shape discrimination, as seen in Figure \ref{fig:neutron}. The left-most line is the gamma-flash that comes from the prompt gammas. The secondary gathering of counts, to the right, is the neutron peak. This area can be integrated over to get the number of neutrons seen during the run.
 
 Table \ref{tab:neutrons} summarizes the results at each energy. Note, that the cross section is not reflective of the full cross section of the isotopes, but of the K-electrons for that transition. This ratio, of the cross-section to the neutron flux, was ultimately used to determine the running energy. The two higher energies, 20 and 21 MeV, have a ratio that agrees within error for both isotopes, indicating a plateau, in agreement with the expectation from Talys. Ultimately, 20 MeV was chosen for two reasons: to minimize any higher energy reaction channels, and because the neutron flux was lower in rate.
@@ -114,7 +110,7 @@ Originally designed to go inside of large gamma detector arrays, ICEBall consist
 
 \input{Setup_Figs/open_iceball.tex}
 
-The Si(Li) detectors inside of ICEBall are 5 mm thick, with a surface area of 750 mm$^2$ \citep{metlay93:_iceball_comm}. Table \ref{tab:ICE_Det_Loc} summarizes the locations of the six Si(Li) detectors inside of ICEBall, using spherical coordinates. A thin aluminized mylar foil is placed in front of the Si(Li) detectors to block low-energy electrons and $\delta$-rays that successfully make it past the mini-orange filter (discussed in \ref{sec:mini_orange}).
+The Si(Li) detectors inside of ICEBall are 5 mm thick, with a surface area of 750 mm$^2$ \citep{metlay93:_iceball_comm}. Table \ref{tab:ICE_Det_Loc} summarizes the locations of the six Si(Li) detectors inside of ICEBall, using spherical coordinates. A thin aluminized mylar foil is placed in front of the Si(Li) detectors to block low-energy electrons and $\delta$-rays that successfully make it past the mini-orange filter (discussed in Section \ref{sec:mini_orange}).
 
 \input{Setup_Figs/ICEBall_Location.tex}
 
@@ -146,10 +142,9 @@ The energy calibration is assumed to be quadratic in nature, although both linea
 The efficiency calibration is fitted to equation
 
 \begin{equation}
-    ln(\epsilon) = p_1+p_2ln(E)+p_3E
+    ln(\epsilon) = p_1+p_2ln(E)+p_3E.
     \label{eq:SiLi_Eff}
 \end{equation}
-
 The efficiency is a convolution of the magnetic configuration and the inherent detector efficiency. Using the efficiency points, the analytic expression for the efficiency was determined empirically in previous work \citep{battaglia15:_iceball_176lu}. These experimental values are summarized in the next chapter for each experiment.
 
 \section{Gamma Detection}
@@ -177,19 +172,15 @@ The CloverShare detectors are large, segmented HPGe detectors, with fitted BGO s
 \subsection{Calibration}
 \label{sec:clover_cal}
 
-Both sets of detectors were calibrated using a $^{152}$Eu source, in addition to the ICEBall sources. The information about the sources is in Table \ref{tab:GEORGINA_Cal_Source}. The $^{152}$Eu source was not designed to sit perfectly on the target ladder, while the two ICEBall sources were. So, even though the Eu source was attached to the target ladder for calibration, using it as a measure of absolute efficiency was not possible. To use the $^{152}$Eu for efficiency, a linear extrapolation of the efficiency of the 344 keV line was done using the 303 keV and 356 keV lines in $^{133}$Ba. All points in the Eu were then scaled based on this. Additionally, several background lines could be used to extend the energy calibration up to 2700 keV. The energy calibration was fit to a polynomial, and fits up to the fifth order were done to find the best calibration without overfitting. For examples of these fits, see the next chapter.
+Both sets of detectors were calibrated using a $^{152}$Eu source, in addition to the ICEBall sources. The information about the sources is in Table \ref{tab:GEORGINA_Cal_Source}. The $^{152}$Eu source was not designed to sit perfectly on the target ladder, while the two ICEBall sources were. So, even though the Eu source was attached to the target ladder for the GEORGINA calibration, using it as a measure of absolute efficiency was not possible. For the CloverShare calibration, the $^{152}$Eu source was placed on the individual detectors instead of centered in ICEBall. To use the $^{152}$Eu for the efficiency, a linear extrapolation of the efficiency of the 344 keV line was done using the 303 keV and 356 keV lines in $^{133}$Ba. All points in the Eu were then scaled based on this. Additionally, several background lines could be used to extend the energy calibration up to 2700 keV. The energy calibration was fit to a polynomial, and fits up to the fifth order were done to find the best calibration without overfitting. For examples of these fits, see the next chapter. All points in the Eu were then scaled based on this. A characteristic fit of the efficiency of these detectors can be seen in Figure \ref{fig:clover_eff}.
 
 \input{Setup_Figs/georgina_calibration_table.tex}
 
-The $^{152}$Eu source was placed on the individual detectors instead of centered in the trap, as it does not mount well to the target ladder. To use the $^{152}$Eu for efficiency, a linear extrapolation of the efficiency of the 344 keV line was done using the 303 keV and 356 keV lines in $^{133}$Ba. All points in the Eu were then scaled based on this. A characteristic fit of the efficiency of these detectors can be seen in Figure \ref{fig:clover_eff}.
-
 The efficiency calibration is fitted to equation
-
 \begin{equation}
     ln(\epsilon) = a_0-(a_1+a_2\times e^{-a_3\times E})\times E^{-a_4\times E}\times ln(E)
     \label{eq:Ge_Eff}
 \end{equation}
-
 A characteristic fit can be seen in Figure \ref{fig:clover_eff}. The CloverShare detectors were also calibrated using a $^{56}$Co source that was created on the FN accelerator days before the experiment. The information about the source is in Table \ref{tab:Co_Energy}. 
 
 \input{Setup_Figs/Co_Calibration.tex}
@@ -200,7 +191,7 @@ As the clovers are comprised of four separate crystals, the efficiency was taken
 
 \input{Setup_Figs/clover_ind_vs_sum.tex}
 
-Each leaf of the clovers was energy calibrated. An unusual trend in the residuals was found in all cases, as seen in Figure \ref{fig:Clover_ene_res}. This trend could not be corrected for by using a higher-order polynomial, as is usually the case for integral non-linearities in multi-channel analyzers \citep{knoll00:rad_det_meas}. Instead, this appears to be a differential non-linearity in the electronics, resulting in discontinuities. As will be discussed in the next section, the electronics used for the experiment are not primarily used with detectors of this sensitivity.
+Each leaf of the clovers was energy calibrated. An unusual trend in the residuals was found in all cases, as seen in Figure \ref{fig:Clover_ene_res}. This trend could not be corrected for by using a higher-order polynomial, as is usually the case for integral non-linearities in multi-channel analyzers \citep{knoll00:rad_det_meas}. Instead, this appears to be a differential non-linearity in the electronics, resulting in discontinuities. The electronics used for the experiment are not primarily used with detectors of this sensitivity.
 
 \input{Setup_Figs/Clover_resid.tex}
 
@@ -208,14 +199,12 @@ Each leaf of the clovers was energy calibrated. An unusual trend in the residual
 
 Electrons must escape the target for detection. All materials have some stopping power for radiation, based on the material, thickness, and type of particle. The Beta-Bloch formula can be used to calculate this stopping power, with several programs, including SRIM, created to make and tabulate these values\citep{ziegler10:_srim}. A thicker target causes energy loss and straggling effects, blurring out the conversion electron spectrum, meaning a thinner target is a more ideal situation.
 
-Enriched, self-supporting samarium targets were used for this experiment. Table \ref{tab:target} has the enrichment and thickness of the targets used. The material started as Sm$_2$O$_3$. Using the reaction
-
+Enriched, self-supporting Samarium targets were used for this experiment. Table \ref{tab:target} has the enrichment and thickness of the targets used. The material started as Sm$_2$O$_3$. Using the reaction
 \begin{equation}
     Sm_2O_3 + Hf \xrightarrow{} HfO_2 + Sm
     \label{eq:sm_hf}
 \end{equation}
-
-at a temperature of 1520-1820 K the samarium was extracted as a metal \citep{clifford02:_target}. Once cooled, it was rolled as thin as possible. Samarium easily oxidizes, stagnating the rolling process, as too much work on the material at once could cause instantaneous oxidization, resulting in the loss of the target. Rolling had to be done incrementally, giving the material time to rest.
+at a temperature of 1520-1820 K the Samarium was extracted as a metal \citep{clifford02:_target}. Once cooled, it was rolled as thin as possible. Samarium easily oxidizes, stagnating the rolling process, as too much work on the material at once could cause instantaneous oxidization, resulting in the loss of the target. Rolling had to be done incrementally, giving the material time to rest.
 
 \input{Setup_Figs/targetable.tex}
 
