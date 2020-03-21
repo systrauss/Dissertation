@@ -1,0 +1,44 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}to compile using root libraries}
+\PYG{n+nv}{ROOTCFLAGS}   \PYG{o}{:=} \PYG{k}{\PYGZdl{}(}shell root\PYGZhy{}config \PYGZhy{}\PYGZhy{}cflags\PYG{k}{)}
+\PYG{n+nv}{ROOTLIBS}     \PYG{o}{:=} \PYG{k}{\PYGZdl{}(}shell root\PYGZhy{}config \PYGZhy{}\PYGZhy{}libs\PYG{k}{)}
+\PYG{n+nv}{ROOTGLIBS}    \PYG{o}{:=} \PYG{k}{\PYGZdl{}(}shell root\PYGZhy{}config \PYGZhy{}\PYGZhy{}glibs\PYG{k}{)}
+
+\PYG{c}{\PYGZsh{}this is the compiler that will be used:}
+\PYG{n+nv}{CXX}           \PYG{o}{=} g++
+\PYG{c}{\PYGZsh{}these are some compiler flags}
+\PYG{n+nv}{CXXFLAGS}      \PYG{o}{=} \PYGZhy{}O2 \PYGZhy{}fPIC \PYGZhy{}g \PYG{k}{\PYGZdl{}(}ROOTCFLAGS\PYG{k}{)}
+
+\PYG{c}{\PYGZsh{}folder including all the header files}
+\PYG{n+nv}{INCLUDES} \PYG{o}{:=} \PYGZhy{}Iinclude \PYGZhy{}Iuser
+\PYG{c}{\PYGZsh{}folder with all the source files}
+\PYG{n+nv}{SOURCES} \PYG{o}{:=} src
+\PYG{c}{\PYGZsh{}source files}
+\PYG{n+nv}{FILES} \PYG{o}{:=} Constraints.cxx Coefficients.cxx histograms.cxx Filelist.cxx main.cxx
+\PYG{c}{\PYGZsh{}this is the executable name}
+\PYG{n+nv}{EXECUTABLES} \PYG{o}{:=} main
+\PYG{c}{\PYGZsh{}libraries}
+\PYG{n+nv}{LIBS}          \PYG{o}{=} \PYG{k}{\PYGZdl{}(}ROOTLIBS\PYG{k}{)} \PYG{k}{\PYGZdl{}(}SYSLIBS\PYG{k}{)}
+\PYG{c}{\PYGZsh{}this are object files (take the names of sources and change the extensions)}
+\PYG{n+nv}{OBJECTS} \PYG{o}{:=} \PYG{k}{\PYGZdl{}(}FILES:.cxx\PYG{o}{=}.o\PYG{k}{)}
+
+\PYG{c}{\PYGZsh{}don\PYGZsq{}t do anything to files named \PYGZsq{}clean\PYGZsq{} and \PYGZsq{}rmobjects\PYGZsq{}}
+\PYG{n+nf}{.PHONY}\PYG{o}{:} \PYG{n}{clean} \PYG{n}{rmobjects}
+
+\PYG{n+nf}{\PYGZdl{}(EXECUTABLES)}\PYG{o}{:} \PYG{k}{\PYGZdl{}(}\PYG{n+nv}{OBJECTS}\PYG{k}{)}
+	\PYG{k}{\PYGZdl{}(}CXX\PYG{k}{)} \PYG{k}{\PYGZdl{}(}LIBS\PYG{k}{)} \PYG{k}{\PYGZdl{}(}INCLUDES\PYG{k}{)} \PYG{k}{\PYGZdl{}(}CXXFLAGS\PYG{k}{)} \PYG{k}{\PYGZdl{}(}OBJECTS\PYG{k}{)} \PYGZhy{}o \PYG{k}{\PYGZdl{}(}EXECUTABLES\PYG{k}{)}
+
+\PYG{c}{\PYGZsh{}compile all source files and generate object files}
+\PYG{c}{\PYGZsh{} \PYGZpc{}.cxx = any file that matches the pattern}
+\PYG{c}{\PYGZsh{} \PYGZdl{}\PYGZlt{} = name of the first dependency file}
+\PYG{c}{\PYGZsh{} \PYGZdl{}@ = name of the target file}
+\PYG{n+nf}{\PYGZpc{}.o}\PYG{o}{:} \PYG{k}{\PYGZdl{}(}\PYG{n+nv}{SOURCES}\PYG{k}{)}/\PYGZpc{}.\PYG{n}{cxx}
+	\PYG{k}{\PYGZdl{}(}CXX\PYG{k}{)} \PYG{k}{\PYGZdl{}(}INCLUDES\PYG{k}{)} \PYG{k}{\PYGZdl{}(}CXXFLAGS\PYG{k}{)} \PYGZhy{}c \PYGZdl{}\PYGZlt{} \PYGZhy{}o \PYG{n+nv}{\PYGZdl{}@}
+
+\PYG{c}{\PYGZsh{}this will remove the executable file and objects}
+\PYG{n+nf}{clean}\PYG{o}{:}
+	rm \PYGZhy{}rf \PYG{k}{\PYGZdl{}(}EXECUTABLES\PYG{k}{)} \PYG{k}{\PYGZdl{}(}OBJECTS\PYG{k}{)}
+
+\PYG{n+nf}{rmobjects}\PYG{o}{:}
+	rm \PYGZhy{}rf \PYG{k}{\PYGZdl{}(}OBJECTS\PYG{k}{)}
+\end{Verbatim}

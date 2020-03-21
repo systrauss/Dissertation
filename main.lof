@@ -1,0 +1,165 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces The chart of nuclides. The $x$-axis is increasing in neutron number from left to right, and the $y$-axis is increasing in proton number from bottom to top. The lower leftmost corner is the lightest elements, while the upper right are the heaviest, including superheavy elements. Black boxes indicate stable or extremely long lived nuclei. These nuclei are in the "center" of the chart, and known colloquially as the valley of stability. To either side of these stable nuclei are radioactive nuclei, which become shorter lived the farther they are from the valley, indicated by the lightening color. The black boxes are at neutron and proton numbers 8, 20, 28, 50, 82 and 126, marking closed shells for spherical nuclei, and are discussed in further depth within the text.\relax }}{3}{figure.caption.4}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {1.2}{\ignorespaces The evolution of the shell model and the creation of the closed shells of a spherical nucleus. On the left is the spherical harmonic oscillator. By changing the potential to the Woods-Saxon potential, creating a flat centered potential well, the degenerate states of the harmonic oscillator separate in energy. By further adding a spin-coupling term, the levels separate with energy spacings that create the closed shells and the magic numbers.\relax }}{4}{figure.caption.5}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {1.3}{\ignorespaces The energy of the first excited $2^+$ state, plotted in isotopic chains by mass, distinguished by color. Areas of high excitation energy, around A$\sim $90,140,210 all correspond to doubly magic areas. The areas around A$\sim $110,170 have much lower excitation energies and correspond to areas of deformation. \relax }}{5}{figure.caption.6}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {1.4}{\ignorespaces The Nilsson diagram, showing the evolution of the shell levels of the nucleus with respect to the deformation parameter $\beta $. As the nucleus gets more deformed, the closed shells break down. Taken from \citep {choppin13:_nilsson}.\relax }}{6}{figure.caption.7}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Illustration of different kinds of deformation, where spherical symmetry is lost. Treating the vertical as the axis of symmetry, the prolate nucleus is contracted along this axis, but is still axially symmetric. The oblate nucleus is elongated along this axis, but otherwise axially symmetric. It is also possible for the nucleus to lose axial symmetry.\relax }}{8}{figure.caption.8}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Plot of the norm of the quadrupole deformation parameter $\beta _2$ along isotopic chains. Deformation can be seen setting in, as isotopic chains transition from spherical to deformed. $\beta _2$ is the quadrupole deformation parameter. The norm of $\beta _2$ is used, as the method used to calculate $\beta _2$ only gives a magnitude, not a sign. A secondary method is needed to distinguish between prolate and oblate.\relax }}{9}{figure.caption.9}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Plot of the ratio of the first $4^+$ excited state energy to the first $2^+$ excited state energy in even-even nuclei. On the right, the ratio is broken down into sections, based on structure. This ratio is an excellent diagnostic of the general nuclear structure.\relax }}{10}{figure.caption.10}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Cartoon of what excited states built upon different types of nuclei looks like. The closed shell has a large gap between the ground state and first excited state. In the vibrator model, this gap is lower, and a gap of comparable size exists before a cluster of states occurs. In the rotor model, the spacing follows a spacing pattern of $J_f(J_f+1)-J_i(J_i+1)$, with $\gamma $ and $\beta $ vibrations also coming into play. The trasitional area between vibrator and rotor shows a shift between the two, with the clustered states of the vibrator model beginning to space out.\relax }}{13}{figure.caption.11}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {1.9}{\ignorespaces Cartoon of the potential well of a nucleus with shape coexistence. A second minima appears at a different $\beta $, the deformation parameter. Both of these minima can have excitations built on top of them, leading to shape coexistence. A representation of the shape at $\beta $ is shown in each minima.\relax }}{14}{figure.caption.12}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {1.10}{\ignorespaces The theoretical K-shell conversion coefficients for the magnetic and electric multipoles for $l=1,2,3$, calculated using BrICC \citep {kibedi08:_BRICC}. Each of the multipoles is distinct. Further distinction between multipoles can be seen by plotting the intensity ratios between different electronic shells.\relax }}{21}{figure.caption.13}% 
+ {\vskip 0.4em} 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Image of the assembled experimental configuration with Clovershare. One HPGe detector is not visible from this angle. The red line indicates the beam direction.\relax }}{31}{figure.caption.14}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Comparison between the cross sections of the $(\alpha ,xn)$ reactions on $^{154}$Sm, calculated using Talys\citep {koning07:_talys}. The less neutrons being lost, the lower the energy before the reaction occurs. Maximizing the cross section with respect to the neutron flux can be done by finding an energy where the desired reaction, $(\alpha ,2n)$ can be maximized, while minimizing the $(\alpha ,n)$ and $(\alpha ,3n)$ reactions. Specifically, this means finding an energy before the $3n$ reaction has significant strength, while maximizing the $2n$ reaction, as the $n$ reaction is nearly the same across the energy regime of interest.\relax }}{32}{figure.caption.15}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Current layout of the Nuclear Science Laboratory at Notre Dame. The red line indicates the path taken by the beam, from ion source, through the accelerator and analyzing magnet, before being sent to ICEBall.\relax }}{34}{figure.caption.16}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.4}{\ignorespaces A schematic of how the Helium Ion Source works.\relax }}{35}{figure.caption.17}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Talys calculation of the highest cross sections divided by the total neutron yield in the natural Samarium target. Only the largest contributors are included, as there are a large number of products possible between the isotopes of Samarium in the target and the reactions channels open for each. All of the largest contributors are Gadolinium isotopes. The ratios for the isotopes of interest appear to plateau around 20-22 MeV.\relax }}{37}{figure.caption.19}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.6}{\ignorespaces A cartoon illustration of pulse shape based on radiation type, in the same detecting material. The different types of radiation interact with the detecting material creating a fast and slow excitation. The ratio of these fast and slow excitations is based on the radiation, and expressed in the length of the decay tail. Picture taken from \citep {knoll00:rad_det_meas}.\relax }}{38}{figure.caption.20}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Plot of the pulse height vs the decay time in the NE212 detectors. Two clear areas are seen. The leftmost, with the shorter decay time, is the gammas, while the more spread out peak on the right is neutrons.\relax }}{39}{figure.caption.21}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Cartoon of how the bandgap works for insulators, conductors, and semiconductors. Insulators have a large band gap, conductors overlap, and semiconductors have a small bandgap.\relax }}{42}{figure.caption.24}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Image of ICEBall, open for servicing. The beam would go from left to right in the picture. The target ladder is blank, in the center of ICEBall.\relax }}{44}{figure.caption.25}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Graphic of the mini-orange filter. The central blocker keeps $\gamma $-rays from hitting the detector. The magnets bend electrons toward the detectors, and positrons away from the detectors. Being permanent magnets, they are optimized for a range of electron energies, and can cause overbending or underbending of electrons outside of that energy range, making the magnetic filter a factor in the efficiency. Taken from \citep {metlay93:_iceball_comm}.\relax }}{45}{figure.caption.27}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.11}{\ignorespaces An efficiency comparison of magnetic filters of two different strengths. The weak filter has been weakened by 70\% compared to the strong filter, using the Pitt split-pole spectrograph. Data from \citep {metlay92:_iceball_comm}.\relax }}{47}{figure.caption.28}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Linear and quadratic energy calibrations of one Si(Li) detector, using the electron energies listed in Table \ref {tab:ICE_Cal_Source}. The top graphs show the calibrations, while the graphs beneath show the respective residuals. The calibration is in much better agreement in the quadratic fit, as seen in the residuals.\relax }}{50}{figure.caption.32}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.13}{\ignorespaces An example of one of the GEORGINA detectors. The crystal is at a $90^{\circ }$ from the cold finger, allowing the long side of the crystal to be placed next to the target, to optimize solid angle coverage. In the experiment, the circular face of the crystal was placed toward the target.\relax }}{51}{figure.caption.33}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Example of one of the CloverShare detectors.\relax }}{52}{figure.caption.34}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.15}{\ignorespaces A characteristic fit of the Clovershare detector efficiencies. The points with large error bars are the $^{152}$Eu points, as the scaling of the points caused a large uncertainty, compared to the $^{207}$Bi and $^{133}$Ba.\relax }}{56}{figure.caption.37}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Efficiency of a CloverShare detector, with the individual leaves' efficiency summed together, compared to the efficiency of the leaves calibrated and summed together. The different colors/shapes indicate the different sources, as labeled.\relax }}{57}{figure.caption.38}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.17}{\ignorespaces A look at the energy calibration of an individual leaf in an HPGe Clover detector. The upper graph is a linear calibration. The lower graph is a look at the residuals. For HPGe detectors, $\pm 0.4$ keV is not a good energy calibration. Here, the sawtooth fit that was derived from the differential non-linearity in the electronics is seen fitted to the data.\relax }}{58}{figure.caption.39}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.18}{\ignorespaces Plot of the HPGe 1 detector time minus the buncher time. Two distinct peaks can be seen in the spectrum, the main timing peak close to channel 800, and the much smaller secondary peak, coming from a second, later bunching signal. The bunching signal only acts as a stop signal for the timing. It can also be used as a veto, as events without a valid buncher time are not real, or are background.\relax }}{60}{figure.caption.41}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.19}{\ignorespaces A schematic of the electronics for the ICEBall-GEORGINA set up. See section \ref {sec:GEORGINA_electronics} for a detailed explanation. Taken from \citep {battaglia15:_iceball_176lu}.\relax }}{62}{figure.caption.43}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.20}{\ignorespaces ICEBall modeled in Autodesk Inventor \citep {autodesk:_inventor} with the Clovershare detectors placed around it in locations to optimize efficiency. Once ICEBall had been modeled, the detectors were moved around to make sure they were not behind the tungsten blockers. The beamline was also modeled to know where obstructions existed that prevent the Clovershare detectors from being place there.\relax }}{63}{figure.caption.44}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {2.21}{\ignorespaces The signal processing done by the XIA Pixie-16 electronics. All the processing is done within the module. Taken from \citep {xia:_pixie}.\relax }}{65}{figure.caption.46}% 
+ {\vskip 0.4em} 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces A plot of the energy-gated timing for a HPGe-Si(Li) detector pairing. The HPGe detector was gated at 247.9 keV, one of the ground state band transitions in the $^{145}$Gd nucleus. The conversion electrons for other transitions in the ground state band were gated on in the Si(Li) detector. Plotted here are the time differences between the two detectors when both peaks were seen in the respective detectors. The 123LM peak was used instead of the K peak due to the high threshold of this detector. As can be seen, the timing has an energy dependence. This dependence is most prominent at lower energies.\relax }}{79}{figure.caption.56}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Timing between two of the Clovershare detectors, with one detector gated on 123 keV, the lowest transition in the ground state band of $^{154}$Gd. In this data, the gates all looked similarly symmetric, and the timing gates did not need to be varied as they had for the GEORGINA set up.\relax }}{80}{figure.caption.57}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {3.3}{\ignorespaces The difference between the literature value and the calibrated value (before run-by-run correction) of the naturally occurring $^{40}$K background peak at 1460 keV, plotted by run for one leaf of one HPGe detector. The red line shows $\Delta E=0$.\relax }}{83}{figure.caption.58}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {3.4}{\ignorespaces An example of the subtraction used to removed the ground state band peaks from spectra. To subtract the conversion electron peak off, the area of the corresponding gamma peak was taken from the same gate. Using the conversion coefficient and the efficiencies of both detectors, the area of the peak could be calculated. From there, this value, along with fixed $R$, $\beta $, $\sigma $, and centroid were used to subtract the peak off. The black line is the function used for subtraction. The blue line is the original spectrum, and the red line is after subtraction. This code can be found in Appendix \ref {chap:macro}\relax }}{88}{figure.caption.60}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {3.5}{\ignorespaces An example of the global background fit used for peaks that could not be fit using the skewed gaussian function. The areas on either side of the peak are selected by the user. Once the background fit is done, the central area between the two sections is treated as the peak and the background is subtracted off to give a peak area. The red line shows the fit for the background area, and the two sections used for the background fit. See Appendix \ref {chap:macro} for the global-fit function used.\relax }}{89}{figure.caption.61}% 
+ {\vskip 0.4em} 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Systematics of the Gadolinium isotopes. $^{154}$Gd has an anomalously large connection between the first excited $0^+$ state and the ground state. The arrows shown are the B(E2) components of the transitions, in single particle Weisskopf units \citep {reich09:_nds_154,reich12:_nds_156,nica17:_nds_158,reich05:_nds_160}. The $R_{4/2}$ values beneath each nucleus are a ratio of the energies of the first excited $2^+$ and $4^+$ states, both in the ground state band. This ratio gives a rough measure of deformation.\relax }}{92}{figure.caption.62}% 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Singles spectra of $^{154}$Gd. Spectra are labeled with the particles being detected, the energies of the $\gamma $ and electron spectra aligned for identification. In the $\gamma $ spectrum, several lines of note are labeled. The large peak at low energy in the electron spectrum is cut off due to the threshold. It is a combination of background and the 123K peak. Transitions in the higher energy regime of the $\gamma $ spectrum cannot be determined without gating, due to additional background from the experimental room. The electron detectors have a maximum energy of approximately 1250 keV, so there are no conversion electron spectra paired with the higher energy gamma spectra.\relax }}{95}{figure.caption.64}% 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces \fontsize {10pt}{12pt} Spectra gated on 123 keV ($2_{gs}^+\rightarrow 0_{gs}^+$) and 247 keV ($4_{gs}^+\rightarrow 2_{gs}^+$), the first two ground state band lines of $^{154}$Gd. As can be seen, some lines do not appear in different gates. Comparison of these gates, yields a list of transitions that directly populate the interim level (in this example, the $2^+$ state). Several peaks are circled in green that appear in the $2_{gs}^+\rightarrow 0_{gs}^+$ and not the $4_{gs}^+\rightarrow 2_{gs}^+$ transition.\relax }}{103}{figure.caption.67}% 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces (a) Level Scheme of $^{154}$Gd. The gate on the $2_{gs}^+\rightarrow 0_{gs}^+$ transition (123 keV) $\gamma $-component in the ground state. The lines shown are in coincidence. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in blue. (b) Gamma spectrum gated on 123 keV, corresponding to the $2_{gs}^+\rightarrow 0_{gs}^+$ transition. Several transitions have been labeled, corresponding to the level scheme.}}{105}{figure.caption.69}% 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces (a) Level Scheme of $^{154}$Gd. The gate on the $4_{gs}^+\rightarrow 2_{gs}^+$ transition (247 keV) $\gamma $-component in the ground state. The lines shown are in coincidence. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in blue. (b) Gamma spectrum gated on 247 keV, corresponding to the $4_{gs}^+\rightarrow 2_{gs}^+$ transition. Several transitions have been labeled, corresponding to the level scheme.}}{108}{figure.caption.72}% 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {4.6}{\ignorespaces (a) Level Scheme of $^{154}$Gd. The gate on the $6_{gs}^+\rightarrow 4_{gs}^+$ transition (346 keV) $\gamma $-component in the ground state. The lines shown are in coincidence. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in blue. (b) Gamma spectrum gated on 346 keV, corresponding to the $6_{gs}^+\rightarrow 4_{gs}^+$ transition. Several transitions have been labeled, corresponding to the level scheme.}}{111}{figure.caption.75}% 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {4.7}{\ignorespaces (a) Level Scheme of $^{154}$Gd. The gate on the $8_{gs}^+\rightarrow 6_{gs}^+$ transition (426 keV) $\gamma $-component in the ground state. The lines shown are in coincidence. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in blue. (b) Gamma spectrum gated on 426 keV, corresponding to the $8_{gs}^+\rightarrow 6_{gs}^+$ transition. Several transitions have been labeled, corresponding to the level scheme.}}{114}{figure.caption.78}% 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Electron singles for $^{154}$Gd. The energies of transitions between $0^+$ states are marked in the plot. The most prominent is the $0^+_{2}\rightarrow 0^+_{gs}$ transition. The $0^+_{7}\rightarrow 0^+_{3}$ transition is at the energy of the $10^+_{gs}\rightarrow 8^+_{gs}$ K-electron energy, and the $0^+_{6}\rightarrow 0^+_{3}$ transition is between the $8^+_{gs}\rightarrow 6^+_{gs}$ L and M electron energies. The $0^+_{7}\rightarrow 0^+_{6}$ transition may be present, but sits on the low energy tail of the $2^+_{gs}\rightarrow 0^+_{gs}$ L electron peak.\relax }}{127}{figure.caption.89}% 
+ {\vskip 0.4em} 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Singles spectra of $^{156}$Gd. Spectra are labeled with the particles being detected, the energies of the $\gamma $ and electron spectra aligned for identification. In the $\gamma $ spectrum, several lines of note are labeled. The large peak in the electron spectrum at low energy is cut off due to the threshold. It is a combination of background and the 89L peak. Transitions in the higher energy regime of the $\gamma $ spectrum cannot be determined without gating, due to additional background from the experimental room. The electron spectrum only goes to 1250 keV, as that is the limit of the detectors.\relax }}{149}{figure.caption.91}% 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces (a) Level Scheme of $^{156}$Gd. The gamma ray of the $2^+_{gs}\rightarrow 0^+_{gs}$ (89 keV) transition in the ground state was gated on. It was then compared with the gated spectrum from the gamma ray of the $4^+_{gs}\rightarrow 2^+_{gs}$ (199 keV) transition in the ground state. Peaks only appearing in the first gate were assumed to go into the $2^+_{gs}$ state, and assignments were made. Due to the low energy of the $2^+_{gs}\rightarrow 0^+_{gs}$ transition, the efficiency was lower, and it is likely that transitions into the $2^+_{gs}$ state were missed. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in blue. (b) Gamma spectrum gated on 89 keV, corresponding to the $2^+_{gs}\rightarrow 0^+_{gs}$ transition. Several transitions are marked according to the level scheme.}}{153}{figure.caption.93}% 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {5.3}{\ignorespaces (a) Level Scheme of $^{156}$Gd. The gamma ray of the $4^+_{gs}\rightarrow 2^+_{gs}$ (199 keV) transition in the ground state was gated on. It was then compared with the gated spectrum from the gamma ray of the $6^+_{gs}\rightarrow 4^+_{gs}$ (296 keV) transition in the ground state. Peaks only appearing in the first gate were assumed to go into the $4^+_{gs}$ state, and assignments were made. Additionally, these peaks were also gated on, to look for cascades leading into the $4^+_{gs}$ state, which were found in several cases. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in blue. (b) Gamma spectrum gated on 199 keV, corresponding to the $4^+_{gs}\rightarrow 2^+_{gs}$ transition. Several transitions are marked according to the level scheme.}}{156}{figure.caption.96}% 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {5.4}{\ignorespaces (a) Level Scheme of $^{156}$Gd. The gamma ray of the $6^+_{gs}\rightarrow 4^+_{gs}$ (296 keV) transition in the ground state was gated on. It was then compared with the gated spectrum from the gamma ray of the $8^+_{gs}\rightarrow 6^+_{gs}$ (380 keV) transition in the ground state. Peaks only appearing in the first gate were assumed to go into the $6^+_{gs}$ state, and assignments were made. Additionally, these peaks were also gated on, to look for cascades leading into the $6^+_{gs}$ state, which were found in several cases. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in blue. (b) Gamma spectrum gated on 296 keV, corresponding to the $6^+_{gs}\rightarrow 4^+_{gs}$ transition. Several transitions are marked according to the level scheme.}}{159}{figure.caption.99}% 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {5.5}{\ignorespaces (a) Level Scheme of $^{156}$Gd. The gamma ray of the $8^+_{gs}\rightarrow 6^+_{gs}$ (380 keV) transition in the ground state was gated on. It was then compared with the gated spectrum from the gamma ray of the $10^+_{gs}\rightarrow 8^+_{gs}$ (451 keV) transition in the ground state. Peaks only appearing in the first gate were assumed to go into the $8^+_{gs}$ state, and assignments were made. Additionally, these peaks were also gated on, to look for cascades leading into the $8^+_{gs}$ state, which were found in several cases. The levels are organized by band. The lower levels of the band, unseen by gamma rays in this gate, are in blue. (b) Gamma spectrum gated on 380 keV, corresponding to the $8^+_{gs}\rightarrow 6^+_{gs}$ transition. Several transitions are marked according to the level scheme.}}{162}{figure.caption.102}% 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Example of comparing gates for level population confirmation}}{165}{figure.caption.105}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Electron singles for $^{156}$Gd. The energies of transitions between $0^+$ states are marked in the plot. In this spectrum, the $0^+_{3}\rightarrow 0^+_{gs}$ transition is the most prominent. The $0^+_{2}\rightarrow 0^+_{gs}$ and $0^+_{4}\rightarrow 0^+_{3}$ transitions appears to have sone strength, but are obscured by other conversion electrons in the data. The $0^+_{3}\rightarrow 0^+_{2}$ transition is at too low an energy to distinguish from the high background at low energies.\relax }}{176}{figure.caption.108}% 
+ {\vskip 0.4em} 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces The interacting boson model symmetry triangle. The critical point symmetries described by Iachello\citep {iachello00:_x5} are marked.\relax }}{185}{figure.caption.110}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {6.2}{\ignorespaces The dynamic moments of inertia of the ground state, $K=2^+_1$ and $K=4^+_1$ bands. As is seen visually and with the slopes, the ground state band and the $\gamma $ band have similar moments of inertia. However, they do not overlap within their standard deviations. The $K=2^+_1$ and $K=4^+_1$ bands have identical moments of inertia, indicating the $K=4^+_1$ band is an excitation built of the $K=2^+_1$ band.\relax }}{188}{figure.caption.111}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {6.3}{\ignorespaces The dynamic moments of inertia of the four $0^+$ bands seen in the experiment. As is seen visually and with the slopes, the ground state band and the first excited $0^+$ band have very similar moments of inertia, while the second and fifth $0^+$ bands differ greatly.\relax }}{189}{figure.caption.112}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {6.4}{\ignorespaces The dynamic moments of inertia of the non-$0^+$ bands seen in the experiment. As is seen visually and with the slopes, the ground state band and the $\gamma $ band have similar moments of inertia, and overlap within two standard deviations.\relax }}{213}{figure.caption.126}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {6.5}{\ignorespaces The dynamic moments of inertia of the four $0^+$ bands seen in the experiment. As is seen visually and with the slopes, the ground state band and the first excited $0^+$ band have very similar moments of inertia.\relax }}{214}{figure.caption.127}% 
+ {\vskip 0.4em} 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces A comparison of the singles spectrum of one Si(Li) detector between the GEORGINA and Clovershare experiments. The resolution of the Si(Li) detector has deteriorated between the two experiments (the GEORGINA one was performed first). The LM peaks at \~{}240 keV and \~{}330 keV show this most clearly. The peaks are distinguishable in the GEORGINA data, but not in the Clovershare data.\relax }}{230}{figure.caption.131}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Map of the magnetic field lines, created through the use of COMSOL, for the original magnetic design \citep {comsol:_comsol}.\relax }}{232}{figure.caption.132}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Initial tests of the cross shapes. The left-side of the shape would be the side against the blocker. Two extremes were chosen, with intermediate steps being tested between the two. These are the three sets of extremes used: large triangle to square, triangle with the base against the blocker to triangle with the point against the blocker, and square to truncated diamond.\relax }}{233}{figure.caption.133}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Sampling of the different hybrid cross shapes tested while examining magnetic designs. The left side of the shape would be the side against the central blocker.\relax }}{234}{figure.caption.134}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {7.5}{\ignorespaces Various width profiles tested for the magnets. The left figure shows the cross-shape for the width profiles. The left side goes against the central blocker. Variable gradients were looked at, starting with linear slopes, but evolving into step functions and piecewise linear slopes as the simulations expanded.\relax }}{235}{figure.caption.135}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {7.6}{\ignorespaces The final shapes chosen for testing. The left side goes against the central blocker. The top design has the best overall efficiency, the middle design has the best high energy efficiency, and the bottom design has the best low energy efficiency. These designs have been commissioned for testing.\relax }}{236}{figure.caption.136}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {7.7}{\ignorespaces Comparison of the thick (self-supporting) and thin (carbon-backed) targets. The spectra were taken during the same experiment. At low energies, the resolution is better in the thin target. Further, the energies of the peaks shift based on which target it is. This spectrum is not energy calibrated.\relax }}{237}{figure.caption.137}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {7.8}{\ignorespaces Trigger rate of the background with respect to time, after running on one of the carbon-backed targets. There is a clear indication of an exponential decay, shown by the fit. The slope corresponds to a half-life of 133(5) seconds. $^{15}$O has a half-life of 122 seconds, within an acceptable error with the low statistics of the run.\relax }}{238}{figure.caption.138}% 
+ {\vskip 0.4em} 
+\contentsline {figure}{\numberline {7.9}{\ignorespaces A schematic representation of the MDPP-16 software in SCP mode. The amplitude and timing are separated out into individual signals. Signal properties, shaping time, and the threshold can all be adjusted. Taken from \citep {mesytec:_mdpp}.\relax }}{240}{figure.caption.139}% 
+ {\vskip 0.4em} 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Spectra for the gates listed in Table \ref {tab:154Gd_gates}, in numerical order, spanning pages 253-391.\relax }}{252}{figure.caption.141}% 
+ {\vskip 0.4em} 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Spectra for the gates listed in Table \ref {tab:156Gd_gates}, in numerical order, spanning pages 396-441.\relax }}{395}{figure.caption.142}% 
+ {\vskip 0.4em} 
+\addvspace {10\p@ }
+\addvspace {10\p@ }

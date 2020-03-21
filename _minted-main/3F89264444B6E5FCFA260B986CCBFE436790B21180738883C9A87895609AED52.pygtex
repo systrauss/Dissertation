@@ -1,0 +1,176 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/* Quick macro to convert root histogram to ascii*/}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}stdio.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}stdlib.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}unistd.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}math.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}string.h\PYGZgt{}}
+
+\PYG{c+cm}{/* ======================================================================= */}
+\PYG{k+kt}{int} \PYG{n+nf}{file\PYGZus{}error}\PYG{p}{(}\PYG{k+kt}{char} \PYG{o}{*}\PYG{n}{error\PYGZus{}type}\PYG{p}{,} \PYG{k+kt}{char} \PYG{o}{*}\PYG{n}{filename}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{c+cm}{/* write error message */}
+  \PYG{c+cm}{/* cannot perform operation error\PYGZus{}type on file filename */}
+
+  \PYG{k}{if} \PYG{p}{(}\PYG{n}{strlen}\PYG{p}{(}\PYG{n}{error\PYGZus{}type}\PYG{p}{)} \PYG{o}{+} \PYG{n}{strlen}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{58}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{warn1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}ERROR \PYGZhy{} cannot \PYGZpc{}s file}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{error\PYGZus{}type}\PYG{p}{,} \PYG{n}{filename}\PYG{p}{);}
+  \PYG{p}{\PYGZcb{}} \PYG{k}{else} \PYG{p}{\PYGZob{}}
+    \PYG{n}{warn1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}ERROR \PYGZhy{} cannot \PYGZpc{}s file \PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{error\PYGZus{}type}\PYG{p}{,} \PYG{n}{filename}\PYG{p}{);}
+  \PYG{p}{\PYGZcb{}}
+  \PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}} \PYG{c+cm}{/* file\PYGZus{}error */}
+
+\PYG{c+cm}{/* ======================================================================= */}
+\PYG{k+kt}{int} \PYG{n+nf}{put\PYGZus{}file\PYGZus{}rec}\PYG{p}{(}\PYG{k+kt}{FILE} \PYG{o}{*}\PYG{n}{fd}\PYG{p}{,} \PYG{k+kt}{void} \PYG{o}{*}\PYG{n}{data}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{numbytes}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{c+cm}{/* write one fortran\PYGZhy{}unformatted style binary record into data */}
+  \PYG{c+cm}{/* returns 1 for error */}
+
+\PYG{c+cp}{\PYGZsh{}ifdef VMS  }\PYG{c+cm}{/* vms */}
+  \PYG{k+kt}{int}   \PYG{n}{j1}\PYG{p}{;}
+  \PYG{k+kt}{short} \PYG{n}{rh}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{];}
+  \PYG{k+kt}{char}  \PYG{o}{*}\PYG{n}{buf}\PYG{p}{;}
+
+  \PYG{n}{buf} \PYG{o}{=} \PYG{n}{data}\PYG{p}{;}
+  \PYG{n}{j1} \PYG{o}{=} \PYG{n}{numbytes}\PYG{p}{;}
+  \PYG{k}{if} \PYG{p}{(}\PYG{n}{numbytes} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{2042}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{rh}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{numbytes} \PYG{o}{+} \PYG{l+m+mi}{2}\PYG{p}{;} \PYG{n}{rh}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{p}{;}
+  \PYG{p}{\PYGZcb{}} \PYG{k}{else} \PYG{p}{\PYGZob{}}
+    \PYG{n}{rh}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{2044}\PYG{p}{;} \PYG{n}{rh}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{;}
+    \PYG{k}{while} \PYG{p}{(}\PYG{n}{j1} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{2042}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+      \PYG{k}{if} \PYG{p}{(}\PYG{n}{fwrite}\PYG{p}{(}\PYG{n}{rh}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n}{fd}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{2} \PYG{o}{||}
+	  \PYG{n}{fwrite}\PYG{p}{(}\PYG{n}{buf}\PYG{p}{,} \PYG{l+m+mi}{2042}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{fd}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{k}{return} \PYG{l+m+mi}{1}\PYG{p}{;}
+       \PYG{n}{rh}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j1} \PYG{o}{\PYGZhy{}=} \PYG{l+m+mi}{2042}\PYG{p}{;} \PYG{n}{buf} \PYG{o}{+=} \PYG{l+m+mi}{2042}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{rh}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{j1} \PYG{o}{+} \PYG{l+m+mi}{2}\PYG{p}{;} \PYG{n}{rh}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{2}\PYG{p}{;}
+  \PYG{p}{\PYGZcb{}}
+  \PYG{k}{if} \PYG{p}{(}\PYG{n}{fwrite}\PYG{p}{(}\PYG{n}{rh}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n}{fd}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{2} \PYG{o}{||}
+      \PYG{n}{fwrite}\PYG{p}{(}\PYG{n}{buf}\PYG{p}{,} \PYG{n}{j1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{fd}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{k}{return} \PYG{l+m+mi}{1}\PYG{p}{;}
+  \PYG{c+cm}{/* if numbytes is odd, write an extra (padding) byte */}
+  \PYG{k}{if} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{p}{(}\PYG{n}{numbytes}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o}{!=} \PYG{n}{numbytes}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{j1} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{n}{fwrite}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{j1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{fd}\PYG{p}{);}
+  \PYG{p}{\PYGZcb{}}
+    
+\PYG{c+cp}{\PYGZsh{}else }\PYG{c+cm}{/* unix */}
+
+  \PYG{k}{if} \PYG{p}{(}\PYG{n}{fwrite}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{numbytes}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{fd}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{1} \PYG{o}{||}
+      \PYG{n}{fwrite}\PYG{p}{(}\PYG{n}{data}\PYG{p}{,} \PYG{n}{numbytes}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{fd}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{1} \PYG{o}{||}
+      \PYG{n}{fwrite}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{numbytes}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{fd}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{k}{return} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{c+cp}{\PYGZsh{}endif}
+  \PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}} \PYG{c+cm}{/*put\PYGZus{}file\PYGZus{}rec */}
+
+\PYG{c+cm}{/* ======================================================================= */}
+
+\PYG{k+kt}{int} \PYG{n+nf}{wspec}\PYG{p}{(}\PYG{k+kt}{char} \PYG{o}{*}\PYG{n}{filnam}\PYG{p}{,} \PYG{k+kt}{float} \PYG{o}{*}\PYG{n}{spec}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{idim}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{c+cm}{/* write spectra in gf3 format}
+\PYG{c+cm}{     filnam = name of file to be created and written}
+\PYG{c+cm}{     spec = spectrum of length idim */}
+
+  \PYG{k+kt}{char} \PYG{n}{buf}\PYG{p}{[}\PYG{l+m+mi}{32}\PYG{p}{];}
+  \PYG{k+kt}{int}  \PYG{n}{j}\PYG{p}{,} \PYG{n}{c1} \PYG{o}{=} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{rl} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+  \PYG{k+kt}{char} \PYG{n}{namesp}\PYG{p}{[}\PYG{l+m+mi}{8}\PYG{p}{];}
+  \PYG{k+kt}{FILE} \PYG{o}{*}\PYG{n}{file}\PYG{p}{;}
+
+  \PYG{n}{file} \PYG{o}{=} \PYG{n}{fopen}\PYG{p}{(}\PYG{n}{filnam}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}w\PYGZdq{}}\PYG{p}{);}
+  \PYG{c+c1}{//if (!(file = open\PYGZus{}new\PYGZus{}file(filnam, 0))) return 1;}
+  \PYG{c+c1}{//strncpy(namesp, filnam, 8);}
+  \PYG{c+c1}{//if (j \PYGZlt{} 8) memset(\PYGZam{}namesp[j], \PYGZsq{} \PYGZsq{}, 8\PYGZhy{}j);}
+
+  \PYG{c+cm}{/* WRITE(1) NAMESP,IDIM,1,1,1 */}
+  \PYG{c+cm}{/* WRITE(1) SPEC */}
+\PYG{c+cp}{\PYGZsh{}define W(a,b) \PYGZob{} memcpy(buf + rl, a, b); rl += b; \PYGZcb{}}
+  \PYG{n}{W}\PYG{p}{(}\PYG{n}{namesp}\PYG{p}{,}\PYG{l+m+mi}{8}\PYG{p}{);} \PYG{n}{W}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{idim}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{);} \PYG{n}{W}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{c1}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{);} \PYG{n}{W}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{c1}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{);} \PYG{n}{W}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{c1}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{);}
+\PYG{c+cp}{\PYGZsh{}undef W}
+\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}trying to put it in the file...\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}
+  \PYG{k}{if} \PYG{p}{(}\PYG{n}{put\PYGZus{}file\PYGZus{}rec}\PYG{p}{(}\PYG{n}{file}\PYG{p}{,} \PYG{n}{buf}\PYG{p}{,} \PYG{n}{rl}\PYG{p}{)} \PYG{o}{||}
+      \PYG{n}{put\PYGZus{}file\PYGZus{}rec}\PYG{p}{(}\PYG{n}{file}\PYG{p}{,} \PYG{n}{spec}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{o}{*}\PYG{n}{idim}\PYG{p}{))} \PYG{p}{\PYGZob{}}
+    \PYG{n}{file\PYGZus{}error}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}write to\PYGZdq{}}\PYG{p}{,} \PYG{n}{filnam}\PYG{p}{);}
+    \PYG{n}{fclose}\PYG{p}{(}\PYG{n}{file}\PYG{p}{);}
+    \PYG{k}{return} \PYG{l+m+mi}{1}\PYG{p}{;}
+  \PYG{p}{\PYGZcb{}}
+  \PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}idk man\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}
+  \PYG{n}{fclose}\PYG{p}{(}\PYG{n}{file}\PYG{p}{);}
+  \PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}} 
+
+\PYG{c+cm}{/* ======================================================================= */}
+
+\PYG{c+cm}{/* Macro to convert root histogram to spe for radware*/}
+
+\PYG{k+kt}{void} \PYG{n+nf}{r2s}\PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{inName}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{fileOut}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{float} \PYG{n}{spec}\PYG{p}{[}\PYG{l+m+mi}{16384}\PYG{p}{];}
+  	\PYG{k+kt}{int}   \PYG{n}{idim1}\PYG{p}{;}
+ 	\PYG{k+kt}{int}   \PYG{n}{i}\PYG{p}{,} \PYG{n}{numch}\PYG{p}{;}
+
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{specToConv} \PYG{o}{=} \PYG{n}{inName}\PYG{p}{;}
+	\PYG{k+kt}{int} \PYG{n}{n} \PYG{o}{=} \PYG{n}{specToConv}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetNbinsX}\PYG{p}{();}
+
+\PYG{c+cm}{/**	if (file\PYGZus{}out == NULL)}
+\PYG{c+cm}{		printf(\PYGZdq{}Sorry, but the ascii output file did not open.\PYGZdq{});}
+\PYG{c+cm}{**/}
+	\PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+	\PYG{k}{while} \PYG{p}{(}\PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{p}{(}\PYG{n}{n}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{16384}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{c+c1}{//file\PYGZus{}out \PYGZlt{}\PYGZlt{} \PYGZdq{}\PYGZbs{}t\PYGZdq{} \PYGZlt{}\PYGZlt{} specToConv\PYGZhy{}\PYGZgt{}GetBinCenter(i) \PYGZlt{}\PYGZlt{}\PYGZdq{},\PYGZdq{} \PYGZlt{}\PYGZlt{} \PYGZdq{}\PYGZbs{}t\PYGZdq{} \PYGZlt{}\PYGZlt{} specToConv\PYGZhy{}\PYGZgt{}GetBinContent(i) \PYGZlt{}\PYGZlt{} endl;}
+		\PYG{n}{spec}\PYG{p}{[}\PYG{n}{i}\PYG{o}{++}\PYG{p}{]} \PYG{o}{=} \PYG{n}{specToConv}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetBinContent}\PYG{p}{(}\PYG{n}{i}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}i lines read...}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{i}\PYG{p}{);}
+
+	\PYG{n}{numch} \PYG{o}{=} \PYG{n}{idim1} \PYG{o}{=} \PYG{n}{i}\PYG{p}{;}
+	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{} \PYGZpc{}i channels..}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{numch}\PYG{p}{);}
+
+	\PYG{n}{wspec}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}s.spe\PYGZdq{}}\PYG{p}{,}\PYG{n}{fileOut}\PYG{p}{),} \PYG{n}{spec}\PYG{p}{,} \PYG{n}{numch}\PYG{p}{);}
+    \PYG{c+cm}{/* tell user that the file has been converted */}
+    \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{} histogram ==\PYGZgt{} \PYGZpc{}s.spe, \PYGZpc{}i chs.}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{fileOut}\PYG{p}{,} \PYG{n}{numch}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+cm}{/* ======================================================================= */}
+
+\PYG{k+kt}{void} \PYG{n+nf}{r2a}\PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{inName}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{fileOut}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{n}{ofstream} \PYG{n}{file\PYGZus{}out}\PYG{p}{(}\PYG{n}{fileOut}\PYG{p}{);}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{specToConv} \PYG{o}{=} \PYG{n}{inName}\PYG{p}{;}
+	\PYG{k+kt}{int} \PYG{n}{n} \PYG{o}{=} \PYG{n}{specToConv}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetNbinsX}\PYG{p}{();}
+
+\PYG{c+cm}{/**	if (file\PYGZus{}out == NULL)}
+\PYG{c+cm}{		printf(\PYGZdq{}Sorry, but the ascii output file did not open.\PYGZdq{});}
+\PYG{c+cm}{**/}
+	\PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{p}{(}\PYG{n}{n}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{);} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{file\PYGZus{}out} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s}{\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{specToConv}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetBinCenter}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{l+s}{\PYGZdq{},\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s}{\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{specToConv}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetBinContent}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}
+	\PYG{p}{\PYGZcb{}}
+
+	\PYG{n}{file\PYGZus{}out}\PYG{p}{.}\PYG{n}{close}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{fileR2S}\PYG{p}{(}\PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{fileIn}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{fileOut}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nStart}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nEnd}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{n}{TFile}\PYG{o}{*} \PYG{n}{file} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TFile}\PYG{p}{(}\PYG{n}{fileIn}\PYG{p}{);}
+  \PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{fileIn} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{} open\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{n}{nStart}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nEnd}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+  \PYG{p}{\PYGZob{}}
+    \PYG{c+c1}{//r2s((TH1F*)file\PYGZhy{}\PYGZgt{}Get(Form(\PYGZdq{}clover\PYGZus{}raw\PYGZus{}\PYGZpc{}d\PYGZdq{},i)),Form(\PYGZdq{}\PYGZpc{}s\PYGZpc{}dl\PYGZpc{}d\PYGZdq{},fileOut,(int)i/4,i\PYGZpc{}4));}
+    \PYG{c+c1}{//r2s((TH1F*)file\PYGZhy{}\PYGZgt{}Get(Form(\PYGZdq{}Clover\PYGZus{}\PYGZpc{}d\PYGZdq{},i)),Form(\PYGZdq{}\PYGZpc{}s\PYGZpc{}dl\PYGZpc{}d\PYGZdq{},fileOut,(int)i/4,i\PYGZpc{}4)); //Special case right now}
+  \PYG{p}{\PYGZcb{}}
+  \PYG{n}{file}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Close}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{fileR2S}\PYG{p}{(}\PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{fileIn}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{fileOut}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+  \PYG{n}{TFile}\PYG{o}{*} \PYG{n}{file} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TFile}\PYG{p}{(}\PYG{n}{fileIn}\PYG{p}{);}
+  \PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{fileIn} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{} open\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{2}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+  \PYG{p}{\PYGZob{}}
+    \PYG{n}{r2s}\PYG{p}{((}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{file}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Clover\PYGZus{}\PYGZpc{}d\PYGZdq{}}\PYG{p}{,}\PYG{n}{i}\PYG{p}{)),}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}s\PYGZus{}C\PYGZpc{}d\PYGZdq{}}\PYG{p}{,}\PYG{n}{fileOut}\PYG{p}{,}\PYG{n}{i}\PYG{p}{));}
+  \PYG{p}{\PYGZcb{}}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{l+m+mi}{7}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+  \PYG{p}{\PYGZob{}}
+    \PYG{n}{r2s}\PYG{p}{((}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{file}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}SiLi\PYGZpc{}d\PYGZdq{}}\PYG{p}{,}\PYG{n}{i}\PYG{p}{)),}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}s\PYGZus{}S\PYGZpc{}d\PYGZdq{}}\PYG{p}{,}\PYG{n}{fileOut}\PYG{p}{,}\PYG{n}{i}\PYG{p}{));}
+  \PYG{p}{\PYGZcb{}}
+  \PYG{n}{file}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Close}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

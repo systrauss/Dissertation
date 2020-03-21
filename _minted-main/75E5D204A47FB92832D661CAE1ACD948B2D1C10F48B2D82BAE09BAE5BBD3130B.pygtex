@@ -1,0 +1,24 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}ifndef HISTOGRAMS\PYGZus{}H}
+\PYG{c+cp}{\PYGZsh{}define HISTOGRAMS\PYGZus{}H}
+
+\PYG{c+cp}{\PYGZsh{}ifndef \PYGZus{}HISTOGRAMS\PYGZus{}CXX}
+\PYG{c+cp}{\PYGZsh{}define EXTERNAL extern}
+\PYG{c+cp}{\PYGZsh{}else}
+\PYG{c+cp}{\PYGZsh{}define EXTERNAL}
+\PYG{c+cp}{\PYGZsh{}endif}
+
+\PYG{c+c1}{//C++ libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}vector\PYGZgt{}}
+
+\PYG{c+c1}{//ROOT libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TH1F.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TString.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TFile.h\PYGZgt{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{makeHistograms}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{nGeDets}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nGeCuts}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nSiLiDets}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nSiLiCuts}\PYG{p}{);}
+\PYG{k+kt}{void} \PYG{n+nf}{fillHistograms}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{nConstraints}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}}\PYG{n}{dConstraints}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dEnCut}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dGeDetectors}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiDetectors}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dBGO}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dGeT}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiT}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dBGOT}\PYG{p}{,} \PYG{k+kt}{bool} \PYG{n}{GeorSiLi}\PYG{p}{);}
+\PYG{k+kt}{void} \PYG{n+nf}{writeHistToFile}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{fOut}\PYG{p}{);}
+
+\PYG{c+cp}{\PYGZsh{}endif}
+\end{Verbatim}

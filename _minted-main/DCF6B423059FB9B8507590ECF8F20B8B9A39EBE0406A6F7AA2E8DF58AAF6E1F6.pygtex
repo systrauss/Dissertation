@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}ifndef COEFFICIENTS\PYGZus{}H}
+\PYG{c+cp}{\PYGZsh{}define COEFFICIENTS\PYGZus{}H}
+
+\PYG{c+cp}{\PYGZsh{}ifndef \PYGZus{}COEFFICIENTS\PYGZus{}CXX}
+\PYG{c+cp}{\PYGZsh{}define EXTERNAL extern}
+\PYG{c+cp}{\PYGZsh{}else}
+\PYG{c+cp}{\PYGZsh{}define EXTERNAL}
+\PYG{c+cp}{\PYGZsh{}endif}
+
+\PYG{k+kt}{void} \PYG{n+nf}{defineGeCoeff}\PYG{p}{();}
+
+\PYG{k+kt}{void} \PYG{n+nf}{defineGeCoeff}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{nRunNum}\PYG{p}{);}
+
+\PYG{k+kt}{void} \PYG{n+nf}{defineSiLiCoeff}\PYG{p}{();}
+
+\PYG{k+kt}{void} \PYG{n+nf}{defineSiLiCoeff}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{nRunNum}\PYG{p}{);}
+
+\PYG{c+cp}{\PYGZsh{}endif}
+\end{Verbatim}

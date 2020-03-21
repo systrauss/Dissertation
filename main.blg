@@ -1,0 +1,72 @@
+This is BibTeX, Version 0.99d (TeX Live 2019)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
+A level-1 auxiliary file: Introduction.aux
+A level-1 auxiliary file: ExperimentalSetup.aux
+A level-1 auxiliary file: Analysis.aux
+A level-1 auxiliary file: 154GdDiscussion.aux
+A level-1 auxiliary file: 156GdDiscussion.aux
+A level-1 auxiliary file: PhysicsDiscussion.aux
+A level-1 auxiliary file: FutureWork.aux
+A level-1 auxiliary file: 154GdAppendix.aux
+A level-1 auxiliary file: 156GdAppendix.aux
+A level-1 auxiliary file: CodeAppendix.aux
+A level-1 auxiliary file: MacroAppendix.aux
+The style file: nddiss2e.bst
+Database file #1: Bibliography.bib
+Warning--empty year in ortec:_fastamp
+Warning--empty year in autodesk:_inventor
+Warning--empty year in caen:_TDC
+Warning--empty year in caen:_scaler
+Warning--can't use both author and editor fields in choppin13:_nilsson
+Warning--there's a number but no volume in clifford02:_target
+Warning--empty year in comsol:_comsol
+Warning--empty year in mesytec:_ADC
+Warning--empty year in mesytec:_PSD
+Warning--empty year in mesytec:_mdpp
+Warning--empty year in mesytec:_mvme
+Warning--empty year in nec:_pelletron
+Warning--empty year in nscl:_daq
+Warning--there's a number but no volume in wood99:_e0
+You've used 87 entries,
+            2774 wiz_defined-function locations,
+            1155 strings with 23290 characters,
+and the built_in function-call counts, 47667 in all, are:
+= -- 4023
+> -- 3950
+< -- 56
++ -- 1344
+- -- 1253
+* -- 4178
+:= -- 7860
+add.period$ -- 330
+call.type$ -- 87
+change.case$ -- 584
+chr.to.int$ -- 83
+cite$ -- 188
+duplicate$ -- 1588
+empty$ -- 3070
+format.name$ -- 1374
+if$ -- 9721
+int.to.chr$ -- 5
+int.to.str$ -- 1
+missing$ -- 77
+newline$ -- 511
+num.names$ -- 350
+pop$ -- 1281
+preamble$ -- 1
+purify$ -- 503
+quote$ -- 0
+skip$ -- 1367
+stack$ -- 0
+substring$ -- 1276
+swap$ -- 125
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 897
+warning$ -- 14
+while$ -- 315
+width$ -- 0
+write$ -- 1252
+(There were 14 warnings)

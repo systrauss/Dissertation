@@ -1,0 +1,222 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}define analysis\PYGZus{}cxx}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}analysis.h\PYGZdq{}}
+
+\PYG{c+c1}{//C++ libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}iostream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}fstream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}string\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}cmath\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}vector\PYGZgt{}}
+
+\PYG{c+c1}{//ROOT libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TSystem.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TROOT.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TH2.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TStyle.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TCanvas.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TString.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TFile.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TH1F.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TTree.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TRandom3.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TMath.h\PYGZgt{}}
+
+\PYG{c+c1}{//object files}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}histograms.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}Constraints.h\PYGZdq{}}
+
+\PYG{c+c1}{//Data tree files}
+\PYG{c+c1}{// \PYGZsh{}include \PYGZdq{}eventData.h\PYGZdq{}}
+\PYG{c+c1}{// \PYGZsh{}include \PYGZdq{}eventScaler.h\PYGZdq{}}
+\PYG{c+c1}{// \PYGZsh{}include \PYGZdq{}ExpEventDictionary.h\PYGZdq{}}
+\PYG{c+c1}{// \PYGZsh{}include \PYGZdq{}ExpEventLinkDef.h\PYGZdq{}}
+
+\PYG{c+c1}{//From Coefficients.cxx}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nGeOrder}\PYG{p}{;} \PYG{c+c1}{//Order of calibration i.e. 1 = linear.}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nGeDets}\PYG{p}{;} \PYG{c+c1}{//Total number of signals from Germanium detectors}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nGeSegments}\PYG{p}{;} \PYG{c+c1}{//number of segments in a single Germanium crystal, for adding purposes}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dGeCoefficients}\PYG{p}{;} \PYG{c+c1}{//Ge Coefficients}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dGeCoeffRes}\PYG{p}{;} \PYG{c+c1}{// Ge Residual Coefficients}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dGeRunCorr}\PYG{p}{;} \PYG{c+c1}{//Run Correction Coefficients}
+
+\PYG{k}{extern} \PYG{n}{TChain}\PYG{o}{*} \PYG{n}{chain}\PYG{p}{;}
+
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nSiLiOrder}\PYG{p}{;} \PYG{c+c1}{//Order of calibration i.e. 1 = linear.}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nSiLiDets}\PYG{p}{;} \PYG{c+c1}{//Total number of signals from SiLi}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nSiLiPlace}\PYG{p}{;} \PYG{c+c1}{//Start of SiLis in generalized array detectors}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiCoefficients}\PYG{p}{;} \PYG{c+c1}{//Coefficients}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiRunCorr}\PYG{p}{;} \PYG{c+c1}{//Run Correction Coefficients}
+
+\PYG{c+c1}{//From Constraints.cxx}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dGeBounds}\PYG{p}{;} \PYG{c+c1}{//bounds for cuts}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiBounds}\PYG{p}{;} \PYG{c+c1}{//bounds for cuts}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nGeConstraints}\PYG{p}{;}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nSiLiConstraints}\PYG{p}{;}
+
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nBGODets}\PYG{p}{;} \PYG{c+c1}{//Total number of signals from BGO detectors}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nBGOPlace}\PYG{p}{;} \PYG{c+c1}{//Start of BGOs in generalized array}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dBGOThreshold}\PYG{p}{;}
+
+\PYG{c+c1}{//From histograms.cxx}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{ge\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{;}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{sili\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{;}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{ge\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{;}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{sili\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{;}
+
+\PYG{k}{using} \PYG{k}{namespace} \PYG{n}{std}\PYG{p}{;}
+
+\PYG{k+kt}{void} \PYG{n}{analysis}\PYG{o}{::}\PYG{n}{Loop}\PYG{p}{(}\PYG{k}{const} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{fileName}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nRunNum}\PYG{p}{,} \PYG{k+kt}{bool} \PYG{n}{bTripleCoin}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{c+c1}{//   In a ROOT session, you can do:}
+\PYG{c+c1}{//      Root \PYGZgt{} .L analysis.C}
+\PYG{c+c1}{//      Root \PYGZgt{} analysis t}
+\PYG{c+c1}{//      Root \PYGZgt{} t.GetEntry(12); // Fill t data members with entry number 12}
+\PYG{c+c1}{//      Root \PYGZgt{} t.Show();       // Show values of entry 12}
+\PYG{c+c1}{//      Root \PYGZgt{} t.Show(16);     // Read and show values of entry 16}
+\PYG{c+c1}{//      Root \PYGZgt{} t.Loop();       // Loop on all entries}
+\PYG{c+c1}{//}
+
+\PYG{c+c1}{//     This is the loop skeleton where:}
+\PYG{c+c1}{//    jentry is the global entry number in the chain}
+\PYG{c+c1}{//    ientry is the entry number in the current Tree}
+\PYG{c+c1}{//  Note that the argument to GetEntry must be:}
+\PYG{c+c1}{//    jentry for TChain::GetEntry}
+\PYG{c+c1}{//    ientry for TTree::GetEntry and TBranch::GetEntry}
+\PYG{c+c1}{//}
+\PYG{c+c1}{//       To read only selected branches, Insert statements like:}
+\PYG{c+c1}{// METHOD1:}
+\PYG{c+c1}{//    fChain\PYGZhy{}\PYGZgt{}SetBranchStatus(\PYGZdq{}*\PYGZdq{},0);  // disable all branches}
+\PYG{c+c1}{//    fChain\PYGZhy{}\PYGZgt{}SetBranchStatus(\PYGZdq{}branchname\PYGZdq{},1);  // activate branchname}
+\PYG{c+c1}{// METHOD2: replace line}
+\PYG{c+c1}{//    fChain\PYGZhy{}\PYGZgt{}GetEntry(jentry);       //read all branches}
+\PYG{c+c1}{//by  b\PYGZus{}branchname\PYGZhy{}\PYGZgt{}GetEntry(ientry); //read only this branch}
+   \PYG{k}{if} \PYG{p}{(}\PYG{n}{fChain} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{k}{return}\PYG{p}{;}
+
+   \PYG{c+c1}{//Don\PYGZsq{}t keep writing to fOut, so switch to the \PYGZdq{}user\PYGZdq{} space instead}
+   \PYG{n}{gROOT}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{cd}\PYG{p}{();}
+
+
+   \PYG{n}{TRandom3} \PYG{o}{*}\PYG{n}{randgen} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TRandom3}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);} \PYG{c+c1}{//For uniformity over bin, to remove artifacting}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dGeEn}\PYG{p}{;}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiEn}\PYG{p}{;}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dBGO}\PYG{p}{;}
+
+   \PYG{c+c1}{//Times}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dT\PYGZus{}GeEnSeg}\PYG{p}{;}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dT\PYGZus{}GeEn}\PYG{p}{;}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dT\PYGZus{}SiLiEn}\PYG{p}{;}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dT\PYGZus{}BGO}\PYG{p}{;}
+
+   \PYG{c+c1}{//Ge vector}
+   \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nGeDets}\PYG{o}{/}\PYG{n}{nGeSegments}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+   \PYG{p}{\PYGZob{}}
+       \PYG{n}{dGeEn}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+       \PYG{n}{dT\PYGZus{}GeEn}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nGeDets}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+   \PYG{p}{\PYGZob{}}
+       \PYG{n}{dT\PYGZus{}GeEnSeg}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nSiLiDets}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+   \PYG{p}{\PYGZob{}}
+       \PYG{n}{dSiLiEn}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+       \PYG{n}{dT\PYGZus{}SiLiEn}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nBGODets}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+   \PYG{p}{\PYGZob{}}
+       \PYG{n}{dBGO}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+       \PYG{n}{dT\PYGZus{}BGO}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+   \PYG{p}{\PYGZcb{}}
+   
+   \PYG{c+c1}{//main loop through the data}
+   \PYG{n}{Long64\PYGZus{}t} \PYG{n}{nentries} \PYG{o}{=} \PYG{n}{fChain}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetEntriesFast}\PYG{p}{();}
+   
+   \PYG{c+c1}{//main loop through the data}
+   \PYG{n}{Long64\PYGZus{}t} \PYG{n}{nbytes} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{nb} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+   \PYG{k}{for} \PYG{p}{(}\PYG{n}{Long64\PYGZus{}t} \PYG{n}{jentry}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{jentry}\PYG{o}{\PYGZlt{}}\PYG{n}{nentries}\PYG{p}{;}\PYG{n}{jentry}\PYG{o}{++}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+      \PYG{n}{Long64\PYGZus{}t} \PYG{n}{ientry} \PYG{o}{=} \PYG{n}{LoadTree}\PYG{p}{(}\PYG{n}{jentry}\PYG{p}{);}
+      \PYG{k}{if} \PYG{p}{(}\PYG{n}{ientry} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{k}{break}\PYG{p}{;}
+      \PYG{n}{nb} \PYG{o}{=} \PYG{n}{fChain}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetEntry}\PYG{p}{(}\PYG{n}{jentry}\PYG{p}{);}   \PYG{n}{nbytes} \PYG{o}{+=} \PYG{n}{nb}\PYG{p}{;}
+    	\PYG{k}{if} \PYG{p}{(}\PYG{n}{jentry} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{1000000} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        	\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}.\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{flush}\PYG{p}{;}
+    	\PYG{p}{\PYGZcb{}}
+      \PYG{c+c1}{// if (Cut(ientry) \PYGZlt{} 0) continue;}
+   \PYG{c+c1}{//Germanium calibration}
+      \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{nGeDets} \PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+      \PYG{p}{\PYGZob{}}
+         \PYG{k}{if}\PYG{p}{(}\PYG{n}{i} \PYG{o}{\PYGZpc{}} \PYG{n}{nGeSegments} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)}
+         \PYG{p}{\PYGZob{}}
+            \PYG{n}{dGeEn}\PYG{p}{[}\PYG{n}{i}\PYG{o}{/}\PYG{n}{nGeSegments}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{c+c1}{//Reset the total clover energy}
+            \PYG{n}{dT\PYGZus{}GeEnSeg}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{c+c1}{//Reset segment time}
+            \PYG{n}{dT\PYGZus{}GeEn}\PYG{p}{[}\PYG{n}{i}\PYG{o}{/}\PYG{n}{nGeSegments}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{c+c1}{//Reset total time}
+         \PYG{p}{\PYGZcb{}} 
+         \PYG{k+kt}{double} \PYG{n}{eneC} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{dADC} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+         \PYG{n}{dADC} \PYG{o}{=} \PYG{n}{ge\PYGZus{}en\PYGZus{}raw}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{+} \PYG{l+m+mf}{0.5}\PYG{o}{*}\PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{randgen}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Rndm}\PYG{p}{());}
+         \PYG{k}{if}\PYG{p}{(}\PYG{n}{ge\PYGZus{}time}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{==} \PYG{l+m+mi}{0} \PYG{o}{||} \PYG{n}{buncher\PYGZus{}time} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)}
+         \PYG{p}{\PYGZob{}}
+             \PYG{n}{dT\PYGZus{}GeEnSeg}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{10000}\PYG{p}{;}
+         \PYG{p}{\PYGZcb{}}
+         \PYG{k}{else}
+         \PYG{p}{\PYGZob{}}
+             \PYG{n}{dT\PYGZus{}GeEnSeg}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{ge\PYGZus{}time}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{n}{buncher\PYGZus{}time}\PYG{p}{;}
+         \PYG{p}{\PYGZcb{}}
+         \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}}\PYG{n}{nGeOrder}\PYG{o}{+}\PYG{l+m+mi}{1} \PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+         \PYG{p}{\PYGZob{}}
+            \PYG{n}{eneC} \PYG{o}{=} \PYG{n}{eneC} \PYG{o}{+} \PYG{n}{dGeCoefficients}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{]}\PYG{o}{*}\PYG{n}{pow}\PYG{p}{(}\PYG{n}{dADC}\PYG{p}{,}\PYG{n}{j}\PYG{p}{);}
+         \PYG{p}{\PYGZcb{}}
+         \PYG{n}{eneC} \PYG{o}{=} \PYG{n}{dGeRunCorr}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{+}\PYG{n}{dGeRunCorr}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{*}\PYG{n}{eneC}\PYG{p}{;} \PYG{c+c1}{//Run correction factor}
+         \PYG{n}{dGeEn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{eneC}\PYG{p}{;}
+         \PYG{n}{dT\PYGZus{}GeEn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{dT\PYGZus{}GeEnSeg}\PYG{p}{[}\PYG{n}{i}\PYG{p}{];} \PYG{c+c1}{//This is the line that should fix the previous problem!}
+        \PYG{c+c1}{//  if(i\PYGZpc{}nGeSegments!=0 \PYGZam{}\PYGZam{} i!=14 \PYGZam{}\PYGZam{} i!=15) }
+        \PYG{c+c1}{//  \PYGZob{}}
+        \PYG{c+c1}{//     dGeEn[i/nGeSegments] = dGeEn[i/nGeSegments]+eneC; //Add energies}
+        \PYG{c+c1}{//     if(dT\PYGZus{}GeEn[i/nGeSegments] == 0) dT\PYGZus{}GeEn[i/nGeSegments] = dT\PYGZus{}GeEnSeg[i]; //Timing}
+        \PYG{c+c1}{//  \PYGZcb{}}
+        \PYG{c+c1}{//  if(dADC \PYGZgt{} 0.5) std::cout \PYGZlt{}\PYGZlt{} dADC \PYGZlt{}\PYGZlt{} std::endl;}
+      \PYG{p}{\PYGZcb{}}
+      \PYG{c+c1}{//SiLi Calibration}
+      \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{nSiLiDets} \PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+      \PYG{p}{\PYGZob{}}
+         \PYG{n}{dSiLiEn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+         \PYG{n}{dT\PYGZus{}SiLiEn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+         \PYG{k+kt}{double} \PYG{n}{dADC} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+         \PYG{n}{dADC} \PYG{o}{=} \PYG{n}{sili\PYGZus{}en\PYGZus{}raw}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{+} \PYG{l+m+mf}{0.5}\PYG{o}{*}\PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{randgen}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Rndm}\PYG{p}{());}
+         \PYG{k}{if}\PYG{p}{(}\PYG{n}{sili\PYGZus{}time}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{==} \PYG{l+m+mi}{0} \PYG{o}{||} \PYG{n}{buncher\PYGZus{}time} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)}
+         \PYG{p}{\PYGZob{}}
+             \PYG{n}{dT\PYGZus{}SiLiEn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{10000}\PYG{p}{;}
+         \PYG{p}{\PYGZcb{}}
+         \PYG{k}{else}
+         \PYG{p}{\PYGZob{}}
+             \PYG{n}{dT\PYGZus{}SiLiEn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{sili\PYGZus{}time}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{n}{buncher\PYGZus{}time}\PYG{p}{;}
+         \PYG{p}{\PYGZcb{}}
+         \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}}\PYG{n}{nSiLiOrder}\PYG{o}{+}\PYG{l+m+mi}{1} \PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+         \PYG{p}{\PYGZob{}}
+            \PYG{n}{dSiLiEn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{dSiLiEn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{+} \PYG{n}{dSiLiCoefficients}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{j}\PYG{p}{]}\PYG{o}{*}\PYG{n}{pow}\PYG{p}{(}\PYG{n}{dADC}\PYG{p}{,}\PYG{n}{j}\PYG{p}{);}
+         \PYG{p}{\PYGZcb{}}
+         \PYG{n}{dSiLiEn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{dSiLiRunCorr}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{+}\PYG{n}{dSiLiRunCorr}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{*}\PYG{n}{dSiLiEn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{];} \PYG{c+c1}{//Run\PYGZhy{}by\PYGZhy{}run correction}
+      \PYG{p}{\PYGZcb{}}
+      \PYG{c+c1}{//BGOs, done dumb because of T. Battaglia not using arrays?!?}
+      \PYG{n}{dBGO}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{bgo1\PYGZus{}en}\PYG{p}{;}
+      \PYG{n}{dBGO}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{bgo4\PYGZus{}en}\PYG{p}{;}
+      \PYG{n}{dBGO}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{=} \PYG{n}{bgo5\PYGZus{}en}\PYG{p}{;}
+      \PYG{n}{dBGO}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{=} \PYG{n}{bgo6\PYGZus{}en}\PYG{p}{;}
+      \PYG{n}{dT\PYGZus{}BGO}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{bgo1\PYGZus{}time}\PYG{o}{\PYGZhy{}}\PYG{n}{buncher\PYGZus{}time}\PYG{p}{;}
+      \PYG{n}{dT\PYGZus{}BGO}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{n}{bgo4\PYGZus{}time}\PYG{o}{\PYGZhy{}}\PYG{n}{buncher\PYGZus{}time}\PYG{p}{;}
+      \PYG{n}{dT\PYGZus{}BGO}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{=} \PYG{n}{bgo5\PYGZus{}time}\PYG{o}{\PYGZhy{}}\PYG{n}{buncher\PYGZus{}time}\PYG{p}{;}
+      \PYG{n}{dT\PYGZus{}BGO}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{=} \PYG{n}{bgo6\PYGZus{}time}\PYG{o}{\PYGZhy{}}\PYG{n}{buncher\PYGZus{}time}\PYG{p}{;}
+
+      \PYG{c+c1}{//Run the constraints subroutine. At this time, it does use timing gates}
+      \PYG{n}{fillHistograms}\PYG{p}{(}\PYG{n}{nGeConstraints}\PYG{p}{,} \PYG{n}{dGeBounds}\PYG{p}{,} \PYG{n}{dGeEn}\PYG{p}{,} \PYG{n}{dGeEn}\PYG{p}{,} \PYG{n}{dSiLiEn}\PYG{p}{,} \PYG{n}{dBGO}\PYG{p}{,} \PYG{n}{dT\PYGZus{}GeEn}\PYG{p}{,} \PYG{n}{dT\PYGZus{}SiLiEn}\PYG{p}{,} \PYG{n}{dT\PYGZus{}BGO}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{);}
+      \PYG{n}{fillHistograms}\PYG{p}{(}\PYG{n}{nSiLiConstraints}\PYG{p}{,} \PYG{n}{dSiLiBounds}\PYG{p}{,} \PYG{n}{dSiLiEn}\PYG{p}{,} \PYG{n}{dGeEn}\PYG{p}{,} \PYG{n}{dSiLiEn}\PYG{p}{,} \PYG{n}{dBGO}\PYG{p}{,} \PYG{n}{dT\PYGZus{}GeEn}\PYG{p}{,} \PYG{n}{dT\PYGZus{}SiLiEn}\PYG{p}{,} \PYG{n}{dT\PYGZus{}BGO}\PYG{p}{,} \PYG{n+nb}{false}\PYG{p}{);}
+   \PYG{p}{\PYGZcb{}}
+
+   \PYG{c+c1}{//File to write out to}
+   \PYG{n}{TFile}\PYG{o}{*} \PYG{n}{fOut} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TFile}\PYG{p}{(}\PYG{n}{fileName}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}RECREATE\PYGZdq{}}\PYG{p}{);}
+
+   \PYG{c+c1}{//write to file}
+   \PYG{n}{fOut}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{cd}\PYG{p}{();}
+   \PYG{n}{writeHistToFile}\PYG{p}{(}\PYG{n}{fOut}\PYG{p}{);}
+   \PYG{n}{fOut}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Close}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

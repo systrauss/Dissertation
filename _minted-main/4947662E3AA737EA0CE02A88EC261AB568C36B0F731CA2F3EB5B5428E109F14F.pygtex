@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{l+m+mi}{4} \PYG{c+c1}{//Total number of signals from BGO detectors}
+\PYG{l+m+mi}{36} \PYG{c+c1}{//Start of BGOs in generalized array, redundant from clovershare}
+\PYG{c+c1}{//BGO Thresholds}
+\PYG{l+m+mi}{10}
+\PYG{l+m+mi}{10}
+\PYG{l+m+mi}{10}
+\PYG{l+m+mi}{10}
+\end{Verbatim}

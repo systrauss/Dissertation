@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}ifndef HISTOGRAMS\PYGZus{}H}
+\PYG{c+cp}{\PYGZsh{}define HISTOGRAMS\PYGZus{}H}
+
+\PYG{c+cp}{\PYGZsh{}ifndef \PYGZus{}HISTOGRAMS\PYGZus{}CXX}
+\PYG{c+cp}{\PYGZsh{}define EXTERNAL extern}
+\PYG{c+cp}{\PYGZsh{}else}
+\PYG{c+cp}{\PYGZsh{}define EXTERNAL}
+\PYG{c+cp}{\PYGZsh{}endif}
+
+\PYG{c+c1}{//C++ libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}vector\PYGZgt{}}
+
+\PYG{c+c1}{//ROOT libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TH1F.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TString.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TFile.h\PYGZgt{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{writeHistToFile}\PYG{p}{(}\PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{fileName}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{sOut}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nRunStart}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nRunStop}\PYG{p}{);}
+
+\PYG{c+cp}{\PYGZsh{}endif}
+\end{Verbatim}

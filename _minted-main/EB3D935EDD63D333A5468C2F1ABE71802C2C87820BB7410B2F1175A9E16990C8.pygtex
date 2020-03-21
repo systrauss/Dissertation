@@ -1,0 +1,88 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}define timing\PYGZus{}cxx}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}timing.h\PYGZdq{}}
+
+\PYG{c+c1}{//C++ libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}iostream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}cstdio\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}fstream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}string\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}cmath\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}vector\PYGZgt{}}
+
+\PYG{c+c1}{//ROOT Libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TString.h\PYGZdq{}}
+
+\PYG{c+c1}{// class Timing}
+\PYG{c+c1}{// \PYGZob{}}
+\PYG{c+c1}{//   public:}
+\PYG{c+c1}{//     std::vector \PYGZlt{}std::vector \PYGZlt{} double \PYGZgt{} \PYGZgt{} geGe;}
+\PYG{c+c1}{//     std::vector \PYGZlt{}std::vector \PYGZlt{} double \PYGZgt{} \PYGZgt{} geSiLi;}
+\PYG{c+c1}{//     std::vector \PYGZlt{}std::vector \PYGZlt{} double \PYGZgt{} \PYGZgt{} siliSiLi;}
+\PYG{c+c1}{//     Timing(int,int,char*);}
+\PYG{c+c1}{// \PYGZcb{};}
+
+\PYG{n}{Timing}\PYG{o}{::}\PYG{n}{Timing} \PYG{p}{()}
+\PYG{p}{\PYGZob{}}
+    \PYG{c+c1}{//Just make a thing}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{Timing}\PYG{o}{::}\PYG{n}{Timing} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{nGe}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nSiLi}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{cTiming}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{n}{std}\PYG{o}{::}\PYG{n}{string} \PYG{n}{buffer}\PYG{p}{;}
+    \PYG{k+kt}{int} \PYG{n}{nCounter} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{strcmp}\PYG{p}{(}\PYG{n}{cTiming}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{)}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{)} \PYG{c+c1}{//No file provided}
+    \PYG{p}{\PYGZob{}}
+        \PYG{n}{cTiming} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}Timing\PYGZdq{}}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{std}\PYG{o}{::}\PYG{n}{fstream} \PYG{n}{fTiming}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}user/\PYGZpc{}s.dat\PYGZdq{}}\PYG{p}{,}\PYG{n}{cTiming}\PYG{p}{));} \PYG{c+c1}{//Timing File}
+    \PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{fTiming}\PYG{p}{.}\PYG{n}{is\PYGZus{}open}\PYG{p}{())}
+    \PYG{p}{\PYGZob{}}
+        \PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Timing file did not open. Ending program.\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+        \PYG{c+c1}{//Need to add a flag somehow that this is void.}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fTiming}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Label Line}
+    \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fTiming}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Timing Line}
+    \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{row}\PYG{p}{;} \PYG{c+c1}{//Row for adding a level in.}
+    \PYG{k}{while}\PYG{p}{(}\PYG{n}{strncmp}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{c\PYGZus{}str}\PYG{p}{(),}\PYG{l+s}{\PYGZdq{}//ge\PYGZhy{}sili\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{c+c1}{//Loop through all the ge Detectors}
+    \PYG{p}{\PYGZob{}}
+        \PYG{n}{geGe}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);} \PYG{c+c1}{//Put a new row of timing}
+        \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{k}\PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{4}\PYG{p}{;} \PYG{n}{k}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through detector 1,  detector 2, low time, high time.}
+        \PYG{p}{\PYGZob{}}
+            \PYG{n}{geGe}\PYG{p}{[}\PYG{n}{nCounter}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{atof}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{()));} \PYG{c+c1}{//read in jth number in line}
+            \PYG{n}{buffer} \PYG{o}{=} \PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{}\PYGZbs{}n\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{));} \PYG{c+c1}{//make a substring of the rest of the line}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{n}{nCounter}\PYG{o}{++}\PYG{p}{;}
+        \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fTiming}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Line with timing in it}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Ge\PYGZhy{}ge timing read in\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+    \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fTiming}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Line with timing in it}
+    \PYG{n}{nCounter} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k}{while}\PYG{p}{(}\PYG{n}{strncmp}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{c\PYGZus{}str}\PYG{p}{(),}\PYG{l+s}{\PYGZdq{}//sili\PYGZhy{}sili\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{0}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}}
+        \PYG{n}{geSiLi}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);} \PYG{c+c1}{//Put a new row of timing}
+        \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{k}\PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{4}\PYG{p}{;} \PYG{n}{k}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through detector 1,  detector 2, low time, high time.}
+        \PYG{p}{\PYGZob{}}
+            \PYG{n}{geSiLi}\PYG{p}{[}\PYG{n}{nCounter}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{atof}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{()));} \PYG{c+c1}{//read in jth number in line}
+            \PYG{n}{buffer} \PYG{o}{=} \PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{}\PYGZbs{}n\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{));} \PYG{c+c1}{//make a substring of the rest of the line}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{n}{nCounter}\PYG{o}{++}\PYG{p}{;}
+        \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fTiming}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Line with timing in it}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Ge\PYGZhy{}sili timing read in\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+    \PYG{n}{nCounter}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fTiming}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Line with timing in it}
+    \PYG{k}{while}\PYG{p}{(}\PYG{o}{!}\PYG{n}{fTiming}\PYG{p}{.}\PYG{n}{eof}\PYG{p}{())} \PYG{c+c1}{//Loop through all the sili Detectors}
+    \PYG{p}{\PYGZob{}}
+        \PYG{n}{siliSiLi}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);} \PYG{c+c1}{//Put a new row of timing}
+        \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{k}\PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{4}\PYG{p}{;} \PYG{n}{k}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through detector 1,  detector 2, low time, high time.}
+        \PYG{p}{\PYGZob{}}
+            \PYG{n}{siliSiLi}\PYG{p}{[}\PYG{n}{nCounter}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{atof}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{()));} \PYG{c+c1}{//read in jth number in line}
+            \PYG{n}{buffer} \PYG{o}{=} \PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{}\PYGZbs{}n\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{));} \PYG{c+c1}{//make a substring of the rest of the line}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{n}{nCounter}\PYG{o}{++}\PYG{p}{;}
+        \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fTiming}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Line with timing in it}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Sili\PYGZhy{}sili timing read in\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

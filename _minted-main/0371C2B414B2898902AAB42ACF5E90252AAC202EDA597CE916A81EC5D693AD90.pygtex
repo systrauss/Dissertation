@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/bin/tcsh}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZdl{} \PYGZhy{}M netID@nd.edu}
+\PYG{c+c1}{\PYGZsh{}\PYGZdl{} \PYGZhy{}m a}
+\PYG{c+c1}{\PYGZsh{}\PYGZdl{} \PYGZhy{}q long}
+\PYG{c+c1}{\PYGZsh{}\PYGZdl{} \PYGZhy{}N Nickname}
+\PYG{c+c1}{\PYGZsh{}\PYGZdl{} \PYGZhy{}o logs/}
+\PYG{c+c1}{\PYGZsh{}\PYGZdl{} \PYGZhy{}t runStart\PYGZhy{}runEnd}
+\PYG{c+c1}{\PYGZsh{}\PYGZdl{} \PYGZhy{}j y}
+
+module load /afs/crc.nd.edu/user/n/nsl/nuclear/startup/nsl
+module load root/6.02
+root\PYGZhy{}config \PYGZhy{}\PYGZhy{}version
+\PYG{n+nb}{cd} CodeDirectory
+\PYG{n+nb}{echo} \PYG{l+s+s2}{\PYGZdq{}start task }\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n+nv}{SGE\PYGZus{}TASK\PYGZus{}ID}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}
+date
+./main \PYG{n+nv}{\PYGZdl{}SGE\PYGZus{}TASK\PYGZus{}ID} FileOut CutFile TimingFile
+\PYG{n+nb}{echo} \PYG{l+s+s2}{\PYGZdq{}ended task }\PYG{l+s+si}{\PYGZdl{}\PYGZob{}}\PYG{n+nv}{SGE\PYGZus{}TASK\PYGZus{}ID}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}
+date
+
+\PYG{n+nb}{exit} \PYG{n+nv}{\PYGZdl{}?}
+\end{Verbatim}

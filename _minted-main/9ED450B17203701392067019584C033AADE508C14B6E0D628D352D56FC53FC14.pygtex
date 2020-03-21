@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{l+m+mi}{14} \PYG{c+c1}{//Total number of Ge cuts to make}
+\PYG{c+c1}{//Ge number(0\PYGZhy{}6),centroid, sigma}
+\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{123}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{123}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{123}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mi}{123}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{123}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{123}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{l+m+mi}{123}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mf}{247.9}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mf}{247.9}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mf}{247.9}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mf}{247.9}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mf}{247.9}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mf}{247.9}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{l+m+mf}{247.9}\PYG{p}{,}\PYG{l+m+mf}{1.5}
+\end{Verbatim}

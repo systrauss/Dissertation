@@ -1,0 +1,69 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/* This macro is meant to subtract off a skewed gaussian of the given }
+\PYG{c+cm}{parameters. }
+
+\PYG{c+cm}{The conversion coefficient, area of the gamma, efficiency of the }
+\PYG{c+cm}{gamma detector, and efficiency of the electron detector are used to calculate }
+\PYG{c+cm}{the area of the skewed gaussian, and give an input to the height.}
+
+\PYG{c+cm}{A best guess based on other data must be used for the width/sigma. R and beta}
+\PYG{c+cm}{are taken from calibration data. The centroid is based off two things: the gamma}
+\PYG{c+cm}{centroid and the electron orbital given.*/}
+
+\PYG{n}{TH1F}\PYG{o}{*} \PYG{n+nf}{Subtraction}\PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{dICC}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{dGeEff}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{dSiLiEff}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{dGeArea}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{dCorrRatio}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{dGeCentroid}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nOrbital}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{dR}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{dBeta}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{dSigma}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{double} \PYG{n}{dSiLiCentroid} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k+kt}{double} \PYG{n}{dSkewCentroid} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k+kt}{double} \PYG{n}{dSiLiArea} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{k+kt}{double} \PYG{n}{dHeight} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+    \PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{hSubtracted} \PYG{o}{=} \PYG{n}{hist}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Clone}\PYG{p}{();}
+    \PYG{c+c1}{//Getting sili centroid}
+    \PYG{k}{switch}\PYG{p}{(}\PYG{n}{nOrbital}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}}
+        \PYG{k}{case} \PYG{l+m+mi}{0}\PYG{o}{:}
+            \PYG{n}{dSiLiCentroid} \PYG{o}{=} \PYG{n}{dGeCentroid} \PYG{o}{\PYGZhy{}} \PYG{l+m+mf}{50.239}\PYG{p}{;}
+            \PYG{k}{break}\PYG{p}{;}
+        \PYG{k}{case} \PYG{l+m+mi}{1}\PYG{o}{:}
+            \PYG{n}{dSiLiCentroid} \PYG{o}{=} \PYG{n}{dGeCentroid} \PYG{o}{\PYGZhy{}} \PYG{l+m+mf}{7.9303}\PYG{p}{;}
+            \PYG{k}{break}\PYG{p}{;}
+        \PYG{k}{case} \PYG{l+m+mi}{2}\PYG{o}{:}
+            \PYG{n}{dSiLiCentroid} \PYG{o}{=} \PYG{n}{dGeCentroid} \PYG{o}{\PYGZhy{}} \PYG{l+m+mf}{1.3}\PYG{p}{;}
+            \PYG{k}{break}
+        \PYG{k}{default}\PYG{o}{:}
+            \PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Invalid electron orbital\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}
+            \PYG{k}{return} \PYG{k}{nullptr}\PYG{p}{;}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{c+c1}{//calculating area under sili peak}
+    \PYG{n}{dSiLiArea} \PYG{o}{=} \PYG{n}{dICC}\PYG{o}{*}\PYG{n}{dGeArea}\PYG{o}{/}\PYG{n}{dGeEff}\PYG{o}{*}\PYG{n}{dSiLiEff}\PYG{o}{*}\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{n}{dCorrRatio}\PYG{p}{;}
+    \PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}SiLi Area: \PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{dSiLiArea} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}
+    \PYG{c+c1}{//calculating the height from the area.}
+    \PYG{n}{dHeight} \PYG{o}{=} \PYG{n}{dSiLiArea}\PYG{o}{*}\PYG{l+m+mi}{100}\PYG{o}{/}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{dSigma}\PYG{o}{**}\PYG{l+m+mi}{2}\PYG{o}{/}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{dBeta}\PYG{o}{**}\PYG{l+m+mi}{2}\PYG{p}{))}\PYG{o}{*}\PYG{n}{dR}\PYG{o}{*}\PYG{n}{dBeta}\PYG{o}{\PYGZhy{}}\PYG{n}{sqrt}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{l+m+mf}{3.1415926}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{dR}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{100}\PYG{p}{)}\PYG{o}{*}\PYG{n}{dSigma}\PYG{p}{);}
+    \PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}SiLi Height: \PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{dHeight} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}
+    \PYG{c+c1}{//calculating the skewed shift in the centroid}
+    \PYG{n}{dSkewCentroid} \PYG{o}{=} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{dBeta}\PYG{o}{*}\PYG{n}{dBeta}\PYG{o}{*}\PYG{n}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{dSigma}\PYG{o}{*}\PYG{n}{dSigma}\PYG{o}{/}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{dBeta}\PYG{o}{*}\PYG{n}{dBeta}\PYG{p}{)))}\PYG{o}{/}\PYG{p}{((}\PYG{n}{dR}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{100}\PYG{p}{)}\PYG{o}{*}\PYG{n}{sqrt}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{l+m+mf}{3.14159}\PYG{p}{)}\PYG{o}{*}\PYG{n}{dSigma}\PYG{o}{+}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{dR}\PYG{o}{*}\PYG{n}{dBeta}\PYG{o}{*}\PYG{n}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{dSigma}\PYG{o}{*}\PYG{n}{dSigma}\PYG{o}{/}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{dBeta}\PYG{o}{*}\PYG{n}{dBeta}\PYG{p}{)));}
+    \PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Centroid shift: \PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{dSkewCentroid} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+    \PYG{n}{dSkewCentroid} \PYG{o}{=} \PYG{n}{dSiLiCentroid}\PYG{o}{\PYGZhy{}}\PYG{n}{dSkewCentroid}\PYG{p}{;}
+    \PYG{c+c1}{//Skewed gaussian function being set}
+    \PYG{n}{TF1}\PYG{o}{*} \PYG{n}{skewed} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}skewed\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]*(1\PYGZhy{}[3]/100)*exp(\PYGZhy{}((x\PYGZhy{}[1])/(sqrt(2.0)*[2]))**2)+[0]*[3]/100*exp((x\PYGZhy{}[5])/[4])*TMath::Erfc((x\PYGZhy{}[5])/(sqrt(2.0)*[2])+[2]/(sqrt(2.0)*[4]))\PYGZdq{}}\PYG{p}{,} \PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+    \PYG{n}{skewed}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParNames}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}height\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}peak\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}sigma\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}R\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}beta\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}centroid\PYGZdq{}}\PYG{p}{);}
+    \PYG{n}{skewed}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{n}{dHeight}\PYG{p}{,}\PYG{n}{dSiLiCentroid}\PYG{p}{,}\PYG{n}{dSigma}\PYG{p}{,}\PYG{n}{dR}\PYG{p}{,}\PYG{n}{dBeta}\PYG{p}{,}\PYG{n}{dSiLiCentroid}\PYG{p}{);}
+
+    \PYG{c+c1}{//begin the subtraction}
+    \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{n}{xMin}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{xMax}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}}
+        \PYG{n}{hSubtracted}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetBinContent}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{hSubtracted}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetBinContent}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{skewed}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Eval}\PYG{p}{(}\PYG{n}{hSubtracted}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetBinCenter}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)));}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{n}{TCanvas}\PYG{o}{*} \PYG{n}{c1} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TCanvas}\PYG{p}{();}
+    \PYG{n}{c1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Divide}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{);}
+    \PYG{n}{c1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{cd}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+    \PYG{n}{hist}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Draw}\PYG{p}{();}
+    \PYG{n}{skewed}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetLineColor}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+    \PYG{n}{skewed}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Draw}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}same\PYGZdq{}}\PYG{p}{);}
+    \PYG{n}{hSubtracted}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetLineColor}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{);}
+    \PYG{n}{hSubtracted}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Draw}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}same\PYGZdq{}}\PYG{p}{);}
+    \PYG{n}{c1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{cd}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{);}
+    \PYG{n}{hSubtracted}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Draw}\PYG{p}{();}
+    \PYG{k}{return} \PYG{n}{hSubtracted}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

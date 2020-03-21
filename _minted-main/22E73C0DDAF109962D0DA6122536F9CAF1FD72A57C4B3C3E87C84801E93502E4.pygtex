@@ -1,0 +1,35 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{//////////////////////////////////////////////////////////}
+\PYG{c+c1}{// This class has been automatically generated on}
+\PYG{c+c1}{// Thu Jan 11 12:37:54 2018 by ROOT version 5.34/19}
+\PYG{c+c1}{// from TTree evtTree/133Ba\PYGZus{}90deg\PYGZus{}facingdown\PYGZus{}trig(coin1(siliall+ge1+ge2) + pulser)}
+\PYG{c+c1}{// found on file: rootFiles/Data/run1.root}
+\PYG{c+c1}{//////////////////////////////////////////////////////////}
+
+\PYG{c+cp}{\PYGZsh{}ifndef timing\PYGZus{}h}
+\PYG{c+cp}{\PYGZsh{}define timing\PYGZus{}h}
+
+\PYG{c+c1}{//C++ libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}iostream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}fstream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}string\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}cmath\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}vector\PYGZgt{}}
+
+\PYG{c+c1}{// Fixed size dimensions of array or collections stored in the TTree if any.}
+
+\PYG{k}{class} \PYG{n+nc}{Timing}
+\PYG{p}{\PYGZob{}}
+  \PYG{k}{public}\PYG{o}{:}
+    \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector} \PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector} \PYG{o}{\PYGZlt{}} \PYG{k+kt}{double} \PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{geGe}\PYG{p}{;}
+    \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector} \PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector} \PYG{o}{\PYGZlt{}} \PYG{k+kt}{double} \PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{geSiLi}\PYG{p}{;}
+    \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector} \PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector} \PYG{o}{\PYGZlt{}} \PYG{k+kt}{double} \PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{siliSiLi}\PYG{p}{;}
+    \PYG{n}{Timing}\PYG{p}{();}
+    \PYG{n}{Timing}\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{,}\PYG{k+kt}{int}\PYG{p}{,}\PYG{k+kt}{char}\PYG{o}{*}\PYG{p}{);}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{c+cp}{\PYGZsh{}endif}
+
+\PYG{c+cp}{\PYGZsh{}ifdef timing\PYGZus{}cxx}
+\PYG{c+cp}{\PYGZsh{}endif }\PYG{c+c1}{// \PYGZsh{}ifdef timing\PYGZus{}cxx}
+\end{Verbatim}

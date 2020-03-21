@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gh}{\PYGZsh{}} Merge\PYGZhy{}Parallel
+
+This code is to be used in conjunction with ICEBall\PYGZhy{}Coincidence\PYGZhy{}Code.
+
+Inputs for the code are as follows (must be in this order)
+\PYG{k}{1.} First sequential run
+\PYG{k}{2.} Last sequential run
+\PYG{k}{3.} File output name (should be the same as the name used for ICEBall\PYGZhy{}Coincidence\PYGZhy{}Code)
+\PYG{k}{4.} Cut File Name (Should be the same as the name used for ICEBall\PYGZhy{}Coincidence\PYGZhy{}Code)
+\end{Verbatim}

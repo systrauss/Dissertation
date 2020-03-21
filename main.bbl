@@ -1,0 +1,684 @@
+\begin{thebibliography}{87}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Allison et~al.(2016)Allison, Amako, Apostolakis, Arce, Asai, Aso,
+  Bagli, Bagulya, Banerjee, Barrand, Beck, Bogdanov, Brandt, Brown, Burkhardt,
+  Canal, Cano-Ott, Chauvie, Cho, Cirrone, Cooperman, Cort{\'e}s-Giraldo, Cosmo,
+  Cuttone, Depaola, Desorgher, Dong, Dotti, Elvira, Folger, Francis, Galoyan,
+  Garnier, Gayer, Genser, Grichine, Guatelli, Gu{\`e}ye, Gumplinger, Howard,
+  H\u{r}ivn{\'a}\u{c}ov{\'a}, Hwang, Incerti, Ivanchenko, Ivanchenko, Jones,
+  Jun, Kaitaniemi, Karakatsanis, Karamitros, Kelsey, Kimura, Koi, Kurashige,
+  Lechner, Lee, Longo, Maire, Mancusi, Mantero, Mendoza, Morgan, Murakami,
+  Nikitina, Pandola, Paprocki, Perl, Petrovi{\'c}, Pia, Pokorski, Quesada,
+  Raine, Reis, Ribon, Fira, Romano, Russo, Santin, Sasaki, Sawkey, Shin,
+  Strakovsky, Taborda, Tanaka, Tom{\'e}, Toshito, Tran, Truscott, Urban,
+  Uzhinsky, Verbeke, Verderi, Wendt, Wenzel, Wright, Wright, Yamashita, Yarba,
+  and Yoshida]{allison16:_geant4}
+J.~Allison, K.~Amako, J.~Apostolakis, P.~Arce, M.~Asai, T.~Aso, E.~Bagli,
+  A.~Bagulya, S.~Banerjee, G.~Barrand, B.~R. Beck, A.~G. Bogdanov, D.~Brandt,
+  J.~M.~C. Brown, H.~Burkhardt, P.~Canal, D.~Cano-Ott, S.~Chauvie, K.~Cho,
+  G.~A.~P. Cirrone, G.~Cooperman, M.~A. Cort{\'e}s-Giraldo, G.~Cosmo,
+  G.~Cuttone, G.~Depaola, L.~Desorgher, X.~Dong, A.~Dotti, V.~D. Elvira,
+  G.~Folger, Z.~Francis, A.~Galoyan, L.~Garnier, M.~Gayer, K.~L. Genser, V.~M.
+  Grichine, S.~Guatelli, P.~Gu{\`e}ye, P.~Gumplinger, A.~S. Howard,
+  I.~H\u{r}ivn{\'a}\u{c}ov{\'a}, S.~Hwang, S.~Incerti, A.~Ivanchenko, V.~N.
+  Ivanchenko, F.~W. Jones, S.~Y. Jun, P.~Kaitaniemi, N.~Karakatsanis,
+  M.~Karamitros, M.~Kelsey, A.~Kimura, T.~Koi, H.~Kurashige, A.~Lechner,
+  S.~Lee, F.~Longo, M.~Maire, D.~Mancusi, A.~Mantero, E.~Mendoza, B.~Morgan,
+  K.~Murakami, T.~Nikitina, L.~Pandola, P.~Paprocki, J.~Perl, I.~Petrovi{\'c},
+  M.~G. Pia, W.~Pokorski, J.~M. Quesada, M.~Raine, M.~A. Reis, A.~Ribon, A.~R.
+  Fira, F.~Romano, G.~Russo, G.~Santin, T.~Sasaki, D.~Sawkey, J.~I. Shin, I.~I.
+  Strakovsky, A.~Taborda, S.~Tanaka, B.~Tom{\'e}, T.~Toshito, H.~N. Tran, P.~R.
+  Truscott, L.~Urban, V.~Uzhinsky, J.~M. Verbeke, M.~Verderi, B.~Wendt,
+  H.~Wenzel, D.~H. Wright, D.~M. Wright, T.~Yamashita, J.~Yarba, and
+  H.~Yoshida.
+\newblock {Recent developments in Geant4}.
+\newblock \emph{{Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment}},
+  835:\penalty0 186 -- 225, 2016.
+\newblock ISSN 0168-9002.
+\newblock \doi{https://doi.org/10.1016/j.nima.2016.06.125}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0168900216306957}.
+
+\bibitem[Allmond et~al.(2017)Allmond, Beausang, Ross, Humby, Basunia,
+  Bernstein, Bleuel, Brooks, Brown, Burke, Darakchieva, Dudziak, Evans, Fallon,
+  Jeppesen, Leblanc, Lesher, Mcmahan, Meyer, Phair, Rasmussen, Scielzo,
+  Stroberg, and Wiedeking]{allmond17:_154_pt}
+J.~M. Allmond, C.~W. Beausang, T.~J. Ross, P.~Humby, M.~S. Basunia, L.~A.
+  Bernstein, D.~L. Bleuel, W.~Brooks, N.~Brown, J.~T. Burke, B.~K. Darakchieva,
+  K.~R. Dudziak, K.~E. Evans, P.~Fallon, H.~B. Jeppesen, J.~D. Leblanc, S.~R.
+  Lesher, M.~A. Mcmahan, D.~A. Meyer, L.~Phair, J.~O. Rasmussen, N.~D. Scielzo,
+  S.~R. Stroberg, and M.~Wiedeking.
+\newblock Particle- $\gamma$ coincidence spectroscopy of the n = 90 nucleus
+  $^{154}$gd by ( $p,t\gamma$).
+\newblock \emph{European Physical Journal. A}, 53\penalty0 (3), 2017.
+\newblock ISSN 1434-6001.
+
+\bibitem[{AMETEK ORTEC}()]{ortec:_fastamp}
+{AMETEK ORTEC}.
+\newblock {579 Fast-Filter Amplifier}.
+\newblock
+  \url{https://www.ortec-online.com/products/electronics/amplifiers/579}.
+
+\bibitem[Aprahamian et~al.(2018)Aprahamian, de~Haan, Lesher, Casarella,
+  Stratman, B\"orner, Lehmann, Jentschel, and Bruce]{aprahamian18:_156gd}
+A.~Aprahamian, R.~C. de~Haan, S.~R. Lesher, C.~Casarella, A.~Stratman, H.~G.
+  B\"orner, H.~Lehmann, M.~Jentschel, and A.~M. Bruce.
+\newblock Lifetime measurements in $^{156}\mathrm{Gd}$.
+\newblock \emph{Phys. Rev. C}, 98:\penalty0 034303, September 2018.
+\newblock \doi{10.1103/PhysRevC.98.034303}.
+\newblock URL \url{https://link.aps.org/doi/10.1103/PhysRevC.98.034303}.
+
+\bibitem[{Autodesk}()]{autodesk:_inventor}
+{Autodesk}.
+\newblock Inventor professional-grade 3d cad software for product design and
+  engineering.
+\newblock \url{https://www.autodesk.com/products/inventor/overview}.
+
+\bibitem[B{\"a}cklin et~al.(1982)B{\"a}cklin, Hedin, Fogelberg, Saraceno,
+  Greenwood, Reich, Koch, Baader, Breitig, Schult, Schreckenbach, Egidy, and
+  Mampe]{backlin82:_156Gd}
+A.~B{\"a}cklin, G.~Hedin, B.~Fogelberg, M.~Saraceno, R.~Greenwood, C.~Reich,
+  H.~Koch, H.~Baader, H.~Breitig, O.~Schult, K.~Schreckenbach, T.~V. Egidy, and
+  W.~Mampe.
+\newblock Levels in 156gd studied in the (n, $\gamma$) reaction.
+\newblock \emph{Nuclear Physics A}, 380\penalty0 (2):\penalty0 189 -- 260,
+  1982.
+\newblock ISSN 0375-9474.
+\newblock \doi{https://doi.org/10.1016/0375-9474(82)90104-X}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/037594748290104X}.
+
+\bibitem[Baktash et~al.(1995)Baktash, Haas, and
+  Nazarewicz]{baktash95:_dynamic_inertia}
+C.~Baktash, B.~Haas, and W.~Nazarewicz.
+\newblock Identical bands in deformed and superdeformed nuclei.
+\newblock \emph{Annual Review of Nuclear and Particle Science}, 45\penalty0
+  (1):\penalty0 485--541, 1995.
+\newblock \doi{10.1146/annurev.ns.45.120195.002413}.
+\newblock URL \url{https://doi.org/10.1146/annurev.ns.45.120195.002413}.
+
+\bibitem[Battaglia(2015)]{battaglia15:_iceball_176lu}
+A.~Battaglia.
+\newblock \emph{Conversion Coefficients Measurements of $^{176}$Lu Using
+  ICEBall}.
+\newblock PhD thesis, University of Notre Dame, May 2015.
+
+\bibitem[Beausang et~al.(2000)Beausang, Barton, Caprio, Casten, Cooper,
+  Kr{\"u}cken, Liu, Novak, Wang, Wilhelm, Wilson, Zamfir, and
+  Zilges]{beausang00:_yrast}
+C.~Beausang, C.~Barton, M.~Caprio, R.~Casten, J.~Cooper, R.~Kr{\"u}cken,
+  B.~Liu, J.~Novak, Z.~Wang, M.~Wilhelm, A.~Wilson, N.~Zamfir, and A.~Zilges.
+\newblock {The YRAST Ball array}.
+\newblock \emph{Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment},
+  452\penalty0 (3):\penalty0 431 -- 439, 2000.
+\newblock ISSN 0168-9002.
+\newblock \doi{https://doi.org/10.1016/S0168-9002(00)00449-6}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0168900200004496}.
+
+\bibitem[Bevington and Robinson(2003)]{bevington03:_error}
+P.~R. Bevington and D.~K. Robinson.
+\newblock \emph{{Data Reduction and Error Analysis for the Physical Sciences}}.
+\newblock McGraw-Hill, 3rd edition, 2003.
+\newblock ISBN 0-07-247227-8.
+
+\bibitem[Biedenharn and Rose(1953)]{biedenharn53:_theory_angular_corr}
+L.~C. Biedenharn and M.~E. Rose.
+\newblock Theory of angular correlation of nuclear radiations.
+\newblock \emph{Reviews of Modern Physics}, 25\penalty0 (3):\penalty0 729--777,
+  July 1953.
+
+\bibitem[Black et~al.(1969)Black, Caelli, Livesey, and
+  Watson]{black69:_carbonalphan}
+J.~Black, W.~Caelli, D.~Livesey, and R.~Watson.
+\newblock {Search for the lowest T = 2 state of 8Be: Experimental}.
+\newblock \emph{Physics Letters B}, 30\penalty0 (2):\penalty0 100 -- 102, 1969.
+\newblock ISSN 0370-2693.
+\newblock \doi{https://doi.org/10.1016/0370-2693(69)90408-0}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/0370269369904080}.
+
+\bibitem[Blatt and Weisskopf(1979)]{blatt79:_emradiation}
+J.~M. Blatt and V.~F. Weisskopf.
+\newblock \emph{Theoretical Nuclear Physics}.
+\newblock Springer-Verlag New York Inc., 1979.
+
+\bibitem[Bohr and Mottelson(1955)]{bohr55:_deformation}
+A.~Bohr and B.~Mottelson.
+\newblock {Moments of Inertia of Rotating Nuclei}.
+\newblock \emph{Kgl. Danske Videnskab. Selskab, Mat.-fys. Medd.}, 30\penalty0
+  (1), 1955.
+
+\bibitem[Brink and Satchler(2015)]{brink93:_emradiation}
+D.~M. Brink and G.~R. Satchler.
+\newblock \emph{{Angular Momentum}}.
+\newblock {Oxford Science Publications}, 3rd edition, 2015.
+
+\bibitem[Brun and Rademakers(1997)]{brun97:_root}
+R.~Brun and F.~Rademakers.
+\newblock Root - an object oriented data analysis framework.
+\newblock \emph{Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment},
+  389\penalty0 (1):\penalty0 81 -- 86, 1997.
+\newblock ISSN 0168-9002.
+\newblock \doi{https://doi.org/10.1016/S0168-9002(97)00048-X}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S016890029700048X}.
+\newblock New Computing Techniques in Physics Research V.
+
+\bibitem[{CAEN}({\natexlab{a}})]{caen:_TDC}
+{CAEN}.
+\newblock {CAEN V775}.
+\newblock \url{https://www.caen.it/products/v775/}, {\natexlab{a}}.
+
+\bibitem[{CAEN}({\natexlab{b}})]{caen:_scaler}
+{CAEN}.
+\newblock {CAEN V830}.
+\newblock \url{https://www.caen.it/products/v830/}, {\natexlab{b}}.
+
+\bibitem[Casten and Zamfir(2000)]{casten00:_x5}
+Casten and Zamfir.
+\newblock Evidence for a possible e(5) symmetry in 134ba.
+\newblock \emph{Physical review letters}, 85\penalty0 (17):\penalty0 3584,
+  2000.
+\newblock ISSN 00319007.
+
+\bibitem[Casten(1990)]{casten90:_structure}
+R.~F. Casten.
+\newblock \emph{Nuclear Structure from a Simple Perspective}.
+\newblock Oxford University Press, Inc., 1st edition, 1990.
+
+\bibitem[Caurier et~al.(2007)Caurier, Men\'endez, Nowacki, and
+  Poves]{caurier07:_shape_coexist}
+E.~Caurier, J.~Men\'endez, F.~Nowacki, and A.~Poves.
+\newblock Coexistence of spherical states with deformed and superdeformed bands
+  in doubly magic $^{40}\mathrm{Ca}$: A shell-model challenge.
+\newblock \emph{Phys. Rev. C}, 75:\penalty0 054317, May 2007.
+\newblock \doi{10.1103/PhysRevC.75.054317}.
+\newblock URL \url{https://link.aps.org/doi/10.1103/PhysRevC.75.054317}.
+
+\bibitem[Choppin et~al.(2013)Choppin, Liljenzin, Rydberg, and
+  Ekberg]{choppin13:_nilsson}
+G.~Choppin, J.-O. Liljenzin, J.~Rydberg, and C.~Ekberg.
+\newblock \emph{Radiochemistry and Nuclear Chemistry}.
+\newblock Academic Press, Oxford, 4th edition, 2013.
+
+\bibitem[Church and Weneser(1956)]{church56:_monopole}
+E.~L. Church and J.~Weneser.
+\newblock Electric-monopole transitions in atomic nuclei.
+\newblock \emph{Physical Review}, 103\penalty0 (4):\penalty0 1035--1044, August
+  1956.
+
+\bibitem[Church et~al.(1958)Church, Rose, and Weneser]{church58:_monopole}
+E.~L. Church, M.~E. Rose, and J.~Weneser.
+\newblock Electric-monopole directional-correlation experiments.
+\newblock \emph{Physical Review}, 109\penalty0 (4):\penalty0 1299--1306,
+  February 1958.
+
+\bibitem[Clifford et~al.(2002)Clifford, Guo-ji, Ingelbrecht, and
+  Pomeroy]{clifford02:_target}
+S.~Clifford, X.~Guo-ji, C.~Ingelbrecht, and M.~J. Pomeroy.
+\newblock Processes for the production of ultra-pure metals from oxide and
+  their cold rolling to ultra-thin foils for use as targets and as reference
+  materials.
+\newblock \emph{Nuclear Instruments and Methods in Physics Research A},
+  \penalty0 (480):\penalty0 29--35, 2002.
+
+\bibitem[{COMSOL Inc.}()]{comsol:_comsol}
+{COMSOL Inc.}
+\newblock {COMSOL Multiphysics Software}.
+\newblock \url{https://www.comsol.com/comsol-multiphysics}.
+
+\bibitem[Delaroche et~al.(2010)Delaroche, Girod, Libert, Goutte, Hilaire,
+  P\'eru, Pillet, and Bertsch]{delaroche10:_systematics}
+J.~P. Delaroche, M.~Girod, J.~Libert, H.~Goutte, S.~Hilaire, S.~P\'eru,
+  N.~Pillet, and G.~F. Bertsch.
+\newblock Structure of even-even nuclei using a mapped collective hamiltonian
+  and the d1s gogny interaction.
+\newblock \emph{Physical Review C}, 81:\penalty0 014303, Jan 2010.
+
+\bibitem[Ewan et~al.(1962)Ewan, Graham, and Geiger]{ewan62:_156gd}
+G.~Ewan, R.~Graham, and J.~Geiger.
+\newblock Levels in gd156 fed in the $\beta$-decay of eu156.
+\newblock \emph{Nuclear Physics}, 29:\penalty0 153 -- 176, 1962.
+\newblock ISSN 0029-5582.
+\newblock \doi{https://doi.org/10.1016/0029-5582(62)90173-6}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/0029558262901736}.
+
+\bibitem[Fano(1947)]{fano47:_factor}
+U.~Fano.
+\newblock Ionization yield of radiation ii. the fluctuations of the number of
+  ions.
+\newblock \emph{Physical Review}, 72\penalty0 (1):\penalty0 26--29, July 1947.
+
+\bibitem[Fleming et~al.(1973)Fleming, G{\"u}nther, Hagemann, Herskind, and
+  Tj{\o}m]{fleming73:_156gd}
+D.~G. Fleming, C.~G{\"u}nther, G.~Hagemann, B.~Herskind, and P.~O. Tj{\o}m.
+\newblock Study of the ($p,t$) reaction on the even gadolinium nuclei.
+\newblock \emph{Phys. Rev. C}, 8:\penalty0 806--818, Aug 1973.
+\newblock \doi{10.1103/PhysRevC.8.806}.
+\newblock URL \url{https://link.aps.org/doi/10.1103/PhysRevC.8.806}.
+
+\bibitem[Gono and Sugihara(1974)]{gono74:_154gd_e0}
+Y.~Gono and T.~T. Sugihara.
+\newblock Electric monopole admixtures in interband transitions of
+  $^{154}${Gd}.
+\newblock \emph{Physical Review C}, 10\penalty0 (6):\penalty0 2460--2466, 1974.
+
+\bibitem[Heyde and Wood(2011)]{heyde11:_shape_coexist}
+K.~Heyde and J.~L. Wood.
+\newblock Shape coexistence in atomic nuclei.
+\newblock \emph{Reviews of Modern Physics}, 83:\penalty0 1467--1521, 2011.
+
+\bibitem[Iachello(2000)]{iachello00:_x5}
+Iachello.
+\newblock Dynamic symmetries at the critical point.
+\newblock \emph{Physical review letters}, 85\penalty0 (17):\penalty0 3580,
+  2000.
+\newblock ISSN 00319007.
+
+\bibitem[Iachello(2001)]{iachello01:_x5}
+F.~Iachello.
+\newblock Analytic description of critical point nuclei in a spherical-axially
+  deformed shape phase transition.
+\newblock \emph{Physical Review Letters}, 87\penalty0 (5):\penalty0
+  52502--1--52502--4, 2001.
+\newblock ISSN 00319007.
+
+\bibitem[Ilie and Casten(2011)]{ilie11:_deformed}
+G.~Ilie and R.~F. Casten.
+\newblock {$E0$ transitions in deformed nuclei}.
+\newblock \emph{Physical Review C}, 84:\penalty0 064320, 2011.
+
+\bibitem[{Institute for Nuclear Astrophysics}(2018)]{isnap18:_georgina}
+{Institute for Nuclear Astrophysics}.
+\newblock {GEORGINA A compact Ge-detector Array}.
+\newblock \url{https://isnap.nd.edu/research/facility/experimental/georgina/},
+  2018.
+
+\bibitem[Isacker(1999)]{vanisacker99:_symmetries}
+P.~V. Isacker.
+\newblock Dynamical symmetries in the structure of nuclei.
+\newblock \emph{Reports on Progress in Physics}, 62\penalty0 (12):\penalty0
+  1661--1717, 1999.
+
+\bibitem[{J. Van Klinken and K. Wisshak}(1972)]{vanklinken72:mini_orange}
+{J. Van Klinken and K. Wisshak}.
+\newblock {Conversion Electrons Separated from High Background}.
+\newblock \emph{Nuclear Instruments and Methods}, 98:\penalty0 1--8, 1972.
+
+\bibitem[{J. Van Klinken, S.~J. Feenstra, K. Wisshak and H.
+  Faust}(1975)]{vanklinken75:mini_orange}
+{J. Van Klinken, S.~J. Feenstra, K. Wisshak and H. Faust}.
+\newblock {Mini-Orange Spectrometers for In- and Off-Beam Observation of
+  Conversion Electrons}.
+\newblock \emph{Nuclear Instruments and Methods}, 130:\penalty0 427--441, 1975.
+
+\bibitem[Jackson(1999)]{jackson99:_emradiation}
+J.~D. Jackson.
+\newblock \emph{Classical Electrodynamics}.
+\newblock John Wiley \& Sons Inc., 3rd edition, 1999.
+
+\bibitem[Kib{\'e}di et~al.(2008)Kib{\'e}di, Burrows, Trzhaskovskaya, Davidson,
+  and Jr.]{kibedi08:_BRICC}
+T.~Kib{\'e}di, T.~W. Burrows, M.~B. Trzhaskovskaya, P.~M. Davidson, and
+  C.~W.~N. Jr.
+\newblock Evaluation of theoretical conversion coefficients using bricc.
+\newblock \emph{Nuclear Instrumentation and Methods A}, 589:\penalty0 202--229,
+  2008.
+
+\bibitem[Klora et~al.(1993)Klora, B{\"o}rner, von Egidy, Georgii, Jolie, Judge,
+  Khitrov, Krusche, Libman, Lindner, Litvinsky, Mayerhofer, Murzin, Robinson,
+  Sukhovoj, and Trieb]{klora93:_156gd}
+J.~Klora, H.~G. B{\"o}rner, T.~von Egidy, R.~Georgii, J.~Jolie, S.~Judge, V.~A.
+  Khitrov, B.~Krusche, V.~A. Libman, H.~Lindner, L.~L. Litvinsky,
+  U.~Mayerhofer, A.~V. Murzin, S.~J. Robinson, A.~M. Sukhovoj, and H.~Trieb.
+\newblock {Nuclear structure of $^{156}$Gd studied with
+  $(n,\gamma),(n,e^-),(d,p),(d,t)$ reactions and lifetime measurements}.
+\newblock \emph{{Nuclear Physics A}}, 561\penalty0 (1):\penalty0 1 -- 73, 1993.
+\newblock ISSN 0375-9474.
+\newblock \doi{https://doi.org/10.1016/0375-9474(93)90165-T}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/037594749390165T}.
+
+\bibitem[Knoll(2000)]{knoll00:rad_det_meas}
+G.~F. Knoll.
+\newblock \emph{Radiation Detection and Measurement}.
+\newblock John Wiley \& Sons Inc., 3rd edition, 2000.
+
+\bibitem[Konijn et~al.(1981)Konijn, Boer, Poelgeest, Hesselink, Voigt, and
+  Verheul]{konijn81:_156gd}
+J.~Konijn, F.~W.~N.~D. Boer, A.~V. Poelgeest, W.~H.~A. Hesselink, M.~J.~A.~D.
+  Voigt, and H.~Verheul.
+\newblock The level structure of $^{156}${Gd} studied by means of the
+  $(\alpha,2n\gamma)$ reaction.
+\newblock \emph{Nuclear Physics A}, 352:\penalty0 191--220, 1981.
+
+\bibitem[Koning et~al.(2007)Koning, Hilaire, and Duijvestijn]{koning07:_talys}
+A.~J. Koning, S.~Hilaire, and M.~C. Duijvestijn.
+\newblock Talys-1.0.
+\newblock In O.~Bersillon, F.~Gunsing, E.~Bauge, R.~Jacqmin, and S.~Leray,
+  editors, \emph{Proceedings of the International Conference on Nuclear Data
+  for Science and Technology}, pages 211--214, Nice, France, April 22-27 2007.
+  EDP Sciences.
+
+\bibitem[Krane and Steffen(1953)]{krane70:_delta_mixing}
+K.~S. Krane and R.~M. Steffen.
+\newblock {Theory of Angular Correlation of Nuclear Radiations}.
+\newblock \emph{Reviews of Modern Physics}, 25\penalty0 (3):\penalty0 729--777,
+  July 1953.
+
+\bibitem[Lesher et~al.(2019)Lesher, Aprahamian, and Tan]{lesher19:_fireball}
+S.~Lesher, A.~Aprahamian, and W.~Tan.
+\newblock {MRI: Acquisition of Si(Li) Detectors and Two BGO Compton Suppression
+  Shields for the Development of the La Crosse fIREBAll}.
+\newblock NSF Major Research Instrumentation Award Number 1919364, 2019.
+
+\bibitem[Lesher et~al.(2002)Lesher, Aprahamian, Trache, Oros-Peusquens, Deyliz,
+  Gollwitzer, Hertenberger, Valnion, and Graw]{lesher02:_158gd}
+S.~R. Lesher, A.~Aprahamian, L.~Trache, A.~Oros-Peusquens, S.~Deyliz,
+  A.~Gollwitzer, R.~Hertenberger, B.~D. Valnion, and G.~Graw.
+\newblock {New ${0}^{+}$ states in ${}^{158}\mathrm{Gd}$}.
+\newblock \emph{Physical Review C}, 66:\penalty0 051305, Nov 2002.
+
+\bibitem[{Mesytec}({\natexlab{a}})]{mesytec:_ADC}
+{Mesytec}.
+\newblock {Mesytec MADC-32}.
+\newblock \url{https://www.mesytec.com/products/nuclear-physics/MADC-32.html},
+  {\natexlab{a}}.
+
+\bibitem[{Mesytec}({\natexlab{b}})]{mesytec:_PSD}
+{Mesytec}.
+\newblock {Mesytec MPD-4}.
+\newblock \url{https://www.mesytec.com/products/nuclear-physics/MPD-4.html},
+  {\natexlab{b}}.
+
+\bibitem[{Mesytec}({\natexlab{c}})]{mesytec:_mdpp}
+{Mesytec}.
+\newblock {Mesytec MDPP-16}.
+\newblock \url{https://www.mesytec.com/products/nuclear-physics/MDPP-16.html},
+  {\natexlab{c}}.
+
+\bibitem[{Mesytec}({\natexlab{d}})]{mesytec:_mvme}
+{Mesytec}.
+\newblock {mvme - Mesytec VME data acquisition}.
+\newblock \url{https://www.mesytec.com/downloads/mvme.html}, {\natexlab{d}}.
+
+\bibitem[Metlay(1992)]{metlay92:_iceball_comm}
+M.~P. Metlay.
+\newblock \emph{{Development Of A Multiple-Element Conversion-Electron
+  Spectrometer Array And Investigation Of Transition Multipolarities In
+  $^{130}$Ce}}.
+\newblock PhD thesis, University of Pittsburgh, May 1992.
+
+\bibitem[Metlay et~al.(1993)Metlay, Saladin, Lee, and
+  Dietzsch]{metlay93:_iceball_comm}
+M.~P. Metlay, J.~X. Saladin, I.~Y. Lee, and O.~Dietzsch.
+\newblock {The ICEBall: a multiple element array for in-beam internal
+  conversion electron spectroscopy}.
+\newblock \emph{Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment},
+  336\penalty0 (1):\penalty0 162--170, November 1993.
+
+\bibitem[Meyer et~al.(2006)Meyer, Wood, Casten, Fitzpatrick, Graw, Bucurescu,
+  Jolie, von Brentano, Hertenberger, Wirth, Braun, Faestermann, Heinze, Jerke,
+  Kr{\"u}cken, Mahgoub, M{\"o}ller, M{\"u}cher, and Scholl]{meyer06:_zeroplus}
+D.~A. Meyer, V.~Wood, R.~F. Casten, C.~R. Fitzpatrick, G.~Graw, D.~Bucurescu,
+  J.~Jolie, P.~von Brentano, R.~Hertenberger, H.-F. Wirth, N.~Braun,
+  T.~Faestermann, S.~Heinze, J.~L. Jerke, R.~Kr{\"u}cken, M.~Mahgoub,
+  O.~M{\"o}ller, D.~M{\"u}cher, and C.~Scholl.
+\newblock Enhanced density of low-lying 0+ states: A corroboration of shape
+  phase transitional behavior.
+\newblock \emph{Physics Letters B}, 638\penalty0 (1):\penalty0 44 -- 49, 2006.
+
+\bibitem[{National Electrostatics Corporation}()]{nec:_pelletron}
+{National Electrostatics Corporation}.
+\newblock {Pelletron Charging System}.
+\newblock \url{http://www.pelletron.com/products/pelletron-charging-chains/}.
+
+\bibitem[{National Superconducting Cyclotron Laboratory}()]{nscl:_daq}
+{National Superconducting Cyclotron Laboratory}.
+\newblock {NSCL Data Acquisition Documentation}.
+\newblock \url{http://docs.nscl.msu.edu/daq/}.
+
+\bibitem[Nica(2017)]{nica17:_nds_158}
+N.~Nica.
+\newblock Nuclear data sheets for a=158.
+\newblock \emph{Nuclear Data Sheets}, 141:\penalty0 1 -- 326, 2017.
+\newblock ISSN 0090-3752.
+\newblock \doi{https://doi.org/10.1016/j.nds.2017.03.001}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S009037521730025X}.
+
+\bibitem[Osborn and Rose(1953)]{osborn53:_angular_corr_3}
+R.~K. Osborn and M.~E. Rose.
+\newblock 1-3$\gamma$ correlation with mixtures and polarization.
+\newblock Technical Report 1560, Oak Ridge National Laboratory, June 1953.
+
+\bibitem[Peek et~al.(1964)Peek, Jungerman, and Patten]{Peek64:_156gd}
+N.~F. Peek, J.~A. Jungerman, and C.~G. Patten.
+\newblock Nuclear energy levels of ${\mathrm{gd}}^{156}$ as populated by
+  $\ensuremath{\beta}$ emission from ${\mathrm{eu}}^{156}$.
+\newblock \emph{Phys. Rev.}, 136:\penalty0 B330--B340, Oct 1964.
+\newblock \doi{10.1103/PhysRev.136.B330}.
+\newblock URL \url{https://link.aps.org/doi/10.1103/PhysRev.136.B330}.
+
+\bibitem[Prokop et~al.(2014)Prokop, Liddick, Abromeit, Chemey, Larson, Suchyta,
+  and Tompkins]{prokop14:_nsclddas}
+C.~Prokop, S.~Liddick, B.~Abromeit, A.~Chemey, N.~Larson, S.~Suchyta, and
+  J.~Tompkins.
+\newblock {Digital data acquisition system implementation at the National
+  Superconducting Cyclotron Laboratory}.
+\newblock \emph{Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment},
+  741:\penalty0 163 -- 168, 2014.
+\newblock ISSN 0168-9002.
+\newblock \doi{https://doi.org/10.1016/j.nima.2013.12.044}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0168900213017488}.
+
+\bibitem[Radford(2000)]{radford00:_radware}
+D.~C. Radford.
+\newblock Notes on the use of the program gf3.
+\newblock \url{http://radware.phy.ornl.gov/gf3/}, May 2000.
+
+\bibitem[RAMAN et~al.(2001)RAMAN, NESTOR, and TIKKANEN]{raman01:_be2}
+S.~RAMAN, C.~NESTOR, and P.~TIKKANEN.
+\newblock Transition probability from the ground to the first-excited 2+ state
+  of even–even nuclides.
+\newblock \emph{Atomic Data and Nuclear Data Tables}, 78\penalty0 (1):\penalty0
+  1 -- 128, 2001.
+\newblock ISSN 0092-640X.
+\newblock \doi{https://doi.org/10.1006/adnd.2001.0858}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0092640X01908587}.
+
+\bibitem[Reich(2005)]{reich05:_nds_160}
+C.~Reich.
+\newblock Nuclear data sheets for a=160.
+\newblock \emph{Nuclear Data Sheets}, 105\penalty0 (3):\penalty0 557 -- 774,
+  2005.
+\newblock ISSN 0090-3752.
+\newblock \doi{https://doi.org/10.1016/j.nds.2005.08.001}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0090375205000530}.
+
+\bibitem[Reich(2009)]{reich09:_nds_154}
+C.~Reich.
+\newblock Nuclear data sheets for a = 154.
+\newblock \emph{Nuclear Data Sheets}, 110\penalty0 (10):\penalty0 2257 -- 2532,
+  2009.
+\newblock ISSN 0090-3752.
+\newblock \doi{https://doi.org/10.1016/j.nds.2009.09.001}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0090375209000805}.
+
+\bibitem[Reich(2012)]{reich12:_nds_156}
+C.~Reich.
+\newblock Nuclear data sheets for a = 156.
+\newblock \emph{Nuclear Data Sheets}, 113\penalty0 (11):\penalty0 2537 -- 2840,
+  2012.
+\newblock ISSN 0090-3752.
+\newblock \doi{https://doi.org/10.1016/j.nds.2012.10.003}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0090375212000798}.
+
+\bibitem[Reingold et~al.(2019)Reingold, Olivas-Gomez, Simon, Arroyo,
+  Chamberlain, Wurzer, Spyrou, Naqvi, Dombos, Palmisano, Anderson, Clark,
+  Frentz, Hall, Henderson, Moylan, Robertson, Skulski, Stech, Strauss, Tan, and
+  {Vande Kolk}]{reingold19:_HECTOR}
+C.~S. Reingold, O.~Olivas-Gomez, A.~Simon, J.~Arroyo, M.~Chamberlain,
+  J.~Wurzer, A.~Spyrou, F.~Naqvi, A.~C. Dombos, A.~Palmisano, T.~Anderson,
+  A.~M. Clark, B.~Frentz, M.~R. Hall, S.~L. Henderson, S.~Moylan, D.~Robertson,
+  M.~Skulski, E.~Stech, S.~Y. Strauss, W.~P. Tan, and B.~{Vande Kolk}.
+\newblock High efficiency total absorption spectrometer hector for capture
+  reaction measurements.
+\newblock \emph{The European Physical Journal A}, 55\penalty0 (77), 2019.
+\newblock \doi{10.1140/epja/i2019-12748-8}.
+
+\bibitem[Rose(1953)]{rose53:_angular_corr_supp}
+M.~E. Rose.
+\newblock Supplementary remarks on angular correlation.
+\newblock Technical Report 1555, Oak Ridge National Laboratory, June 1953.
+
+\bibitem[Rose et~al.(1951)Rose, Goertzel, Spinrad, Harr, and
+  Strong]{rose51:_internal_conversion}
+M.~E. Rose, G.~H. Goertzel, B.~I. Spinrad, J.~Harr, and P.~Strong.
+\newblock The internal conversion coefficients. i. the $k$-shell.
+\newblock \emph{Physical Review}, 83\penalty0 (1):\penalty0 79--87, July 1951.
+
+\bibitem[Rose et~al.(1952)Rose, Biedenharn, and
+  Arfken]{rose52:_internal_conversion}
+M.~E. Rose, L.~C. Biedenharn, and G.~B. Arfken.
+\newblock Internal conversion angular correlations.
+\newblock \emph{Physical Review}, 85\penalty0 (1):\penalty0 5--16, January
+  1952.
+
+\bibitem[Rowe(2010)]{rowe10:_collective}
+D.~J. Rowe.
+\newblock \emph{Nuclear Collective Motion Models and Theory}.
+\newblock World Scientific, 2010.
+
+\bibitem[Rowe and Wood(2010)]{rowe10:_nuclearmodel}
+D.~J. Rowe and J.~L. Wood.
+\newblock \emph{Fundamentals of Nuclear Models}.
+\newblock World Scientific, 2010.
+
+\bibitem[Roy and Nigam(1967)]{roy67:_e0}
+R.~R. Roy and B.~P. Nigam.
+\newblock \emph{Nuclear Physics Theory and Experiment}.
+\newblock John Wiley \& Sons Inc., 1st edition, 1967.
+
+\bibitem[Segr{\'e}(1977)]{segre77:_icradiation}
+E.~Segr{\'e}.
+\newblock \emph{Nuclei and Particles}.
+\newblock Basic Books, 2nd edition, 1977.
+
+\bibitem[Smith(2014)]{smith14:_evt2root}
+K.~Smith.
+\newblock {evt2root Package}.
+\newblock \url{https://github.com/ksmith0/evt2root/}, March 2014.
+
+\bibitem[Spits et~al.(1996)Spits, Assche, B{\"o}rner, Schreckenbach, Colvin,
+  Greenwood, Reich, O.Lipas, Suhonen, Sinkko, and B{\"a}cklin]{spits96:_154gd}
+A.~M.~J. Spits, P.~H.~M.~V. Assche, H.~G. B{\"o}rner, W.~F. D.~K.
+  Schreckenbach, G.~G. Colvin, R.~C. Greenwood, C.~W. Reich, P.~O.Lipas,
+  J.~Suhonen, P.~Sinkko, and A.~B{\"a}cklin.
+\newblock {Spectroscopy of the $^{153}${Gd} and $^{154}${Gd} Isotopes}, 1996.
+\newblock in BLG-703, edited by A.~M.~J. Spits and A. B{\"a}cklin.
+
+\bibitem[Tonev et~al.(2004)Tonev, Dewald, Klug, Petkov, Jolie, Fitzler,
+  M\"oller, Heinze, von Brentano, and Casten]{tonev04:_154gd}
+D.~Tonev, A.~Dewald, T.~Klug, P.~Petkov, J.~Jolie, A.~Fitzler, O.~M\"oller,
+  S.~Heinze, P.~von Brentano, and R.~F. Casten.
+\newblock {Transition probabilities in $^{154}\mathrm{Gd}$: Evidence for X(5)
+  critical point symmetry}.
+\newblock \emph{Phys. Rev. C}, 69:\penalty0 034334, Mar 2004.
+\newblock \doi{10.1103/PhysRevC.69.034334}.
+\newblock URL \url{https://link.aps.org/doi/10.1103/PhysRevC.69.034334}.
+
+\bibitem[Trzaska(1990)]{trzaska90:_calibration}
+W.~H. Trzaska.
+\newblock Recommended data on selected gamma-ray and conversion-electron
+  calibration sources.
+\newblock \emph{Nuclear Instruments and Methods in Physics Research A},
+  297\penalty0 (2):\penalty0 223--229, 1990.
+
+\bibitem[Werner et~al.(2008)Werner, Williams, Casperson, Casten, Scholl, and
+  Von~Brentano]{werner08:_x5}
+V.~Werner, E.~Williams, R.~Casperson, R.~Casten, C.~Scholl, and
+  P.~Von~Brentano.
+\newblock Deformation crossing near the first-order shape-phase transition in
+  gd152-156.
+\newblock \emph{Physical Review C - Nuclear Physics}, 78\penalty0 (5), 2008.
+\newblock ISSN 05562813.
+
+\bibitem[{Wollersheim} and {Elze}(1977)]{wollersheim77:_154_tau}
+H.~J. {Wollersheim} and T.~W. {Elze}.
+\newblock E2 and e3 transition strengths in some rare-earth nuclei.
+\newblock \emph{Zeitschrift f{\"u}r Physik}, A280:\penalty0 277, 1977.
+
+\bibitem[Wood et~al.(1999)Wood, Zganjar, Coster, and Heyde]{wood99:_e0}
+J.~L. Wood, E.~F. Zganjar, C.~D. Coster, and K.~Heyde.
+\newblock Electric monopole transitions from low energy excitations in nuclei.
+\newblock \emph{Nuclear Physics A}, \penalty0 (651):\penalty0 323--368, 1999.
+
+\bibitem[Wu(1993)]{wu93:_a2n}
+X.~Wu.
+\newblock \emph{{Investigation of Multiphonon Vibrational States in Deformed
+  Nuclei}}.
+\newblock PhD thesis, University of Notre Dame, December 1993.
+
+\bibitem[{Xia}(2016)]{xia:_pixie}
+{Xia}.
+\newblock Pixie-16, 16-channel pxi digital pulse processor.
+\newblock \url{https://www.xia.com/DGF_Pixie-16.html}, 2016.
+
+\bibitem[Yamada et~al.(1976)Yamada, Katoh, Fujioka, Sekikawa, H.~Ahn,
+  H.~Hamilton, R.~Johnson, and J.~Pinajian]{yamada76:_156gd}
+H.~Yamada, T.~Katoh, M.~Fujioka, M.~Sekikawa, S.~H.~Ahn, J.~H.~Hamilton,
+  N.~R.~Johnson, and J.~J.~Pinajian.
+\newblock Electric monopole transitions from excited 0+ states in 156gd.
+\newblock \emph{Journal of the Physical Society of Japan}, 41\penalty0
+  (6):\penalty0 1843--1850, 1976.
+\newblock \doi{10.1143/JPSJ.41.1843}.
+\newblock URL \url{https://doi.org/10.1143/JPSJ.41.1843}.
+
+\bibitem[Zangwill(2013)]{zangwill13:_emradiation}
+A.~Zangwill.
+\newblock \emph{Modern Electrodynamics}.
+\newblock Cambridge University Press, 1st edition, 2013.
+
+\bibitem[Zerkin and Pritychenko(2018)]{zerkin18:_exfor}
+V.~Zerkin and B.~Pritychenko.
+\newblock {The experimental nuclear reaction data (EXFOR): Extended computer
+  database and Web retrieval system}.
+\newblock \emph{{Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment}},
+  888:\penalty0 31 -- 43, 2018.
+\newblock ISSN 0168-9002.
+\newblock \doi{https://doi.org/10.1016/j.nima.2018.01.045}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0168900218300627}.
+
+\bibitem[Ziegler et~al.(2010)Ziegler, Ziegler, and Biersack]{ziegler10:_srim}
+J.~F. Ziegler, M.~Ziegler, and J.~Biersack.
+\newblock {SRIM - The stopping and range of ions in matter (2010)}.
+\newblock \emph{Nuclear Instruments and Methods in Physics Research Section B:
+  Beam Interactions with Materials and Atoms}, 268\penalty0 (11):\penalty0 1818
+  -- 1823, 2010.
+\newblock ISSN 0168-583X.
+\newblock \doi{https://doi.org/10.1016/j.nimb.2010.02.091}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0168583X10001862}.
+\newblock 19th International Conference on Ion Beam Analysis.
+
+\end{thebibliography}

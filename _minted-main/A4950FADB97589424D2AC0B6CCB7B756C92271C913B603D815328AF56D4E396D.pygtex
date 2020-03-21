@@ -1,0 +1,170 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}Constraints.h\PYGZdq{}}
+
+\PYG{c+c1}{//C++ libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}iostream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}fstream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}string\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}cmath\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}vector\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}cstdlib\PYGZgt{}}
+
+\PYG{c+c1}{//ROOT libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TString.h\PYGZgt{}}
+
+\PYG{k}{using} \PYG{k}{namespace} \PYG{n}{std}\PYG{p}{;}
+
+\PYG{k+kt}{int} \PYG{n}{nGeOrder}\PYG{p}{;} \PYG{c+c1}{//Order of calibration i.e. 1 = linear.}
+\PYG{k+kt}{int} \PYG{n}{nGeDets}\PYG{p}{;} \PYG{c+c1}{//Total number of signals from Germanium detectors}
+\PYG{k+kt}{int} \PYG{n}{nGeSegments}\PYG{p}{;} \PYG{c+c1}{//number of segments in a single Germanium crystal, for adding purposes}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dGeCoefficients}\PYG{p}{;} \PYG{c+c1}{//Coefficients}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dGeCoeffRes}\PYG{p}{;} \PYG{c+c1}{//Residual Coefficients}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dGeRunCorr}\PYG{p}{;} \PYG{c+c1}{//Run Correction Coefficients}
+
+\PYG{k+kt}{int} \PYG{n}{nSiLiOrder}\PYG{p}{;} \PYG{c+c1}{//Order of calibration i.e. 1 = linear.}
+\PYG{k+kt}{int} \PYG{n}{nSiLiDets}\PYG{p}{;} \PYG{c+c1}{//Total number of signals from SiLi}
+\PYG{k+kt}{int} \PYG{n}{nSiLiPlace}\PYG{p}{;} \PYG{c+c1}{//Start of SiLis in generalized array detectors}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiCoefficients}\PYG{p}{;} \PYG{c+c1}{//Coefficients}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiRunCorr}\PYG{p}{;} \PYG{c+c1}{//Run Correction Coefficients}
+
+\PYG{k+kt}{void} \PYG{n+nf}{defineGeCoeff}\PYG{p}{()} \PYG{c+c1}{//Get Ge coefficients. Does not include run\PYGZhy{}by\PYGZhy{}run corrections}
+\PYG{p}{\PYGZob{}}
+   \PYG{c+c1}{//First thing: read in the coefficients for this run.}
+   \PYG{n}{fstream} \PYG{n}{fCoeff}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}user/GeCoefficients.dat\PYGZdq{}}\PYG{p}{);} \PYG{c+c1}{//Coefficient File, before run\PYGZhy{}by\PYGZhy{}run corrections}
+   \PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{fCoeff}\PYG{p}{.}\PYG{n}{is\PYGZus{}open}\PYG{p}{())}
+   \PYG{p}{\PYGZob{}}
+      \PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Ge file did not open\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}
+      \PYG{k}{return}\PYG{p}{;}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{n}{string} \PYG{n}{buffer}\PYG{p}{;}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{getline}\PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);}
+   \PYG{n}{nGeOrder} \PYG{o}{=} \PYG{n}{std}\PYG{o}{::}\PYG{n}{atoi}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{} \PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{());} \PYG{c+c1}{//So this clusterfuck is due to gcc being a pain. it basically converts a substring of the string into a char to convert into an int because apparently it won\PYGZsq{}t just go string to int}
+   \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);}
+   \PYG{n}{nGeDets} \PYG{o}{=} \PYG{n}{std}\PYG{o}{::}\PYG{n}{atoi}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{} \PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{());}
+   \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);}
+   \PYG{n}{nGeSegments} \PYG{o}{=} \PYG{n}{std}\PYG{o}{::}\PYG{n}{atoi}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{} \PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{());}
+   \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Label Line}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{row}\PYG{p}{;} \PYG{c+c1}{//Row for adding a level in.}
+   \PYG{c+c1}{//Okay, here, we get into the nitty gritty}
+   \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nGeDets}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through all the detectors}
+   \PYG{p}{\PYGZob{}}
+      \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Line with coefficients on it.}
+      \PYG{n}{dGeCoefficients}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);} \PYG{c+c1}{//Put a new row in for the detector}
+      \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}=} \PYG{n}{nGeOrder}\PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through the coefficients}
+      \PYG{p}{\PYGZob{}}
+         \PYG{n}{dGeCoefficients}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{atof}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{()));} \PYG{c+c1}{//read in jth coefficient}
+         \PYG{n}{buffer} \PYG{o}{=} \PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{}\PYGZbs{}n\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{));} \PYG{c+c1}{//make a substring of the rest of the coefficients}
+      \PYG{p}{\PYGZcb{}}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Line with label on it}
+   \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nGeDets}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through all the detectors}
+   \PYG{p}{\PYGZob{}}
+      \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Line with coefficients on it.}
+      \PYG{n}{dGeCoeffRes}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);} \PYG{c+c1}{//Put a new row in for the detector}
+      \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{7}\PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through the residual coefficients. Currently hardcoded in.}
+      \PYG{p}{\PYGZob{}}
+         \PYG{n}{dGeCoeffRes}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{atof}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{()));} \PYG{c+c1}{//read in jth coefficient}
+         \PYG{n}{buffer} \PYG{o}{=} \PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{}\PYGZbs{}n\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{));} \PYG{c+c1}{//make a substring of the rest of the coefficients}
+      \PYG{p}{\PYGZcb{}}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{n}{fCoeff}\PYG{p}{.}\PYG{n}{close}\PYG{p}{();} \PYG{c+c1}{//Close the coefficients file}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{defineGeCoeff}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{nRunNum}\PYG{p}{)} \PYG{c+c1}{//Ge Coefficients for the run based corrections.}
+\PYG{p}{\PYGZob{}}
+   \PYG{c+c1}{//First thing: read in the coefficients for this run.}
+   \PYG{n}{fstream} \PYG{n}{fCoeff}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}user/Run\PYGZus{}by\PYGZus{}Run/GeCoefficients\PYGZus{}r\PYGZpc{}i.dat\PYGZdq{}}\PYG{p}{,}\PYG{n}{nRunNum}\PYG{p}{));} \PYG{c+c1}{//Coefficient File}
+   \PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{fCoeff}\PYG{p}{.}\PYG{n}{is\PYGZus{}open}\PYG{p}{())}
+   \PYG{p}{\PYGZob{}}
+      \PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Ge run file did not open, setting correction to y=x\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}
+      \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{row}\PYG{p}{;} \PYG{c+c1}{//Row for adding a level in.}
+      \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nGeDets}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+      \PYG{p}{\PYGZob{}}
+          \PYG{n}{dGeRunCorr}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);}
+          \PYG{n}{dGeRunCorr}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+          \PYG{n}{dGeRunCorr}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+      \PYG{p}{\PYGZcb{}}
+      \PYG{k}{return}\PYG{p}{;}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{n}{string} \PYG{n}{buffer}\PYG{p}{;}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{getline}\PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Label}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{row}\PYG{p}{;} \PYG{c+c1}{//Row for adding a level in.}
+   \PYG{c+c1}{//Okay, here, we get into the nitty gritty}
+   \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nGeDets}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through all the detectors}
+   \PYG{p}{\PYGZob{}}
+      \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Line with coefficients on it.}
+      \PYG{n}{dGeRunCorr}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);} \PYG{c+c1}{//Put a new row in for the detector}
+      \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through the coefficients, assuming linear }
+      \PYG{p}{\PYGZob{}}
+         \PYG{n}{dGeRunCorr}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{atof}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{()));} \PYG{c+c1}{//read in jth coefficient}
+         \PYG{n}{buffer} \PYG{o}{=} \PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{}\PYGZbs{}n\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{));} \PYG{c+c1}{//make a substring of the rest of the coefficients}
+      \PYG{p}{\PYGZcb{}}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{n}{fCoeff}\PYG{p}{.}\PYG{n}{close}\PYG{p}{();} \PYG{c+c1}{//Close the coefficients file}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{defineSiLiCoeff}\PYG{p}{()} \PYG{c+c1}{//Get SiLi coefficients. Does not include run\PYGZhy{}by\PYGZhy{}run corrections}
+\PYG{p}{\PYGZob{}}
+   \PYG{c+c1}{//First thing: read in the coefficients for this run.}
+   \PYG{n}{fstream} \PYG{n}{fCoeff}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}user/SiLiCoefficients.dat\PYGZdq{}}\PYG{p}{);} \PYG{c+c1}{//Coefficient File}
+   \PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{fCoeff}\PYG{p}{.}\PYG{n}{is\PYGZus{}open}\PYG{p}{())}
+   \PYG{p}{\PYGZob{}}
+      \PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}SiLi file did not open\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}
+      \PYG{k}{return}\PYG{p}{;}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{n}{string} \PYG{n}{buffer}\PYG{p}{;}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{getline}\PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);}
+   \PYG{n}{nSiLiOrder} \PYG{o}{=} \PYG{n}{std}\PYG{o}{::}\PYG{n}{atoi}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{} \PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{());} \PYG{c+c1}{//So this clusterfuck is due to gcc being a pain. it basically converts a substring of the string into a char to convert into an int because apparently it won\PYGZsq{}t just go string to int}
+   \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);}
+   \PYG{n}{nSiLiDets} \PYG{o}{=} \PYG{n}{std}\PYG{o}{::}\PYG{n}{atoi}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{} \PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{());}
+   \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);}
+   \PYG{n}{nSiLiPlace} \PYG{o}{=} \PYG{n}{std}\PYG{o}{::}\PYG{n}{atoi}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{} \PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{());}
+   \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Label Line}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{row}\PYG{p}{;} \PYG{c+c1}{//Row for adding a level in.}
+   \PYG{c+c1}{//Okay, here, we get into the nitty gritty}
+   \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nSiLiDets}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through all the detectors}
+   \PYG{p}{\PYGZob{}}
+      \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Line with coefficients on it.}
+      \PYG{n}{dSiLiCoefficients}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);} \PYG{c+c1}{//Put a new row in for the detector}
+      \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}=} \PYG{n}{nSiLiOrder}\PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through the coefficients}
+      \PYG{p}{\PYGZob{}}
+         \PYG{n}{dSiLiCoefficients}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{atof}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{()));} \PYG{c+c1}{//read in jth coefficient}
+         \PYG{n}{buffer} \PYG{o}{=} \PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{}\PYGZbs{}n\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{));} \PYG{c+c1}{//make a substring of the rest of the coefficients}
+      \PYG{p}{\PYGZcb{}}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{n}{fCoeff}\PYG{p}{.}\PYG{n}{close}\PYG{p}{();} \PYG{c+c1}{//Close the coefficients file}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{defineSiLiCoeff}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{nRunNum}\PYG{p}{)} \PYG{c+c1}{//SiLi Coefficients for the run based correction}
+\PYG{p}{\PYGZob{}}
+   \PYG{c+c1}{//First thing: read in the coefficients for this run.}
+   \PYG{n}{fstream} \PYG{n}{fCoeff}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}user/Run\PYGZus{}by\PYGZus{}Run/SiLiCoefficients\PYGZus{}r\PYGZpc{}i.dat\PYGZdq{}}\PYG{p}{,}\PYG{n}{nRunNum}\PYG{p}{));} \PYG{c+c1}{//Coefficient File}
+   \PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{fCoeff}\PYG{p}{.}\PYG{n}{is\PYGZus{}open}\PYG{p}{())}
+   \PYG{p}{\PYGZob{}}
+      \PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}SiLi run file did not open, setting correction to y=x\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{endl}\PYG{p}{;}
+      \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{row}\PYG{p}{;} \PYG{c+c1}{//Row for adding a level in.}
+      \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nSiLiDets}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+      \PYG{p}{\PYGZob{}}
+          \PYG{n}{dSiLiRunCorr}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);}
+          \PYG{n}{dSiLiRunCorr}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+          \PYG{n}{dSiLiRunCorr}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+      \PYG{p}{\PYGZcb{}}
+      \PYG{k}{return}\PYG{p}{;}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{n}{string} \PYG{n}{buffer}\PYG{p}{;}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{getline}\PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Label}
+   \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{row}\PYG{p}{;} \PYG{c+c1}{//Row for adding a level in.}
+   \PYG{c+c1}{//Okay, here, we get into the nitty gritty}
+   \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nSiLiDets}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through all the detectors}
+   \PYG{p}{\PYGZob{}}
+      \PYG{n}{getline} \PYG{p}{(}\PYG{n}{fCoeff}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{);} \PYG{c+c1}{//Line with coefficients on it.}
+      \PYG{n}{dSiLiRunCorr}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);} \PYG{c+c1}{//Put a new row in for the detector}
+      \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)} \PYG{c+c1}{//Loop through the coefficients, assuming linear }
+      \PYG{p}{\PYGZob{}}
+         \PYG{n}{dSiLiRunCorr}\PYG{p}{[}\PYG{n}{i}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{atof}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)).}\PYG{n}{c\PYGZus{}str}\PYG{p}{()));} \PYG{c+c1}{//read in jth coefficient}
+         \PYG{n}{buffer} \PYG{o}{=} \PYG{n}{buffer}\PYG{p}{.}\PYG{n}{substr}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{},\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{buffer}\PYG{p}{.}\PYG{n}{find\PYGZus{}first\PYGZus{}of}\PYG{p}{(}\PYG{l+s+sc}{\PYGZsq{}\PYGZbs{}n\PYGZsq{}}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{));} \PYG{c+c1}{//make a substring of the rest of the coefficients}
+      \PYG{p}{\PYGZcb{}}
+   \PYG{p}{\PYGZcb{}}
+   \PYG{n}{fCoeff}\PYG{p}{.}\PYG{n}{close}\PYG{p}{();} \PYG{c+c1}{//Close the coefficients file}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

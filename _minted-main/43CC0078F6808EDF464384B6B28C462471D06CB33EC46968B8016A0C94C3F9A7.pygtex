@@ -1,0 +1,185 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{//+ Combined (simultaneous) fit of two histogram with separate functions}
+\PYG{c+c1}{//  and some common parameters}
+\PYG{c+c1}{//}
+\PYG{c+c1}{// See http://root.cern.ch/phpBB3//viewtopic.php?f=3\PYGZam{}t=11740\PYGZsh{}p50908}
+\PYG{c+c1}{// for a modified version working with Fumili or GSLMultiFit}
+\PYG{c+c1}{//}
+\PYG{c+c1}{// N.B. this macro must be compiled with ACliC}
+\PYG{c+c1}{//}
+\PYG{c+c1}{//Author: L. Moneta \PYGZhy{} Dec 2010}
+
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}Fit/Fitter.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}Fit/BinData.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}Fit/Chi2FCN.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TH1.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TList.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}Math/WrappedMultiTF1.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}HFitInterface.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TCanvas.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TStyle.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TMath.h\PYGZdq{}}
+
+
+\PYG{c+c1}{// definition of shared parameter}
+\PYG{c+c1}{// background function, left}
+\PYG{k+kt}{int} \PYG{n}{iparBL}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}} \PYG{l+m+mi}{0}\PYG{p}{,}      \PYG{c+c1}{// Constant background value}
+                 \PYG{l+m+mi}{1}\PYG{p}{,}    \PYG{c+c1}{// Linear background value}
+                 \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{c+c1}{//Shift of \PYGZdq{}0\PYGZdq{}}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{c+c1}{//background function, right}
+\PYG{k+kt}{int} \PYG{n}{iparBR}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{c+c1}{// Constant background value}
+                  \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{c+c1}{// Linear background value}
+                  \PYG{l+m+mi}{2}\PYG{p}{,} \PYG{c+c1}{//Shift of \PYGZdq{}0\PYGZdq{}}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{k}{struct} \PYG{n}{GlobalChi2} \PYG{p}{\PYGZob{}}
+   \PYG{n}{GlobalChi2}\PYG{p}{(}  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Math}\PYG{o}{::}\PYG{n}{IMultiGenFunction} \PYG{o}{\PYGZam{}} \PYG{n}{f1}\PYG{p}{,}
+                \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Math}\PYG{o}{::}\PYG{n}{IMultiGenFunction} \PYG{o}{\PYGZam{}} \PYG{n}{f2}\PYG{p}{)} \PYG{o}{:}
+      \PYG{n}{fChi2\PYGZus{}1}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{f1}\PYG{p}{),} \PYG{n}{fChi2\PYGZus{}2}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{f2}\PYG{p}{)} \PYG{p}{\PYGZob{}\PYGZcb{}}
+
+   \PYG{c+c1}{// parameter vector is first background (in common 1 and 2)}
+   \PYG{c+c1}{// and then is signal (only in 2)}
+   \PYG{k+kt}{double} \PYG{k}{operator}\PYG{p}{()} \PYG{p}{(}\PYG{k}{const} \PYG{k+kt}{double} \PYG{o}{*}\PYG{n}{par}\PYG{p}{)} \PYG{k}{const} \PYG{p}{\PYGZob{}}
+      \PYG{k+kt}{double} \PYG{n}{p1}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{];}
+      \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{3}\PYG{p}{;} \PYG{o}{++}\PYG{n}{i}\PYG{p}{)} \PYG{n}{p1}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{par}\PYG{p}{[}\PYG{n}{iparBL}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{p}{];}
+
+      \PYG{k+kt}{double} \PYG{n}{p2}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{];}
+      \PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{3}\PYG{p}{;} \PYG{o}{++}\PYG{n}{i}\PYG{p}{)} \PYG{n}{p2}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{par}\PYG{p}{[}\PYG{n}{iparBR}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{p}{];}
+
+      \PYG{k}{return} \PYG{p}{(}\PYG{o}{*}\PYG{n}{fChi2\PYGZus{}1}\PYG{p}{)(}\PYG{n}{p1}\PYG{p}{)} \PYG{o}{+} \PYG{p}{(}\PYG{o}{*}\PYG{n}{fChi2\PYGZus{}2}\PYG{p}{)(}\PYG{n}{p2}\PYG{p}{);}
+   \PYG{p}{\PYGZcb{}}
+
+   \PYG{k}{const}  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Math}\PYG{o}{::}\PYG{n}{IMultiGenFunction} \PYG{o}{*} \PYG{n}{fChi2\PYGZus{}1}\PYG{p}{;}
+   \PYG{k}{const}  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Math}\PYG{o}{::}\PYG{n}{IMultiGenFunction} \PYG{o}{*} \PYG{n}{fChi2\PYGZus{}2}\PYG{p}{;}
+\PYG{p}{\PYGZcb{};}
+
+\PYG{k+kt}{void} \PYG{n+nf}{combinedFit}\PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{xMin}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{xStart}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{xEnd}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{xMax}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+
+\PYG{c+c1}{//   TH1D * hB = new TH1D(\PYGZdq{}hB\PYGZdq{},\PYGZdq{}histo B\PYGZdq{},100,0,100);}
+\PYG{c+c1}{//   TH1D * hSB = new TH1D(\PYGZdq{}hSB\PYGZdq{},\PYGZdq{}histo S+B\PYGZdq{},100, 0,100);}
+
+\PYG{c+c1}{//   TF1 * fB = new TF1(\PYGZdq{}fB\PYGZdq{},\PYGZdq{}expo\PYGZdq{},0,100);}
+\PYG{c+c1}{//   fB\PYGZhy{}\PYGZgt{}SetParameters(1,\PYGZhy{}0.05);}
+\PYG{c+c1}{//   hB\PYGZhy{}\PYGZgt{}FillRandom(\PYGZdq{}fB\PYGZdq{});}
+
+\PYG{c+c1}{//   TF1 * fS = new TF1(\PYGZdq{}fS\PYGZdq{},\PYGZdq{}gaus\PYGZdq{},0,100);}
+\PYG{c+c1}{//   fS\PYGZhy{}\PYGZgt{}SetParameters(1,30,5);}
+
+\PYG{c+c1}{//   hSB\PYGZhy{}\PYGZgt{}FillRandom(\PYGZdq{}fB\PYGZdq{},2000);}
+\PYG{c+c1}{//   hSB\PYGZhy{}\PYGZgt{}FillRandom(\PYGZdq{}fS\PYGZdq{},1000);}
+
+  \PYG{c+c1}{// perform now global fit}
+
+  \PYG{c+c1}{//TF1* fBL = new TF1(\PYGZdq{}fBL\PYGZdq{},\PYGZdq{}pol1\PYGZdq{},xMin,xStart); }
+  \PYG{c+c1}{//TF1* fBR = new TF1(\PYGZdq{}fBR\PYGZdq{},\PYGZdq{}pol1\PYGZdq{},xEnd,xMax); }
+
+  \PYG{n}{TF1}\PYG{o}{*} \PYG{n}{fBL} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}fBL\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*(x\PYGZhy{}[2])\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xStart}\PYG{p}{);} 
+  \PYG{n}{TF1}\PYG{o}{*} \PYG{n}{fBR} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}fBR\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*(x\PYGZhy{}[2])\PYGZdq{}}\PYG{p}{,}\PYG{n}{xEnd}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);} 
+  \PYG{n}{fBL}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{);}
+  \PYG{n}{fBR}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{);}
+ \PYG{c+c1}{// TF1 * fSB = new TF1(\PYGZdq{}fSB\PYGZdq{},\PYGZdq{}expo + gaus(2)\PYGZdq{},0,100);}
+
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Math}\PYG{o}{::}\PYG{n}{WrappedMultiTF1} \PYG{n}{wfBL}\PYG{p}{(}\PYG{o}{*}\PYG{n}{fBL}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{);}
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Math}\PYG{o}{::}\PYG{n}{WrappedMultiTF1} \PYG{n}{wfBR}\PYG{p}{(}\PYG{o}{*}\PYG{n}{fBR}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{);}
+
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Fit}\PYG{o}{::}\PYG{n}{DataOptions} \PYG{n}{opt}\PYG{p}{;}
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Fit}\PYG{o}{::}\PYG{n}{DataRange} \PYG{n}{rangeBL}\PYG{p}{;}
+  \PYG{c+c1}{// set the data range}
+  \PYG{n}{rangeBL}\PYG{p}{.}\PYG{n}{SetRange}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xStart}\PYG{p}{);}
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Fit}\PYG{o}{::}\PYG{n}{BinData} \PYG{n}{dataBL}\PYG{p}{(}\PYG{n}{opt}\PYG{p}{,}\PYG{n}{rangeBL}\PYG{p}{);}
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Fit}\PYG{o}{::}\PYG{n}{FillData}\PYG{p}{(}\PYG{n}{dataBL}\PYG{p}{,} \PYG{n}{hist}\PYG{p}{);}
+
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Fit}\PYG{o}{::}\PYG{n}{DataRange} \PYG{n}{rangeBR}\PYG{p}{;}
+  \PYG{n}{rangeBR}\PYG{p}{.}\PYG{n}{SetRange}\PYG{p}{(}\PYG{n}{xEnd}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Fit}\PYG{o}{::}\PYG{n}{BinData} \PYG{n}{dataBR}\PYG{p}{(}\PYG{n}{opt}\PYG{p}{,}\PYG{n}{rangeBR}\PYG{p}{);}
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Fit}\PYG{o}{::}\PYG{n}{FillData}\PYG{p}{(}\PYG{n}{dataBR}\PYG{p}{,} \PYG{n}{hist}\PYG{p}{);}
+
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Fit}\PYG{o}{::}\PYG{n}{Chi2Function} \PYG{n}{chi2\PYGZus{}BL}\PYG{p}{(}\PYG{n}{dataBL}\PYG{p}{,} \PYG{n}{wfBL}\PYG{p}{);}
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Fit}\PYG{o}{::}\PYG{n}{Chi2Function} \PYG{n}{chi2\PYGZus{}BR}\PYG{p}{(}\PYG{n}{dataBR}\PYG{p}{,} \PYG{n}{wfBR}\PYG{p}{);}
+
+  \PYG{n}{GlobalChi2} \PYG{n}{globalChi2}\PYG{p}{(}\PYG{n}{chi2\PYGZus{}BL}\PYG{p}{,} \PYG{n}{chi2\PYGZus{}BR}\PYG{p}{);}
+
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Fit}\PYG{o}{::}\PYG{n}{Fitter} \PYG{n}{fitter}\PYG{p}{;}
+
+  \PYG{k}{const} \PYG{k+kt}{int} \PYG{n}{Npar} \PYG{o}{=} \PYG{l+m+mi}{3}\PYG{p}{;}
+  \PYG{k+kt}{double} \PYG{n}{par0}\PYG{p}{[}\PYG{n}{Npar}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{\PYGZcb{};}
+
+  \PYG{c+c1}{// create before the parameter settings in order to fix or set range on them}
+  \PYG{n}{fitter}\PYG{p}{.}\PYG{n}{Config}\PYG{p}{().}\PYG{n}{SetParamsSettings}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{par0}\PYG{p}{);}
+\PYG{c+c1}{//   // fix 5\PYGZhy{}th parameter}
+  \PYG{n}{fitter}\PYG{p}{.}\PYG{n}{Config}\PYG{p}{().}\PYG{n}{ParSettings}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{).}\PYG{n}{Fix}\PYG{p}{();}
+\PYG{c+c1}{//   // set limits on the third and 4\PYGZhy{}th parameter}
+\PYG{c+c1}{//   fitter.Config().ParSettings(2).SetLimits(\PYGZhy{}10,\PYGZhy{}1.E\PYGZhy{}4);}
+\PYG{c+c1}{//   fitter.Config().ParSettings(3).SetLimits(0,10000);}
+\PYG{c+c1}{//   fitter.Config().ParSettings(3).SetStepSize(5);}
+
+  \PYG{n}{fitter}\PYG{p}{.}\PYG{n}{Config}\PYG{p}{().}\PYG{n}{MinimizerOptions}\PYG{p}{().}\PYG{n}{SetPrintLevel}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+  \PYG{n}{fitter}\PYG{p}{.}\PYG{n}{Config}\PYG{p}{().}\PYG{n}{SetMinimizer}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Minuit2\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Migrad\PYGZdq{}}\PYG{p}{);}
+
+  \PYG{c+c1}{// fit FCN function directly}
+  \PYG{c+c1}{// (specify optionally data size and flag to indicate that is a chi2 fit)}
+  \PYG{n}{fitter}\PYG{p}{.}\PYG{n}{FitFCN}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{globalChi2}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{dataBL}\PYG{p}{.}\PYG{n}{Size}\PYG{p}{()}\PYG{o}{+}\PYG{n}{dataBR}\PYG{p}{.}\PYG{n}{Size}\PYG{p}{(),}\PYG{n+nb}{true}\PYG{p}{);}
+  \PYG{n}{ROOT}\PYG{o}{::}\PYG{n}{Fit}\PYG{o}{::}\PYG{n}{FitResult} \PYG{n}{result} \PYG{o}{=} \PYG{n}{fitter}\PYG{p}{.}\PYG{n}{Result}\PYG{p}{();}
+  \PYG{n}{result}\PYG{p}{.}\PYG{n}{Print}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{p}{);}
+  \PYG{n}{hist}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Draw}\PYG{p}{();}
+  \PYG{n}{fBL}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetFitResult}\PYG{p}{(} \PYG{n}{result}\PYG{p}{,} \PYG{n}{iparBL}\PYG{p}{);}
+  \PYG{n}{fBL}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetRange}\PYG{p}{(}\PYG{n}{rangeBL}\PYG{p}{().}\PYG{n}{first}\PYG{p}{,} \PYG{n}{rangeBL}\PYG{p}{().}\PYG{n}{second}\PYG{p}{);}
+  \PYG{n}{fBL}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Draw}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}same\PYGZdq{}}\PYG{p}{);}
+  \PYG{n}{fBR}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetFitResult}\PYG{p}{(} \PYG{n}{result}\PYG{p}{,} \PYG{n}{iparBR}\PYG{p}{);}
+  \PYG{n}{fBR}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetRange}\PYG{p}{(}\PYG{n}{rangeBR}\PYG{p}{().}\PYG{n}{first}\PYG{p}{,} \PYG{n}{rangeBR}\PYG{p}{().}\PYG{n}{second}\PYG{p}{);}
+  \PYG{n}{fBR}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Draw}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}same\PYGZdq{}}\PYG{p}{);}
+
+  \PYG{n}{TF1}\PYG{o}{*} \PYG{n}{fB} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}fB\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*(x\PYGZhy{}[2])\PYGZdq{}}\PYG{p}{);}
+  \PYG{n}{fB}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetFitResult}\PYG{p}{(} \PYG{n}{result}\PYG{p}{,} \PYG{n}{iparBL}\PYG{p}{);}
+  \PYG{k+kt}{double} \PYG{n}{dBkdSigma} \PYG{o}{=} \PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{((}\PYG{n}{xEnd}\PYG{o}{\PYGZhy{}}\PYG{n}{xStart}\PYG{p}{)}\PYG{o}{*}\PYG{n}{fB}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{),}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{+}\PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{l+m+mf}{0.5}\PYG{o}{*}\PYG{n}{fB}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{xEnd}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{xStart}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{xMin}\PYG{p}{),}\PYG{l+m+mi}{2}\PYG{p}{));}
+  \PYG{c+c1}{//double dBkdArea = fB\PYGZhy{}\PYGZgt{}GetParameter(0)*(xEnd\PYGZhy{}xStart)+fB\PYGZhy{}\PYGZgt{}GetParameter(1)*(0.5*xEnd*xEnd \PYGZhy{} 0.5*xStart*xStart \PYGZhy{} xMin);}
+  \PYG{k+kt}{double} \PYG{n}{dBkdArea} \PYG{o}{=} \PYG{n}{fB}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xStart}\PYG{p}{,}\PYG{n}{xEnd}\PYG{p}{);}
+
+  \PYG{k+kt}{double} \PYG{n}{dArea} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+  \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{n}{xStart}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}=} \PYG{n}{xEnd}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+  \PYG{p}{\PYGZob{}}
+      \PYG{k}{if}\PYG{p}{(}\PYG{n}{hist}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetBinContent}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{0}\PYG{p}{)}
+      \PYG{p}{\PYGZob{}} 
+        \PYG{n}{dArea} \PYG{o}{=} \PYG{n}{dArea} \PYG{o}{+} \PYG{n}{hist}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetBinContent}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{fB}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Eval}\PYG{p}{(}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mf}{0.5}\PYG{p}{);}
+     \PYG{c+c1}{// std::cout \PYGZlt{}\PYGZlt{} i \PYGZlt{}\PYGZlt{} \PYGZdq{}\PYGZbs{}t\PYGZdq{} \PYGZlt{}\PYGZlt{} hist\PYGZhy{}\PYGZgt{}GetBinContent(i) \PYGZlt{}\PYGZlt{} \PYGZdq{}\PYGZbs{}t\PYGZdq{} \PYGZlt{}\PYGZlt{} fB\PYGZhy{}\PYGZgt{}Eval(i+0.5) \PYGZlt{}\PYGZlt{} \PYGZdq{}\PYGZbs{}t\PYGZdq{} \PYGZlt{}\PYGZlt{} hist\PYGZhy{}\PYGZgt{}GetBinContent(i)\PYGZhy{}fB\PYGZhy{}\PYGZgt{}Eval(i+0.5) \PYGZlt{}\PYGZlt{} std::endl;}
+      \PYG{p}{\PYGZcb{}}
+  \PYG{p}{\PYGZcb{}}
+  \PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Centroid: \PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{p}{(}\PYG{n}{xStart}\PYG{o}{+}\PYG{n}{xEnd}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mf}{2.0} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;} 
+  \PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Area: \PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{dArea} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{} +/\PYGZhy{} \PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{dArea}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{} +/\PYGZhy{} \PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{dBkdArea}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+  \PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Background Area: \PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{dBkdArea} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+
+\PYG{c+c1}{//   TCanvas * c1 = new TCanvas(\PYGZdq{}Simfit\PYGZdq{},\PYGZdq{}Simultaneous fit of two histograms\PYGZdq{},}
+\PYG{c+c1}{//                              10,10,700,700);}
+\PYG{c+c1}{//   c1\PYGZhy{}\PYGZgt{}Divide(1,2);}
+\PYG{c+c1}{//   c1\PYGZhy{}\PYGZgt{}cd(1);}
+\PYG{c+c1}{//   gStyle\PYGZhy{}\PYGZgt{}SetOptFit(1111);}
+
+\PYG{c+c1}{//   fB\PYGZhy{}\PYGZgt{}SetFitResult( result, iparB);}
+\PYG{c+c1}{//   fB\PYGZhy{}\PYGZgt{}SetRange(rangeB().first, rangeB().second);}
+\PYG{c+c1}{//   fB\PYGZhy{}\PYGZgt{}SetLineColor(kBlue);}
+\PYG{c+c1}{//   hB\PYGZhy{}\PYGZgt{}GetListOfFunctions()\PYGZhy{}\PYGZgt{}Add(fB);}
+\PYG{c+c1}{//   hB\PYGZhy{}\PYGZgt{}Draw();}
+
+\PYG{c+c1}{//   c1\PYGZhy{}\PYGZgt{}cd(2);}
+\PYG{c+c1}{//   fSB\PYGZhy{}\PYGZgt{}SetFitResult( result, iparSB);}
+\PYG{c+c1}{//   fSB\PYGZhy{}\PYGZgt{}SetRange(rangeSB().first, rangeSB().second);}
+\PYG{c+c1}{//   fSB\PYGZhy{}\PYGZgt{}SetLineColor(kRed);}
+\PYG{c+c1}{//   hSB\PYGZhy{}\PYGZgt{}GetListOfFunctions()\PYGZhy{}\PYGZgt{}Add(fSB);}
+\PYG{c+c1}{//   hSB\PYGZhy{}\PYGZgt{}Draw();}
+
+
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{Piecewise}\PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{xMin}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{xStart}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{xEnd}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{xMax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{n}{TF1}\PYG{o}{*} \PYG{n}{piecewise} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}piecewise\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x)*(TMath::Erfc((x\PYGZhy{}[2])*1000)+TMath::Erf((x\PYGZhy{}[3])*1000))\PYGZdq{}}\PYG{p}{,} \PYG{n}{xMin}\PYG{p}{,} \PYG{n}{xMax}\PYG{p}{);}
+    \PYG{n}{piecewise}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{xStart}\PYG{p}{);}
+    \PYG{n}{piecewise}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{xEnd}\PYG{p}{);}
+    \PYG{n}{piecewise}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{);}
+    \PYG{n}{piecewise}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{36223}\PYG{p}{);}
+
+    \PYG{n}{hist}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}piecewise\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,} \PYG{n}{xMin}\PYG{p}{,} \PYG{n}{xMax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

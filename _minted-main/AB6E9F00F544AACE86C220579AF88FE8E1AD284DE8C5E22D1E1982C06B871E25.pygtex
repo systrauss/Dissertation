@@ -1,0 +1,31 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{Germanium} \PYG{n}{run} \PYG{n}{correction} \PYG{n}{coefficients}\PYG{p}{,} \PYG{n}{individual} \PYG{n}{signals}		
+\PYG{l+m+mf}{0.584057642}	\PYG{p}{,}	\PYG{l+m+mf}{0.999282044}
+\PYG{l+m+mf}{0.971306146}	\PYG{p}{,}	\PYG{l+m+mf}{0.999064637}
+\PYG{l+m+mf}{2.143313887}	\PYG{p}{,}	\PYG{l+m+mf}{0.99916084}
+\PYG{l+m+mf}{0.952878608}	\PYG{p}{,}	\PYG{l+m+mf}{0.998954085}
+\PYG{l+m+mf}{0.14849556}	\PYG{p}{,}	\PYG{l+m+mf}{0.999183925}
+\PYG{l+m+mf}{0.026878147}	\PYG{p}{,}	\PYG{l+m+mf}{0.999284696}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.072866577}	\PYG{p}{,}	\PYG{l+m+mf}{0.999213095}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.269457227}	\PYG{p}{,}	\PYG{l+m+mf}{0.999457012}
+\PYG{l+m+mf}{0.980689919}	\PYG{p}{,}	\PYG{l+m+mf}{0.999131285}
+\PYG{l+m+mf}{2.111134837}	\PYG{p}{,}	\PYG{l+m+mf}{0.998652167}
+\PYG{l+m+mf}{0.684397991}	\PYG{p}{,}	\PYG{l+m+mf}{0.998943934}
+\PYG{l+m+mf}{1.251808042}	\PYG{p}{,}	\PYG{l+m+mf}{0.998663883}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.030330086}	\PYG{p}{,}	\PYG{l+m+mf}{0.999770215}
+\PYG{l+m+mf}{2.862946017}	\PYG{p}{,}	\PYG{l+m+mf}{0.997447239}
+\PYG{l+m+mi}{0}	\PYG{p}{,}	\PYG{l+m+mi}{0}
+\PYG{l+m+mi}{0}	\PYG{p}{,}	\PYG{l+m+mi}{0}
+\PYG{l+m+mf}{1.154940607}	\PYG{p}{,}	\PYG{l+m+mf}{0.998653804}
+\PYG{l+m+mf}{1.088098405}	\PYG{p}{,}	\PYG{l+m+mf}{0.998668786}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.394580103}	\PYG{p}{,}	\PYG{l+m+mf}{1.000881362}
+\PYG{l+m+mf}{0.443448664}	\PYG{p}{,}	\PYG{l+m+mf}{0.99895749}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.55139315}	\PYG{p}{,}	\PYG{l+m+mf}{0.999311609}
+\PYG{l+m+mf}{0.860640139}	\PYG{p}{,}	\PYG{l+m+mf}{0.999007238}
+\PYG{l+m+mf}{1.052573998}	\PYG{p}{,}	\PYG{l+m+mf}{0.998685627}
+\PYG{l+m+mf}{0.877030797}	\PYG{p}{,}	\PYG{l+m+mf}{0.99920026}
+\PYG{l+m+mf}{1.112452034}	\PYG{p}{,}	\PYG{l+m+mf}{0.998738007}
+\PYG{l+m+mf}{1.102602529}	\PYG{p}{,}	\PYG{l+m+mf}{0.9988922}
+\PYG{l+m+mf}{1.022320775}	\PYG{p}{,}	\PYG{l+m+mf}{0.99899084}
+\PYG{l+m+mf}{0.736591679}	\PYG{p}{,}	\PYG{l+m+mf}{0.998994596}
+\end{Verbatim}

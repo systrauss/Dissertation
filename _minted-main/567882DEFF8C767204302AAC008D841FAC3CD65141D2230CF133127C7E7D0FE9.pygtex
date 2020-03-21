@@ -1,0 +1,32 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}ifndef FILELIST\PYGZus{}H}
+\PYG{c+cp}{\PYGZsh{}define FILELIST\PYGZus{}H}
+
+
+\PYG{c+c1}{//C++ libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}iostream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}string\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}cstdio\PYGZgt{}}
+
+\PYG{c+c1}{//ROOT libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TROOT.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TFile.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TTree.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TChain.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TString.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TBranch.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TLeaf.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TObject.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TObjArray.h\PYGZdq{}}
+
+\PYG{c+cp}{\PYGZsh{}ifndef \PYGZus{}FILELIST\PYGZus{}CXX}
+\PYG{c+cp}{\PYGZsh{}define EXTERNAL extern}
+\PYG{c+cp}{\PYGZsh{}else}
+\PYG{c+cp}{\PYGZsh{}define EXTERNAL}
+\PYG{c+cp}{\PYGZsh{}endif}
+
+\PYG{k+kt}{void} \PYG{n+nf}{makeChain}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{nRunNum}\PYG{p}{);}
+\PYG{k+kt}{void} \PYG{n+nf}{readPaths}\PYG{p}{();}
+
+\PYG{c+cp}{\PYGZsh{}endif}
+\end{Verbatim}

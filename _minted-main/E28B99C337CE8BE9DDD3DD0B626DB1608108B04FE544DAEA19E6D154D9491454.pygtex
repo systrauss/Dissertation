@@ -1,0 +1,196 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{//This file is for the creation of the arrays of histograms to be used with the cuts code. It also contains the fill histograms command.}
+
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}histograms.h\PYGZgt{}}
+
+\PYG{c+c1}{//C++ libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}vector\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}iostream\PYGZgt{}}
+
+\PYG{c+c1}{//ROOT libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TH1F.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TString.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TFile.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TDirectory.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TObject.h\PYGZgt{}}
+
+\PYG{c+c1}{//Libraries within Code}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}timing.h\PYGZdq{}}
+
+\PYG{c+c1}{//From Coefficients.cxx}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nGeOrder}\PYG{p}{;} \PYG{c+c1}{//Order of calibration i.e. 1 = linear.}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nGeDets}\PYG{p}{;} \PYG{c+c1}{//Total number of signals from Germanium detectors}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nGeSegments}\PYG{p}{;} \PYG{c+c1}{//number of segments in a single Germanium crystal, for adding purposes}
+
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nSiLiOrder}\PYG{p}{;} \PYG{c+c1}{//Order of calibration i.e. 1 = linear.}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nSiLiDets}\PYG{p}{;} \PYG{c+c1}{//Total number of signals from SiLi}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nSiLiPlace}\PYG{p}{;} \PYG{c+c1}{//Start of SiLis in generalized array detectors}
+
+\PYG{c+c1}{//From Constraints.cxx}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dGeBounds}\PYG{p}{;} \PYG{c+c1}{//bounds for cuts}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiBounds}\PYG{p}{;} \PYG{c+c1}{//bounds for cuts}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nGeConstraints}\PYG{p}{;}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nSiLiConstraints}\PYG{p}{;}
+
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nBGODets}\PYG{p}{;} \PYG{c+c1}{//Total number of signals from BGO detectors}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nBGOPlace}\PYG{p}{;} \PYG{c+c1}{//Start of BGOs in generalized array}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dBGOThreshold}\PYG{p}{;}
+
+\PYG{c+c1}{//From main.cxx}
+\PYG{k}{extern} \PYG{k}{const} \PYG{n}{Timing} \PYG{n}{tGates}\PYG{p}{;}
+
+\PYG{c+c1}{//From this file}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{ge\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{sili\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{ge\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{;}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{sili\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{;}
+
+
+\PYG{c+c1}{//For regular coincidence}
+\PYG{k+kt}{void} \PYG{n+nf}{makeHistograms}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{nGeDets}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nGeCuts}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nSiLiDets}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{nSiLiCuts}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{c+c1}{//Vector to make a new row}
+	\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{n}{row}\PYG{p}{;}
+	\PYG{c+c1}{//Loop through and construct them all.}
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{p}{;} \PYG{n}{j} \PYG{o}{\PYGZlt{}} \PYG{n}{nGeDets} \PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{ge\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);}
+		\PYG{n}{ge\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);}
+		\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{nGeCuts} \PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+		\PYG{p}{\PYGZob{}}
+			\PYG{n}{ge\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(} \PYG{k}{new} \PYG{n}{TH1F}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}ge\PYGZus{}en\PYGZus{}ge\PYGZus{}cut[\PYGZpc{}i][\PYGZpc{}i]\PYGZdq{}}\PYG{p}{,}\PYG{n}{j}\PYG{p}{,}\PYG{n}{i}\PYG{p}{),}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Clover\PYGZus{}\PYGZpc{}i\PYGZdq{}}\PYG{p}{,}\PYG{n}{j}\PYG{p}{),}\PYG{l+m+mi}{4001}\PYG{p}{,}\PYG{l+m+mf}{0.5}\PYG{p}{,}\PYG{l+m+mf}{4000.5}\PYG{p}{));}
+		\PYG{p}{\PYGZcb{}}
+		\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{nSiLiCuts} \PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+		\PYG{p}{\PYGZob{}}
+			\PYG{n}{ge\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{k}{new} \PYG{n}{TH1F}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}sili\PYGZus{}en\PYGZus{}ge\PYGZus{}cut[\PYGZpc{}i][\PYGZpc{}i]\PYGZdq{}}\PYG{p}{,}\PYG{n}{j}\PYG{p}{,}\PYG{n}{i}\PYG{p}{),}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Clover\PYGZus{}\PYGZpc{}i\PYGZdq{}}\PYG{p}{,}\PYG{n}{j}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{l+m+mi}{4001}\PYG{p}{,}\PYG{l+m+mf}{0.5}\PYG{p}{,}\PYG{l+m+mf}{4000.5}\PYG{p}{));}
+		\PYG{p}{\PYGZcb{}}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{p}{;} \PYG{n}{j} \PYG{o}{\PYGZlt{}} \PYG{n}{nSiLiDets} \PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{sili\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);}
+		\PYG{n}{sili\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{.}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{n}{row}\PYG{p}{);}
+		\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{nGeCuts} \PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+		\PYG{p}{\PYGZob{}}
+			\PYG{n}{sili\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{k}{new} \PYG{n}{TH1F}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}ge\PYGZus{}en\PYGZus{}sili\PYGZus{}cut[\PYGZpc{}i][\PYGZpc{}i]\PYGZdq{}}\PYG{p}{,}\PYG{n}{j}\PYG{p}{,}\PYG{n}{i}\PYG{p}{),}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}SiLi\PYGZus{}\PYGZpc{}i\PYGZdq{}}\PYG{p}{,}\PYG{n}{j}\PYG{p}{),}\PYG{l+m+mi}{4001}\PYG{p}{,}\PYG{l+m+mf}{0.5}\PYG{p}{,}\PYG{l+m+mf}{4000.5}\PYG{p}{));}
+		\PYG{p}{\PYGZcb{}}
+		\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0} \PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{nSiLiCuts} \PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+		\PYG{p}{\PYGZob{}}
+			\PYG{n}{sili\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{].}\PYG{n}{push\PYGZus{}back}\PYG{p}{(}\PYG{k}{new} \PYG{n}{TH1F}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}sili\PYGZus{}en\PYGZus{}sili\PYGZus{}cut[\PYGZpc{}i][\PYGZpc{}i]\PYGZdq{}}\PYG{p}{,}\PYG{n}{j}\PYG{p}{,}\PYG{n}{i}\PYG{p}{),}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}SiLi\PYGZus{}\PYGZpc{}i\PYGZdq{}}\PYG{p}{,}\PYG{n}{j}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{l+m+mi}{4001}\PYG{p}{,}\PYG{l+m+mf}{0.5}\PYG{p}{,}\PYG{l+m+mf}{4000.5}\PYG{p}{));}
+		\PYG{p}{\PYGZcb{}}
+	\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//Regular, singular coincidence}
+\PYG{k+kt}{void} \PYG{n+nf}{fillHistograms}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{nConstraints}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}}\PYG{n}{dConstraints}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dEnCut}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dGeDetectors}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiDetectors}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dBGO}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dGeT}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiT}\PYG{p}{,} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{n}{dBGOT}\PYG{p}{,} \PYG{k+kt}{bool} \PYG{n}{GeorSiLi}\PYG{c+cm}{/*true  = ge gate, false = sili gate*/}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nConstraints} \PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{k}{if}\PYG{p}{((}\PYG{n}{dEnCut}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]]} \PYG{o}{\PYGZgt{}} \PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{c+c1}{//gate detector lower limit}
+			\PYG{n}{dEnCut}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]]} \PYG{o}{\PYGZlt{}} \PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{c+c1}{//gate detector upper limit}
+			\PYG{n}{GeorSiLi}                                             \PYG{c+c1}{//\PYGZam{}\PYGZam{} //is germanium}
+			\PYG{c+c1}{//dBGO[(int)dConstraints[i][0]] \PYGZlt{} dBGOThreshold[(int)dConstraints[i][0]]) //BGO Threshold met}
+		\PYG{p}{)}\PYG{o}{||} \PYG{c+c1}{//OR (above is Ge constraint, below is SiLi)}
+		   \PYG{p}{(}\PYG{n}{dEnCut}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]]} \PYG{o}{\PYGZgt{}} \PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{c+c1}{//gate detector lower limit}
+		   	\PYG{n}{dEnCut}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]]} \PYG{o}{\PYGZlt{}} \PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{c+c1}{//gate detector upper limit}
+		   	\PYG{o}{!}\PYG{n}{GeorSiLi}\PYG{p}{))} \PYG{c+c1}{//is SiLi}
+		\PYG{p}{\PYGZob{}}
+			\PYG{c+c1}{//Fill Germanium histograms, includes BGO thresholds and timing}
+			\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{p}{;} \PYG{n}{j} \PYG{o}{\PYGZlt{}} \PYG{n}{nGeDets}\PYG{o}{/}\PYG{n}{nGeSegments} \PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+			\PYG{p}{\PYGZob{}}
+				\PYG{k}{if}\PYG{p}{(}\PYG{n}{GeorSiLi} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{!=} \PYG{n}{j}\PYG{p}{)} \PYG{c+c1}{// if Ge gate AND gate detector is not this detector AND BGO is under threshold)}
+				\PYG{p}{\PYGZob{}}
+					\PYG{c+c1}{//Timing check \PYGZhy{} ge\PYGZhy{}ge}
+					\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{k} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{k} \PYG{o}{\PYGZlt{}} \PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geGe}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();} \PYG{n}{k}\PYG{o}{++}\PYG{p}{)}
+					\PYG{p}{\PYGZob{}}
+						\PYG{c+c1}{//if( (((dGeT[(int)dConstraints[i][0]]\PYGZhy{}dGeT[j])\PYGZgt{}=tGates.geGe[k][2] \PYGZam{}\PYGZam{} (dGeT[(int)dConstraints[i][0]]\PYGZhy{}dGeT[j])\PYGZlt{}=tGates.geGe[k][3]) || ((dGeT[j]\PYGZhy{}dGeT[(int)dConstraints[i][0]])\PYGZgt{}=tGates.geGe[k][2] \PYGZam{}\PYGZam{} (dGeT[j]\PYGZhy{}dGeT[(int)dConstraints[i][0]])\PYGZlt{}=tGates.geGe[k][3]))) std::cout \PYGZlt{}\PYGZlt{} \PYGZdq{}Within timing gate for Ge\PYGZhy{}Ge\PYGZdq{} \PYGZlt{}\PYGZlt{} std::endl;}
+						\PYG{k}{if}\PYG{p}{((}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{==}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geGe}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{j}\PYG{o}{==}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geGe}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{])}
+						\PYG{p}{\PYGZob{}}
+							\PYG{k}{if}\PYG{p}{(} \PYG{p}{(}\PYG{n}{dGeT}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]]}\PYG{o}{\PYGZhy{}}\PYG{n}{dGeT}\PYG{p}{[}\PYG{n}{j}\PYG{p}{])}\PYG{o}{\PYGZgt{}=}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geGe}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{n}{dGeT}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]]}\PYG{o}{\PYGZhy{}}\PYG{n}{dGeT}\PYG{p}{[}\PYG{n}{j}\PYG{p}{])}\PYG{o}{\PYGZlt{}=}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geGe}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{dGeDetectors}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{5}\PYG{p}{)} \PYG{n}{ge\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fill}\PYG{p}{(}\PYG{n}{dGeDetectors}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]);}
+						\PYG{p}{\PYGZcb{}}
+						\PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n}{j}\PYG{o}{==}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geGe}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{==}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geGe}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{])}
+						\PYG{p}{\PYGZob{}}
+							\PYG{k}{if}\PYG{p}{(} \PYG{p}{(}\PYG{n}{dGeT}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{n}{dGeT}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]])}\PYG{o}{\PYGZgt{}=}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geGe}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{n}{dGeT}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{n}{dGeT}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]])}\PYG{o}{\PYGZlt{}=}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geGe}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{dGeDetectors}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{5}\PYG{p}{)} \PYG{n}{ge\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fill}\PYG{p}{(}\PYG{n}{dGeDetectors}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]);}
+						\PYG{p}{\PYGZcb{}}
+					\PYG{p}{\PYGZcb{}}
+				\PYG{p}{\PYGZcb{}}
+				\PYG{k}{else} \PYG{k}{if} \PYG{p}{(}\PYG{o}{!}\PYG{n}{GeorSiLi}\PYG{p}{)}
+				\PYG{p}{\PYGZob{}}
+					\PYG{c+c1}{//Timing check ge\PYGZhy{}sili}
+					\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{k} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{k} \PYG{o}{\PYGZlt{}} \PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geSiLi}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();} \PYG{n}{k}\PYG{o}{++}\PYG{p}{)}
+					\PYG{p}{\PYGZob{}}
+						\PYG{k}{if}\PYG{p}{((}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{==}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{j}\PYG{o}{==}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{])}
+						\PYG{p}{\PYGZob{}}
+							\PYG{k}{if}\PYG{p}{(} \PYG{p}{(}\PYG{n}{dGeT}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{n}{dSiLiT}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]])}\PYG{o}{\PYGZgt{}=}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{n}{dGeT}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{n}{dSiLiT}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]])}\PYG{o}{\PYGZlt{}=}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{dGeDetectors}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{5}\PYG{p}{)} \PYG{n}{ge\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fill}\PYG{p}{(}\PYG{n}{dGeDetectors}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]);}
+						\PYG{p}{\PYGZcb{}}
+					\PYG{p}{\PYGZcb{}}
+				\PYG{p}{\PYGZcb{}}
+			\PYG{p}{\PYGZcb{}}
+			\PYG{c+c1}{//Fill SiLi histograms, includes timing}
+			\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j} \PYG{o}{=} \PYG{l+m+mi}{0} \PYG{p}{;} \PYG{n}{j} \PYG{o}{\PYGZlt{}} \PYG{n}{nSiLiDets} \PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+			\PYG{p}{\PYGZob{}}
+				\PYG{k}{if}\PYG{p}{(}\PYG{n}{GeorSiLi}\PYG{p}{)}
+				\PYG{p}{\PYGZob{}}
+					\PYG{c+c1}{//Timing check ge\PYGZhy{}sili}
+					\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{k} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{k} \PYG{o}{\PYGZlt{}} \PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geSiLi}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();} \PYG{n}{k}\PYG{o}{++}\PYG{p}{)}
+					\PYG{p}{\PYGZob{}}
+						\PYG{k}{if}\PYG{p}{(}\PYG{n}{j}\PYG{o}{==}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{==}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{])}
+						\PYG{p}{\PYGZob{}}
+							\PYG{k}{if}\PYG{p}{(} \PYG{p}{(}\PYG{n}{dGeT}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]]}\PYG{o}{\PYGZhy{}}\PYG{n}{dSiLiT}\PYG{p}{[}\PYG{n}{j}\PYG{p}{])}\PYG{o}{\PYGZgt{}=}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{n}{dGeT}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]]}\PYG{o}{\PYGZhy{}}\PYG{n}{dSiLiT}\PYG{p}{[}\PYG{n}{j}\PYG{p}{])}\PYG{o}{\PYGZlt{}=}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{geSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{dSiLiDetectors}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{20}\PYG{p}{)} \PYG{n}{sili\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fill}\PYG{p}{(}\PYG{n}{dSiLiDetectors}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]);}
+						\PYG{p}{\PYGZcb{}}
+					\PYG{p}{\PYGZcb{}}
+				\PYG{p}{\PYGZcb{}}
+				\PYG{k}{else} \PYG{k}{if} \PYG{p}{(}\PYG{o}{!}\PYG{n}{GeorSiLi} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{!=} \PYG{n}{j}\PYG{p}{)}
+				\PYG{p}{\PYGZob{}}
+					\PYG{c+c1}{//timing check sili\PYGZhy{}sili}
+					\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{k} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{k} \PYG{o}{\PYGZlt{}} \PYG{n}{tGates}\PYG{p}{.}\PYG{n}{siliSiLi}\PYG{p}{.}\PYG{n}{size}\PYG{p}{();} \PYG{n}{k}\PYG{o}{++}\PYG{p}{)}
+					\PYG{p}{\PYGZob{}}
+						\PYG{k}{if}\PYG{p}{((}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{==}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{siliSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{j}\PYG{o}{==}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{siliSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{])}
+						\PYG{p}{\PYGZob{}}
+							\PYG{k}{if}\PYG{p}{(} \PYG{p}{(}\PYG{n}{dSiLiT}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]]}\PYG{o}{\PYGZhy{}}\PYG{n}{dSiLiT}\PYG{p}{[}\PYG{n}{j}\PYG{p}{])}\PYG{o}{\PYGZgt{}=}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{siliSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{n}{dSiLiT}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]]}\PYG{o}{\PYGZhy{}}\PYG{n}{dSiLiT}\PYG{p}{[}\PYG{n}{j}\PYG{p}{])}\PYG{o}{\PYGZlt{}=}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{siliSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{dSiLiDetectors}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{20}\PYG{p}{)} \PYG{n}{sili\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fill}\PYG{p}{(}\PYG{n}{dSiLiDetectors}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]);}
+						\PYG{p}{\PYGZcb{}}
+						\PYG{k}{else} \PYG{k}{if}\PYG{p}{(}\PYG{n}{j}\PYG{o}{==}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{siliSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{==}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{siliSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{])}
+						\PYG{p}{\PYGZob{}}
+							\PYG{k}{if}\PYG{p}{(} \PYG{p}{(}\PYG{n}{dSiLiT}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{n}{dSiLiT}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]])}\PYG{o}{\PYGZgt{}=}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{siliSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{n}{dSiLiT}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]}\PYG{o}{\PYGZhy{}}\PYG{n}{dSiLiT}\PYG{p}{[(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dConstraints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]])}\PYG{o}{\PYGZlt{}=}\PYG{n}{tGates}\PYG{p}{.}\PYG{n}{siliSiLi}\PYG{p}{[}\PYG{n}{k}\PYG{p}{][}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{dSiLiDetectors}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{20}\PYG{p}{)} \PYG{n}{sili\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fill}\PYG{p}{(}\PYG{n}{dSiLiDetectors}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]);}
+						\PYG{p}{\PYGZcb{}}
+					\PYG{p}{\PYGZcb{}}
+				\PYG{p}{\PYGZcb{}}
+			\PYG{p}{\PYGZcb{}}
+		\PYG{p}{\PYGZcb{}}
+	\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+
+\PYG{k+kt}{void} \PYG{n+nf}{writeHistToFile}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{fOut}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nGeConstraints} \PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{fOut}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{cd}\PYG{p}{();}
+		\PYG{n}{gDirectory}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{mkdir}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Ge Cut Detector \PYGZpc{}i, Peak \PYGZpc{}f\PYGZdq{}}\PYG{p}{,(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dGeBounds}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{],(}\PYG{n}{dGeBounds}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{+}\PYG{n}{dGeBounds}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{])}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{));}
+		\PYG{n}{fOut}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{cd}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Ge Cut Detector \PYGZpc{}i, Peak \PYGZpc{}f\PYGZdq{}}\PYG{p}{,(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dGeBounds}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{],(}\PYG{n}{dGeBounds}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{+}\PYG{n}{dGeBounds}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{])}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{));}
+		\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}}\PYG{n}{nGeDets}\PYG{o}{/}\PYG{n}{nGeSegments} \PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+		\PYG{p}{\PYGZob{}}
+			\PYG{n}{ge\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Write}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Clover\PYGZus{}\PYGZpc{}i\PYGZdq{}}\PYG{p}{,}\PYG{n}{j}\PYG{p}{),}\PYG{n}{TObject}\PYG{o}{::}\PYG{n}{kOverwrite}\PYG{p}{,}\PYG{l+m+mf}{1E8}\PYG{p}{);}
+		\PYG{p}{\PYGZcb{}}
+		\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}}\PYG{n}{nSiLiDets} \PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+		\PYG{p}{\PYGZob{}}
+			\PYG{n}{sili\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Write}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}SiLi\PYGZus{}\PYGZpc{}i\PYGZdq{}}\PYG{p}{,}\PYG{n}{j}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{n}{TObject}\PYG{o}{::}\PYG{n}{kOverwrite}\PYG{p}{,}\PYG{l+m+mf}{1E8}\PYG{p}{);}
+		\PYG{p}{\PYGZcb{}}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{nSiLiConstraints} \PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{fOut}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{cd}\PYG{p}{();}
+		\PYG{n}{gDirectory}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{mkdir}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}SiLi Cut Detector \PYGZpc{}i, Peak \PYGZpc{}f\PYGZdq{}}\PYG{p}{,(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dSiLiBounds}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,(}\PYG{n}{dSiLiBounds}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{+}\PYG{n}{dSiLiBounds}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{])}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{));}
+		\PYG{n}{fOut}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{cd}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}SiLi Cut Detector \PYGZpc{}i, Peak \PYGZpc{}f\PYGZdq{}}\PYG{p}{,(}\PYG{k+kt}{int}\PYG{p}{)}\PYG{n}{dSiLiBounds}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,(}\PYG{n}{dSiLiBounds}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{+}\PYG{n}{dSiLiBounds}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{l+m+mi}{2}\PYG{p}{])}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{));}
+		\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}}\PYG{n}{nGeDets}\PYG{o}{/}\PYG{n}{nGeSegments} \PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+		\PYG{p}{\PYGZob{}}
+			\PYG{n}{ge\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Write}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Clover\PYGZus{}\PYGZpc{}i\PYGZdq{}}\PYG{p}{,}\PYG{n}{j}\PYG{p}{),}\PYG{n}{TObject}\PYG{o}{::}\PYG{n}{kOverwrite}\PYG{p}{,}\PYG{l+m+mf}{1E8}\PYG{p}{);}
+		\PYG{p}{\PYGZcb{}}
+		\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j}\PYG{o}{\PYGZlt{}}\PYG{n}{nSiLiDets} \PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)}
+		\PYG{p}{\PYGZob{}}
+			\PYG{n}{sili\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{[}\PYG{n}{j}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Write}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}SiLi\PYGZus{}\PYGZpc{}i\PYGZdq{}}\PYG{p}{,}\PYG{n}{j}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{n}{TObject}\PYG{o}{::}\PYG{n}{kOverwrite}\PYG{p}{,}\PYG{l+m+mf}{1E8}\PYG{p}{);}
+		\PYG{p}{\PYGZcb{}}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{fOut}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Write}\PYG{p}{();}
+
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

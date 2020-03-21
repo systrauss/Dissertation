@@ -1,0 +1,105 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/*}
+\PYG{c+cm}{Please check the README for more information about this code and it\PYGZsq{}s purpose.}
+\PYG{c+cm}{*/}
+
+\PYG{c+c1}{//C++ libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}iostream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}fstream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}string\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}cmath\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}cstdio\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}cstdlib\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}vector\PYGZgt{}}
+
+\PYG{c+c1}{//ROOT libraries}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}TROOT.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TH2.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TStyle.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TCanvas.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TString.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TFile.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TChain.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TH1F.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TTree.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TRandom3.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TBranch.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TLeaf.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TObject.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}TObjArray.h\PYGZdq{}}
+
+\PYG{c+c1}{//Object files}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}Coefficients.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}Constraints.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}histograms.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}Filelist.h\PYGZdq{}}
+
+\PYG{k}{using} \PYG{k}{namespace} \PYG{n}{std}\PYG{p}{;}
+
+\PYG{c+c1}{//File path info}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{string} \PYG{n}{sFilepath}\PYG{p}{;}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{string} \PYG{n}{sTree}\PYG{p}{;}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{string} \PYG{n}{sRun}\PYG{p}{;}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{string} \PYG{n}{sFType}\PYG{p}{;}
+
+\PYG{c+c1}{//from histograms.cxx}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{ge\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{;}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{sili\PYGZus{}en\PYGZus{}ge\PYGZus{}cut}\PYG{p}{;}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{ge\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{;}
+\PYG{k}{extern} \PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{TH1F}\PYG{o}{*\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{sili\PYGZus{}en\PYGZus{}sili\PYGZus{}cut}\PYG{p}{;}
+
+\PYG{c+c1}{//From coefficients.cxx}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nGeOrder}\PYG{p}{;} \PYG{c+c1}{//Order of calibration i.e. 1 = linear.}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nGeDets}\PYG{p}{;} \PYG{c+c1}{//Total number of signals from Germanium detectors}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nGeSegments}\PYG{p}{;} \PYG{c+c1}{//number of segments in a single Germanium crystal, for adding purposes}
+
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nSiLiOrder}\PYG{p}{;} \PYG{c+c1}{//Order of calibration i.e. 1 = linear.}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nSiLiDets}\PYG{p}{;} \PYG{c+c1}{//Total number of signals from SiLi}
+\PYG{k}{extern} \PYG{k+kt}{int} \PYG{n}{nSiLiPlace}\PYG{p}{;} \PYG{c+c1}{//Start of SiLis in generalized array detectors}
+
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dGeBounds}\PYG{p}{;} \PYG{c+c1}{//bounds for cuts}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiBounds}\PYG{p}{;} \PYG{c+c1}{//bounds for cuts}
+\PYG{k+kt}{int} \PYG{n}{nGeConstraints}\PYG{p}{;}
+\PYG{k+kt}{int} \PYG{n}{nSiLiConstraints}\PYG{p}{;}
+
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dGeGeBounds}\PYG{p}{;} \PYG{c+c1}{//bounds for cuts}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dGeSiLiBounds}\PYG{p}{;} \PYG{c+c1}{//bounds for cuts}
+\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{std}\PYG{o}{::}\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{k+kt}{double}\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZgt{}} \PYG{n}{dSiLiSiLiBounds}\PYG{p}{;} \PYG{c+c1}{//bounds for cuts}
+\PYG{k+kt}{int} \PYG{n}{nGeGeConstraints}\PYG{p}{;}
+\PYG{k+kt}{int} \PYG{n}{nGeSiLiConstraints}\PYG{p}{;}
+\PYG{k+kt}{int} \PYG{n}{nSiLiSiLiConstraints}\PYG{p}{;}
+
+\PYG{k+kt}{int} \PYG{n+nf}{main}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{argc}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{argv}\PYG{p}{[])} \PYG{c+c1}{//Order of arguments: first run, last run, output file name, cut file name}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{char} \PYG{n}{buffer}\PYG{p}{[}\PYG{l+m+mi}{50}\PYG{p}{];}
+	\PYG{k+kt}{int} \PYG{n}{nRunStart} \PYG{o}{=} \PYG{n}{atoi}\PYG{p}{(}\PYG{n}{argv}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]);}
+	\PYG{k+kt}{int} \PYG{n}{nRunEnd} \PYG{o}{=} \PYG{n}{atoi}\PYG{p}{(}\PYG{n}{argv}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]);}
+	\PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{sOut} \PYG{o}{=} \PYG{n}{argv}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{];}
+	\PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{sCut1} \PYG{o}{=} \PYG{n}{argv}\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{];}
+	\PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{sCut2} \PYG{o}{=} \PYG{n}{argv}\PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{];}
+	\PYG{n}{readPaths}\PYG{p}{();}
+	\PYG{n}{defineGeCoeff}\PYG{p}{();} \PYG{c+c1}{//From Coefficients.cxx}
+	\PYG{n}{defineSiLiCoeff}\PYG{p}{();} \PYG{c+c1}{//From Coefficients.cxx}
+	\PYG{k}{if}\PYG{p}{(}\PYG{n}{strcmp}\PYG{p}{(}\PYG{n}{sCut2}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}0\PYGZdq{}}\PYG{p}{)}\PYG{o}{==}\PYG{l+m+mi}{0}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{sprintf}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}GeCut\PYGZus{}\PYGZpc{}s.dat\PYGZdq{}}\PYG{p}{,}\PYG{n}{sCut1}\PYG{p}{);} \PYG{c+c1}{//File name to input}
+		\PYG{n}{nGeConstraints} \PYG{o}{=} \PYG{n}{defineConstraints}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,}\PYG{n}{dGeBounds}\PYG{p}{);} \PYG{c+c1}{//From constraints.cxx}
+		\PYG{n}{sprintf}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}SiLiCut\PYGZus{}\PYGZpc{}s.dat\PYGZdq{}}\PYG{p}{,}\PYG{n}{sCut1}\PYG{p}{);} \PYG{c+c1}{//File name to input}
+		\PYG{n}{nSiLiConstraints} \PYG{o}{=} \PYG{n}{defineConstraints}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,}\PYG{n}{dSiLiBounds}\PYG{p}{);}
+		\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Regular Coincidence\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+		\PYG{n}{writeHistToFile}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}/scratch365/sstrauss/\PYGZpc{}s.root\PYGZdq{}}\PYG{p}{,}\PYG{n}{sOut}\PYG{p}{),}\PYG{n}{sOut}\PYG{p}{,}\PYG{n}{nRunStart}\PYG{p}{,}\PYG{n}{nRunEnd}\PYG{p}{,} \PYG{n+nb}{false}\PYG{p}{);} \PYG{c+c1}{//fOut is in Filelist.h}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{k}{else}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{sprintf}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Cut\PYGZus{}Ge\PYGZus{}\PYGZpc{}s\PYGZus{}Ge\PYGZus{}\PYGZpc{}s.dat\PYGZdq{}}\PYG{p}{,}\PYG{n}{sCut1}\PYG{p}{,}\PYG{n}{sCut2}\PYG{p}{);} \PYG{c+c1}{//File name to input}
+		\PYG{n}{nGeGeConstraints} \PYG{o}{=} \PYG{n}{defineTripleConstraints}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,}\PYG{n}{dGeGeBounds}\PYG{p}{);} \PYG{c+c1}{//From constraints.cxx}
+		\PYG{n}{sprintf}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Cut\PYGZus{}Ge\PYGZus{}\PYGZpc{}s\PYGZus{}SiLi\PYGZus{}\PYGZpc{}s.dat\PYGZdq{}}\PYG{p}{,}\PYG{n}{sCut1}\PYG{p}{,}\PYG{n}{sCut2}\PYG{p}{);} \PYG{c+c1}{//File name to input}
+		\PYG{n}{nGeSiLiConstraints} \PYG{o}{=} \PYG{n}{defineTripleConstraints}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,}\PYG{n}{dGeSiLiBounds}\PYG{p}{);} \PYG{c+c1}{//From constraints.cxx}
+		\PYG{n}{sprintf}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Cut\PYGZus{}SiLi\PYGZus{}\PYGZpc{}s\PYGZus{}SiLi\PYGZus{}\PYGZpc{}s.dat\PYGZdq{}}\PYG{p}{,}\PYG{n}{sCut1}\PYG{p}{,}\PYG{n}{sCut2}\PYG{p}{);} \PYG{c+c1}{//File name to input}
+		\PYG{n}{nSiLiSiLiConstraints} \PYG{o}{=} \PYG{n}{defineTripleConstraints}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,}\PYG{n}{dSiLiSiLiBounds}\PYG{p}{);} \PYG{c+c1}{//From constraints.cxx}
+		\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+s}{\PYGZdq{}Triple Coincidence\PYGZdq{}} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+		\PYG{n}{writeHistToFile}\PYG{p}{(}\PYG{n}{Form}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}/scratch365/sstrauss/\PYGZpc{}s.root\PYGZdq{}}\PYG{p}{,}\PYG{n}{sOut}\PYG{p}{),}\PYG{n}{sOut}\PYG{p}{,}\PYG{n}{nRunStart}\PYG{p}{,}\PYG{n}{nRunEnd}\PYG{p}{,} \PYG{n+nb}{true}\PYG{p}{);} \PYG{c+c1}{//fOut is in Filelist.h}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

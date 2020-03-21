@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{l+m+mi}{2} \PYG{c+c1}{//Order of calibration i.e. 1 = linear.}
+\PYG{l+m+mi}{6} \PYG{c+c1}{//Total number of signals from SiLi detectors}
+\PYG{l+m+mi}{48} \PYG{c+c1}{//Start of SiLis in generalized array, redundant from CloverShare}
+\PYG{c+c1}{//SiLi Coefficients}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{20.0687}\PYG{p}{,} \PYG{l+m+mf}{0.186828}\PYG{p}{,} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{3.03149E\PYGZhy{}06}
+\PYG{l+m+mf}{9.46919}\PYG{p}{,}  \PYG{l+m+mf}{0.153857}\PYG{p}{,} \PYG{l+m+mf}{6.276E\PYGZhy{}07}
+\PYG{l+m+mf}{3.84721}\PYG{p}{,} \PYG{l+m+mf}{0.163458}\PYG{p}{,} \PYG{l+m+mf}{3.61702E\PYGZhy{}07}
+\PYG{l+m+mf}{8.41864}\PYG{p}{,} \PYG{l+m+mf}{0.160942}\PYG{p}{,} \PYG{l+m+mf}{4.86406E\PYGZhy{}07}
+\PYG{l+m+mf}{5.5835}\PYG{p}{,}   \PYG{l+m+mf}{0.163278}\PYG{p}{,} \PYG{l+m+mf}{3.71974E\PYGZhy{}07}
+\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{2.28321}\PYG{p}{,} \PYG{l+m+mf}{0.173382}\PYG{p}{,} \PYG{l+m+mf}{2.06782E\PYGZhy{}07}
+\end{Verbatim}

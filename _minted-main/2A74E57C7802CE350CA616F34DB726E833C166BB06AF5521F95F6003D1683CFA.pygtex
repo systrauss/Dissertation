@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{//Change sFilepath to change the location the program looks for the rootfiles}
+\PYG{n}{DataDirectory}
+\PYG{c+c1}{//Change sTree for the program to look at a different tree in the files.}
+\PYG{n}{evtTree}
+\PYG{c+c1}{//Formatting for the beginning and end of the rootfile name}
+\PYG{n}{run}
+\PYG{p}{.}\PYG{n}{root}
+\end{Verbatim}

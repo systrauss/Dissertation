@@ -1,0 +1,721 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include}\PYG{c+cpf}{\PYGZlt{}TFile.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{c+cpf}{\PYGZlt{}TH1F.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{c+cpf}{\PYGZlt{}TF1.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{c+cpf}{\PYGZlt{}TMath.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{c+cpf}{\PYGZlt{}TRandom3.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{c+cpf}{\PYGZlt{}TFitResultPtr.h\PYGZgt{}}
+
+\PYG{c+cp}{\PYGZsh{}include}\PYG{c+cpf}{\PYGZlt{}sstream\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{c+cpf}{\PYGZlt{}string\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include}\PYG{c+cpf}{\PYGZlt{}iostream\PYGZgt{}}
+
+\PYG{c+c1}{//linear+gaussian+skew+step guess, one iteration}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterSk1}\PYG{p}{(}\PYG{n}{TH1D}\PYG{o}{*} \PYG{n}{h1}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{rrr}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{beta}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{step}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+\PYG{c+c1}{//	TH1F* h1 = (TH1F*)inFile\PYGZhy{}\PYGZgt{}Get(hist);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]*((1\PYGZhy{}[5]/100)*exp(\PYGZhy{}((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))**2)+TMath::Erfc((x\PYGZhy{}[3])/(sqrt(2.0)*[4])+[4]/(sqrt(2.0)*[6]))*[5]/100*exp((x\PYGZhy{}[3])/[6])+TMath::Erfc((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))*[7]/100)\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{,}\PYG{n}{rrr}\PYG{p}{,}\PYG{n}{beta}\PYG{p}{,}\PYG{n}{step}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{rrr}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{beta}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{step}\PYG{p}{);}
+\PYG{c+c1}{//	lingaus\PYGZhy{}\PYGZgt{}SetParLimits(5,0,100.0); //R}
+\PYG{c+c1}{//	lingaus\PYGZhy{}\PYGZgt{}SetParLimits(7,0,100.0); //Step}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{+}\PYG{l+m+mi}{10}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{width}\PYG{o}{+}\PYG{l+m+mi}{10}\PYG{p}{);}
+
+\PYG{c+cm}{/*	for(int i=1; i\PYGZlt{}=500; i++)}
+\PYG{c+cm}{	\PYGZob{}}
+\PYG{c+cm}{		h1\PYGZhy{}\PYGZgt{}Fit(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}BLQM\PYGZdq{},\PYGZdq{}\PYGZdq{},xmin,xmax);}
+\PYG{c+cm}{	\PYGZcb{}}
+\PYG{c+cm}{	h1\PYGZhy{}\PYGZgt{}Fit(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}BLS\PYGZdq{},\PYGZdq{}\PYGZdq{},xmin,xmax);}
+\PYG{c+cm}{*/}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+gaussian+skew+step guess}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterSk}\PYG{p}{(}\PYG{n}{TH1D}\PYG{o}{*} \PYG{n}{h1}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{rrr}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{beta}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{step}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+\PYG{c+c1}{//	TH1F* h1 = (TH1F*)inFile\PYGZhy{}\PYGZgt{}Get(hist);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lin} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lin\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]*TMath::Erfc((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))*[5]/100\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]*((1\PYGZhy{}[5]/100)*exp(\PYGZhy{}((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))**2)+TMath::Erfc((x\PYGZhy{}[3])/(sqrt(2.0)*[4])+[4]/(sqrt(2.0)*[6]))*[5]/100*exp((x\PYGZhy{}[3])/[6])+TMath::Erfc((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))*[7]/100)\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{,}\PYG{n}{rrr}\PYG{p}{,}\PYG{n}{beta}\PYG{p}{,}\PYG{n}{step}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{rrr}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{beta}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{step}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}	
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mf}{100.0}\PYG{p}{);} \PYG{c+c1}{//R}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mf}{1000.0}\PYG{p}{);} \PYG{c+c1}{//beta}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mf}{100.0}\PYG{p}{);} \PYG{c+c1}{//Step}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{+}\PYG{l+m+mi}{10}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{width}\PYG{o}{+}\PYG{l+m+mi}{10}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{100}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+
+	\PYG{n}{TFitResultPtr} \PYG{n}{r} \PYG{o}{=} \PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{));}
+
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParError}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParError}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParError}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParError}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParError}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParError}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{));}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{c0\PYGZus{}err} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{c1\PYGZus{}err} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{((}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{n}{c0\PYGZus{}err}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{l+m+mf}{0.5}\PYG{o}{*}\PYG{p}{(}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{n}{c1\PYGZus{}err}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{IntegralError}\PYG{p}{(} \PYG{n}{xMin}\PYG{p}{,} \PYG{n}{xMax}\PYG{p}{,} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParams}\PYG{p}{(),} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{GetMatrixArray}\PYG{p}{()} \PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area} \PYG{o}{=} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{\PYGZhy{}} \PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{;}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	\PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{Print}\PYG{p}{();}
+	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{Fit area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Bkgd area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Net area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f\PYGZbs{} }\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{net\PYGZus{}area}\PYG{p}{,}\PYG{n}{net\PYGZus{}area\PYGZus{}error}\PYG{p}{);}
+
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+gaussian guess}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterG}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]/(sqrt(2.0*pi)*[4])*exp(\PYGZhy{}((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))**2)\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParNames}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}intercept\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}slope\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}area\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}centroid\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}sigma\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+gaussian*2 guess}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterG}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]/(sqrt(2.0*pi)*[4])*exp(\PYGZhy{}((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))**2)+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParNames}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}intercept\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}slope\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}area 1\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}centroid 1\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}sigma 1\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}area 2\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}centroid 2\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}sigma 2\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent2}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent2}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width2}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width2}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+gaussian*3 guess}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterG}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width3}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]/(sqrt(2.0*pi)*[4])*exp(\PYGZhy{}((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))**2)+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)+[8]/(sqrt(2.0*pi)*[10])*exp(\PYGZhy{}((x\PYGZhy{}[9])/(sqrt(2.0)*[10]))**2)\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParNames}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}intercept\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}slope\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}area 1\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}centroid 1\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}sigma 1\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}area 2\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}centroid 2\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}sigma 2\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}area 3\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}centroid 3\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}sigma 3\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width3}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent2}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent2}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width2}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width2}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent3}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent3}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width3}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width3}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//guess for gamma singles, one old, one new peak}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterGS}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]/(sqrt(2.0*pi)*[4])*exp(\PYGZhy{}((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))**2)+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent2}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent2}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width2}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width2}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//guess for gamma singles, one old, two new peaks}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterGS}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width3}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]/(sqrt(2.0*pi)*[4])*exp(\PYGZhy{}((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))**2)+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)+[8]/(sqrt(2.0*pi)*[10])*exp(\PYGZhy{}((x\PYGZhy{}[9])/(sqrt(2.0)*[10]))**2)\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width3}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent2}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent2}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width2}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width2}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent3}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent3}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width3}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width3}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//guess for gamma singles, two old, one new peaks}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterGS2}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width3}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]/(sqrt(2.0*pi)*[4])*exp(\PYGZhy{}((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))**2)+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)+[8]/(sqrt(2.0*pi)*[10])*exp(\PYGZhy{}((x\PYGZhy{}[9])/(sqrt(2.0)*[10]))**2)\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width3}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent3}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent3}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width3}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width3}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+sine+gaussian, sine guess}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterGTS}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{scale}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{freq}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{phase}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2))*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{o}{\PYGZhy{}}\PYG{n}{scale}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mf}{0.25}\PYG{p}{,}\PYG{l+m+mf}{0.45}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{pi}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+sine+gaussian*2, sine guess}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterGTS}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{scale}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{freq}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{phase}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)+[8]/(sqrt(2.0*pi)*[10])*exp(\PYGZhy{}((x\PYGZhy{}[9])/(sqrt(2.0)*[10]))**2))*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{o}{\PYGZhy{}}\PYG{n}{scale}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mf}{0.25}\PYG{p}{,}\PYG{l+m+mf}{0.45}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{pi}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+sine+gaussian*3, sine guess}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterGTS}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{scale}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{freq}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{phase}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)+[8]/(sqrt(2.0*pi)*[10])*exp(\PYGZhy{}((x\PYGZhy{}[9])/(sqrt(2.0)*[10]))**2)+[11]/(sqrt(2.0*pi)*[13])*exp(\PYGZhy{}((x\PYGZhy{}[12])/(sqrt(2.0)*[13]))**2))*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{12}\PYG{p}{,}\PYG{n}{cent3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{13}\PYG{p}{,}\PYG{n}{width3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{o}{\PYGZhy{}}\PYG{n}{scale}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mf}{0.25}\PYG{p}{,}\PYG{l+m+mf}{0.45}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{o}{*}\PYG{n}{pi}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+sine+gaussian, gaussian guess}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterGTG}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{scale}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{freq}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{phase}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2))*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+sine+gaussian*2, gaussian*2 guess}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterGTG}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{scale}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{freq}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{phase}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)+[8]/(sqrt(2.0*pi)*[10])*exp(\PYGZhy{}((x\PYGZhy{}[9])/(sqrt(2.0)*[10]))**2))*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent2}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent2}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width2}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width2}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+sine+gaussian*3, gaussian*3 guess}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterGTG}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,}  \PYG{k+kt}{double} \PYG{n}{cent3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{scale}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{freq}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{phase}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xmax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)+[8]/(sqrt(2.0*pi)*[10])*exp(\PYGZhy{}((x\PYGZhy{}[9])/(sqrt(2.0)*[10]))**2)+[11]/(sqrt(2.0*pi)*[13])*exp(\PYGZhy{}((x\PYGZhy{}[12])/(sqrt(2.0)*[13]))**2))*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{12}\PYG{p}{,}\PYG{n}{cent3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{13}\PYG{p}{,}\PYG{n}{width3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent2}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent2}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width2}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width2}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{12}\PYG{p}{,}\PYG{n}{cent3}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{cent3}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParLimits}\PYG{p}{(}\PYG{l+m+mi}{13}\PYG{p}{,}\PYG{n}{width3}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{width3}\PYG{o}{+}\PYG{l+m+mi}{5}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xmin}\PYG{p}{,}\PYG{n}{xmax}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+gaussian}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterI}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+\PYG{c+c1}{//	TF1* lingaus = new TF1(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}pol1(0)+gaus(2)\PYGZdq{});}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lin} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lin\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]/(sqrt(2.0*pi)*[4])*exp(\PYGZhy{}((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))**2)\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{20}\PYG{p}{,}\PYG{l+m+mf}{0.022}\PYG{p}{,}\PYG{l+m+mi}{800}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+\PYG{c+c1}{//	h1\PYGZhy{}\PYGZgt{}Fit(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}BLQM\PYGZdq{},\PYGZdq{}\PYGZdq{},xMin,xMax);}
+\PYG{c+c1}{//	lingaus\PYGZhy{}\PYGZgt{}SetParLimits(3,cent\PYGZhy{}5,cent+5);}
+\PYG{c+c1}{//	lingaus\PYGZhy{}\PYGZgt{}SetParLimits(4,width\PYGZhy{}5,width+5);}
+\PYG{c+c1}{//	h1\PYGZhy{}\PYGZgt{}Fit(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}BLM\PYGZdq{},\PYGZdq{}\PYGZdq{},xMin,xMax);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{TFitResultPtr} \PYG{n}{r} \PYG{o}{=} \PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{));}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{c0\PYGZus{}err} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{c1\PYGZus{}err} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{((}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{n}{c0\PYGZus{}err}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{l+m+mf}{0.5}\PYG{o}{*}\PYG{p}{(}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{n}{c1\PYGZus{}err}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{IntegralError}\PYG{p}{(} \PYG{n}{xMin}\PYG{p}{,} \PYG{n}{xMax}\PYG{p}{,} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParams}\PYG{p}{(),} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{GetMatrixArray}\PYG{p}{()} \PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area} \PYG{o}{=} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{\PYGZhy{}} \PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{;}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	\PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{Print}\PYG{p}{();}
+	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{Fit area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Bkgd area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Net area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{net\PYGZus{}area}\PYG{p}{,}\PYG{n}{net\PYGZus{}area\PYGZus{}error}\PYG{p}{);}
+	
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+gaussian*2}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterI}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+\PYG{c+c1}{//	TF1* lingaus = new TF1(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}pol1(0)+gaus(2)\PYGZdq{});}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lin} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lin\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]/(sqrt(2.0*pi)*[4])*exp(\PYGZhy{}((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))**2)+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{20}\PYG{p}{,}\PYG{l+m+mf}{0.022}\PYG{p}{,}\PYG{l+m+mi}{800}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+\PYG{c+c1}{//	h1\PYGZhy{}\PYGZgt{}Fit(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}BLQM\PYGZdq{},\PYGZdq{}\PYGZdq{},xMin,xMax);}
+\PYG{c+c1}{//	lingaus\PYGZhy{}\PYGZgt{}SetParLimits(3,cent\PYGZhy{}5,cent+5);}
+\PYG{c+c1}{//	lingaus\PYGZhy{}\PYGZgt{}SetParLimits(4,width\PYGZhy{}5,width+5);}
+\PYG{c+c1}{//	h1\PYGZhy{}\PYGZgt{}Fit(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}BLM\PYGZdq{},\PYGZdq{}\PYGZdq{},xMin,xMax);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{TFitResultPtr} \PYG{n}{r} \PYG{o}{=} \PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{));}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{c0\PYGZus{}err} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{c1\PYGZus{}err} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{((}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{n}{c0\PYGZus{}err}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{l+m+mf}{0.5}\PYG{o}{*}\PYG{p}{(}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{n}{c1\PYGZus{}err}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{IntegralError}\PYG{p}{(} \PYG{n}{xMin}\PYG{p}{,} \PYG{n}{xMax}\PYG{p}{,} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParams}\PYG{p}{(),} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{GetMatrixArray}\PYG{p}{()} \PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area} \PYG{o}{=} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{\PYGZhy{}} \PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{;}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	\PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{Print}\PYG{p}{();}
+	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{Fit area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Bkgd area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Net area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{net\PYGZus{}area}\PYG{p}{,}\PYG{n}{net\PYGZus{}area\PYGZus{}error}\PYG{p}{);}
+	
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+gaussian*3}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterI}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width3}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+\PYG{c+c1}{//	TF1* lingaus = new TF1(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}pol1(0)+gaus(2)\PYGZdq{});}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lin} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lin\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]/(sqrt(2.0*pi)*[4])*exp(\PYGZhy{}((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))**2)+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)+[8]/(sqrt(2.0*pi)*[10])*exp(\PYGZhy{}((x\PYGZhy{}[9])/(sqrt(2.0)*[10]))**2)\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{20}\PYG{p}{,}\PYG{l+m+mf}{0.022}\PYG{p}{,}\PYG{l+m+mi}{800}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width3}\PYG{p}{);}
+\PYG{c+c1}{//	h1\PYGZhy{}\PYGZgt{}Fit(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}BLQM\PYGZdq{},\PYGZdq{}\PYGZdq{},xMin,xMax);}
+\PYG{c+c1}{//	lingaus\PYGZhy{}\PYGZgt{}SetParLimits(3,cent\PYGZhy{}5,cent+5);}
+\PYG{c+c1}{//	lingaus\PYGZhy{}\PYGZgt{}SetParLimits(4,width\PYGZhy{}5,width+5);}
+\PYG{c+c1}{//	h1\PYGZhy{}\PYGZgt{}Fit(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}BLM\PYGZdq{},\PYGZdq{}\PYGZdq{},xMin,xMax);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{TFitResultPtr} \PYG{n}{r} \PYG{o}{=} \PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{));}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{c0\PYGZus{}err} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{c1\PYGZus{}err} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{((}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{n}{c0\PYGZus{}err}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{l+m+mf}{0.5}\PYG{o}{*}\PYG{p}{(}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{n}{c1\PYGZus{}err}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{IntegralError}\PYG{p}{(} \PYG{n}{xMin}\PYG{p}{,} \PYG{n}{xMax}\PYG{p}{,} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParams}\PYG{p}{(),} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{GetMatrixArray}\PYG{p}{()} \PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area} \PYG{o}{=} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{\PYGZhy{}} \PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{;}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	\PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{Print}\PYG{p}{();}
+	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{Fit area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Bkgd area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Net area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{net\PYGZus{}area}\PYG{p}{,}\PYG{n}{net\PYGZus{}area\PYGZus{}error}\PYG{p}{);}
+	
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+gaussian*4}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterI}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent4}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width4}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+\PYG{c+c1}{//	TF1* lingaus = new TF1(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}pol1(0)+gaus(2)\PYGZdq{});}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lin} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lin\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}[0]+[1]*x+[2]/(sqrt(2.0*pi)*[4])*exp(\PYGZhy{}((x\PYGZhy{}[3])/(sqrt(2.0)*[4]))**2)+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)+[8]/(sqrt(2.0*pi)*[10])*exp(\PYGZhy{}((x\PYGZhy{}[9])/(sqrt(2.0)*[10]))**2)+[11]/(sqrt(2.0*pi)*[13])*exp(\PYGZhy{}((x\PYGZhy{}[12])/(sqrt(2.0)*[13]))**2)\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{20}\PYG{p}{,}\PYG{l+m+mf}{0.022}\PYG{p}{,}\PYG{l+m+mi}{800}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{12}\PYG{p}{,}\PYG{n}{cent4}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{13}\PYG{p}{,}\PYG{n}{width4}\PYG{p}{);}
+\PYG{c+c1}{//	h1\PYGZhy{}\PYGZgt{}Fit(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}BLQM\PYGZdq{},\PYGZdq{}\PYGZdq{},xMin,xMax);}
+\PYG{c+c1}{//	lingaus\PYGZhy{}\PYGZgt{}SetParLimits(3,cent\PYGZhy{}5,cent+5);}
+\PYG{c+c1}{//	lingaus\PYGZhy{}\PYGZgt{}SetParLimits(4,width\PYGZhy{}5,width+5);}
+\PYG{c+c1}{//	h1\PYGZhy{}\PYGZgt{}Fit(\PYGZdq{}lingaus\PYGZdq{},\PYGZdq{}BLM\PYGZdq{},\PYGZdq{}\PYGZdq{},xMin,xMax);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{TFitResultPtr} \PYG{n}{r} \PYG{o}{=} \PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{));}
+	\PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{));}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lin}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{c0\PYGZus{}err} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{c1\PYGZus{}err} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParError}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{((}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{n}{c0\PYGZus{}err}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{l+m+mf}{0.5}\PYG{o}{*}\PYG{p}{(}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{n}{xMax}\PYG{o}{\PYGZhy{}}\PYG{n}{xMin}\PYG{p}{)}\PYG{o}{*}\PYG{n}{c1\PYGZus{}err}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{IntegralError}\PYG{p}{(} \PYG{n}{xMin}\PYG{p}{,} \PYG{n}{xMax}\PYG{p}{,} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParams}\PYG{p}{(),} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{GetMatrixArray}\PYG{p}{()} \PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area} \PYG{o}{=} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{\PYGZhy{}} \PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{;}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	\PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{Print}\PYG{p}{();}
+	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{Fit area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Bkgd area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Net area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{net\PYGZus{}area}\PYG{p}{,}\PYG{n}{net\PYGZus{}area\PYGZus{}error}\PYG{p}{);}
+	
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+gaussian+sine}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterT}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{scale}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{freq}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{phase}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{linsine} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}linsine\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x)*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2))*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{TFitResultPtr} \PYG{n}{r} \PYG{o}{=} \PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{));}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{));}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral} \PYG{o}{=} \PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+\PYG{c+c1}{//	Double\PYGZus{}t c0\PYGZus{}err = lingaus\PYGZhy{}\PYGZgt{}GetParError(0);}
+\PYG{c+c1}{//	Double\PYGZus{}t c1\PYGZus{}err = lingaus\PYGZhy{}\PYGZgt{}GetParError(1);}
+\PYG{c+c1}{//	Double\PYGZus{}t bkgd\PYGZus{}integral\PYGZus{}error = TMath::Sqrt( TMath::Power((xMax\PYGZhy{}xMin)*c0\PYGZus{}err,2.0) + TMath::Power(0.5*(xMax\PYGZhy{}xMin)*(xMax\PYGZhy{}xMin)*c1\PYGZus{}err,2.0) );}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{);}
+	
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{IntegralError}\PYG{p}{(} \PYG{n}{xMin}\PYG{p}{,} \PYG{n}{xMax}\PYG{p}{,} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParams}\PYG{p}{(),} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{GetMatrixArray}\PYG{p}{()} \PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area} \PYG{o}{=} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{\PYGZhy{}} \PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{;}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	\PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{Print}\PYG{p}{();}
+	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{Fit area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Bkgd area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Net area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{net\PYGZus{}area}\PYG{p}{,}\PYG{n}{net\PYGZus{}area\PYGZus{}error}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+gaussian*2+sine}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterT}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{scale}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{freq}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{phase}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{linsine} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}linsine\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x)*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)+[8]/(sqrt(2.0*pi)*[10])*exp(\PYGZhy{}((x\PYGZhy{}[9])/(sqrt(2.0)*[10]))**2))*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{TFitResultPtr} \PYG{n}{r} \PYG{o}{=} \PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{));}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{));}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral} \PYG{o}{=} \PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+\PYG{c+c1}{//	Double\PYGZus{}t c0\PYGZus{}err = lingaus\PYGZhy{}\PYGZgt{}GetParError(0);}
+\PYG{c+c1}{//	Double\PYGZus{}t c1\PYGZus{}err = lingaus\PYGZhy{}\PYGZgt{}GetParError(1);}
+\PYG{c+c1}{//	Double\PYGZus{}t bkgd\PYGZus{}integral\PYGZus{}error = TMath::Sqrt( TMath::Power((xMax\PYGZhy{}xMin)*c0\PYGZus{}err,2.0) + TMath::Power(0.5*(xMax\PYGZhy{}xMin)*(xMax\PYGZhy{}xMin)*c1\PYGZus{}err,2.0) );}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{);}
+	
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{IntegralError}\PYG{p}{(} \PYG{n}{xMin}\PYG{p}{,} \PYG{n}{xMax}\PYG{p}{,} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParams}\PYG{p}{(),} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{GetMatrixArray}\PYG{p}{()} \PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area} \PYG{o}{=} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{\PYGZhy{}} \PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{;}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	\PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{Print}\PYG{p}{();}
+	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{Fit area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Bkgd area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Net area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{net\PYGZus{}area}\PYG{p}{,}\PYG{n}{net\PYGZus{}area\PYGZus{}error}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+gaussian*3+sine}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterT}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{scale}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{freq}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{phase}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{linsine} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}linsine\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x)*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)+[8]/(sqrt(2.0*pi)*[10])*exp(\PYGZhy{}((x\PYGZhy{}[9])/(sqrt(2.0)*[10]))**2)+[11]/(sqrt(2.0*pi)*[13])*exp(\PYGZhy{}((x\PYGZhy{}[12])/(sqrt(2.0)*[13]))**2))*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{12}\PYG{p}{,}\PYG{n}{cent3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{13}\PYG{p}{,}\PYG{n}{width3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{TFitResultPtr} \PYG{n}{r} \PYG{o}{=} \PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{));}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{));}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral} \PYG{o}{=} \PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+\PYG{c+c1}{//	Double\PYGZus{}t c0\PYGZus{}err = lingaus\PYGZhy{}\PYGZgt{}GetParError(0);}
+\PYG{c+c1}{//	Double\PYGZus{}t c1\PYGZus{}err = lingaus\PYGZhy{}\PYGZgt{}GetParError(1);}
+\PYG{c+c1}{//	Double\PYGZus{}t bkgd\PYGZus{}integral\PYGZus{}error = TMath::Sqrt( TMath::Power((xMax\PYGZhy{}xMin)*c0\PYGZus{}err,2.0) + TMath::Power(0.5*(xMax\PYGZhy{}xMin)*(xMax\PYGZhy{}xMin)*c1\PYGZus{}err,2.0) );}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{);}
+	
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{IntegralError}\PYG{p}{(} \PYG{n}{xMin}\PYG{p}{,} \PYG{n}{xMax}\PYG{p}{,} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParams}\PYG{p}{(),} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{GetMatrixArray}\PYG{p}{()} \PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area} \PYG{o}{=} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{\PYGZhy{}} \PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{;}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	\PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{Print}\PYG{p}{();}
+	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{Fit area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Bkgd area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Net area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{net\PYGZus{}area}\PYG{p}{,}\PYG{n}{net\PYGZus{}area\PYGZus{}error}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{//linear+gaussian*4+sine}
+\PYG{k+kt}{void} \PYG{n+nf}{FitterT}\PYG{p}{(}\PYG{n}{TFile}\PYG{o}{*} \PYG{n}{inFile}\PYG{p}{,} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{hist}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width2}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width3}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{cent4}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{width4}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{scale}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{freq}\PYG{p}{,} \PYG{k+kt}{double} \PYG{n}{phase}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMin}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{xMax}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{k+kt}{double} \PYG{n}{pi} \PYG{o}{=} \PYG{l+m+mf}{3.14159265359}\PYG{p}{;}
+	\PYG{n}{TH1F}\PYG{o}{*} \PYG{n}{h1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{TH1F}\PYG{o}{*}\PYG{p}{)}\PYG{n}{inFile}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Get}\PYG{p}{(}\PYG{n}{hist}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{linsine} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}linsine\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x)*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{TF1}\PYG{o}{*} \PYG{n}{lingaus} \PYG{o}{=} \PYG{k}{new} \PYG{n}{TF1}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}([0]+[1]*x+[5]/(sqrt(2.0*pi)*[7])*exp(\PYGZhy{}((x\PYGZhy{}[6])/(sqrt(2.0)*[7]))**2)+[8]/(sqrt(2.0*pi)*[10])*exp(\PYGZhy{}((x\PYGZhy{}[9])/(sqrt(2.0)*[10]))**2)+[11]/(sqrt(2.0*pi)*[13])*exp(\PYGZhy{}((x\PYGZhy{}[12])/(sqrt(2.0)*[13]))**2)+[14]/(sqrt(2.0*pi)*[16])*exp(\PYGZhy{}((x\PYGZhy{}[15])/(sqrt(2.0)*[16]))**2))*(1+[2]*sin([3]*x+[4]))\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameters}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{cent}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{width}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{cent2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{width2}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{12}\PYG{p}{,}\PYG{n}{cent3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{13}\PYG{p}{,}\PYG{n}{width3}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{15}\PYG{p}{,}\PYG{n}{cent4}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{,}\PYG{n}{width4}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{FixParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+
+	\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{;} \PYG{n}{i}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{500}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}BLQM\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{TFitResultPtr} \PYG{n}{r} \PYG{o}{=} \PYG{n}{h1}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Fit}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lingaus\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}LLS\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{));}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParameter}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{));}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{scale}\PYG{p}{);}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{freq}\PYG{p}{);}
+	\PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{SetParameter}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{phase}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral} \PYG{o}{=} \PYG{n}{linsine}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+\PYG{c+c1}{//	Double\PYGZus{}t c0\PYGZus{}err = lingaus\PYGZhy{}\PYGZgt{}GetParError(0);}
+\PYG{c+c1}{//	Double\PYGZus{}t c1\PYGZus{}err = lingaus\PYGZhy{}\PYGZgt{}GetParError(1);}
+\PYG{c+c1}{//	Double\PYGZus{}t bkgd\PYGZus{}integral\PYGZus{}error = TMath::Sqrt( TMath::Power((xMax\PYGZhy{}xMin)*c0\PYGZus{}err,2.0) + TMath::Power(0.5*(xMax\PYGZhy{}xMin)*(xMax\PYGZhy{}xMin)*c1\PYGZus{}err,2.0) );}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{);}
+	
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{Integral}\PYG{p}{(}\PYG{n}{xMin}\PYG{p}{,}\PYG{n}{xMax}\PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{fn\PYGZus{}integral\PYGZus{}error} \PYG{o}{=} \PYG{n}{lingaus}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{IntegralError}\PYG{p}{(} \PYG{n}{xMin}\PYG{p}{,} \PYG{n}{xMax}\PYG{p}{,} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetParams}\PYG{p}{(),} \PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{GetMatrixArray}\PYG{p}{()} \PYG{p}{);}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area} \PYG{o}{=} \PYG{n}{fn\PYGZus{}integral} \PYG{o}{\PYGZhy{}} \PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{;}
+	\PYG{n}{Double\PYGZus{}t} \PYG{n}{net\PYGZus{}area\PYGZus{}error} \PYG{o}{=} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Sqrt}\PYG{p}{(} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{o}{+} \PYG{n}{TMath}\PYG{o}{::}\PYG{n}{Power}\PYG{p}{(}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{l+m+mf}{2.0}\PYG{p}{)} \PYG{p}{);}
+	\PYG{n}{r}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{GetCovarianceMatrix}\PYG{p}{().}\PYG{n}{Print}\PYG{p}{();}
+	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{Fit area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Bkgd area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Net area = \PYGZpc{}10.6f+/\PYGZhy{}\PYGZpc{}10.6f}\PYG{l+s+se}{\PYGZbs{}n\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral}\PYG{p}{,}\PYG{n}{fn\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral}\PYG{p}{,}\PYG{n}{bkgd\PYGZus{}integral\PYGZus{}error}\PYG{p}{,}\PYG{n}{net\PYGZus{}area}\PYG{p}{,}\PYG{n}{net\PYGZus{}area\PYGZus{}error}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
