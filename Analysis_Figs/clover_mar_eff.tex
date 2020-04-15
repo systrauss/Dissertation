@@ -1,6 +1,8 @@
 \begin{table}[]
     \centering
     \caption{Clovershare March Run Efficiency Parameters}
+    \label{tab:clover_march_eff}
+    \begin{threeparttable}
     \begin{tabular}{c|c|c|c|c|c}
         \toprule
         Detector & $a_0$ & $a_1$ & $a_2$ & $a_3$ & $a_4$ \\
@@ -14,5 +16,8 @@
         6	&	-8.225	&	-0.3443	&	-0.4478	&	0.005464	&	0.0007393	\\
         \bottomrule
     \end{tabular}
-    \label{tab:clover_march_eff}
+    \begin{tablenotes}[para]
+        Efficiency equation: $ln(\epsilon) = a_0-(a_1+a_2\times e^{-a_3\times E})\times E^{-a_4\times E}\times ln(E)$
+    \end{tablenotes}
+\end{threeparttable}
 \end{table}

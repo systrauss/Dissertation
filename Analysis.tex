@@ -8,7 +8,7 @@ The acquisition of the data, as discussed in the previous chapter, was done usin
 
 Whenever possible, all data were fit using the same methodology. If another methodology needed to be used (as will be discussed in Section \ref{sec:upper_limit}) the methodology was tested. This was done by taking both fitting routines to the same peaks and comparing the results. If they were in agreement, the secondary method could be used where the primary method failed.
 
-In a completely ideal scenario, the spectrum from an experiment should look like a series of delta functions. This is never the case in a real experiment, as detectors do not have infinite resolution, and do not cover an infinitesimal angle. Instead, an ideal experimental spectrum would have the peaks look like gaussian functions. The normal gaussian formula is 
+In an ideal scenario, the spectrum from an experiment should look like a series of delta functions. This is never the case in a real experiment, as detectors do not have infinite resolution, and do not cover an infinitesimal angle. Instead, an ideal experimental spectrum would have peaks that look like gaussian functions. The normal Gaussian formula is 
 \begin{equation}
     f(x) = he^{-\left(\frac{x-\mu}{\sqrt{2}\sigma}\right)^2}
     \label{eq:gaus}
@@ -19,7 +19,7 @@ where $h$ is the height of the peak, $\mu$ is the centroid of the peak, and $\si
     A = h\sigma\sqrt{2\pi}
 \end{equation}
 
-The HPGe spectra were fitted using the gaussian formula. Fitting multiple peaks at once in a spectrum requires a secondary consideration: the Fano factor. The Fano factor is a measure of dispersion within a detector\citep{fano47:_factor}. It takes into account that the energy loss in the detector is not purely statistical, as the gaussian distribution would assume. This goes into the resolution of the detector, which is related to the energy of the particle being detected. As a result, the resolution changes with energy. This is reflected in the variation ($\sigma^2$) in the fit. To do this in ROOT, the fitting function must be written to reflect this information, tying the width of every peak together under certain assumptions. As there is not an iterative way to create such a function in ROOT for $x$ number of peaks, an individual fitting function must be written for each number $x$ of peaks to fit. This becomes exceedingly tedious. However, RADWARE has this energy adjustment built into the fitting code, allowing the correlation between peaks to be turned off if needed for up to 35 peaks. If there are background peaks that should not have a correlation, such as the case of a Compton peak, it can be turned off for individual peaks.
+The HPGe spectra were fitted using the Gaussian formula. Fitting multiple peaks at once in a spectrum requires a secondary consideration: the Fano factor. The Fano factor is a measure of dispersion within a detector\citep{fano47:_factor}. It takes into account that the energy loss in the detector is not purely statistical, as the gaussian distribution would assume. This goes into the resolution of the detector, which is related to the energy of the particle being detected. As a result, the resolution changes with energy. This is reflected in the variation ($\sigma^2$) in the fit. To incorporate the Fano factor in ROOT, the fitting function must be written to reflect this information, tying the width of every peak together under certain assumptions. As there is not an iterative way to create such a function in ROOT for $x$ number of peaks, an individual fitting function must be written for each number $x$ of peaks to fit. This becomes exceedingly tedious. However, RADWARE has this energy adjustment built into the fitting code, allowing the correlation between peaks to be toggled on or off if needed for up to 35 peaks. If there are background peaks that should not have a correlation, such as the case of a Compton peak, it can be turned off for individual peaks.
 
 In the previous chapter, the results of the calibrations were discussed, without going into detail into the calibrations themselves. In particular, the calibrations of the Si(Li) detectors were important for the fitting of data peaks. Due to incomplete charge collection, the Si(Li) detectors have a pronounced low-energy tail that can be modeled using a skewed gaussian. This skewed gaussian formula adds two more fitting parameters: R and $\beta$. R is the ratio of the tail height to the peak height, and $\beta$ is a "skewedness" parameter. Both of these values are floated during the calibrations to find optimal values, and then fixed from these values for the data fits. The skewed gaussian formula is
 \begin{equation}
@@ -53,7 +53,7 @@ The timing gates were unique to pairs of detectors. In the GEORGINA data, a puls
 
 \input{Analysis_Figs/timing_georgina.tex}
 
-In the Clovershare data, the timing was done within the electronics, leading to an clean structure, seen in Figure \ref{fig:timing_clover}. Although the same code structure was used for the timing, the gates were all the same within the Clovershare data. The main gate used was $\pm0.3$ and the background ranged from 0.3 to 0.9, using the same scaling as seen in Figure \ref{fig:timing_clover}.
+In the Clovershare data, the timing was done within the electronics, leading to an clean structure, seen in Figure \ref{fig:timing_clover}. Although the same code structure was used for the timing, the gates were all the same within the Clovershare data. The main gate used was $\pm0.3(\mu s)$ and the background ranged from 0.3 to 0.9$(\mu s)$, using the same scaling as seen in Figure \ref{fig:timing_clover}.
 
 \input{Analysis_Figs/timing_clover.tex}
 
@@ -63,7 +63,7 @@ Background was taken into account via the energy and timing background gates. Th
 
 Several systematic effects had to be taken into account at various stages of analysis. Each will be discussed in further detail in this section. At the calibration stage, there are two major corrections in the Clovershare data. The first, as discussed in section \ref{sec:clover_cal}, is due to the integral non-linearities of the electronics. Second, the instability of the Clovershare detectors required a run-by-run calibration correction. 
 
-In the analysis stage, corrections on extracted values needed to be done based on the angular correlations due to the detectors being at different angles relative to each other. If the angle between the two HPGe detectors were the same as the angle between the HPGe detector and Si(Li) detector(s), this correction would divide out and be unneeded.
+In the analysis stage, corrections on extracted values needed to be done based on the angular correlations due to the multipolarity of the radiation and the detectors being at different angles relative to each other. Multipole radiation follows an angular distribution based on the kind of radiation, the multipole of the radiation, and the spin and parity of the initial and final states.
 
 \subsection{Electronics-based Integral Non-Linearities}
 \label{sec:non-linearity}
@@ -143,7 +143,7 @@ where $W(\theta)$ is the angular distribution function, $\eta$ is the azimuthal 
 
 In $^{156}$Gd, there were several possible transitions of interest at energies less than 250 keV. In that energy range, the ground-state band transitions cover much of the spectrum. Some transitions could be removed through the use of gating on gamma-rays of parallel transitions, but not all the transitions could be removed. This was due, in part, to the gate transitions being in sequence with some of the ground-state band. 
 
-To get an upper limit for the transitions of interest, the ground state band transitions that were in sequence with the gate transition were subtracted off of the conversion electron spectrum through the following method. An example of this subtraction can be seen in Figure \ref{fig:subtraction}. The skewed gaussian fitting function described earlier was given parameters derived from the data and subtracted from the conversion electron spectrum.
+To get an upper limit for the transitions of interest, the ground state band transitions that were in sequence with the gate transition were subtracted from of the conversion electron spectrum through the following method. An example of this subtraction can be seen in Figure \ref{fig:subtraction}. The skewed gaussian fitting function described earlier was given parameters derived from the data and subtracted from the conversion electron spectrum.
 
 \input{Analysis_Figs/subtraction.tex}
 
@@ -165,7 +165,7 @@ These three variables are all unique to the detector, and come directly from fit
 
 When areas of peaks were found, the error is found with the fit. In the cases of the peaks that needed to be fit by estimating the background and subtracting it off, the error of the area is assumed to be the square root of the counts in the peak added in quadrature with the error in the background.
 
-These areas are propagated through calculations via the equation
+These areas are propagated via the equation
 \begin{equation}
     \sigma_{f}^2=\sum_{i}\left(\sigma_{x_i}\frac{\delta f}{\delta_{x_i}}\right)^2
 \end{equation}
@@ -175,4 +175,4 @@ where $f$ is a function of all $x_i$ in the sum \citep{bevington03:_error}. If t
 \end{equation}
 Errors on the areas of both gamma-rays and electrons were propagated through the data. The error on the efficiency was estimated by shifting the efficiency value $\pm0.5\sigma$ and calculating upper and lower limit functions for the efficiency. 
 
-In the final results, the uncertainties were kept separate into statistical and systematic effects. Statistical effects are caused by the areas of the peaks. Systematic effects are from the uncertainty in the efficiency of both the HPGe and Si(Li) detectors, as well as an uncertainty in the angular correlations, based on the solid angle covered by the detectors.
+In the final results, the uncertainties were kept separate into statistical and systematic effects. Statistical uncertainties are caused by the areas of the peaks. Systematic effects are from the uncertainty in the efficiency of both the HPGe and Si(Li) detectors, as well as an uncertainty in the angular correlations, based on the solid angle covered by the detectors.

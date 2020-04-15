@@ -91,9 +91,9 @@ The code in this appendix is expressly for the ICEBall-GEORGINA data. The ICEBal
 
 \includecode{md}{README.md}{README.md}{Simple included explanation of code inputs for running.}
 
-\includecode{make}{Makefile}{Makefile}{In this code, CodeDirectory must be replaced with the path to the code directory. \mint{make}|-L/CodeDirectory/libExpEvent.so| could be removed in the Clovershare data due to the converter changes.}
+\includecode{make}{Makefile}{Makefile}{In this code, CodeDirectory must be replaced with the path to the code directory. \mintinline{make}{-L/CodeDirectory/libExpEvent.so} could be removed in the Clovershare data due to the converter changes.}
 
-\includecode{bash}{Queuescript.sh}{Queuescript.sh}{This shell script is written for executing the code on the CRC backend computers. It can be used locally by removing the commented lines down to line 9, and replacing \mint{bash}|$SGE_TASK_ID| with the run number. The terms "netID","Nickname","runStart","runEnd", "CodeDirectory","FileOut", "CutFile", and "TimingFile" must all be replaced with the correct information.}
+\includecode{bash}{Queuescript.sh}{Queuescript.sh}{This shell script is written for executing the code on the CRC backend computers. It can be used locally by removing the commented lines down to line 9, and replacing \mintinline{bash}{$SGE_TASK_ID} with the run number. The terms "netID","Nickname","runStart","runEnd", "CodeDirectory","FileOut", "CutFile", and "TimingFile" must all be replaced with the correct information.}
 
 \includecode{c++}{src/main.cxx}{src/main.cxx}{This is the main code that calls all of the subroutines. The gSystem line is necessary to load the library to read the tree structure of the root files. "Directory" and "OutputDirectory" should be replaced with the proper filepaths.}
 

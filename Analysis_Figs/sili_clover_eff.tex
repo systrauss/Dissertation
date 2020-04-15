@@ -1,9 +1,12 @@
 \begin{table}[]
     \centering
     \caption{Si(Li) Efficiencies in Clovershare Configuration}
+    \label{tab:sili_eff_clover}
+    \begin{threeparttable}
     \begin{tabular}{c|c|c|c}
     \toprule
         Detector & $p_1$ & $p_2$ & $p_3$ \\
+        \hline
         1	&	-11.39	&	1.424	&	-0.003961	\\
         2	&	-17.75	&	2.542	&	-0.003829	\\
         3	&	-14.55	&	2.101	&	-0.004718	\\
@@ -12,5 +15,8 @@
         6	&	-15.88	&	2.331	&	-0.004863	\\
         \bottomrule
     \end{tabular}
-    \label{tab:sili_eff_clover}
+    \begin{tablenotes}[para]
+        Efficiency equation: $ln(\epsilon) = p_1+p_2ln(E)+p_3E$
+    \end{tablenotes}
+\end{threeparttable}
 \end{table}

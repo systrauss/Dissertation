@@ -1,21 +1,25 @@
 \begin{table}[]
     \centering
+    \begin{threeparttable}
     \caption{ICEBall Calibration Sources}
         \label{tab:ICE_Cal_Source}
     \begin{tabular}{c|c|c|c} \toprule
          Source & Activity & Electron Energy (keV) & Intensity (\%)\\
           \hline 
-         $^{133}$Ba & 0.331(7) $\mu$Ci\tablefootnote{Measured on May-4-2012} & 240.413 & 0.331 \\
+         $^{133}$Ba & 0.331(7) $\mu$Ci\tnote{a} & 240.413 & 0.331 \\
          & & 266.868 & 0.698 \\
          & & 320.032 & 1.308 \\
          & & 347.866 & 0.370 \\
          \hline
-         $^{207}$Bi & 0.306(8) $\mu$Ci\tablefootnote{Measured on May-4-2012} & 481.697 & 1.562 \\ 
+         $^{207}$Bi & 0.306(8) $\mu$Ci\tnote{b} & 481.697 & 1.562 \\ 
          & & 554.4 & 0.469 \\
          & & 975.657 & 7.243 \\
          & & 1048.1 & 1.838 \\\bottomrule
     \end{tabular}
-    \\[2pt]
-    \footnotesize
+    \begin{tablenotes}[para]
     Calibration source information for ICEBall. The energies and the respective intensities are listed for each source. Intensities are taken from \cite{trzaska90:_calibration}. The intensity of the 347 keV line in $^{133}$Ba is both the 384K and 356L intensities combined.
+    \newline\item{a} Measured on May-4-2012
+    \newline\item {b} Measured on May-4-2012
+    \end{tablenotes}
+\end{threeparttable}
 \end{table}

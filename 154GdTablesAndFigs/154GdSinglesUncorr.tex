@@ -16,7 +16,7 @@
 	    \hline
         313.21	&	$3^+_{\gamma}	\rightarrow	2^+_{0^+_2}$	&	1127.802	&	815.492		&	[M1,E2]	&	 \\
         \hline
-        641.92	&	$5^+_{4^+_1}	\rightarrow	3^+_{\gamma}$	&	1770.187	&	1127.8018		&	M1,E2	&		\\
+        641.92	&	$5^+_{4^+_1}	\rightarrow	3^+_{\gamma}$	&	1770.187	&	1127.8018		&	E2	&		\\
         648.951	&	$6^+_{0^+_2}	\rightarrow	6^+_{gs}$	&	1365.87	&	717.662		&	E0+M1+E2	&	+1.30 (20)	\\
         \hline
         715.198	&	$2^+_{2^+_2}	\rightarrow	2^+_{0^+_2}$	&	1531.305	&	815.492		&	E0+M1+E2	&		\\
@@ -40,23 +40,23 @@
         &  & \multicolumn{2}{>{\footnotesize}c|}{$\alpha$ (This Work)} & & \\
         $E$ (keV)	& Shell	&	Uncorrected & Corrected &	$\alpha$  (Theory)\citep{kibedi08:_BRICC}	&	$\alpha$ (Spits)\citep{spits96:_154gd} & 	$\alpha$ (Gono)\citep{gono74:_154gd_e0}\\
 	    \hline
-        198.311	& K &	0.0842	(26) (19)	& 0.0568 (18) (13) & 	0.0393 (6)	&		\\
-        &	 & 			&	[M1] 0.0986 (30) (22)	& [M1] 0.248 (4) &\\
-        &	&	&		[E2] 0.1144 (35) (26)	& [E2] 0.1587 (23) & \\
+        198.311	& K &	0.0842	(26) (19)	& 0.0797 (25) (18) & 	0.0393 (6)	&		\\
+        &	 & 			&	[M1] 0.0768 (24) (17)	& [M1] 0.248 (4) &\\
+        &	&	&		[E2] 0.0764 (24) (17)	& [E2] 0.1587 (23) & \\
 	    \hline
-        313.21	&	 K	&	0.0805	(47) (20)	 & [M1] 0.0543 (32) (13) &	[M1] 0.0723 (11)	&		\\
-        	&	&	&	[E2] 0.0832 (49) (21) &	[E2] 0.0407 (6)	&		\\
+        313.21	&	 K	&	0.0805	(47) (20)	 & [M1] 0.760 (44) (19) &	[M1] 0.0723 (11)	&		\\
+        	&	&	&	[E2] 0.0682 (40) (17) &	[E2] 0.0407 (6)	&		\\
         \hline
-        641.92	& K &	0.0303 (7) (8)	&	0.0249 (6) (2)	 & 0.00615 (9)  &	0.0086 (8)	\\
-        648.951	&		&	0.0079 (5)	&	0.0082 (5) & 0.0079 (5) &  & 0.039 (7)	\\
+        641.92	& K &	0.0366 (4) (9)	&	0.0400 (4) (10)	 & 0.00615 (9)  &	0.0086 (8)	\\
+        648.951	&		&	0.0405 (4) (10)	&	0.0406 (4) (10) & 0.0079 (5) &  & 0.039 (7)	\\
         \hline
-        715.198	& K &	0.0199	(5) (5)	& [M1] 0.0299 (8) (8)	& [M1] 0.00879 (13) 	&	0.0070 (5)	\\
-        &				  &	& [E2] 0.0150 (4) (4)	& [E2] 0.00479 (7)		& \\
-        &				 L &	0.0041	(4) (1)	&	[M1] 0.0061 (6) (2)	& & 		\\
-        &				&				  	&	[E2] 0.0031 (3) (1)	& & 		\\
+        715.198	& K &	0.0199	(5) (5)	& [M1] 0.0239 (6) (6)	& [M1] 0.00879 (13) 	&	0.0070 (5)	\\
+        &				  &	& [E2] 0.0164 (4) (4)	& [E2] 0.00479 (7)		& \\
+        &				 L &	0.0041	(4) (1)	&	[M1] 0.0049 (5) (1)	& & 		\\
+        &				&				  	&	[E2] 0.0034 (3) (1)	& & 		\\
 	    \hline
-        1061.59	& K &	0.0022	(3) (1)	&	0.0046 (6) (2) & 0.0021 (1)	&		\\
-	    &				&	0.0021 (1) & 0.0014 (1) & 0.0019 (4) &	\\
+        1061.59	& K &	0.0022	(3) (1)	&	0.0018 (3) (1) & 0.0021 (1)	&		\\
+	    &				&	0.0021 (3) (1) & 0.0021 (3) (1) & 0.0019 (4) &	\\
         \bottomrule
     \end{tabular}
 % \begin{tablenotes}[para,flushleft]
@@ -66,6 +66,7 @@
 \end{table}
 \begin{table}
     \begin{ThreePartTable}
+        \makeatletter\def\TPT@hsize{}\makeatletter
 \begin{tablenotes}[para,flushleft]
     Table \ref{tab:154Gd_Single_ICC_Uncorr}: A list of conversion coefficients from $^{154}$Gd. Table (a) lists transition information. Multipolarities and mixing ratios were taken from the nuclear data sheets\citep{reich09:_nds_154}. Table (b) lists the conversion coefficients. Unless otherwise stated, the $\alpha$ values are $\alpha_K$. An angular distribution correction has been applied in the second column of this work, with both the pure M1 and E2 coefficients listed in the cases where the transition does not have a mixing ratio. No M1 information is listed for the $5^+_{4^+}	\rightarrow	3^+_{\gamma}$, as that is not a possible transition by selection rules. The theoretical value for the $6^+_{0^+_2}	\rightarrow	6^+_{gs}$ transition assumes no E0 component. None of the above transitions have known half-lives. The first error is statistical, the second is systematic. Numbers are compared with Spits et al.\citep{spits96:_154gd}. The bands for each level are listed as subscripts.
  \end{tablenotes}
